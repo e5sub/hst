@@ -1,4 +1,4 @@
-### 好视通会议服务器一键安装脚本
+## 好视通会议服务器一键安装脚本
 脚本目前功能：  
 1、同步linux时间  
 2、检测linux硬件配置  
@@ -7,6 +7,6 @@
 5、RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（用于网络对接大疆无人机之类的设备）  
 6、重置后台admin密码   
 一键安装脚本：  
-# yum -y install wget && wget https://www.yaohst.com/ces.sh -O ces.sh && bash ./ces.sh  
-备用地址：     
-# bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh)
+ yum -y install wget && wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh -O ces.sh && bash ./ces.sh  
+备用脚本：     
+ bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh)
