@@ -3,7 +3,7 @@ echo ""
 getBtTime=$(curl -sS --connect-timeout 3 -m 60 http://www.bt.cn/api/index/get_time)
 date -s "$(date -d @$getBtTime +"%Y-%m-%d %H:%M:%S")"
 echo ""
-wget https://ghproxy.comhttps://github.com/e5sub/hst/blob/master/install/hstinstall.sh -O hstinstall.sh
+wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/hstinstall.sh -O hstinstall.sh
 wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/hstces.sh -O hstces.sh
 wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
 wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
