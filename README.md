@@ -6,6 +6,8 @@
 4、一键安装CES标准版/CES中性版/FSP服务器  
 5、RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（用于网络对接大疆无人机之类的设备）  
 6、重置后台admin密码   
+
+
 一键安装脚本：  
  yum -y install wget && wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh -O ces.sh && bash ./ces.sh  
 备用脚本：     
