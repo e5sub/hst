@@ -291,11 +291,19 @@ then
 fi
 if [ $1 = '-xiezai' ]
 then
-	echo -e "\033[33m 【你选择的是卸载CES服务器（请注意备份好数据）】 \033[0m"
+	echo -e "\033[33m 【你选择的是卸载CES服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	cd /usr/local/hst
 	bash server_uninstall.sh
+fi
+if [ $1 = '-unfsp' ]
+then
+	echo -e "\033[33m 【你选择的是卸载FSP服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
 fi
 if [ $1 = '-resetadmin' ]
 then

@@ -119,7 +119,8 @@ echo -e " \033[32m 52. \033[0m 安装FSP v1.7.1.19服务器"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
 echo -e " \033[32m 87. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/8080/8000端口）"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
-echo -e " \033[32m 88. \033[0m 卸载CES服务器（请注意备份数据）"
+echo -e " \033[32m 88. \033[0m 卸载CES服务器"
+echo -e " \033[32m 89. \033[0m 卸载FSP服务器"
 echo -e " \033[32m 98. \033[0m 自动添加FSP公网地址（1.7.1.19以上才需要执行）"
 echo -e " \033[32m 99. \033[0m 重置后台admin密码"
 echo -e ""
@@ -157,6 +158,7 @@ case $N in
   52) bash install.sh -171fsp ;;
   87) bash install.sh -rtmp ;;
   88) bash install.sh -xiezai ;;
+  89) bash install.sh -unfsp ;;
   98) bash install.sh -setip ;;
   99) bash install.sh -resetadmin ;;
   00) bash zxces.sh ;;
