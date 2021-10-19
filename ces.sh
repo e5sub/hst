@@ -1,15 +1,11 @@
+yum -y install unzip
+wget https://yaohst.com/OS/uploads/install.zip -O install.zip
+unzip -o install.zip
 echo '尝试通过网络同步系统时间...'
 echo ""
 getBtTime=$(curl -sS --connect-timeout 3 -m 60 http://www.bt.cn/api/index/get_time)
 date -s "$(date -d @$getBtTime +"%Y-%m-%d %H:%M:%S")"
 echo ""
-wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/hstinstall.sh -O hstinstall.sh
-wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/hstces.sh -O hstces.sh
-wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
-wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
-wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/set_extra_ip.sh -O set_extra_ip.sh
-wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh
-wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxinstall.sh -O zxinstall.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
@@ -54,7 +50,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：唐辉                                                     "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2021年9月14日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2021年10月19日，如有遇到安装问题请及时反馈           "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -107,17 +103,19 @@ echo -e " \033[32m 28. \033[0m CES v4.31.3.6单机版"
 echo -e " \033[32m 29. \033[0m CES v4.31.3.6集群主服务器"
 echo -e " \033[32m 30. \033[0m CES v4.31.3.6集群节点服务器"
 echo -e " \033[44;37m 国产化CES服务端 For ARM \033[0m"
-echo -e " \033[32m 40. \033[0m 国产化CES v4.31.2.16单机版服务器"
-echo -e " \033[32m 41. \033[0m 国产化CES v4.31.2.16集群主服务器"
-echo -e " \033[32m 42. \033[0m 国产化CES v4.31.2.16集群节点服务器"
+echo -e " \033[32m 40. \033[0m 国产化CES v4.34.5.1单机版服务器"
+echo -e " \033[32m 41. \033[0m 国产化CES v4.34.5.1集群主服务器"
+echo -e " \033[32m 42. \033[0m 国产化CES v4.34.5.1集群节点服务器"
+echo -e " \033[32m 43. \033[0m 国产化CES v4.34.5.1人脸识别服务器"
+echo -e " \033[32m 44. \033[0m 国产化CES v4.31.2.16单机版服务器"
+echo -e " \033[32m 45. \033[0m 国产化CES v4.31.2.16集群主服务器"
+echo -e " \033[32m 46. \033[0m 国产化CES v4.31.2.16集群节点服务器"
 echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
 echo -e " \033[32m 50. \033[0m 安装FSP v1.4.1.17服务器（适用于4.31以下服务器）"
 echo -e " \033[32m 51. \033[0m 安装FSP v1.6.4.4服务器（适用于4.32以上服务器）"
 echo -e " \033[32m 52. \033[0m 安装FSP v1.7.1.19服务器"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
 echo -e " \033[32m 87. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/8080/8000端口）"
-echo -e " \033[44;37m 如下载速度较慢，可选择0切换到备用线路下载 \033[0m"
-echo -e " \033[32m 0. \033[0m  切换到备用下载线路下载安装包"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
 echo -e " \033[32m 88. \033[0m 卸载CES服务器（请注意备份数据）"
 echo -e " \033[32m 98. \033[0m 自动添加FSP公网地址（1.7.1.19以上才需要执行）"
@@ -128,7 +126,6 @@ echo ""
 read N
 echo ""
 case $N in
-  0) bash hstces.sh ;;
   1) bash install.sh -434single ;;
   2) bash install.sh -434main ;;
   3) bash install.sh -432single ;;
@@ -146,9 +143,13 @@ case $N in
   28) bash install.sh -431dj ;;
   29) bash install.sh -431jq ;;
   30) bash install.sh -431node;;
-  40) bash install.sh -gc431dj;;
-  41) bash install.sh -gc431jq;;
-  42) bash install.sh -gc431node;;
+  40) bash install.sh -gc434dj;;
+  41) bash install.sh -gc434jq;;
+  42) bash install.sh -gc434node;;
+  43) bash install.sh -gc434face;;
+  44) bash install.sh -gc431dj;;
+  45) bash install.sh -gc431jq;;
+  46) bash install.sh -gc431node;;
   50) bash install.sh -141fsp ;;
   51) bash install.sh -164fsp ;;
   52) bash install.sh -171fsp ;;

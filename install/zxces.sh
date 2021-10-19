@@ -28,9 +28,10 @@ echo -e " \033[32m 28. \033[0m CES v4.31.3.6单机版"
 echo -e " \033[32m 29. \033[0m CES v4.31.3.6集群主服务器"
 echo -e " \033[32m 30. \033[0m CES v4.31.3.6集群节点服务器"
 echo -e " \033[44;37m 国产化CES服务端 For ARM \033[0m"
-echo -e " \033[32m 40. \033[0m 国产化CES v4.31.2.16单机版服务器"
-echo -e " \033[32m 41. \033[0m 国产化CES v4.31.2.16集群主服务器"
-echo -e " \033[32m 42. \033[0m 国产化CES v4.31.2.16集群节点服务器"
+echo -e " \033[32m 40. \033[0m 国产化CES v4.34.5.1单机版服务器"
+echo -e " \033[32m 41. \033[0m 国产化CES v4.34.5.1集群主服务器"
+echo -e " \033[32m 42. \033[0m 国产化CES v4.34.5.1集群节点服务器"
+echo -e " \033[32m 43. \033[0m 国产化CES v4.34.5.1人脸识别服务器"
 echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
 echo -e " \033[32m 50. \033[0m 安装FSP v1.4.1.17服务器（适用于4.31以下服务器）"
 echo -e " \033[32m 51. \033[0m 安装FSP v1.6.4.4服务器（适用于4.32以上服务器）"
@@ -63,9 +64,10 @@ case $N in
   28) bash zxinstall.sh -431dj ;;
   29) bash zxinstall.sh -431jq ;;
   30) bash zxinstall.sh -431node;;
-  40) bash zxinstall.sh -gc431dj;;
-  41) bash zxinstall.sh -gc431jq;;
-  42) bash zxinstall.sh -gc431node;;
+  40) bash zxinstall.sh -gc434dj;;
+  41) bash zxinstall.sh -gc434jq;;
+  42) bash zxinstall.sh -gc434node;;
+  43) bash zxinstall.sh -gc434face;;
   50) bash zxinstall.sh -141fsp ;;
   51) bash zxinstall.sh -164fsp ;;
   52) bash zxinstall.sh -171fsp ;;
