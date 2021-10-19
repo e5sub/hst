@@ -351,10 +351,8 @@ echo -e "                                                                       
 
 #删除安装脚本
 rm -rf install.sh
-rm -rf hstinstall.sh
 rm -rf zxinstall.sh
 rm -rf ces.sh
-rm -rf hstces.sh
 rm -rf zxces.sh
 rm -rf resetadmin.sql
 rm -rf install.zip
