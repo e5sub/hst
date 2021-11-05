@@ -327,7 +327,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --restart=unless-stopped -p 5201:5201 --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
+	docker run -d --restart=unless-stopped -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
 fi
 if [ $1 = '-xiezai' ]
 then
