@@ -41,7 +41,9 @@ echo -e " \033[32m 80. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服
 echo -e " \033[32m 81. \033[0m 安装iperf3局域网性能测试工具(服务端)（5201端口）"
 echo -e ""
 echo -e " \033[32m 88. \033[0m 卸载CES服务器"
-echo -e " \033[32m 89. \033[0m 卸载CES服务器"
+echo -e " \033[32m 89. \033[0m 重启FSP服务器"
+echo -e " \033[32m 90. \033[0m 卸载CES服务器"
+echo -e ""
 echo -e " \033[32m 98. \033[0m 自动添加FSP公网地址（1.7.1.19以上才需要执行）"
 echo -e " \033[32m 99. \033[0m 重置后台admin密码"
 echo -e ""
@@ -75,9 +77,10 @@ case $N in
   51) bash zxinstall.sh -164fsp ;;
   52) bash zxinstall.sh -171fsp ;;
   80) bash zxinstall.sh -rtmp ;;
-  81) bash install.sh -iperf ;; 
+  81) bash zxinstall.sh -iperf ;; 
   88) bash zxinstall.sh -xiezai ;;
-  89) bash zxinstall.sh -unfsp ;;
+  89) bash zxinstall.sh -restartfsp ;;
+  90) bash zxinstall.sh -unfsp ;;
   98) bash zxinstall.sh -setip ;;
   99) bash zxinstall.sh -resetadmin ;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;

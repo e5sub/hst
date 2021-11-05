@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2021年10月19日                        "*
+echo -e "# *脚本更新时间：2021年11月5日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -306,6 +306,13 @@ then
 	sleep 5s
 	cd /usr/local/hst
 	bash server_uninstall.sh
+fi
+if [ $1 = '-restartfsp' ]
+then
+	echo -e "\033[33m 【你选择的是重启FSP服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	docker restart $(docker ps -a -q)
 fi
 if [ $1 = '-unfsp' ]
 then

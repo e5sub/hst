@@ -52,7 +52,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：唐辉                                                     "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2021年10月19日，如有遇到安装问题请及时反馈           "#
+echo "# * 脚本更新时间：2021年11月5日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -121,7 +121,9 @@ echo -e " \033[32m 80. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服
 echo -e " \033[32m 81. \033[0m 安装iperf3局域网性能测试工具(服务端)（5201端口）"
 echo -e ""
 echo -e " \033[32m 88. \033[0m 卸载CES服务器"
-echo -e " \033[32m 89. \033[0m 卸载FSP服务器"
+echo -e " \033[32m 89. \033[0m 重启FSP服务器"
+echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
+echo -e ""
 echo -e " \033[32m 98. \033[0m 自动添加FSP公网地址（1.7.1.19以上才需要执行）"
 echo -e " \033[32m 99. \033[0m 重置后台admin密码"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
@@ -161,7 +163,8 @@ case $N in
   80) bash install.sh -rtmp ;;
   81) bash install.sh -iperf ;;  
   88) bash install.sh -xiezai ;;
-  89) bash install.sh -unfsp ;;
+  89) bash install.sh -restartfsp ;;
+  90) bash install.sh -unfsp ;;
   98) bash install.sh -setip ;;
   99) bash install.sh -resetadmin ;;
   00) bash zxces.sh ;;
