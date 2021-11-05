@@ -319,6 +319,16 @@ then
 	systemctl start docker
 	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8000:8000/udp --name srs4 ccr.ccs.tencentyun.com/1040155/srs4
 fi
+if [ $1 = '-iperf' ]
+then
+	echo -e "\033[33m 【你选择的是安装iperf3局域网性能测试工具(服务端)】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 5201:5201 --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
+fi
 if [ $1 = '-xiezai' ]
 then
 	echo -e "\033[33m 【你选择的是卸载CES服务器】 \033[0m"
