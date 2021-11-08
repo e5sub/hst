@@ -2,7 +2,11 @@ echo '尝试通过网络同步系统时间...'
 echo ""
 getBtTime=$(curl -sS --connect-timeout 3 -m 60 http://www.bt.cn/api/index/get_time)
 date -s "$(date -d @$getBtTime +"%Y-%m-%d %H:%M:%S")"
-wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh && wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql && wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/set_extra_ip.sh -O set_extra_ip.sh && wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh && wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxinstall.sh -O zxinstall.sh &&
+wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
+wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
+wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/set_extra_ip.sh -O set_extra_ip.sh
+wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh
+wget https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxinstall.sh -O zxinstall.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
