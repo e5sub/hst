@@ -23,7 +23,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44
 	wget https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
 	tar zxvf ces_linux_zx4.35.2.21.tar.gz
 	cd ./ces_linux4.35.2.21
@@ -37,7 +37,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44
 	wget https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
 	tar zxvf ces_linux_zx4.35.2.21.tar.gz
 	cd ./ces_linux4.35.2.21
@@ -355,7 +355,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 8000:8000/udp --name srs4 ccr.ccs.tencentyun.com/1040155/srs4
+	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8080:8080 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs4 ccr.ccs.tencentyun.com/1040155/srs4
 fi
 if [ $1 = '-iperf' ]
 then
@@ -440,4 +440,3 @@ rm -rf zxinstall.sh
 rm -rf ces.sh
 rm -rf zxces.sh
 rm -rf resetadmin.sql
-rm -rf install.zip
