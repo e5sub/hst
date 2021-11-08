@@ -433,7 +433,6 @@ echo -e "# *博客地址：https://www.yaohst.com                               
 echo -e "#                                                                               "
 echo -e "# ******************************************************************************"
 echo -e "                                                                                "
-
 #删除安装脚本
 rm -rf install.sh
 rm -rf zxinstall.sh
