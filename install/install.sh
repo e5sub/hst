@@ -498,7 +498,7 @@ echo -e "# *后台默认用户名密码均为admin，请您及时修改后台默
 echo -e "#                                                                               "
 echo -e "# *使用过程中如有问题，请拨打400-1699-666转1号键联系我们                        "
 echo -e "#                                                                               "
-echo -e "# *本脚本作者：唐辉                                                             "
+echo -e "# *本脚本作者：Sugar                                                            "
 echo -e "#                                                                               "
 echo -e "# *博客地址：https://www.yaohst.com                                             "
 echo -e "#                                                                               "
