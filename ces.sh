@@ -51,7 +51,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：唐辉                                                     "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2021年11月8日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2021年11月9日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -112,17 +112,21 @@ echo -e " \033[32m 32. \033[0m CES v4.31.3.6单机版"
 echo -e " \033[32m 33. \033[0m CES v4.31.3.6集群主服务器"
 echo -e " \033[32m 34. \033[0m CES v4.31.3.6集群节点服务器"
 echo -e " \033[44;37m 国产化CES服务端 For ARM \033[0m"
-echo -e " \033[32m 40. \033[0m 国产化CES v4.34.5.1单机版服务器"
-echo -e " \033[32m 41. \033[0m 国产化CES v4.34.5.1集群主服务器"
-echo -e " \033[32m 42. \033[0m 国产化CES v4.34.5.1集群节点服务器"
-echo -e " \033[32m 43. \033[0m 国产化CES v4.34.5.1人脸识别服务器"
-echo -e " \033[32m 44. \033[0m 国产化CES v4.31.2.16单机版服务器"
-echo -e " \033[32m 45. \033[0m 国产化CES v4.31.2.16集群主服务器"
-echo -e " \033[32m 46. \033[0m 国产化CES v4.31.2.16集群节点服务器"
+echo -e " \033[32m 40. \033[0m 国产化CES v4.35.2.21单机版服务器"
+echo -e " \033[32m 41. \033[0m 国产化CES v4.35.2.21集群主服务器"
+echo -e " \033[32m 42. \033[0m 国产化CES v4.35.2.21集群节点服务器"
+echo -e " \033[32m 43. \033[0m 国产化CES v4.35.2.21人脸识别服务器"
+echo -e " \033[32m 44. \033[0m 国产化CES v4.34.5.1单机版服务器"
+echo -e " \033[32m 45. \033[0m 国产化CES v4.34.5.1集群主服务器"
+echo -e " \033[32m 46. \033[0m 国产化CES v4.34.5.1集群节点服务器"
+echo -e " \033[32m 47. \033[0m 国产化CES v4.34.5.1人脸识别服务器"
+echo -e " \033[32m 48. \033[0m 国产化CES v4.31.2.16单机版服务器"
+echo -e " \033[32m 49. \033[0m 国产化CES v4.31.2.16集群主服务器"
+echo -e " \033[32m 50. \033[0m 国产化CES v4.31.2.16集群节点服务器"
 echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
-echo -e " \033[32m 50. \033[0m 安装FSP v1.4.1.17服务器（适用于4.31以下服务器）"
-echo -e " \033[32m 51. \033[0m 安装FSP v1.6.4.4服务器（适用于4.32以上服务器）"
-echo -e " \033[32m 52. \033[0m 安装FSP v1.7.1.19服务器"
+echo -e " \033[32m 70. \033[0m 安装FSP v1.4.1.17服务器（适用于4.31以下服务器）"
+echo -e " \033[32m 71. \033[0m 安装FSP v1.6.4.4服务器（适用于4.32以上服务器）"
+echo -e " \033[32m 72. \033[0m 安装FSP v1.7.1.19服务器"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
 echo -e " \033[32m 80. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/8080/8000端口）"
 echo -e " \033[32m 81. \033[0m 安装iperf3局域网性能测试工具(服务端)（5201端口）"
@@ -131,6 +135,7 @@ echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 重启FSP服务器"
 echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
 echo -e ""
+echo -e " \033[32m 97. \033[0m 安装CES历史版本"
 echo -e " \033[32m 98. \033[0m 自动添加FSP公网地址（1.7.1.19以上才需要执行）"
 echo -e " \033[32m 99. \033[0m 重置后台admin密码"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
@@ -163,21 +168,26 @@ case $N in
   32) bash install.sh -431dj ;;
   33) bash install.sh -431jq ;;
   34) bash install.sh -431node;;
-  40) bash install.sh -gc434dj;;
-  41) bash install.sh -gc434jq;;
-  42) bash install.sh -gc434node;;
-  43) bash install.sh -gc434face;;
-  44) bash install.sh -gc431dj;;
-  45) bash install.sh -gc431jq;;
-  46) bash install.sh -gc431node;;
-  50) bash install.sh -141fsp ;;
-  51) bash install.sh -164fsp ;;
-  52) bash install.sh -171fsp ;;
+  40) bash install.sh -gc435dj;;
+  41) bash install.sh -gc435jq;;
+  42) bash install.sh -gc435node;;
+  43) bash install.sh -gc435face;;
+  44) bash install.sh -gc434dj;;
+  45) bash install.sh -gc434jq;;
+  46) bash install.sh -gc434node;;
+  47) bash install.sh -gc434face;;
+  48) bash install.sh -gc431dj;;
+  49) bash install.sh -gc431jq;;
+  50) bash install.sh -gc431node;;
+  70) bash install.sh -141fsp ;;
+  71) bash install.sh -164fsp ;;
+  72) bash install.sh -171fsp ;;
   80) bash install.sh -rtmp ;;
   81) bash install.sh -iperf ;;  
   88) bash install.sh -xiezai ;;
   89) bash install.sh -restartfsp ;;
   90) bash install.sh -unfsp ;;
+  97) bash old.sh ;;
   98) bash install.sh -setip ;;
   99) bash install.sh -resetadmin ;;
   00) bash zxces.sh ;;

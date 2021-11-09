@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2021年11月8日                         "*
+echo -e "# *脚本更新时间：2021年11月9日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -276,6 +276,46 @@ then
 	tar zxvf ces_linux_zx4.32.8.5.tar.gz
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh cluster main
+fi
+if [ $1 = '-gc435dj' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.2.21单机版服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.2.21.tar.gz -O ces_linux_arm_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_arm_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh single
+fi
+if [ $1 = '-gc435jq' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.2.21集群主服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.2.21.tar.gz -O ces_linux_arm_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_arm_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-gc435node' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.2.21集群节点服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.2.21.tar.gz -O ces_linux_arm_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_arm_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh cluster node
+fi
+if [ $1 = '-gc435face' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.2.21人脸识别服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.2.21.tar.gz -O ces_linux_arm_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_arm_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh cluster face
 fi
 if [ $1 = '-gc434dj' ]
 then
