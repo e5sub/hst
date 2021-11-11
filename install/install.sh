@@ -478,7 +478,12 @@ fi
 systemctl stop firewalld.service
 #禁用防火墙
 systemctl disable firewalld.service
-
+#删除安装脚本
+rm -rf install.sh
+rm -rf zxinstall.sh
+rm -rf ces.sh
+rm -rf zxces.sh
+rm -rf resetadmin.sql
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"*                      
 echo -e "#                                                                               "
@@ -504,9 +509,3 @@ echo -e "# *博客地址：https://www.yaohst.com                               
 echo -e "#                                                                               "
 echo -e "# ******************************************************************************"
 echo -e "                                                                                "
-#删除安装脚本
-rm -rf install.sh
-rm -rf zxinstall.sh
-rm -rf ces.sh
-rm -rf zxces.sh
-rm -rf resetadmin.sql
