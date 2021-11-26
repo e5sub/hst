@@ -409,13 +409,13 @@ then
 fi
 if [ $1 = '-171fsp' ]
 then
-	echo -e "\033[33m 【你选择的是安装FSP v1.7.1.19服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装FSP v1.7.1.44服务器（仅安装FSP服务器）】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19	
+	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44	
 fi
 if [ $1 = '-rtmp' ]
 then
