@@ -15,7 +15,7 @@ echo -e "                                                       "
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
 panelPort="8080"
-if [ $1 = '-435single' ]
+if [ $1 = '-zx435single' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.35.2.21单机版（含FSP服务器）】 \033[0m"
 	echo -e "\n"
@@ -29,7 +29,7 @@ then
 	cd ./ces_linux4.35.2.21
 	bash server_install.sh single	
 fi
-if [ $1 = '-435main' ]
+if [ $1 = '-zx435main' ]
 then
 	echo -e "\033[33m 【你选择安装的是CES v4.35.2.21集群主服务器（含FSP服务器）】 \033[0m"
 	echo -e "\n"
@@ -43,7 +43,7 @@ then
 	cd ./ces_linux4.35.2.21
 	bash server_install.sh cluster main	
 fi
-if [ $1 = '-435dj' ]
+if [ $1 = '-zx435dj' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.35.2.21单机版】 \033[0m"
 	echo -e "\n"
@@ -53,7 +53,7 @@ then
 	cd ./ces_linux4.35.2.21
 	bash server_install.sh single
 fi
-if [ $1 = '-434jq' ]
+if [ $1 = '-zx434jq' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.35.2.21集群主服务器】 \033[0m"
 	echo -e "\n"
@@ -63,7 +63,7 @@ then
 	cd ./ces_linux4.35.2.21
 	bash server_install.sh cluster main
 fi
-if [ $1 = '-434node' ]
+if [ $1 = '-zx434node' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.35.2.21集群节点服务器】 \033[0m"
 	echo -e "\n"
@@ -73,7 +73,7 @@ then
 	cd ./ces_linux4.35.2.21
 	bash server_install.sh cluster node
 fi
-if [ $1 = '-435face' ]
+if [ $1 = '-zx435face' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.35.2.21人脸识别服务器】 \033[0m"
 	echo -e "\n"
@@ -83,7 +83,7 @@ then
 	cd ./ces_linux4.35.2.21
 	bash server_install.sh cluster face
 fi
-if [ $1 = '-434single' ]
+if [ $1 = '-zx434single' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.34.5.1单机版（含FSP服务器）】 \033[0m"
 	echo -e "\n"
@@ -97,7 +97,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh single	
 fi
-if [ $1 = '-434main' ]
+if [ $1 = '-zx434main' ]
 then
 	echo -e "\033[33m 【你选择安装的是CES v4.34.5.1集群主服务器（含FSP服务器）】 \033[0m"
 	echo -e "\n"
@@ -111,7 +111,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster main	
 fi
-if [ $1 = '-434dj' ]
+if [ $1 = '-zx434dj' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.34.5.1单机版】 \033[0m"
 	echo -e "\n"
@@ -121,7 +121,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh single
 fi
-if [ $1 = '-434jq' ]
+if [ $1 = '-zx434jq' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.34.5.1集群主服务器】 \033[0m"
 	echo -e "\n"
@@ -131,7 +131,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster main
 fi
-if [ $1 = '-434node' ]
+if [ $1 = '-zx434node' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.34.5.1集群节点服务器】 \033[0m"
 	echo -e "\n"
@@ -141,7 +141,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster node
 fi
-if [ $1 = '-434face' ]
+if [ $1 = '-zx434face' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.34.5.1人脸识别服务器】 \033[0m"
 	echo -e "\n"
@@ -151,7 +151,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster face
 fi
-if [ $1 = '-431single' ]
+if [ $1 = '-zx431single' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6单机版（含FSP服务器）】 \033[0m"
 	echo -e "\n"
@@ -165,7 +165,7 @@ then
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh single
 fi
-if [ $1 = '-431main' ]
+if [ $1 = '-zx431main' ]
 then
 	echo -e "\033[33m 【你选择安装的是CES v4.31.3.6集群主服务器（含FSP服务器）】 \033[0m"
 	echo -e "\n"
@@ -179,7 +179,7 @@ then
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh cluster main
 fi
-if [ $1 = '-431node' ]
+if [ $1 = '-zx431node' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6集群节点服务器】 \033[0m"
 	echo -e "\n"
@@ -189,7 +189,7 @@ then
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh cluster node
 fi
-if [ $1 = '-431dj' ]
+if [ $1 = '-zx431dj' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.31.3.6单机版】 \033[0m"
 	echo -e "\n"
@@ -199,7 +199,7 @@ then
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh single
 fi
-if [ $1 = '-431jq' ]
+if [ $1 = '-zx431jq' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.31.3.6集群主服务器】 \033[0m"
 	echo -e "\n"
@@ -209,7 +209,7 @@ then
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh cluster main
 fi
-if [ $1 = '-432single' ]
+if [ $1 = '-zx432single' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5单机版（含FSP服务器）】 \033[0m"
 	echo -e "\n"
@@ -223,7 +223,7 @@ then
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh single
 fi
-if [ $1 = '-432main' ]
+if [ $1 = '-zx432main' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5集群主服务器（含FSP服务器）】 \033[0m"
 	echo -e "\n"
@@ -237,7 +237,7 @@ then
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh cluster main
 fi
-if [ $1 = '-432node' ]
+if [ $1 = '-zx432node' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5集群节点服务器】 \033[0m"
 	echo -e "\n"
@@ -247,7 +247,7 @@ then
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh cluster node
 fi
-if [ $1 = '-432face' ]
+if [ $1 = '-zx432face' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5人脸识别服务器】 \033[0m"
 	echo -e "\n"
@@ -257,7 +257,7 @@ then
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh cluster face
 fi
-if [ $1 = '-432dj' ]
+if [ $1 = '-zx432dj' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.32.8.5单机版】 \033[0m"
 	echo -e "\n"
@@ -267,7 +267,7 @@ then
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh single
 fi
-if [ $1 = '-432jq' ]
+if [ $1 = '-zx432jq' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.32.8.5集群主服务器】 \033[0m"
 	echo -e "\n"
@@ -277,7 +277,7 @@ then
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh cluster main
 fi
-if [ $1 = '-gc435dj' ]
+if [ $1 = '-gczx435dj' ]
 then
 	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.29单机版服务器】 \033[0m"
 	echo -e "\n"
@@ -287,7 +287,7 @@ then
 	cd ./ces_linux4.35.1.29
 	bash server_install.sh single
 fi
-if [ $1 = '-gc435jq' ]
+if [ $1 = '-gczx435jq' ]
 then
 	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.29集群主服务器】 \033[0m"
 	echo -e "\n"
@@ -297,7 +297,7 @@ then
 	cd ./ces_linux4.35.1.29
 	bash server_install.sh cluster main
 fi
-if [ $1 = '-gc435node' ]
+if [ $1 = '-gczx435node' ]
 then
 	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.29集群节点服务器】 \033[0m"
 	echo -e "\n"
@@ -307,7 +307,7 @@ then
 	cd ./ces_linux4.35.1.29
 	bash server_install.sh cluster node
 fi
-if [ $1 = '-gc435face' ]
+if [ $1 = '-gczx435face' ]
 then
 	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.29人脸识别服务器】 \033[0m"
 	echo -e "\n"
@@ -317,7 +317,7 @@ then
 	cd ./ces_linux4.35.1.29
 	bash server_install.sh cluster face
 fi
-if [ $1 = '-gc434dj' ]
+if [ $1 = '-gczx434dj' ]
 then
 	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1单机版服务器】 \033[0m"
 	echo -e "\n"
@@ -327,7 +327,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh single
 fi
-if [ $1 = '-gc434jq' ]
+if [ $1 = '-gczx434jq' ]
 then
 	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1集群主服务器】 \033[0m"
 	echo -e "\n"
@@ -337,7 +337,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster main
 fi
-if [ $1 = '-gc434node' ]
+if [ $1 = '-gczx434node' ]
 then
 	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1集群节点服务器】 \033[0m"
 	echo -e "\n"
@@ -347,7 +347,7 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster node
 fi
-if [ $1 = '-gc434face' ]
+if [ $1 = '-gczx434face' ]
 then
 	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1人脸识别服务器】 \033[0m"
 	echo -e "\n"

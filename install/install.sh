@@ -387,6 +387,355 @@ then
 	cd ./ces_linux4.31.2.16
 	bash server_install.sh cluster node
 fi
+
+##########################################################################################以下是中性版本##########################################################################################
+
+
+if [ $1 = '-zx435single' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.35.2.21单机版（含FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44
+	wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh single	
+fi
+if [ $1 = '-zx435main' ]
+then
+	echo -e "\033[33m 【你选择安装的是CES v4.35.2.21集群主服务器（含FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh cluster main	
+fi
+if [ $1 = '-zx435dj' ]
+then
+	echo -e "\033[33m 【你选择的是只安装CES v4.35.2.21单机版】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh single
+fi
+if [ $1 = '-zx434jq' ]
+then
+	echo -e "\033[33m 【你选择的是只安装CES v4.35.2.21集群主服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-zx434node' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.35.2.21集群节点服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh cluster node
+fi
+if [ $1 = '-zx435face' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.35.2.21人脸识别服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
+	tar zxvf ces_linux_zx4.35.2.21.tar.gz
+	cd ./ces_linux4.35.2.21
+	bash server_install.sh cluster face
+fi
+if [ $1 = '-zx434single' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.34.5.1单机版（含FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh single	
+fi
+if [ $1 = '-zx434main' ]
+then
+	echo -e "\033[33m 【你选择安装的是CES v4.34.5.1集群主服务器（含FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh cluster main	
+fi
+if [ $1 = '-zx434dj' ]
+then
+	echo -e "\033[33m 【你选择的是只安装CES v4.34.5.1单机版】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh single
+fi
+if [ $1 = '-zx434jq' ]
+then
+	echo -e "\033[33m 【你选择的是只安装CES v4.34.5.1集群主服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-zx434node' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.34.5.1集群节点服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh cluster node
+fi
+if [ $1 = '-zx434face' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.34.5.1人脸识别服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh cluster face
+fi
+if [ $1 = '-zx431single' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6单机版（含FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz
+	tar zxvf ces_linux_zx4.31.3.5.tar.gz
+	cd ./ces_linux4.31.3.5
+	bash server_install.sh single
+fi
+if [ $1 = '-zx431main' ]
+then
+	echo -e "\033[33m 【你选择安装的是CES v4.31.3.6集群主服务器（含FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz
+	tar zxvf ces_linux_zx4.31.3.5.tar.gz
+	cd ./ces_linux4.31.3.5
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-zx431node' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6集群节点服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz
+	tar zxvf ces_linux_zx4.31.3.5.tar.gz
+	cd ./ces_linux4.31.3.5
+	bash server_install.sh cluster node
+fi
+if [ $1 = '-zx431dj' ]
+then
+	echo -e "\033[33m 【你选择的是只安装CES v4.31.3.6单机版】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz
+	tar zxvf ces_linux_zx4.31.3.5.tar.gz
+	cd ./ces_linux4.31.3.5
+	bash server_install.sh single
+fi
+if [ $1 = '-zx431jq' ]
+then
+	echo -e "\033[33m 【你选择的是只安装CES v4.31.3.6集群主服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz
+	tar zxvf ces_linux_zx4.31.3.5.tar.gz
+	cd ./ces_linux4.31.3.5
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-zx432single' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5单机版（含FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp ccr.ccs.tencentyun.com/1040155/fsp:1.6.4.4
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz
+	tar zxvf ces_linux_zx4.32.8.5.tar.gz
+	cd ./ces_linux4.32.8.5
+	bash server_install.sh single
+fi
+if [ $1 = '-zx432main' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5集群主服务器（含FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp ccr.ccs.tencentyun.com/1040155/fsp:1.6.4.4
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz
+	tar zxvf ces_linux_zx4.32.8.5.tar.gz
+	cd ./ces_linux4.32.8.5
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-zx432node' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5集群节点服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz
+	tar zxvf ces_linux_zx4.32.8.5.tar.gz
+	cd ./ces_linux4.32.8.5
+	bash server_install.sh cluster node
+fi
+if [ $1 = '-zx432face' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5人脸识别服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz
+	tar zxvf ces_linux_zx4.32.8.5.tar.gz
+	cd ./ces_linux4.32.8.5
+	bash server_install.sh cluster face
+fi
+if [ $1 = '-zx432dj' ]
+then
+	echo -e "\033[33m 【你选择的是只安装CES v4.32.8.5单机版】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz
+	tar zxvf ces_linux_zx4.32.8.5.tar.gz
+	cd ./ces_linux4.32.8.5
+	bash server_install.sh single
+fi
+if [ $1 = '-zx432jq' ]
+then
+	echo -e "\033[33m 【你选择的是只安装CES v4.32.8.5集群主服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz
+	tar zxvf ces_linux_zx4.32.8.5.tar.gz
+	cd ./ces_linux4.32.8.5
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-gczx435dj' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.29单机版服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.29.tar.gz -O ces_linux_arm_zx4.35.1.29.tar.gz
+	tar zxvf ces_linux_arm_zx4.35.1.29.tar.gz
+	cd ./ces_linux4.35.1.29
+	bash server_install.sh single
+fi
+if [ $1 = '-gczx435jq' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.29集群主服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.29.tar.gz -O ces_linux_arm_zx4.35.1.29.tar.gz
+	tar zxvf ces_linux_arm_zx4.35.1.29.tar.gz
+	cd ./ces_linux4.35.1.29
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-gczx435node' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.29集群节点服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.29.tar.gz -O ces_linux_arm_zx4.35.1.29.tar.gz
+	tar zxvf ces_linux_arm_zx4.35.1.29.tar.gz
+	cd ./ces_linux4.35.1.29
+	bash server_install.sh cluster node
+fi
+if [ $1 = '-gczx435face' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.29人脸识别服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.29.tar.gz -O ces_linux_arm_zx4.35.1.29.tar.gz
+	tar zxvf ces_linux_arm_zx4.35.1.29.tar.gz
+	cd ./ces_linux4.35.1.29
+	bash server_install.sh cluster face
+fi
+if [ $1 = '-gczx434dj' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1单机版服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh single
+fi
+if [ $1 = '-gczx434jq' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1集群主服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh cluster main
+fi
+if [ $1 = '-gczx434node' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1集群节点服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh cluster node
+fi
+if [ $1 = '-gczx434face' ]
+then
+	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1人脸识别服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz
+	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
+	cd ./ces_linux4.34.5.1
+	bash server_install.sh cluster face
+fi
+
+##########################################################################################服务器安装脚本到此结束##########################################################################################
+
 if [ $1 = '-141fsp' ]
 then
 	echo -e "\033[33m 【你选择的是安装FSP v1.4.1.17服务器（仅安装FSP服务器）】 \033[0m"
