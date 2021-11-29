@@ -6,7 +6,6 @@ wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blo
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/set_extra_ip.sh -O set_extra_ip.sh
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxinstall.sh -O zxinstall.sh
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return

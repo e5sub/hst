@@ -829,7 +829,6 @@ systemctl stop firewalld.service
 systemctl disable firewalld.service
 #删除安装脚本
 rm -rf install.sh
-rm -rf zxinstall.sh
 rm -rf ces.sh
 rm -rf zxces.sh
 rm -rf resetadmin.sql
