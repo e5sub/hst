@@ -85,12 +85,6 @@ echo -e " \033[32m 2. \033[0m CES v4.35.2.21集群主服务器（含FSP服务器
 echo -e " \033[31m=====*4.34版本*=====\033[0m"
 echo -e " \033[32m 3. \033[0m CES v4.34.5.1单机版（含FSP服务器）"
 echo -e " \033[32m 4. \033[0m CES v4.34.5.1集群主服务器（含FSP服务器）"
-echo -e " \033[31m=====*4.32版本*=====\033[0m"
-echo -e " \033[32m 5. \033[0m CES v4.32.8.5单机版（含FSP服务器）"
-echo -e " \033[32m 6. \033[0m CES v4.32.8.5集群主服务器（含FSP服务器）"
-echo -e " \033[31m=====*4.31版本*=====\033[0m"
-echo -e " \033[32m 7. \033[0m CES v4.31.3.6单机版（含FSP服务器）"
-echo -e " \033[32m 8. \033[0m CES v4.31.3.6集群主服务器（含FSP服务器）"
 echo -e " \033[44;37m 只安装CES服务器 \033[0m"
 echo -e " \033[31m=====*4.35版本*=====\033[0m"
 echo -e " \033[32m 20. \033[0m CES v4.35.2.21单机版"
@@ -102,15 +96,6 @@ echo -e " \033[32m 24. \033[0m CES v4.34.5.1单机版"
 echo -e " \033[32m 25. \033[0m CES v4.34.5.1集群主服务器"
 echo -e " \033[32m 26. \033[0m CES v4.34.5.1集群节点服务器"
 echo -e " \033[32m 27. \033[0m CES v4.34.5.1人脸识别服务器"
-echo -e " \033[31m=====*4.32版本*=====\033[0m"
-echo -e " \033[32m 28. \033[0m CES v4.32.8.5单机版"
-echo -e " \033[32m 29. \033[0m CES v4.32.8.5集群主服务器"
-echo -e " \033[32m 30. \033[0m CES v4.32.8.5集群节点服务器"
-echo -e " \033[32m 31. \033[0m CES v4.32.8.5人脸识别服务器"
-echo -e " \033[31m=====*4.31版本*=====\033[0m"
-echo -e " \033[32m 32. \033[0m CES v4.31.3.6单机版"
-echo -e " \033[32m 33. \033[0m CES v4.31.3.6集群主服务器"
-echo -e " \033[32m 34. \033[0m CES v4.31.3.6集群节点服务器"
 echo -e " \033[44;37m 国产化CES服务端 For ARM \033[0m"
 echo -e " \033[32m 40. \033[0m 国产化CES v4.35.1.29单机版服务器"
 echo -e " \033[32m 41. \033[0m 国产化CES v4.35.1.29集群主服务器"
@@ -149,10 +134,6 @@ case $N in
   2) bash install.sh -435main ;;
   3) bash install.sh -434single ;;
   4) bash install.sh -434main ;;
-  5) bash install.sh -432single ;;
-  6) bash install.sh -432main ;;
-  7) bash install.sh -431single ;;
-  8) bash install.sh -431main ;;
   20) bash install.sh -435dj ;;
   21) bash install.sh -435jq ;;
   22) bash install.sh -435node ;;
@@ -161,13 +142,6 @@ case $N in
   25) bash install.sh -434jq ;;
   26) bash install.sh -434node ;;
   27) bash install.sh -434face ;;
-  28) bash install.sh -432dj ;;
-  29) bash install.sh -432jq ;;
-  30) bash install.sh -432node ;;
-  31) bash install.sh -432face ;;
-  32) bash install.sh -431dj ;;
-  33) bash install.sh -431jq ;;
-  34) bash install.sh -431node;;
   40) bash install.sh -gc435dj;;
   41) bash install.sh -gc435jq;;
   42) bash install.sh -gc435node;;
@@ -176,9 +150,6 @@ case $N in
   45) bash install.sh -gc434jq;;
   46) bash install.sh -gc434node;;
   47) bash install.sh -gc434face;;
-  48) bash install.sh -gc431dj;;
-  49) bash install.sh -gc431jq;;
-  50) bash install.sh -gc431node;;
   70) bash install.sh -141fsp ;;
   71) bash install.sh -164fsp ;;
   72) bash install.sh -171fsp ;;
