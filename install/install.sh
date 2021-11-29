@@ -484,6 +484,7 @@ rm -rf zxinstall.sh
 rm -rf ces.sh
 rm -rf zxces.sh
 rm -rf resetadmin.sql
+rm -rf old.sh
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"*                      
 echo -e "#                                                                               "
