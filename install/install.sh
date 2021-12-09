@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2021年11月29日                        "*
+echo -e "# *脚本更新时间：2021年12月9日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -14,6 +14,7 @@ echo -e "                                                       "
 #获取内外网IP地址，端口
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
+ip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 172.17.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
 panelPort="8080"
 if [ $1 = '-435single' ]
 then
@@ -23,7 +24,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44
+	docker run -d --name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 	wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.2.21.tar.gz -O ces_linux_hst4.35.2.21.tar.gz
 	tar zxvf ces_linux_hst4.35.2.21.tar.gz
 	cd ./ces_linux4.35.2.21
@@ -37,7 +38,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44
+	docker run -d --name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 	wget --no-check-certificate --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.2.21.tar.gz -O ces_linux_hst4.35.2.21.tar.gz
 	tar zxvf ces_linux_hst4.35.2.21.tar.gz
 	cd ./ces_linux4.35.2.21
@@ -399,7 +400,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44
+	docker run -d --name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 	wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
 	tar zxvf ces_linux_zx4.35.2.21.tar.gz
 	cd ./ces_linux4.35.2.21
@@ -413,7 +414,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44
+	docker run -d --name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.2.21.tar.gz -O ces_linux_zx4.35.2.21.tar.gz
 	tar zxvf ces_linux_zx4.35.2.21.tar.gz
 	cd ./ces_linux4.35.2.21
@@ -756,15 +757,15 @@ then
 	systemctl start docker
 	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp ccr.ccs.tencentyun.com/1040155/fsp:1.6.4.4
 fi
-if [ $1 = '-171fsp' ]
+if [ $1 = '-174fsp' ]
 then
-	echo -e "\033[33m 【你选择的是安装FSP v1.7.1.44服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装FSP v1.7.4.2服务器（仅安装FSP服务器）】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.44	
+	docker run -d --name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 fi
 if [ $1 = '-rtmp' ]
 then
