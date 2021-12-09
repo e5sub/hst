@@ -834,6 +834,10 @@ rm -rf ces.sh
 rm -rf zxces.sh
 rm -rf resetadmin.sql
 rm -rf old.sh
+rm -rf set_protocol_addr.sh
+rm -rf set_store_proxy.sh
+rm -rf set_wb_app_id.sh
+
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"*                      
 echo -e "#                                                                               "
