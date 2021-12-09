@@ -16,7 +16,7 @@ if [[ $protocol == "wss" ]]; then
   ss_port=21002
 fi
 
-docker_id=`docker ps|grep fsp_pri|awk '{print $1}'`
+docker_id=`docker ps|grep fsp|awk '{print $1}'`
 
 docker exec -ti $docker_id sed -i "s/ws_address.*/ws_address\":\"$protocol:\/\/$addr:$webgw_port\",/g" /fsmeeting/fsp_sss_stream/webgw/webgw.config
 docker exec -ti $docker_id sed -i "s/ws_address.*/ws_address\":\"$protocol:\/\/$addr:$wsgw_port\",/g" /fsmeeting/fsp_sss_stream/wsgw/wsgw.config
