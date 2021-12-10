@@ -689,6 +689,7 @@ rm -f ces.sh
 rm -f zxces.sh
 rm -f resetadmin.sql
 rm -f old.sh
+rm -f set_extra_ip.sh
 rm -f set_protocol_addr.sh
 rm -f set_store_proxy.sh
 rm -f set_wb_app_id.sh
