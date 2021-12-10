@@ -684,14 +684,14 @@ systemctl stop firewalld.service
 #禁用防火墙
 systemctl disable firewalld.service
 #删除安装脚本
-rm -rf install.sh
-rm -rf ces.sh
-rm -rf zxces.sh
-rm -rf resetadmin.sql
-rm -rf old.sh
-rm -rf set_protocol_addr.sh
-rm -rf set_store_proxy.sh
-rm -rf set_wb_app_id.sh
+rm -f install.sh
+rm -f ces.sh
+rm -f zxces.sh
+rm -f resetadmin.sql
+rm -f old.sh
+rm -f set_protocol_addr.sh
+rm -f set_store_proxy.sh
+rm -f set_wb_app_id.sh
 
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"*                      
