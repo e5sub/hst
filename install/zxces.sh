@@ -2,20 +2,11 @@ echo "# #####################################################################"#
 echo "                                                       "
 echo "请选择需要安装的版本【默认安装中性版】:"
 echo ""
-echo -e " \033[44;37m 安装FSP和CES服务器 \033[0m"
-echo -e " \033[31m=====*4.35版本*=====\033[0m"
-echo -e " \033[32m 1. \033[0m CES v4.35.2.21单机版（含FSP服务器）"
-echo -e " \033[32m 2. \033[0m CES v4.35.2.21集群主服务器（含FSP服务器）"
-echo -e " \033[31m=====*4.34版本*=====\033[0m"
-echo -e " \033[32m 3. \033[0m CES v4.34.5.1单机版（含FSP服务器）"
-echo -e " \033[32m 4. \033[0m CES v4.34.5.1集群主服务器（含FSP服务器）"
-echo -e " \033[31m=====*4.32版本*=====\033[0m"
-echo -e " \033[32m 5. \033[0m CES v4.32.8.5单机版（含FSP服务器）"
-echo -e " \033[32m 6. \033[0m CES v4.32.8.5集群主服务器（含FSP服务器）"
-echo -e " \033[31m=====*4.31版本*=====\033[0m"
-echo -e " \033[32m 7. \033[0m CES v4.31.3.6单机版（含FSP服务器）"
-echo -e " \033[32m 8. \033[0m CES v4.31.3.6集群主服务器（含FSP服务器）"
-echo -e " \033[44;37m 只安装CES服务器 \033[0m"
+echo -e " \033[31m=====*4.36版本*=====\033[0m"
+echo -e " \033[32m 16. \033[0m CES v4.36.1.11单机版"
+echo -e " \033[32m 17. \033[0m CES v4.36.1.11集群主服务器"
+echo -e " \033[32m 18. \033[0m CES v4.36.1.11集群节点服务器"
+echo -e " \033[32m 19. \033[0m CES v4.36.1.11人脸识别服务器"
 echo -e " \033[31m=====*4.35版本*=====\033[0m"
 echo -e " \033[32m 20. \033[0m CES v4.35.2.21单机版"
 echo -e " \033[32m 21. \033[0m CES v4.35.2.21集群主服务器"
@@ -52,14 +43,10 @@ echo ""
 read N
 echo ""
 case $N in
-  1) bash install.sh -zx435single ;;
-  2) bash install.sh -zx435main ;;
-  3) bash install.sh -zx434single ;;
-  4) bash install.sh -zx434main ;;
-  5) bash install.sh -zx432single ;;
-  6) bash install.sh -zx432main ;;
-  7) bash install.sh -zx431single ;;
-  8) bash install.sh -zx431main ;;
+  16) bash install.sh -zx436dj ;;
+  17) bash install.sh -zx436jq ;;
+  18) bash install.sh -zx436node ;;
+  19) bash install.sh -zx436face ;;
   20) bash install.sh -zx435dj ;;
   21) bash install.sh -zx435jq ;;
   22) bash install.sh -zx435node ;;

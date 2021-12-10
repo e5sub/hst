@@ -54,7 +54,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2021年12月9日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2021年12月10日，如有遇到安装问题请及时反馈           "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -81,14 +81,11 @@ echo "# #####################################################################"#
 echo "                                                       "
 echo "请选择需要安装的版本【默认安装标准版】:"
 echo ""
-echo -e " \033[44;37m 安装FSP和CES服务器 \033[0m"
-echo -e " \033[31m=====*4.35版本*=====\033[0m"
-echo -e " \033[32m 1. \033[0m CES v4.35.2.21单机版（含FSP服务器）"
-echo -e " \033[32m 2. \033[0m CES v4.35.2.21集群主服务器（含FSP服务器）"
-echo -e " \033[31m=====*4.34版本*=====\033[0m"
-echo -e " \033[32m 3. \033[0m CES v4.34.5.1单机版（含FSP服务器）"
-echo -e " \033[32m 4. \033[0m CES v4.34.5.1集群主服务器（含FSP服务器）"
-echo -e " \033[44;37m 只安装CES服务器 \033[0m"
+echo -e " \033[31m=====*4.36版本*=====\033[0m"
+echo -e " \033[32m 16. \033[0m CES v4.36.1.11单机版"
+echo -e " \033[32m 17. \033[0m CES v4.36.1.11集群主服务器"
+echo -e " \033[32m 18. \033[0m CES v4.36.1.11集群节点服务器"
+echo -e " \033[32m 19. \033[0m CES v4.36.1.11人脸识别服务器"
 echo -e " \033[31m=====*4.35版本*=====\033[0m"
 echo -e " \033[32m 20. \033[0m CES v4.35.2.21单机版"
 echo -e " \033[32m 21. \033[0m CES v4.35.2.21集群主服务器"
@@ -130,10 +127,10 @@ echo ""
 read N
 echo ""
 case $N in
-  1) bash install.sh -435single ;;
-  2) bash install.sh -435main ;;
-  3) bash install.sh -434single ;;
-  4) bash install.sh -434main ;;
+  16) bash install.sh -436dj ;;
+  17) bash install.sh -436jq ;;
+  18) bash install.sh -436node ;;
+  19) bash install.sh -436face ;;
   20) bash install.sh -435dj ;;
   21) bash install.sh -435jq ;;
   22) bash install.sh -435node ;;
