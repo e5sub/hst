@@ -621,10 +621,10 @@ then
 	systemctl enable docker
 	systemctl start docker
 	docker run -d --name=fsp ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
-	docker cp $(docker ps -f name=fsp):/fsmeeting /usr/local/hst
-	docker cp $(docker ps -f name=fsp):/middleware /usr/local/hst
-	docker stop $(docker ps -f name=fsp)
-	docker rm $(docker ps -f name=fsp)  
+	docker cp $(docker ps -a -q):/fsmeeting /usr/local/hst
+	docker cp $(docker ps -a -q):/middleware /usr/local/hst
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q) 
 	docker run -d -v /usr/local/hst/fsmeeting:/fsmeeting -v /usr/local/hst/middleware:/middleware --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
 fi
 if [ $1 = '-174fsp' ]
