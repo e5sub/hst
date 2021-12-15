@@ -621,10 +621,10 @@ then
 	systemctl enable docker
 	systemctl start docker
 	docker run -d --name=fsp ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
-	docker cp $(docker ps -a -q):/fsmeeting /usr/local/hst
-	docker cp $(docker ps -a -q):/middleware /usr/local/hst
-	docker stop $(docker ps -a -q)
-	docker rm $(docker ps -a -q) 
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst
+	docker stop $(docker ps|grep fsp|awk '{print $1}')
+	docker rm $(docker ps|grep fsp|awk '{print $1}')
 	docker run -d -v /usr/local/hst/fsmeeting:/fsmeeting -v /usr/local/hst/middleware:/middleware --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
 fi
 if [ $1 = '-174fsp' ]
@@ -636,10 +636,10 @@ then
 	systemctl enable docker
 	systemctl start docker
 	docker run -d ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
-	docker cp $(docker ps -a -q):/fsmeeting /usr/local/hst
-	docker cp $(docker ps -a -q):/middleware /usr/local/hst
-	docker stop $(docker ps -a -q)
-	docker rm $(docker ps -a -q)
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst
+	docker stop $(docker ps|grep fsp|awk '{print $1}')
+	docker rm $(docker ps|grep fsp|awk '{print $1}')
 	docker run -d -v /usr/local/hst/fsmeeting:/fsmeeting -v /usr/local/hst/middleware:/middleware --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 fi
 if [ $1 = '-rtmp' ]
@@ -675,15 +675,15 @@ then
 	echo -e "\033[33m 【你选择的是重启FSP服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	docker restart $(docker ps -a -q)
+	docker restart $(docker ps|grep fsp|awk '{print $1}')
 fi
 if [ $1 = '-unfsp' ]
 then
 	echo -e "\033[33m 【你选择的是卸载FSP服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	docker stop $(docker ps -a -q)
-	docker rm $(docker ps -a -q)
+	docker stop $(docker ps|grep fsp|awk '{print $1}')
+	docker rm $(docker ps|grep fsp|awk '{print $1}')
 fi
 if [ $1 = '-resetadmin' ]
 then
