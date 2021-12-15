@@ -624,9 +624,14 @@ then
 	mkdir -p /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	echo -e "正在停止FSP服务器"
 	docker stop $(docker ps|grep fsp|awk '{print $1}')
-	docker rm $(docker ps|grep fsp|awk '{print $1}')
-	docker run -d -v /usr/local/hst/fsmeeting/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
+	sleep 5s
+	echo -e "正在启动FSP服务器"
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
 fi
 if [ $1 = '-174fsp' ]
 then
@@ -640,9 +645,14 @@ then
 	mkdir -p /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	echo -e "正在停止FSP服务器"
 	docker stop $(docker ps|grep fsp|awk '{print $1}')
-	docker rm $(docker ps|grep fsp|awk '{print $1}')
-	docker run -d -v /usr/local/hst/fsmeeting/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
+	sleep 5s
+	echo -e "正在启动FSP服务器"
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 fi
 if [ $1 = '-rtmp' ]
 then
@@ -684,8 +694,11 @@ then
 	echo -e "\033[33m 【你选择的是卸载FSP服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
+	echo -e "正在停止FSP服务器"
 	docker stop $(docker ps|grep fsp|awk '{print $1}')
-	docker rm $(docker ps|grep fsp|awk '{print $1}')
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
 fi
 if [ $1 = '-resetadmin' ]
 then
