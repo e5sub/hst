@@ -612,6 +612,21 @@ then
 	systemctl start docker
 	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp ccr.ccs.tencentyun.com/1040155/fsp:1.6.4.4
 fi
+if [ $1 = '-171fsp' ]
+then
+	echo -e "\033[33m 【你选择的是安装FSP v1.7.1.19服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	docker cp $(docker ps -a -q):/fsmeeting /usr/local/hst
+	docker cp $(docker ps -a -q):/middleware /usr/local/hst
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
+	docker run -d -v /usr/local/hst/fsmeeting:/fsmeeting -v /usr/local/hst/middleware:/middleware --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+fi
 if [ $1 = '-174fsp' ]
 then
 	echo -e "\033[33m 【你选择的是安装FSP v1.7.4.2服务器（仅安装FSP服务器）】 \033[0m"
@@ -620,7 +635,12 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+	docker run -d ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+	docker cp $(docker ps -a -q):/fsmeeting /usr/local/hst
+	docker cp $(docker ps -a -q):/middleware /usr/local/hst
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
+	docker run -d -v /usr/local/hst/fsmeeting:/fsmeeting -v /usr/local/hst/middleware:/middleware --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 fi
 if [ $1 = '-rtmp' ]
 then
