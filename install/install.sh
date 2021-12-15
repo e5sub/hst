@@ -624,6 +624,7 @@ then
 	mkdir -p /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/boss /usr/local/hst/fsp
 	echo -e "正在停止FSP服务器"
 	docker stop $(docker ps|grep fsp|awk '{print $1}')
 	sleep 5s
@@ -631,7 +632,7 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
 fi
 if [ $1 = '-174fsp' ]
 then
@@ -645,6 +646,7 @@ then
 	mkdir -p /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/boss /usr/local/hst/fsp
 	echo -e "正在停止FSP服务器"
 	docker stop $(docker ps|grep fsp|awk '{print $1}')
 	sleep 5s
@@ -652,7 +654,7 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 fi
 if [ $1 = '-rtmp' ]
 then
