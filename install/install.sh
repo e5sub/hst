@@ -621,6 +621,7 @@ then
 	systemctl enable docker
 	systemctl start docker
 	docker run -d --name=fsp ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	mkdir -p /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
 	docker stop $(docker ps|grep fsp|awk '{print $1}')
@@ -636,6 +637,7 @@ then
 	systemctl enable docker
 	systemctl start docker
 	docker run -d ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+	mkdir -p /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
 	docker stop $(docker ps|grep fsp|awk '{print $1}')
