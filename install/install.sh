@@ -656,6 +656,28 @@ then
 	echo -e "正在启动FSP服务器"
 	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 fi
+if [ $1 = '-175fsp' ]
+then
+	echo -e "\033[33m 【你选择的是安装FSP v1.7.5.2服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
+	mkdir -p /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp|awk '{print $1}'):/boss /usr/local/hst/fsp
+	echo -e "正在停止FSP服务器"
+	docker stop $(docker ps|grep fsp|awk '{print $1}')
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
+	sleep 5s
+	echo -e "正在启动FSP服务器"
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
+fi
 if [ $1 = '-rtmp' ]
 then
 	echo -e "\033[33m 【你选择的是安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器】 \033[0m"

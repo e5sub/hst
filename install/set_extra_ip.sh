@@ -6,14 +6,20 @@ ip_addr=$1
 
 docker_id=`docker ps|grep fsp|awk '{print $1}'`
 
-docker exec -ti $docker_id sed -i "s/\"net_address_list\":.*,/\"net_address_list\": \"${ip_addr}\",/g" /fsmeeting/fsp_sss_stream/cp/cp.config
+cp_pid=`pidof client_proxy`
+if [[ $cp_pid != "" ]]; then
+  docker exec -ti $docker_id sed -i "s/\"net_address_list\":.*,/\"net_address_list\": \"${ip_addr}\",/g" /fsmeeting/fsp_sss_stream/cp/cp.config
+  docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/cp/CPMonitorCtrl.sh restart
+fi
 
-docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/cp/CPMonitorCtrl.sh restart
+ss_pid=`pidof stream_server`
+if [[ $ss_pid != "" ]]; then
+  docker exec -ti $docker_id sed -i "s/\"net_address_list\":.*,/\"net_address_list\": \"${ip_addr}\",/g" /fsmeeting/fsp_sss_stream/ss/ss.config
+  docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/ss/SSMonitorCtrl.sh restart
+fi
 
-docker exec -ti $docker_id sed -i "s/\"net_address_list\":.*,/\"net_address_list\": \"${ip_addr}\",/g" /fsmeeting/fsp_sss_stream/ss/ss.config
-
-docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/ss/SSMonitorCtrl.sh restart
-
-docker exec -ti $docker_id sed -i "s/\"nat_address\": \".*\"/\"nat_address\": \"${ip_addr}\"/g" /fsmeeting/fsp_sss_stream/webgw/webgw.config
-
-docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/webgw/WEBGWMonitorCtrl.sh restart
+wbgw_pid=`pidof wb_gateway`
+if [[ $wbgw_pid != "" ]]; then
+  docker exec -ti $docker_id sed -i "s/\"net_address_list\":.*,/\"net_address_list\": \"${ip_addr}\",/g" /fsmeeting/fsp_sss_stream/wbgw/wbgw.config
+  docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/wbgw/WBGWMonitorCtrl.sh restart
+fi
