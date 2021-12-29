@@ -105,6 +105,11 @@ echo -e " \033[32m 44. \033[0m 国产化CES v4.34.5.1单机版服务器"
 echo -e " \033[32m 45. \033[0m 国产化CES v4.34.5.1集群主服务器"
 echo -e " \033[32m 46. \033[0m 国产化CES v4.34.5.1集群节点服务器"
 echo -e " \033[32m 47. \033[0m 国产化CES v4.34.5.1人脸识别服务器"
+echo -e " \033[44;37m 国产化CES服务端 For MIPS \033[0m"
+echo -e " \033[32m 60. \033[0m 国产化CES v4.35.1.30单机版服务器"
+echo -e " \033[32m 61. \033[0m 国产化CES v4.35.1.30集群主服务器"
+echo -e " \033[32m 62. \033[0m 国产化CES v4.35.1.30集群节点服务器"
+echo -e " \033[32m 63. \033[0m 国产化CES v4.35.1.30人脸识别服务器"
 echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
 echo -e " \033[32m 70. \033[0m 安装FSP v1.4.1.17服务器（配套4.31服务器）"
 echo -e " \033[32m 71. \033[0m 安装FSP v1.7.1.19服务器（配套4.34服务器）"
@@ -147,6 +152,10 @@ case $N in
   45) bash install.sh -gc434jq;;
   46) bash install.sh -gc434node;;
   47) bash install.sh -gc434face;;
+  60) bash install.sh -m435dj;;
+  61) bash install.sh -m435jq;;
+  62) bash install.sh -m435node;;
+  63) bash install.sh -m435face;;
   70) bash install.sh -141fsp ;;
   71) bash install.sh -171fsp ;;
   72) bash install.sh -175fsp ;;

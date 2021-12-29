@@ -35,6 +35,11 @@ echo -e " \033[32m 44. \033[0m 国产化CES v4.34.5.1单机版服务器"
 echo -e " \033[32m 45. \033[0m 国产化CES v4.34.5.1集群主服务器"
 echo -e " \033[32m 46. \033[0m 国产化CES v4.34.5.1集群节点服务器"
 echo -e " \033[32m 47. \033[0m 国产化CES v4.34.5.1人脸识别服务器"
+echo -e " \033[44;37m 国产化CES服务端 For MIPS \033[0m"
+echo -e " \033[32m 60. \033[0m 国产化CES v4.35.1.30单机版服务器"
+echo -e " \033[32m 61. \033[0m 国产化CES v4.35.1.30集群主服务器"
+echo -e " \033[32m 62. \033[0m 国产化CES v4.35.1.30集群节点服务器"
+echo -e " \033[32m 63. \033[0m 国产化CES v4.35.1.30人脸识别服务器"
 echo -e ""
 echo -e " \033[32m 00. \033[0m 返回安装标准版CES服务器"
 echo -e ""
@@ -70,6 +75,10 @@ case $N in
   45) bash install.sh -gczx434jq;;
   46) bash install.sh -gczx434node;;
   47) bash install.sh -gczx434face;;
+  60) bash install.sh -mzx435dj;;
+  61) bash install.sh -mzx435jq;;
+  62) bash install.sh -mzx435node;;
+  63) bash install.sh -mzx435face;;
   00) bash ces.sh ;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac
