@@ -18,42 +18,42 @@ ip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 172.17.0.1|grep -v inet6|awk
 panelPort="8080"
 if [ $1 = '-436dj' ]
 then
-	echo -e "\033[33m 【你选择的是只安装CES v4.36.1.11单机版】 \033[0m"
+	echo -e "\033[33m 【你选择的是只安装CES v4.36.2.16单机版】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.1.11.tar.gz -O ces_linux_hst4.36.1.11.tar.gz
-	tar zxvf ces_linux_hst4.36.1.11.tar.gz
-	cd ./ces_linux4.36.1.11
+	wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.2.16.tar.gz -O ces_linux_hst4.36.2.16.tar.gz
+	tar zxvf ces_linux_hst4.36.2.16.tar.gz
+	cd ./ces_linux4.36.2.16
 	bash server_install.sh single	
 fi
 if [ $1 = '-436jq' ]
 then
-	echo -e "\033[33m 【你选择的是只安装CES v4.36.1.11集群主服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是只安装CES v4.36.2.16集群主服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.1.11.tar.gz -O ces_linux_hst4.36.1.11.tar.gz
-	tar zxvf ces_linux_hst4.36.1.11.tar.gz
-	cd ./ces_linux4.36.1.11
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.2.16.tar.gz -O ces_linux_hst4.36.2.16.tar.gz
+	tar zxvf ces_linux_hst4.36.2.16.tar.gz
+	cd ./ces_linux4.36.2.16
 	bash server_install.sh cluster main	
 fi
 if [ $1 = '-436node' ]
 then
-	echo -e "\033[33m 【你选择的是安装CES v4.36.1.11集群节点服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装CES v4.36.2.16集群节点服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.1.11.tar.gz -O ces_linux_hst4.36.1.11.tar.gz
-	tar zxvf ces_linux_hst4.36.1.11.tar.gz
-	cd ./ces_linux4.36.1.11
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.2.16.tar.gz -O ces_linux_hst4.36.2.16.tar.gz
+	tar zxvf ces_linux_hst4.36.2.16.tar.gz
+	cd ./ces_linux4.36.2.16
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-436face' ]
 then
-	echo -e "\033[33m 【你选择的是安装CES v4.36.1.11人脸识别服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装CES v4.36.2.16人脸识别服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.1.11.tar.gz -O ces_linux_hst4.36.1.11.tar.gz
-	tar zxvf ces_linux_hst4.36.1.11.tar.gz
-	cd ./ces_linux4.36.1.11
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.2.16.tar.gz -O ces_linux_hst4.36.2.16.tar.gz
+	tar zxvf ces_linux_hst4.36.2.16.tar.gz
+	cd ./ces_linux4.36.2.16
 	bash server_install.sh cluster face
 fi
 if [ $1 = '-435dj' ]
@@ -361,42 +361,42 @@ fi
 
 if [ $1 = '-zx436dj' ]
 then
-	echo -e "\033[33m 【你选择的是只安装CES v4.36.1.11单机版】 \033[0m"
+	echo -e "\033[33m 【你选择的是只安装CES v4.36.2.16单机版】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.1.11.tar.gz -O ces_linux_zx4.36.1.11.tar.gz
-	tar zxvf ces_linux_zx4.36.1.11.tar.gz
-	cd ./ces_linux4.36.1.11
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.2.16.tar.gz -O ces_linux_zx4.36.2.16.tar.gz
+	tar zxvf ces_linux_zx4.36.2.16.tar.gz
+	cd ./ces_linux4.36.2.16
 	bash server_install.sh single
 fi
 if [ $1 = '-zx436jq' ]
 then
-	echo -e "\033[33m 【你选择的是只安装CES v4.36.1.11集群主服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是只安装CES v4.36.2.16集群主服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.1.11.tar.gz -O ces_linux_zx4.36.1.11.tar.gz
-	tar zxvf ces_linux_zx4.36.1.11.tar.gz
-	cd ./ces_linux4.36.1.11
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.2.16.tar.gz -O ces_linux_zx4.36.2.16.tar.gz
+	tar zxvf ces_linux_zx4.36.2.16.tar.gz
+	cd ./ces_linux4.36.2.16
 	bash server_install.sh cluster main
 fi
 if [ $1 = '-zx436node' ]
 then
-	echo -e "\033[33m 【你选择的是安装CES v4.36.1.11集群节点服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装CES v4.36.2.16集群节点服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.1.11.tar.gz -O ces_linux_zx4.36.1.11.tar.gz
-	tar zxvf ces_linux_zx4.36.1.11.tar.gz
-	cd ./ces_linux4.36.1.11
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.2.16.tar.gz -O ces_linux_zx4.36.2.16.tar.gz
+	tar zxvf ces_linux_zx4.36.2.16.tar.gz
+	cd ./ces_linux4.36.2.16
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-zx436face' ]
 then
-	echo -e "\033[33m 【你选择的是安装CES v4.36.1.11人脸识别服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装CES v4.36.2.16人脸识别服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.1.11.tar.gz -O ces_linux_zx4.36.1.11.tar.gz
-	tar zxvf ces_linux_zx4.36.1.11.tar.gz
-	cd ./ces_linux4.36.1.11
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.2.16.tar.gz -O ces_linux_zx4.36.2.16.tar.gz
+	tar zxvf ces_linux_zx4.36.2.16.tar.gz
+	cd ./ces_linux4.36.2.16
 	bash server_install.sh cluster face
 fi
 if [ $1 = '-zx435dj' ]
