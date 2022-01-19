@@ -719,6 +719,11 @@ then
 	echo -e "\033[33m 【你选择的是安装FSP v1.7.4.2服务器（仅安装FSP服务器）】 \033[0m"
 	echo -e "\n"
 	sleep 5s
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_extra_ip.sh -O set_extra_ip.sh
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_protocol_addr.sh -O set_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_store_proxy.sh -O set_store_proxy.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_wb_app_id.sh -O set_wb_app_id.sh
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/add_protocol_addr.sh -O add_protocol_addr.sh
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
@@ -832,6 +837,7 @@ rm -f set_extra_ip.sh
 rm -f set_protocol_addr.sh
 rm -f set_store_proxy.sh
 rm -f set_wb_app_id.sh
+rm -f add_protocol_addr.sh
 
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"*                      

@@ -4,12 +4,8 @@ getBtTime=$(curl -sS --connect-timeout 3 -m 60 http://www.bt.cn/api/index/get_ti
 date -s "$(date -d @$getBtTime +"%Y-%m-%d %H:%M:%S")"
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/set_extra_ip.sh -O set_extra_ip.sh
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/set_protocol_addr.sh -O set_protocol_addr.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/set_store_proxy.sh -O set_store_proxy.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/set_wb_app_id.sh -O set_wb_app_id.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
