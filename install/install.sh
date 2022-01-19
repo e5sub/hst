@@ -814,6 +814,7 @@ then
 	echo -e "\033[33m 【你选择的是重置后台admin密码】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
 	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
 fi
 if [ $1 = '-setip' ]

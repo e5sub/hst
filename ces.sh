@@ -3,9 +3,6 @@ echo ""
 getBtTime=$(curl -sS --connect-timeout 3 -m 60 http://www.bt.cn/api/index/get_time)
 date -s "$(date -d @$getBtTime +"%Y-%m-%d %H:%M:%S")"
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
@@ -160,9 +157,9 @@ case $N in
   88) bash install.sh -xiezai ;;
   89) bash install.sh -restartfsp ;;
   90) bash install.sh -unfsp ;;
-  97) bash old.sh ;;
+  97) bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh) ;;
   98) bash install.sh -setip ;;
   99) bash install.sh -resetadmin ;;
-  00) bash zxces.sh ;;
+  00) bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh) ;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac
