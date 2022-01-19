@@ -16,22 +16,13 @@ if [[ $protocol == "wss" ]]; then
   ss_port=21002
 fi
 
-docker_id=`docker ps|grep fsp|awk '{print $1}'`
+docker_id=`docker ps|grep fsp_pri|awk '{print $1}'`
 
-webgw_pid=`pidof web_gateway`
-if [[ $webgw_pid != "" ]]; then
-  docker exec -ti $docker_id sed -i "s/ws_address.*/ws_address\":\"$protocol:\/\/$addr:$webgw_port\",/g" /fsmeeting/fsp_sss_stream/webgw/webgw.config
-  docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/webgw/WEBGWMonitorCtrl.sh restart
-fi
+docker exec -ti $docker_id sed -i "s/ws_address.*/ws_address\":\"$protocol:\/\/$addr:$webgw_port\",/g" /fsmeeting/fsp_sss_stream/webgw/webgw.config
+docker exec -ti $docker_id sed -i "s/ws_address.*/ws_address\":\"$protocol:\/\/$addr:$wsgw_port\",/g" /fsmeeting/fsp_sss_stream/wsgw/wsgw.config
+docker exec -ti $docker_id sed -i "s/ws_address.*/ws_address\":\"$protocol:\/\/$addr:$ss_port\",/g" /fsmeeting/fsp_sss_stream/ss/ss.config
 
-wsgw_pid=`pidof websocket_gateway`
-if [[ $wsgw_pid != "" ]]; then
-  docker exec -ti $docker_id sed -i "s/ws_address.*/ws_address\":\"$protocol:\/\/$addr:$wsgw_port\",/g" /fsmeeting/fsp_sss_stream/wsgw/wsgw.config
-  docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/wsgw/WSGWMonitorCtrl.sh restart
-fi
 
-ss_pid=`pidof stream_server`
-if [[ $ss_pid != "" ]]; then
-  docker exec -ti $docker_id sed -i "s/ws_address.*/ws_address\":\"$protocol:\/\/$addr:$ss_port\",/g" /fsmeeting/fsp_sss_stream/ss/ss.config
-  docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/ss/SSMonitorCtrl.sh restart
-fi
+docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/webgw/WEBGWMonitorCtrl.sh restart
+docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/wsgw/WSGWMonitorCtrl.sh restart
+docker exec -ti $docker_id /bin/bash /fsmeeting/fsp_sss_stream/ss/SSMonitorCtrl.sh restart

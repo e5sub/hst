@@ -54,7 +54,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年1月12日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2022年1月19日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -112,11 +112,11 @@ echo -e " \033[32m 62. \033[0m 国产化CES v4.35.1.30集群节点服务器"
 echo -e " \033[32m 63. \033[0m 国产化CES v4.35.1.30人脸识别服务器"
 echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
 echo -e " \033[32m 70. \033[0m 安装FSP v1.4.1.17服务器（配套4.31服务器）"
-echo -e " \033[32m 71. \033[0m 安装FSP v1.7.1.19服务器（配套4.34服务器）"
+echo -e " \033[32m 71. \033[0m 安装FSP v1.7.4.2服务器（配套4.34服务器）"
 echo -e " \033[32m 72. \033[0m 安装FSP v1.7.5.2服务器"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
 echo -e " \033[32m 80. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/8080/8000端口）"
-echo -e " \033[32m 81. \033[0m 安装iperf3局域网性能测试工具(服务端)（5201端口）"
+echo -e " \033[32m 81. \033[0m 安装iperf3网络性能测试工具(服务端)（5201端口）"
 echo -e ""
 echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 重启FSP服务器"
@@ -157,7 +157,7 @@ case $N in
   62) bash install.sh -m435node;;
   63) bash install.sh -m435face;;
   70) bash install.sh -141fsp ;;
-  71) bash install.sh -171fsp ;;
+  71) bash install.sh -174fsp ;;
   72) bash install.sh -175fsp ;;
   80) bash install.sh -rtmp ;;
   81) bash install.sh -iperf ;;  

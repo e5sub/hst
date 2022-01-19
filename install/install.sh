@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年1月12日                         "*
+echo -e "# *脚本更新时间：2022年1月19日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -680,7 +680,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17
+	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17
 fi
 if [ $1 = '-164fsp' ]
 then
@@ -690,7 +690,7 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp ccr.ccs.tencentyun.com/1040155/fsp:1.6.4.4
+	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.6.4.4
 fi
 if [ $1 = '-171fsp' ]
 then
@@ -700,19 +700,19 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d --name=fsp ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
 	mkdir -p /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/boss /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
 	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp|awk '{print $1}')
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 	sleep 5s
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
 fi
 if [ $1 = '-174fsp' ]
 then
@@ -722,19 +722,19 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 	mkdir -p /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/boss /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
 	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp|awk '{print $1}')
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 	sleep 5s
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
 fi
 if [ $1 = '-175fsp' ]
 then
@@ -744,19 +744,19 @@ then
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
-	docker run -d ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
+	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
 	mkdir -p /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/middleware /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp|awk '{print $1}'):/boss /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
 	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp|awk '{print $1}')
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 	sleep 5s
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name--name=fsp -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
 fi
 if [ $1 = '-rtmp' ]
 then
@@ -791,7 +791,7 @@ then
 	echo -e "\033[33m 【你选择的是重启FSP服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	docker restart $(docker ps|grep fsp|awk '{print $1}')
+	docker restart $(docker ps|grep fsp_pri|awk '{print $1}')
 fi
 if [ $1 = '-unfsp' ]
 then
@@ -799,7 +799,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp|awk '{print $1}')
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 	sleep 5s
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
