@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年1月21日                         "*
+echo -e "# *脚本更新时间：2022年3月17日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -834,18 +834,13 @@ rm -f ces.sh
 rm -f zxces.sh
 rm -f resetadmin.sql
 rm -f old.sh
-rm -f set_extra_ip.sh
-rm -f set_protocol_addr.sh
-rm -f set_store_proxy.sh
-rm -f set_wb_app_id.sh
-rm -f add_protocol_addr.sh
 
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"*                      
 echo -e "#                                                                               "
 echo -e "# *脚本执行完成                                                                 "
 echo -e "#                                                                               "
-echo -e "# *FSP默认端口：28000、29100 （注：4.34之后的为28000和20020端口)                "
+echo -e "# *FSP外网映射端口：28000、20020、21000、29100、29400、29710                    "
 echo -e "#                                                                               "
 echo -e "# *CES默认端口：1089、8080、8443                                                "
 echo -e "#                                                                               "
