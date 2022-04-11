@@ -174,7 +174,7 @@ case $N in
   90) bash install.sh -unfsp ;;
   97) bash install.sh -setip ;;
   98) bash install.sh -resetadmin ;;
-  99) bash install.sh -old ;;
-  00) bash install.sh -zxces ;;
+  99) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh && chmod +x old.sh && bash old.sh ;;
+  00) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh && chmod +x zxces.sh && bash zxces.sh ;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac
