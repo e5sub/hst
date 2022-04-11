@@ -79,6 +79,6 @@ case $N in
   61) bash install.sh -mzx435jq ;;
   62) bash install.sh -mzx435node ;;
   63) bash install.sh -mzx435face ;;
-  00) bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh) ;;
+  00) bash ces.sh;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac
