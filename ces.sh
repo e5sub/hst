@@ -11,6 +11,12 @@ sys_install(){
     else
         echo 'wget 已安装，继续操作'
     fi
+	if ! type curl >/dev/null 2>&1; then
+        echo 'curl 未安装 正在安装中';
+	    apt-get install wget -y || yum install wget -y
+    else
+        echo 'curl 已安装，继续操作'
+    fi
 }
 #脚本启动
 sys_install
