@@ -11,7 +11,6 @@
   
 后续计划添加zabbix服务器监控应用  
 
-一键安装脚本（适用于CentOS7）：  
- yum -y install wget && wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh -O ces.sh && bash ces.sh  
-一键安装脚本（适用于非CentOS）：     
+一键安装脚本：     
+
  bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh)
