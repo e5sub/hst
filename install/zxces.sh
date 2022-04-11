@@ -41,7 +41,6 @@ echo -e " \033[32m 61. \033[0m 国产化CES v4.35.1.30集群主服务器"
 echo -e " \033[32m 62. \033[0m 国产化CES v4.35.1.30集群节点服务器"
 echo -e " \033[32m 63. \033[0m 国产化CES v4.35.1.30人脸识别服务器"
 echo -e ""
-echo -e " \033[32m 00. \033[0m 返回安装标准版CES服务器"
 echo -e ""
 echo -e -n "\033[41;33m 请输入编号:  \033[0m"
 echo ""
@@ -79,6 +78,5 @@ case $N in
   61) bash install.sh -mzx435jq ;;
   62) bash install.sh -mzx435node ;;
   63) bash install.sh -mzx435face ;;
-  00) bash ces.sh;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac
