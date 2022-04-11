@@ -130,6 +130,7 @@ echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
 echo -e " \033[32m 80. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/1990/8000/8080/8088端口）"
 echo -e " \033[32m 81. \033[0m 安装iperf3网络性能测试工具(服务端)（5201端口）"
 echo -e " \033[32m 82. \033[0m 安装HTML5网络速度测试工具(服务端)（6688端口）"
+echo -e " \033[32m 83. \033[0m 修改时间为中国时区"
 echo -e ""
 echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 重启FSP服务器"
@@ -175,6 +176,7 @@ case $N in
   80) bash install.sh -rtmp ;;
   81) bash install.sh -iperf ;;  
   82) bash install.sh -html5 ;; 
+  83) rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime ;; 
   88) bash install.sh -xiezai ;;
   89) bash install.sh -restartfsp ;;
   90) bash install.sh -unfsp ;;
