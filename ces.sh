@@ -2,6 +2,17 @@ echo '尝试通过网络同步系统时间...'
 echo ""
 getBtTime=$(curl -sS --connect-timeout 3 -m 60 http://www.bt.cn/api/index/get_time)
 date -s "$(date -d @$getBtTime +"%Y-%m-%d %H:%M:%S")"
+
+#安装依赖
+sys_install(){
+    if ! type wget >/dev/null 2>&1; then
+        echo 'wget 未安装 正在安装中';
+	    apt-get install wget -y || yum install wget -y
+    else
+        echo 'wget 已安装，继续操作'
+    fi
+}
+
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
@@ -47,7 +58,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年3月23日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2022年4月11日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -116,9 +127,9 @@ echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 重启FSP服务器"
 echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
 echo -e ""
-echo -e " \033[32m 97. \033[0m 安装CES历史版本"
-echo -e " \033[32m 98. \033[0m 自动添加FSP公网地址（1.7.4.2以上才需要执行）"
-echo -e " \033[32m 99. \033[0m 重置后台admin密码"
+echo -e " \033[32m 97. \033[0m 自动添加FSP公网地址（1.7.4.2以上才需要执行）"
+echo -e " \033[32m 98. \033[0m 重置后台admin密码"
+echo -e " \033[32m 99. \033[0m 安装CES历史版本"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
 echo -e ""
 echo -e -n "\033[41;33m 请输入编号:  \033[0m"
@@ -159,9 +170,9 @@ case $N in
   88) bash install.sh -xiezai ;;
   89) bash install.sh -restartfsp ;;
   90) bash install.sh -unfsp ;;
-  97) bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh) ;;
-  98) bash install.sh -setip ;;
-  99) bash install.sh -resetadmin ;;
-  00) bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh) ;;
+  97) bash install.sh -setip ;;
+  98) bash install.sh -resetadmin ;;
+  99) bash install.sh -old;;
+  00) bash install.sh -zxces;; ;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac

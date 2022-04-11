@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年3月23日                         "*
+echo -e "# *脚本更新时间：2022年4月11日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -833,6 +833,20 @@ then
 	echo -e "\n"
 	sleep 5s	
 	bash set_extra_ip.sh ${getIpAddress}
+fi
+if [ $1 = '-old' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES历史版本】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh)
+fi
+if [ $1 = '-zxces' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES中性版本】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh)
 fi
 #关闭防火墙
 systemctl stop firewalld.service
