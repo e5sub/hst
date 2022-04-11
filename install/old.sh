@@ -13,6 +13,8 @@ echo -e " \033[32m 4314. \033[0m 国产化CES v4.31.2.16单机版服务器"
 echo -e " \033[32m 4315. \033[0m 国产化CES v4.31.2.16集群主服务器"
 echo -e " \033[32m 4316. \033[0m 国产化CES v4.31.2.16集群节点服务器"
 echo -e ""
+echo -e " \033[32m 00. \033[0m 返回安装新版本CES服务器"
+echo -e ""
 echo -e -n "\033[41;33m 请输入编号:  \033[0m"
 echo ""
 read N
@@ -28,5 +30,6 @@ case $N in
   4314) bash install.sh -gc431dj;;
   4315) bash install.sh -gc431jq;;
   4316) bash install.sh -gc431node;;
+  00) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh -O ces.sh && chmod +x ces.sh && bash ces.sh;;
    *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac
