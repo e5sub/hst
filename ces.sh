@@ -12,6 +12,8 @@ sys_install(){
         echo 'wget 已安装，继续操作'
     fi
 }
+#脚本启动
+sys_install
 
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
 get_opsy() {
