@@ -28,12 +28,12 @@ pre_install_node(){
     echo "Main_VerifyCode = ${Main_VerifyCode}"
     echo "---------------------------"
     echo
-	# Set Main_VerifyCode
+	# Set Main_port
     read -p "(请输入主服务器HTTPS端口，不填则默认8443):" Main_port
     [ -z "${Main_port}" ] && Main_port=8443
     echo
     echo "---------------------------"
-    echo "Main_VerifyCode = ${Main_port}"
+    echo "Main_port = ${Main_port}"
     echo "---------------------------"
     echo
 }
