@@ -9,7 +9,7 @@ pre_install_node(){
     [ -z "${Main_ip}" ]
     echo
     echo "---------------------------"
-    echo "main_ip = ${main_ip}"
+    echo "CES主服务器IP = ${main_ip}"
     echo "---------------------------"
     echo
     # Set main DevID
@@ -17,7 +17,7 @@ pre_install_node(){
     [ -z "${Main_DevID}" ]
     echo
     echo "---------------------------"
-    echo "main_DevID = ${main_DevID}"
+    echo "节点ID = ${main_DevID}"
     echo "---------------------------"
     echo
     # Set Main_VerifyCode
@@ -25,7 +25,7 @@ pre_install_node(){
     [ -z "${Main_VerifyCode}" ] 
     echo
     echo "---------------------------"
-    echo "Main_VerifyCode = ${Main_VerifyCode}"
+    echo "节点验证码 = ${Main_VerifyCode}"
     echo "---------------------------"
     echo
 	# Set Main_port
@@ -33,24 +33,24 @@ pre_install_node(){
     [ -z "${Main_port}" ] && Main_port=8443
     echo
     echo "---------------------------"
-    echo "Main_port = ${Main_port}"
+    echo "CES主服务器端口 = ${Main_port}"
     echo "---------------------------"
     echo
 }
 
 # Config node
 config_node(){
-    echo "正在写入节点配置文件"
-	echo "写入成功"
+    echo "正在写入节点配置文件"	
     sed -i "s|<LicenseMgrService>.*|<LicenseMgrService>${main_ip}:1091</LicenseMgrService>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<DevID>.*|<DevID>${main_DevID}</DevID>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<VerifyCode>.*|<VerifyCode>${Main_VerifyCode}</VerifyCode>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<UserAuthAddr>.*|<UserAuthAddr>${main_ip}:${Main_port}</UserAuthAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<ConfigCenter>.*|<ConfigCenter>${main_ip}:${Main_port}</ConfigCenter>|" /usr/local/hst/FMServer/ServiceConfig.xml    
+	echo "写入成功"
 }
 
 pre_install_node
-config_docker
+config_node
 
 #重启FMservice服务
 service fmservice restart
