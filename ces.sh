@@ -136,6 +136,7 @@ echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 重启FSP服务器"
 echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
 echo -e ""
+echo -e " \033[32m 96. \033[0m 一键修改节点配置信息"
 echo -e " \033[32m 97. \033[0m 自动添加FSP公网地址（1.7.4.2以上才需要执行）"
 echo -e " \033[32m 98. \033[0m 重置后台admin密码"
 echo -e " \033[32m 99. \033[0m 安装CES历史版本"
@@ -180,6 +181,7 @@ case $N in
   88) bash install.sh -xiezai ;;
   89) bash install.sh -restartfsp ;;
   90) bash install.sh -unfsp ;;
+  96) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh -O node.sh && chmod +x node.sh && bash node.sh ;;
   97) bash install.sh -setip ;;
   98) bash install.sh -resetadmin ;;
   99) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh && chmod +x old.sh && bash old.sh ;;
