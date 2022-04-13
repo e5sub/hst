@@ -136,7 +136,8 @@ echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 重启FSP服务器"
 echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
 echo -e ""
-echo -e " \033[32m 93. \033[0m 一键修改H323服务器配置信息（适用于2.3.1.12版本的H323服务器）"
+echo -e " \033[32m 92. \033[0m 一键修改H323服务器配置信息（适用于2.3.1.12版本的H323服务器）"
+echo -e " \033[32m 93. \033[0m 一键修改H323 GM服务器配置信息（适用于2.3.1.12版本，H323集群部署专用）"
 echo -e " \033[32m 94. \033[0m 一键修改录制服务器配置信息（适用于1.0.7.16版本的录制服务器）"
 echo -e " \033[32m 95. \033[0m 一键修改CES webapp配置信息（适用于4.35以上版本）"
 echo -e " \033[32m 96. \033[0m 一键修改节点服务器配置信息（适用于4.35以上版本，主服务器勿用）"
@@ -184,7 +185,8 @@ case $N in
   88) bash install.sh -xiezai ;;
   89) bash install.sh -restartfsp ;;
   90) bash install.sh -unfsp ;;
-  93) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh -O h323.sh && chmod +x h323.sh && bash h323.sh ;;
+  92) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh -O h323.sh && chmod +x h323.sh && bash h323.sh ;;
+  93) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323gm.sh -O h323gm.sh && chmod +x h323gm.sh && bash h323gm.sh ;;
   94) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/luzhi.sh -O luzhi.sh && chmod +x luzhi.sh && bash luzhi.sh ;;
   95) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/webapp.sh -O webapp.sh && chmod +x webapp.sh && bash webapp.sh ;;
   96) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh -O node.sh && chmod +x node.sh && bash node.sh ;;
