@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月11日                         "*
+echo -e "# *脚本更新时间：2022年4月13日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -833,6 +833,15 @@ then
 	echo -e "\n"
 	sleep 5s	
 	bash set_extra_ip.sh ${getIpAddress}
+fi
+if [ $1 = '-luzhi' ]
+then
+	echo -e "\033[33m 【你选择的是安装录制服务器v1.0.7.16】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/mc-1.0.7.16.tar -O mc-1.0.7.16.tar
+	tar zxvf mc-1.0.7.16.tar
+	bash setup.sh
 fi
 #关闭防火墙
 systemctl stop firewalld.service
