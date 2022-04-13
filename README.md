@@ -3,7 +3,7 @@
 1、同步linux时间  
 2、检测linux硬件配置  
 3、自动获取linux内外网IP地址  
-4、一键安装CES标准版/CES中性版/FSP服务器/录制服务器  
+4、一键安装CES标准版/CES中性版/FSP服务器
 5、RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（用于网络对接大疆无人机之类的设备）  
 7、iperf3网络性能测试工具   
 8、HTML5网络速度测试工具   

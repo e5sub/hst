@@ -839,14 +839,13 @@ then
 	echo -e "\033[33m 【你选择的是安装录制服务器v1.0.7.16】 \033[0m"
 	echo -e "\n"
 	sleep 5s
+	cd /opt
 	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/mc-1.0.7.16.tar -O mc-1.0.7.16.tar
-	tar zxvf mc-1.0.7.16.tar
+	tar xvf mc-1.0.7.16.tar
+	chmod +x setup.sh
 	bash setup.sh
 fi
-#关闭防火墙
-systemctl stop firewalld.service
-#禁用防火墙
-systemctl disable firewalld.service
+
 #删除安装脚本
 rm -f install.sh
 rm -f ces.sh
