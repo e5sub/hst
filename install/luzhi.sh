@@ -5,7 +5,7 @@ echo -e "# ******************************************************"
 echo -e "#                                                      "*
 echo -e "# *脚本更新时间：2022年4月13日                         "*
 echo -e "#                                                      "*
-echo -e "# *请按照提示填写相应的参数，                          "* 
+echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
 echo -e "# *如输入错误，可按Ctrl+Z重新填写                      "*
 echo -e "#                                                      "*
@@ -38,7 +38,7 @@ pre_install_luzhi(){
     [ -z "${ZY_VerifyCode}" ] && ZY_VerifyCode=12345
     echo
     echo "---------------------------"
-    echo "资源设备验证码 = ${ZY_VerifyCode}"
+    echo "资源平台设备验证码 = ${ZY_VerifyCode}"
     echo "---------------------------"
     echo
 	# Set MT_DevID
