@@ -57,7 +57,7 @@ config_H323(){
     sed -i "s|<verify_code>.*|<verify_code>${verify_code}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
     sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_devid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gm/gm.xml
     sed -i "s|dev_id>.*|dev_id>${h323gw_gcdevid}</dev_id>|" /fsmeeting/h323gw_xd/gm/gm.xml
-	sed -i "s|<tcp>.*|<tcp>tcp:${gc_ip};:1088</tcp>|"  /fsmeeting/h323gw_xd/gm/gm.xml
+	sed -i "s|<tcp>.*|<tcp>tcp:${gc_ip}:1088</tcp>|"  /fsmeeting/h323gw_xd/gm/gm.xml
 	sed -i "s|<local_ip>.*|<local_ip>=${IP}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
 	echo "写入成功，正在重启H323 gm服务器，请耐心等待"
 }
