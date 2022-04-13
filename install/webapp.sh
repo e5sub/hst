@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-
+echo -e "# ******************************************************"
+echo -e "#                                                      "*
+echo -e "# *脚本更新时间：2022年4月13日                         "*
+echo -e "#                                                      "*
+echo -e "# *请按照提示填写相应的参数，                          "* 
+echo -e "#                                                      "*
+echo -e "# *如输入错误，可按Ctrl+Z重新填写                      "*
+echo -e "#                                                      "*
+echo -e "# *如有不明白选项可以保持默认                          "*
+echo -e "#                                                      "*
+echo -e "# *如有问题或者遗漏的参数信息，请及时反馈              "*
+echo -e "                                                       "
+echo -e "# ******************************************************"
+echo -e "                                                       "
 # Pre-installation settings
 pre_install_webapp(){
     # Set Main_ip
@@ -70,7 +83,7 @@ config_webapp(){
     sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>$IsUseFspWbSrv</IsUseFspWbSrv>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>${FspAccessAddr}:${FspPort}</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspDomain>.*|<FspDomain>${FspDomain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
-	echo "写入成功"
+	echo "写入成功，正在重启FMservice服务，请耐心等待"
 }
 
 pre_install_webapp
