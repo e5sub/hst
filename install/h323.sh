@@ -101,7 +101,7 @@ config_H323(){
 # CES数据库IP
     sed -i "s|<dbip>.*|<dbip>${main_ip}</dbip>|" /fsmeeting/h323gw_xd/gc/gc.xml
 # 是否为4.30以下CES
-    sed -i "s|<old_ces type="private">.*|<old_ces type="private">${old_ces}</old_ces>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+    sed -i "s|<old_ces.*|<old_ces type="'"private"'">${old_ces}</old_ces>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # CES配置中心地址
 	sed -i "s|<register_url>.*|<register_url>https://${main_ip}:${port}</register_url>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # CES前置地址
