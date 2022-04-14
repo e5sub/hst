@@ -850,7 +850,7 @@ then
 	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.3.1.12】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
-	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12_%23292.tar.gz -O h323gw_xd_pkg_2.3.1.12_#292.tar.gz
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz -O h323gw_xd_pkg_2.3.1.12_#292.tar.gz
 	tar xvf h323gw_xd_pkg_2.3.1.12_#292.tar.gz
 	cd ./h323gw_xd_install
 	bash install.sh pri gc
