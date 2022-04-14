@@ -58,8 +58,8 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set verify_gccode
-    read -p "(请输入H323 gc服务器IP):" gc_ip
-    [ -z "${gc_ip}" ]
+    read -p "(请输入H323 gc服务器IP，不填则默认127.0.0.1):" gc_ip
+    [ -z "${gc_ip}" ] && gc_ip=127.0.0.1
     echo
     echo "---------------------------"
     echo "H323 gc服务器IP = ${gc_ip}"
