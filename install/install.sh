@@ -845,6 +845,21 @@ then
 	chmod +x setup.sh
 	bash setup.sh
 fi
+if [ $1 = '-h323' ]
+then
+	echo -e "\033[33m 【你选择的是安装H323服务器v2.3.1.12】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12_#292.tar.gz -O h323gw_xd_pkg_2.3.1.12_#292.tar.gz
+	tar xvf h323gw_xd_pkg_2.3.1.12_#292.tar.gz
+	cd ./h323gw_xd_install
+	bash install.sh pri gc
+	bash install.sh pri gm
+	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20211231_2.3.1.12.tar -O centos7.installer_MCU20211231_2.3.1.12.tar
+	tar xvf centos7.installer_MCU20211231_2.3.1.12.tar
+	cd ./centos7.installer
+	bash install.sh
+fi
 #关闭并禁用防火墙
 systemctl stop firewalld.service
 systemctl disable firewalld.service
