@@ -98,8 +98,6 @@ config_H323(){
     sed -i "s|<verify_code>.*|<verify_code>${verify_gccode}</verify_code>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GC设备ID	
     sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_gcdevid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gc/gc.xml
-# CES服务器IP	
-    sed -i "s|<rpc_url>.*|<rpc_url>http://${main_ip}:10000/RPC2</rpc_url>|" /fsmeeting/h323gw_xd/gc/gc.xml
 # CES数据库IP
     sed -i "s|<dbip>.*|<dbip>${main_ip}</dbip>|" /fsmeeting/h323gw_xd/gc/gc.xml
 # 是否为4.30以下CES
@@ -107,7 +105,7 @@ config_H323(){
 # CES配置中心地址
 	sed -i "s|<register_url>.*|<register_url>https://${main_ip}:${port}</register_url>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # CES前置地址
-	sed -i "s|<front>.*|<front>TCP:${main_ip};</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<front>.*|<front>TCP:${main_ip}:${front};</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GC本地IP	
 	sed -i "s|<local_ip>.*|<local_ip>${IP}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GM设备验证码
