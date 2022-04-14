@@ -852,7 +852,7 @@ then
 	sleep 5s	
 	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz -O h323gw_xd_pkg_2.3.1.12.tar.gz
 	tar xvf h323gw_xd_pkg_2.3.1.12.tar.gz
-	cd ./h323gw_xd_install
+	cd ./h323gw_xd_pkg_2.3.1.12
 	bash install.sh pri gc
 	bash install.sh pri gm
 	wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20211231_2.3.1.12.tar -O centos7.installer_MCU20211231_2.3.1.12.tar
