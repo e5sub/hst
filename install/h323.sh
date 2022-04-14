@@ -26,7 +26,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
     # Set h323gw_gcdevid
-    read -p "(请输入H323 gc网关设备ID，):" h323gw_gcdevid
+    read -p "(请输入H323 gc网关设备ID):" h323gw_gcdevid
     [ -z "${h323gw_gcdevid}" ] 
     echo
     echo "---------------------------"
@@ -42,7 +42,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set h323gw_gcdevid
-    read -p "(请输入H323 gm网关设备ID，):" h323gw_gmdevid
+    read -p "(请输入H323 gm网关设备ID):" h323gw_gmdevid
     [ -z "${h323gw_gmdevid}" ] 
     echo
     echo "---------------------------"
