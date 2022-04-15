@@ -875,8 +875,16 @@ then
 	${H323}
 	tar xvf h323gw_xd_pkg_2.3.1.12.tar.gz
 	cd ./h323gw_xd_pkg_2.3.1.12
+	echo -e "\033[33m 正在安装GC，请等待30秒 \033[0m"
+	echo -e "\n"
 	bash install.sh pri gc
+	sleep 30s
+	echo -e "\033[33m 正在安装GM，请等待30秒 \033[0m"
+	echo -e "\n"
 	bash install.sh pri gm
+	echo -e "\033[33m 正在安装H323MCU，请等待30秒 \033[0m"
+	echo -e "\n"
+	sleep 30s
 	${H323MCU}
 	tar xvf centos7.installer_MCU20211231_2.3.1.12.tar
 	cd ./centos7.installer
