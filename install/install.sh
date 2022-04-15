@@ -15,6 +15,205 @@ echo -e "                                                       "
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
 ip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 172.17.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
+if [ $1 = '-141fsp' ]
+then
+	echo -e "\033[33m 【你选择的是安装FSP v1.4.1.17服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17
+fi
+if [ $1 = '-164fsp' ]
+then
+	echo -e "\033[33m 【你选择的是安装FSP v1.6.4.4服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.6.4.4
+fi
+if [ $1 = '-171fsp' ]
+then
+	echo -e "\033[33m 【你选择的是安装FSP v1.7.1.19服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+	mkdir -p /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
+	echo -e "正在停止FSP服务器"
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
+	sleep 5s
+	echo -e "正在启动FSP服务器"
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
+fi
+if [ $1 = '-174fsp' ]
+then
+	echo -e "\033[33m 【你选择的是安装FSP v1.7.4.2服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_extra_ip.sh -O set_extra_ip.sh
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_protocol_addr.sh -O set_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_store_proxy.sh -O set_store_proxy.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_wb_app_id.sh -O set_wb_app_id.sh
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/add_protocol_addr.sh -O add_protocol_addr.sh
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+	mkdir -p /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
+	echo -e "正在停止FSP服务器"
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
+	sleep 5s
+	echo -e "正在启动FSP服务器"
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
+fi
+if [ $1 = '-175fsp' ]
+then
+	echo -e "\033[33m 【你选择的是安装FSP v1.7.5.2服务器（仅安装FSP服务器）】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
+	mkdir -p /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
+	echo -e "正在停止FSP服务器"
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
+	sleep 5s
+	echo -e "正在启动FSP服务器"
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
+fi
+if [ $1 = '-rtmp' ]
+then
+	echo -e "\033[33m 【你选择的是安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs4 ccr.ccs.tencentyun.com/1040155/srs4 ./objs/srs -c conf/https.docker.conf
+fi
+if [ $1 = '-iperf' ]
+then
+	echo -e "\033[33m 【你选择的是安装iperf3局域网性能测试工具(服务端)】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
+fi
+if [ $1 = '-html5' ]
+then
+	echo -e "\033[33m 【你选择的是安装HTML5网络速度测试工具(服务端)】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 6688:80 --name hst-speedtest 1040155/hst-speedtest
+fi
+if [ $1 = '-xiezai' ]
+then
+	echo -e "\033[33m 【你选择的是卸载CES服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	cd /usr/local/hst
+	bash server_uninstall.sh
+fi
+if [ $1 = '-restartfsp' ]
+then
+	echo -e "\033[33m 【你选择的是重启FSP服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	docker restart $(docker ps|grep fsp_pri|awk '{print $1}')
+fi
+if [ $1 = '-unfsp' ]
+then
+	echo -e "\033[33m 【你选择的是卸载FSP服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	echo -e "正在停止FSP服务器"
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
+fi
+if [ $1 = '-resetadmin' ]
+then
+	echo -e "\033[33m 【你选择的是重置后台admin密码】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
+	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
+fi
+if [ $1 = '-setip' ]
+then
+	echo -e "\033[33m 【你选择的是自动添加FSP公网地址（1.7.1.19以上才需要执行）】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	bash set_extra_ip.sh ${getIpAddress}
+fi
+if [ $1 = '-luzhi' ]
+then
+	echo -e "\033[33m 【你选择的是安装录制服务器v1.0.7.16】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	cd /opt
+	${LUZHI}
+	tar xvf mc-1.0.7.16.tar
+	chmod +x setup.sh
+	bash setup.sh
+fi
+if [ $1 = '-h323' ]
+then
+	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.3.1.12】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	${H323}
+	tar xvf h323gw_xd_pkg_2.3.1.12.tar.gz
+	cd ./h323gw_xd_pkg_2.3.1.12
+	echo -e "\033[33m 正在安装GC，请等待30秒 \033[0m"
+	echo -e "\n"
+	bash install.sh pri gc
+	sleep 30s
+	echo -e "\033[33m 正在安装GM，请等待30秒 \033[0m"
+	echo -e "\n"
+	bash install.sh pri gm
+	echo -e "\033[33m 正在安装H323MCU，请等待30秒 \033[0m"
+	echo -e "\n"
+	sleep 30s
+	${H323MCU}
+	tar xvf centos7.installer_MCU20211231_2.3.1.12.tar
+	cd ./centos7.installer
+	bash install.sh
+fi
+
+##########################################################################################以下是服务器安装脚本##########################################################################################
+
 ## China_IP
     if [[ -z "${CN}" ]]; then
         if [[ $(curl -m 10 -s https://ipapi.co/json | grep 'China') != "" ]]; then
@@ -737,205 +936,10 @@ fi
 
 ##########################################################################################服务器安装脚本到此结束##########################################################################################
 
-if [ $1 = '-141fsp' ]
-then
-	echo -e "\033[33m 【你选择的是安装FSP v1.4.1.17服务器（仅安装FSP服务器）】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17
-fi
-if [ $1 = '-164fsp' ]
-then
-	echo -e "\033[33m 【你选择的是安装FSP v1.6.4.4服务器（仅安装FSP服务器）】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.6.4.4
-fi
-if [ $1 = '-171fsp' ]
-then
-	echo -e "\033[33m 【你选择的是安装FSP v1.7.1.19服务器（仅安装FSP服务器）】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
-	mkdir -p /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
-	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 5s
-	echo -e "正在卸载FSP服务器"
-	docker rm $(docker ps -qf status=exited)
-	sleep 5s
-	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr=127.0.0.1 -e service=base --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.1.19
-fi
-if [ $1 = '-174fsp' ]
-then
-	echo -e "\033[33m 【你选择的是安装FSP v1.7.4.2服务器（仅安装FSP服务器）】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_extra_ip.sh -O set_extra_ip.sh
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_protocol_addr.sh -O set_protocol_addr.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_store_proxy.sh -O set_store_proxy.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_wb_app_id.sh -O set_wb_app_id.sh
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/add_protocol_addr.sh -O add_protocol_addr.sh
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
-	mkdir -p /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
-	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 5s
-	echo -e "正在卸载FSP服务器"
-	docker rm $(docker ps -qf status=exited)
-	sleep 5s
-	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2
-fi
-if [ $1 = '-175fsp' ]
-then
-	echo -e "\033[33m 【你选择的是安装FSP v1.7.5.2服务器（仅安装FSP服务器）】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --name=fsp_pri ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
-	mkdir -p /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /usr/local/hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /usr/local/hst/fsp
-	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 5s
-	echo -e "正在卸载FSP服务器"
-	docker rm $(docker ps -qf status=exited)
-	sleep 5s
-	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.2
-fi
-if [ $1 = '-rtmp' ]
-then
-	echo -e "\033[33m 【你选择的是安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs4 ccr.ccs.tencentyun.com/1040155/srs4 ./objs/srs -c conf/https.docker.conf
-fi
-if [ $1 = '-iperf' ]
-then
-	echo -e "\033[33m 【你选择的是安装iperf3局域网性能测试工具(服务端)】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --restart=unless-stopped -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
-fi
-if [ $1 = '-html5' ]
-then
-	echo -e "\033[33m 【你选择的是安装HTML5网络速度测试工具(服务端)】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --restart=unless-stopped -p 6688:80 --name hst-speedtest 1040155/hst-speedtest
-fi
-if [ $1 = '-xiezai' ]
-then
-	echo -e "\033[33m 【你选择的是卸载CES服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	cd /usr/local/hst
-	bash server_uninstall.sh
-fi
-if [ $1 = '-restartfsp' ]
-then
-	echo -e "\033[33m 【你选择的是重启FSP服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	docker restart $(docker ps|grep fsp_pri|awk '{print $1}')
-fi
-if [ $1 = '-unfsp' ]
-then
-	echo -e "\033[33m 【你选择的是卸载FSP服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 5s
-	echo -e "正在卸载FSP服务器"
-	docker rm $(docker ps -qf status=exited)
-fi
-if [ $1 = '-resetadmin' ]
-then
-	echo -e "\033[33m 【你选择的是重置后台admin密码】 \033[0m"
-	echo -e "\n"
-	sleep 5s	
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
-	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
-fi
-if [ $1 = '-setip' ]
-then
-	echo -e "\033[33m 【你选择的是自动添加FSP公网地址（1.7.1.19以上才需要执行）】 \033[0m"
-	echo -e "\n"
-	sleep 5s	
-	bash set_extra_ip.sh ${getIpAddress}
-fi
-if [ $1 = '-luzhi' ]
-then
-	echo -e "\033[33m 【你选择的是安装录制服务器v1.0.7.16】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	cd /opt
-	${LUZHI}
-	tar xvf mc-1.0.7.16.tar
-	chmod +x setup.sh
-	bash setup.sh
-fi
-if [ $1 = '-h323' ]
-then
-	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.3.1.12】 \033[0m"
-	echo -e "\n"
-	sleep 5s	
-	${H323}
-	tar xvf h323gw_xd_pkg_2.3.1.12.tar.gz
-	cd ./h323gw_xd_pkg_2.3.1.12
-	echo -e "\033[33m 正在安装GC，请等待30秒 \033[0m"
-	echo -e "\n"
-	bash install.sh pri gc
-	sleep 30s
-	echo -e "\033[33m 正在安装GM，请等待30秒 \033[0m"
-	echo -e "\n"
-	bash install.sh pri gm
-	echo -e "\033[33m 正在安装H323MCU，请等待30秒 \033[0m"
-	echo -e "\n"
-	sleep 30s
-	${H323MCU}
-	tar xvf centos7.installer_MCU20211231_2.3.1.12.tar
-	cd ./centos7.installer
-	bash install.sh
-fi
 #关闭并禁用防火墙
 systemctl stop firewalld.service
 systemctl disable firewalld.service
+
 #删除安装脚本
 rm -f install.sh
 rm -f ces.sh
