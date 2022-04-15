@@ -1,8 +1,3 @@
-echo '尝试通过网络同步系统时间...'
-echo ""
-getBtTime=$(curl -sS --connect-timeout 3 -m 60 http://www.bt.cn/api/index/get_time)
-date -s "$(date -d @$getBtTime +"%Y-%m-%d %H:%M:%S")"
-
 #安装依赖
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
