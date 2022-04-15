@@ -16,68 +16,24 @@ LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
 ip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 172.17.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
 panelPort="8080"
-## China_IP
-    if [[ -z "${CN}" ]]; then
-        if [[ $(curl -m 10 -s https://ipapi.co/json | grep 'China') != "" ]]; then
-            echo "根据ipapi.co提供的信息，当前IP可能在中国"
-            read -e -r -p "是否选用国内下载地址完成安装? [Y/n] " input
-            case $input in
-            [yY][eE][sS] | [yY])
-                echo "使用国内下载地址"
-                CN=true
-                ;;
-
-            [nN][oO] | [nN])
-                echo "不使用国内下载地址"
-                ;;
-            *)
-                echo "使用国内下载地址"
-                CN=true
-                ;;
-            esac
-        fi
-    fi
-    if [[ -z "${CN}" ]]; then
-	    #CES标准版安装包下载地址
-        CES436="wget --no-check-certificate --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.36.5.1.tar.gz -O ces_linux_hst4.36.5.1.tar.gz"
-        CES435="wget --no-check-certificate --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.35.4.5.tar.gz -O ces_linux_hst4.35.4.5.tar.gz"
-        CES434="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz -O ces_linux_hst4.34.5.1.tar.gz"
-        CES432="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz -O ces_linux_hst4.32.8.5.tar.gz"
-        CES431="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz -O ces_linux_hst4.31.3.5.tar.gz"
-        ARMCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz -O ces_linux_arm4.35.1.30.tar.gz"
-        ARMCES434="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz -O ces_linux_arm4.34.5.1.tar.gz"
-        ARMCES431="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/ARM/ces_linux_arm4.31.2.16.tar.gz -O ces_linux_arm4.31.2.16.tar.gz"
-        MIPSCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/mips/标准版/ces_linux_mips4.35.1.30.tar.gz -O ces_linux_mips4.35.1.30.tar.gz"
-		#CES中性版安装包下载地址
-	    ZXCES436="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.36.5.1.tar.gz -O ces_linux_zx4.36.5.1.tar.gz"
-        ZXCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.35.4.5.tar.gz -O ces_linux_zx4.35.4.5.tar.gz"
-	    ZXCES434="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz"
-        ZXCES432="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz"
-        ZXCES431="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz"
-        ARMZXCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz -O ces_linux_arm_zx4.35.1.30.tar.gz"
-        ARMZXCES434="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz"
-        MIPSZXCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
-    else
-        #CES标准版安装包下载地址
-        CES436="wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.1.tar.gz -O ces_linux_hst4.36.5.1.tar.gz"
-        CES435="wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz -O ces_linux_hst4.35.4.5.tar.gz"
-        CES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz -O ces_linux_hst4.34.5.1.tar.gz"
-        CES432="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz -O ces_linux_hst4.32.8.5.tar.gz"
-        CES431="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz -O ces_linux_hst4.31.3.5.tar.gz"
-        ARMCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz -O ces_linux_arm4.35.1.30.tar.gz"
-        ARMCES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz -O ces_linux_arm4.34.5.1.tar.gz"
-        ARMCES431="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.31.2.16.tar.gz -O ces_linux_arm4.31.2.16.tar.gz"
-        MIPSCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/标准版/ces_linux_mips4.35.1.30.tar.gz -O ces_linux_mips4.35.1.30.tar.gz"
-        #CES中性版安装包下载地址
-        ZXCES436="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.5.1.tar.gz -O ces_linux_zx4.36.5.1.tar.gz"
-        ZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.4.5.tar.gz -O ces_linux_zx4.35.4.5.tar.gz"
-        ZXCES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz"
-        ZXCES432="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz"
-        ZXCES431="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz"
-        ARMZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz -O ces_linux_arm_zx4.35.1.30.tar.gz"
-        ARMZXCES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz"
-        MIPSZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
-    fi
+#CES标准版安装包下载地址
+CES436="wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.1.tar.gz -O ces_linux_hst4.36.5.1.tar.gz"
+CES435="wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz -O ces_linux_hst4.35.4.5.tar.gz"
+CES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz -O ces_linux_hst4.34.5.1.tar.gz"
+CES432="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz -O ces_linux_hst4.32.8.5.tar.gz"
+CES431="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz -O ces_linux_hst4.31.3.5.tar.gz"
+ARMCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz -O ces_linux_arm4.35.1.30.tar.gz"
+ARMCES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz -O ces_linux_arm4.34.5.1.tar.gz"
+ARMCES431="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.31.2.16.tar.gz -O ces_linux_arm4.31.2.16.tar.gz"
+MIPSCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/标准版/ces_linux_mips4.35.1.30.tar.gz -O ces_linux_mips4.35.1.30.tar.gz"
+#CES中性版安装包下载地址
+ZXCES436="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.5.1.tar.gz -O ces_linux_zx4.36.5.1.tar.gz"
+ZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.4.5.tar.gz -O ces_linux_zx4.35.4.5.tar.gz"
+ZXCES432="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz"
+ZXCES431="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz"
+ARMZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz -O ces_linux_arm_zx4.35.1.30.tar.gz"
+ARMZXCES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz"
+MIPSZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
 #录制服务器和H323安装包下载地址
 LUZHI="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/mc-1.0.7.16.tar -O mc-1.0.7.16.tar"
 H323MCU="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz -O h323gw_xd_pkg_2.3.1.12.tar.gz"
