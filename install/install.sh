@@ -15,7 +15,6 @@ echo -e "                                                       "
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
 ip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 172.17.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
-panelPort="8080"
 ## China_IP
     if [[ -z "${CN}" ]]; then
         if [[ $(curl -m 10 -s https://ipapi.co/json | grep 'China') != "" ]]; then
@@ -953,7 +952,7 @@ echo -e "# *FSP外网映射端口：28000、20020、21000、29100、29400、2971
 echo -e "#                                                                               "
 echo -e "# *CES默认端口：1089、8080、8443                                                "
 echo -e "#                                                                               "
-echo -e "# *内网后台地址（仅限单机版和集群主服务器）：http://${LOCAL_IP}:${panelPort}    "
+echo -e "# *内网后台地址（仅限单机版和集群主服务器）：https://${LOCAL_IP}:8443           "
 echo -e "#                                                                               "
 echo -e "# *外网后台地址（仅限单机版和集群主服务器）：https://${getIpAddress}:8443       "
 echo -e "#                                                                               "
