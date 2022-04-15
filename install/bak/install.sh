@@ -17,8 +17,8 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
 ip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 172.17.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
 panelPort="8080"
 #CES标准版安装包下载地址
-CES436="wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.1.tar.gz -O ces_linux_hst4.36.5.1.tar.gz"
-CES435="wget --no-check-certificate --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz -O ces_linux_hst4.35.4.5.tar.gz"
+CES436="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.1.tar.gz -O ces_linux_hst4.36.5.1.tar.gz"
+CES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz -O ces_linux_hst4.35.4.5.tar.gz"
 CES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz -O ces_linux_hst4.34.5.1.tar.gz"
 CES432="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz -O ces_linux_hst4.32.8.5.tar.gz"
 CES431="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz -O ces_linux_hst4.31.3.5.tar.gz"
