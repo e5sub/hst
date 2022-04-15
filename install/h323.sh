@@ -30,7 +30,7 @@ pre_install_H323(){
     [ -z "${h323gw_gcdevid}" ] 
     echo
     echo "---------------------------"
-    echo "H323 gc网关设备设备ID = ${h323gw_gcdevid}"
+    echo "H323 gc网关设备ID = ${h323gw_gcdevid}"
     echo "---------------------------"
     echo
     # Set verify_gccode
@@ -46,7 +46,7 @@ pre_install_H323(){
     [ -z "${h323gw_gmdevid}" ] 
     echo
     echo "---------------------------"
-    echo "H323 gm网关设备设备ID = ${h323gw_gmdevid}"
+    echo "H323 gm网关设备ID = ${h323gw_gmdevid}"
     echo "---------------------------"
     echo
     # Set verify_gccode
