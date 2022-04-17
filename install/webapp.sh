@@ -54,7 +54,7 @@ pre_install_webapp(){
     [ -z "${AccessAddr}" ] 
     echo
     echo "---------------------------"
-    echo "FSP服务器IP = ${FspAccessAddr}"
+    echo "FSP服务器IP = ${AccessAddr}"
     echo "---------------------------"
     echo
 	# Set FspPort
