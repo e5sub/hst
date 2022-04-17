@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月13日                         "*
+echo -e "# *脚本更新时间：2022年4月17日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -34,24 +34,24 @@ pre_install_webapp(){
     echo "---------------------------"
     echo
     # Set IsUseWss
-    read -p "(是否启用ws协议 1：启用 不填则默认不启用):" IsUseWss
-    [ -z "${IsUseWss}" ] && IsUseWss=0
+    read -p "(是否启用ws协议 1：启用 不填则默认不启用):" UseWss
+    [ -z "${UseWss}" ] && UseWss=0
     echo
     echo "---------------------------"
-    echo "IsUseWss = ${IsUseWss}"
+    echo "ws协议 = ${UseWss}"
     echo "---------------------------"
     echo
     # Set IsUseFspWbSrv
-    read -p "(是否启用fsp白板 1：启用 不填则默认不启用):" IsUseFspWbSrv
-    [ -z "${IsUseFspWbSrv}" ] && IsUseFspWbSrv=0
+    read -p "(是否启用fsp白板 1：启用 不填则默认不启用):" UseFspWbSrv
+    [ -z "${UseFspWbSrv}" ] && UseFspWbSrv=0
     echo
     echo "---------------------------"
-    echo "IsUseFspWbSrv = ${IsUseFspWbSrv}"
+    echo "FSP白板 = ${UseFspWbSrv}"
     echo "---------------------------"
     echo
 	# Set FspAccessAddr
-    read -p "(请输入FSP服务器IP地址):" FspAccessAddr
-    [ -z "${FspAccessAddr}" ] 
+    read -p "(请输入FSP服务器IP地址):" AccessAddr
+    [ -z "${AccessAddr}" ] 
     echo
     echo "---------------------------"
     echo "FSP服务器IP = ${FspAccessAddr}"
@@ -65,24 +65,24 @@ pre_install_webapp(){
     echo "FSP服务器端口 = ${FspPort}"
     echo "---------------------------"
     echo
-	# Set FspPort
-    read -p "(请输入fsp域，不填则默认pri):" FspDomain
-    [ -z "${FspDomain}" ] && FspDomain=pri
+	# Set Domain
+    read -p "(请输入fsp域，不填则默认pri):" Domain
+    [ -z "${Domain}" ] && Domain=pri
     echo
     echo "---------------------------"
-    echo "FspDomain = ${FspDomain}"
+    echo "FSP域 = ${Domain}"
     echo "---------------------------"
     echo
 }
 
 # Config webapp
 config_webapp(){
-    echo "正在写入节点配置文件"	
-    sed -i "s|<IsUseWss>.*|<IsUseWss>${IsUseWss}</IsUseWss>|"  /usr/local/hst/FMWebProxy/service_config.xml
+    echo "正在写入webapp配置文件"	
+    sed -i "s|<IsUseWss>.*|<IsUseWss>${UseWss}</IsUseWss>|"  /usr/local/hst/FMWebProxy/service_config.xml
     sed -i "s|<LocalAddr>.*|<LocalAddr>wss://${main_ip}:${WSPort}</LocalAddr>|"  /usr/local/hst/FMWebProxy/service_config.xml
-    sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>$IsUseFspWbSrv</IsUseFspWbSrv>|"  /usr/local/hst/FMServer/ServiceConfig.xml
-    sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>${FspAccessAddr}:${FspPort}</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
-    sed -i "s|<FspDomain>.*|<FspDomain>${FspDomain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
+    sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${UseFspWbSrv}</IsUseFspWbSrv>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>${AccessAddr}:${FspPort}</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<FspDomain>.*|<FspDomain>${Domain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
 	echo "写入成功，正在重启FMservice服务，请耐心等待"
 }
 
