@@ -61,7 +61,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年4月15日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2022年4月17日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -120,7 +120,7 @@ echo -e " \033[32m 63. \033[0m 国产化CES v4.35.1.30人脸识别服务器"
 echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
 echo -e " \033[32m 70. \033[0m 安装FSP v1.4.1.17服务器（配套4.31以下服务器）"
 echo -e " \033[32m 71. \033[0m 安装FSP v1.7.4.2服务器（配套4.34以上服务器）"
-echo -e " \033[32m 72. \033[0m 安装FSP v1.7.5.2服务器"
+echo -e " \033[32m 72. \033[0m 安装FSP v1.8.3.3服务器（配套4.36以上服务器）"
 echo -e " \033[44;37m 安装H323服务器 \033[0m"
 echo -e " \033[32m 79. \033[0m 安装H323网关服务器v2.3.1.12"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
@@ -174,7 +174,7 @@ case $N in
   63) bash install.sh -m435face;;
   70) bash install.sh -141fsp ;;
   71) bash install.sh -174fsp ;;
-  72) bash install.sh -175fsp ;;
+  72) bash install.sh -183fsp ;;
   79) bash install.sh -h323 ;;
   80) bash install.sh -rtmp ;;
   81) bash install.sh -iperf ;;  
