@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月13日                         "*
+echo -e "# *脚本更新时间：2022年4月18日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -81,12 +81,12 @@ config_luzhi(){
     sed -i "s|fs.server.config.url.*|fs.server.config.url=https://${main_ip}:${port}|"  /opt/AIO/Service/webservice/webroot/ROOT/WEB-INF/classes/jdbc.properties
     sed -i "s|my.server.device.device.id.*|my.server.device.device.id=${ZY_DevID}|"  /opt/AIO/Service/webservice/webroot/ROOT/WEB-INF/classes/jdbc.properties
     sed -i "s|my.server.device.verify.code.*|my.server.device.verify.code=${ZY_VerifyCode}|"  /opt/AIO/Service/webservice/webroot/ROOT/WEB-INF/classes/jdbc.properties
-    sed -i "s|<ConfigCenterAddr>.*|<ConfigCenterAddr>https://${main_ip}:${port}</ConfigCenterAddr>|"  /Resource/fsp_record/httpservice/service_config.xml
-    sed -i "s|<DeviceID>.*|<DeviceID>${MT_DevID}</DeviceID>|" /Resource/fsp_record/httpservice/service_config.xml
-    sed -i "s|<VerifyCode>.*|<VerifyCode>${MT_VerifyCode}</VerifyCode>|" /Resource/fsp_record/httpservice/service_config.xml 
-    sed -i "s|<ConfigCenterAddr>.*|<ConfigCenterAddr>https://${main_ip}:${port}</ConfigCenterAddr>|"  /Resource/fsp_record/mediaservice/service_config.xml
-	sed -i "s|<GPUCodeNum>.*|<GPUCodeNum>${cloud}</GPUCodeNum>|"  /Resource/fsp_record/recordservice/service_config.xml
-	sed -i "s|<addr>.*|<addr>${IP}</addr>|"  /Resource/fsp_record/httpservice/service_config.xml
+    sed -i "s|<ConfigCenterAddr>.*|<ConfigCenterAddr>https://${main_ip}:${port}</ConfigCenterAddr>|"  /fsmeeting/fsp_record/httpservice/service_config.xml
+    sed -i "s|<DeviceID>.*|<DeviceID>${MT_DevID}</DeviceID>|" /fsmeeting/fsp_record/httpservice/service_config.xml
+    sed -i "s|<VerifyCode>.*|<VerifyCode>${MT_VerifyCode}</VerifyCode>|" /fsmeeting/fsp_record/httpservice/service_config.xml 
+    sed -i "s|<ConfigCenterAddr>.*|<ConfigCenterAddr>https://${main_ip}:${port}</ConfigCenterAddr>|"  /fsmeeting/fsp_record/mediaservice/service_config.xml
+	sed -i "s|<GPUCodeNum>.*|<GPUCodeNum>${cloud}</GPUCodeNum>|"  /fsmeeting/fsp_record/recordservice/service_config.xml
+	sed -i "s|<addr>.*|<addr>${IP}</addr>|"  /fsmeeting/fsp_record/httpservice/service_config.xml
 	sed -i "s|default.local.ip.*|default.local.ip=${IP}|"    /opt/AIO/Service/webservice/webroot/ROOT/WEB-INF/classes/jdbc.properties
 	echo "写入成功，正在重启录制服务器，请耐心等待"
 }
