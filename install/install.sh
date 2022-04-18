@@ -14,7 +14,6 @@ echo -e "                                                       "
 #获取内外网IP地址，端口
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
-ip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 172.17.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
 
 ##########################################################################################以下是服务器安装脚本##########################################################################################
 
@@ -780,13 +779,18 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ${FSP174}
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ${FSP174}
 fi
 if [ $1 = '-183fsp' ]
 then
 	echo -e "\033[33m 【你选择的是安装FSP v1.8.3.3服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_extra_ip.sh -O set_extra_ip.sh
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_protocol_addr.sh -O set_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_store_proxy.sh -O set_store_proxy.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_wb_app_id.sh -O set_wb_app_id.sh
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/add_protocol_addr.sh -O add_protocol_addr.sh
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
@@ -802,7 +806,7 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="$ip" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
 fi
 if [ $1 = '-luzhi' ]
 then
