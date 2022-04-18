@@ -60,7 +60,7 @@ config_node(){
     sed -i "s|<UserAuthAddr>.*|<UserAuthAddr>${main_ip}:${Main_port}</UserAuthAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<ConfigCenter>.*|<ConfigCenter>${main_ip}:${Main_port}</ConfigCenter>|"  /usr/local/hst/FMServer/ServiceConfig.xml    
 	sed -i "s|CommonService.*|CommonService=commonService:tcp -h ${main_ip} -p 33001|"  /usr/local/hst/FMServer/config.client
-	sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator=dbProxyIceGrid/Locator:default -h ${Main_port} -p 10001|"  /usr/local/hst/FMServer/config.client
+	sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator=dbProxyIceGrid/Locator:default -h ${main_ip} -p 10001|"  /usr/local/hst/FMServer/config.client
 	echo "写入成功，正在重启FMservice服务，请耐心等待"
 }
 
