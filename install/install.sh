@@ -16,85 +16,13 @@ LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
 ip=`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v 172.17.0.1|grep -v inet6|awk '{print $2}'|tr -d "addr:"`
 
-if [ $1 = '-rtmp' ]
-then
-	echo -e "\033[33m 【你选择的是安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs4 ccr.ccs.tencentyun.com/1040155/srs4 ./objs/srs -c conf/https.docker.conf
-fi
-if [ $1 = '-iperf' ]
-then
-	echo -e "\033[33m 【你选择的是安装iperf3局域网性能测试工具(服务端)】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --restart=unless-stopped -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
-fi
-if [ $1 = '-html5' ]
-then
-	echo -e "\033[33m 【你选择的是安装HTML5网络速度测试工具(服务端)】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
-	docker run -d --restart=unless-stopped -p 6688:80 --name hst-speedtest 1040155/hst-speedtest
-fi
-if [ $1 = '-xiezai' ]
-then
-	echo -e "\033[33m 【你选择的是卸载CES服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	cd /usr/local/hst
-	bash server_uninstall.sh
-fi
-if [ $1 = '-restartfsp' ]
-then
-	echo -e "\033[33m 【你选择的是重启FSP服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	docker restart $(docker ps|grep fsp_pri|awk '{print $1}')
-fi
-if [ $1 = '-unfsp' ]
-then
-	echo -e "\033[33m 【你选择的是卸载FSP服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	echo -e "正在停止FSP服务器"
-	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 5s
-	echo -e "正在卸载FSP服务器"
-	docker rm $(docker ps -qf status=exited)
-fi
-if [ $1 = '-resetadmin' ]
-then
-	echo -e "\033[33m 【你选择的是重置后台admin密码】 \033[0m"
-	echo -e "\n"
-	sleep 5s	
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
-	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
-fi
-if [ $1 = '-setip' ]
-then
-	echo -e "\033[33m 【你选择的是自动添加FSP公网地址（1.7.1.19以上才需要执行）】 \033[0m"
-	echo -e "\n"
-	sleep 5s	
-	bash set_extra_ip.sh ${getIpAddress}
-fi
-
 ##########################################################################################以下是服务器安装脚本##########################################################################################
 
 ## China_IP
     if [[ -z "${CN}" ]]; then
         if [[ $(curl -m 10 -s https://ipapi.co/json | grep 'China') != "" ]]; then
-            echo "根据ipapi.co提供的信息，当前IP可能在中国"
-            read -e -r -p "是否选用国内下载地址完成安装? [Y/n] " input
+            echo "根据ipapi.co提供的信息，当前IP可能在国内"
+            read -e -r -p "是否选用国内下载地址? [Y/n] " input
             case $input in
             [yY][eE][sS] | [yY])
                 echo "使用国内下载地址"
@@ -912,6 +840,78 @@ then
 fi
 
 ##########################################################################################服务器安装脚本到此结束##########################################################################################
+
+if [ $1 = '-rtmp' ]
+then
+	echo -e "\033[33m 【你选择的是安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs4 ccr.ccs.tencentyun.com/1040155/srs4 ./objs/srs -c conf/https.docker.conf
+fi
+if [ $1 = '-iperf' ]
+then
+	echo -e "\033[33m 【你选择的是安装iperf3局域网性能测试工具(服务端)】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
+fi
+if [ $1 = '-html5' ]
+then
+	echo -e "\033[33m 【你选择的是安装HTML5网络速度测试工具(服务端)】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	curl -sSL https://get.docker.com/ | sh
+	systemctl enable docker
+	systemctl start docker
+	docker run -d --restart=unless-stopped -p 6688:80 --name hst-speedtest 1040155/hst-speedtest
+fi
+if [ $1 = '-xiezai' ]
+then
+	echo -e "\033[33m 【你选择的是卸载CES服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	cd /usr/local/hst
+	bash server_uninstall.sh
+fi
+if [ $1 = '-restartfsp' ]
+then
+	echo -e "\033[33m 【你选择的是重启FSP服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	docker restart $(docker ps|grep fsp_pri|awk '{print $1}')
+fi
+if [ $1 = '-unfsp' ]
+then
+	echo -e "\033[33m 【你选择的是卸载FSP服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	echo -e "正在停止FSP服务器"
+	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
+	sleep 5s
+	echo -e "正在卸载FSP服务器"
+	docker rm $(docker ps -qf status=exited)
+fi
+if [ $1 = '-resetadmin' ]
+then
+	echo -e "\033[33m 【你选择的是重置后台admin密码】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
+	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
+fi
+if [ $1 = '-setip' ]
+then
+	echo -e "\033[33m 【你选择的是自动添加FSP公网地址（1.7.1.19以上才需要执行）】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	bash set_extra_ip.sh ${getIpAddress}
+fi
 
 #关闭并禁用防火墙
 systemctl stop firewalld.service
