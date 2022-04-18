@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月13日                         "*
+echo -e "# *脚本更新时间：2022年4月17日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -58,7 +58,9 @@ config_node(){
     sed -i "s|<DevID>.*|<DevID>${main_DevID}</DevID>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<VerifyCode>.*|<VerifyCode>${Main_VerifyCode}</VerifyCode>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<UserAuthAddr>.*|<UserAuthAddr>${main_ip}:${Main_port}</UserAuthAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
-    sed -i "s|<ConfigCenter>.*|<ConfigCenter>${main_ip}:${Main_port}</ConfigCenter>|" /usr/local/hst/FMServer/ServiceConfig.xml    
+    sed -i "s|<ConfigCenter>.*|<ConfigCenter>${main_ip}:${Main_port}</ConfigCenter>|"  /usr/local/hst/FMServer/ServiceConfig.xml    
+	sed -i "s|CommonService.*|CommonService=commonService:tcp -h ${main_ip} -p 33001|"  /usr/local/hst/FMServer/config.client
+	sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator=dbProxyIceGrid/Locator:default -h ${Main_port} -p 10001|"  /usr/local/hst/FMServer/config.client
 	echo "写入成功，正在重启FMservice服务，请耐心等待"
 }
 
