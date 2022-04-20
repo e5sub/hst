@@ -39,7 +39,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         fi
     fi
     if [[ -z "${CN}" ]]; then
-	    #CES标准版安装包下载地址
+        #CES标准版安装包下载地址
         CES436="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.36.5.1.tar.gz -O ces_linux_hst4.36.5.1.tar.gz"
         CES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.35.4.5.tar.gz -O ces_linux_hst4.35.4.5.tar.gz"
         CES434="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz -O ces_linux_hst4.34.5.1.tar.gz"
@@ -49,19 +49,19 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         ARMCES434="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz -O ces_linux_arm4.34.5.1.tar.gz"
         ARMCES431="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/ARM/ces_linux_arm4.31.2.16.tar.gz -O ces_linux_arm4.31.2.16.tar.gz"
         MIPSCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/mips/标准版/ces_linux_mips4.35.1.30.tar.gz -O ces_linux_mips4.35.1.30.tar.gz"
-		#CES中性版安装包下载地址
-	    ZXCES436="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.36.5.1.tar.gz -O ces_linux_zx4.36.5.1.tar.gz"
+        #CES中性版安装包下载地址
+        ZXCES436="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.36.5.1.tar.gz -O ces_linux_zx4.36.5.1.tar.gz"
         ZXCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.35.4.5.tar.gz -O ces_linux_zx4.35.4.5.tar.gz"
-	    ZXCES434="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz"
+        ZXCES434="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz"
         ZXCES432="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz"
         ZXCES431="wget --no-check-certificate https://yaohst.com/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz"
         ARMZXCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz -O ces_linux_arm_zx4.35.1.30.tar.gz"
         ARMZXCES434="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz"
         MIPSZXCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
-		#FSP服务器
-		FSP141="1040155/fsp:1.4.1.17"
-		FSP174="1040155/fsp:1.7.4.2"
-		FSP183="1040155/fsp:1.8.3.3"
+        #FSP服务器
+        FSP141="1040155/fsp:1.4.1.17"
+        FSP174="1040155/fsp:1.7.4.2"
+        FSP183="1040155/fsp:1.8.3.3"
     else
         #CES标准版安装包下载地址
         CES436="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.1.tar.gz -O ces_linux_hst4.36.5.1.tar.gz"
@@ -82,10 +82,10 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         ARMZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz -O ces_linux_arm_zx4.35.1.30.tar.gz"
         ARMZXCES434="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz"
         MIPSZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
-		#FSP服务器
-		FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
-		FSP174="ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2"
-		FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.3"
+        #FSP服务器
+        FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
+        FSP174="ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2"
+        FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.3"
     fi
 #录制服务器和H323安装包下载地址
 LUZHI="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/mc-1.0.7.16.tar -O mc-1.0.7.16.tar"
@@ -759,11 +759,11 @@ then
 	echo -e "\033[33m 【你选择的是安装FSP v1.7.4.2服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_extra_ip.sh -O set_extra_ip.sh
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_protocol_addr.sh -O set_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_extra_ip.sh -O set_extra_ip.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_protocol_addr.sh -O set_protocol_addr.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_store_proxy.sh -O set_store_proxy.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_wb_app_id.sh -O set_wb_app_id.sh
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/add_protocol_addr.sh -O add_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/add_protocol_addr.sh -O add_protocol_addr.sh
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
@@ -780,17 +780,20 @@ then
 	sleep 5s
 	echo -e "正在启动FSP服务器"
 	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ${FSP174}
+    echo -e "正在向FSP服务器添加外网IP映射，也可手动执行set_extra_ip.sh添加。请耐心等待（等待大约60秒）"
+    sleep 60s
+    bash set_extra_ip.sh ${getIpAddress}
 fi
 if [ $1 = '-183fsp' ]
 then
 	echo -e "\033[33m 【你选择的是安装FSP v1.8.3.3服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_extra_ip.sh -O set_extra_ip.sh
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_protocol_addr.sh -O set_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_extra_ip.sh -O set_extra_ip.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_protocol_addr.sh -O set_protocol_addr.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_store_proxy.sh -O set_store_proxy.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_wb_app_id.sh -O set_wb_app_id.sh
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/add_protocol_addr.sh -O add_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/add_protocol_addr.sh -O add_protocol_addr.sh
 	curl -sSL https://get.docker.com/ | sh
 	systemctl enable docker
 	systemctl start docker
@@ -805,8 +808,11 @@ then
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
-	echo -e "正在启动FSP服务器"
+    echo -e "正在启动FSP服务器"
 	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+    echo -e "正在向FSP服务器添加外网IP映射，也可手动执行set_extra_ip.sh添加。请耐心等待（等待大约60秒）"
+    sleep 60s
+	bash set_extra_ip.sh ${getIpAddress}
 fi
 if [ $1 = '-luzhi' ]
 then
