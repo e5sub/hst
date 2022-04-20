@@ -779,7 +779,7 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ${FSP174}
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ${FSP174}
 fi
 if [ $1 = '-183fsp' ]
 then
@@ -806,7 +806,7 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+	docker run -d -v /usr/local/hst/fsp/fsmeeting:/fsmeeting -v /usr/local/hst/fsp/middleware:/middleware -v /usr/local/hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
 fi
 if [ $1 = '-luzhi' ]
 then
