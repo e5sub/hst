@@ -146,7 +146,7 @@ echo -e " \033[32m 00. \033[0m 安装中性版服务器"
 echo -e ""
 echo -e -n "\033[41;33m 请输入编号:  \033[0m"
 echo ""
-read N
+read N 
 echo ""
 case $N in
   16) bash install.sh -436dj ;;

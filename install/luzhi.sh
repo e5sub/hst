@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月18日                         "*
+echo -e "# *脚本更新时间：2022年4月20日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -18,7 +18,7 @@ echo -e "                                                       "
 # Pre-installation settings
 pre_install_luzhi(){
     # Set Main_ip
-    read -p "(请输入CES服务器IP地址或者域名):" main_ip
+    read -ep "(请输入CES服务器IP地址或者域名):" main_ip
     [ -z "${Main_ip}" ]
     echo
     echo "---------------------------"
@@ -26,7 +26,7 @@ pre_install_luzhi(){
     echo "---------------------------"
     echo
     # Set ZY_DevID
-    read -p "(请输入资源平台设备ID，不填则默认12345):" ZY_DevID
+    read -ep "(请输入资源平台设备ID，不填则默认12345):" ZY_DevID
     [ -z "${ZY_DevID}" ] && ZY_DevID=12345
     echo
     echo "---------------------------"
@@ -34,7 +34,7 @@ pre_install_luzhi(){
     echo "---------------------------"
     echo
     # Set ZY_VerifyCode
-    read -p "(请输入资源平台设备验证码，不填则默认12345):" ZY_VerifyCode
+    read -ep "(请输入资源平台设备验证码，不填则默认12345):" ZY_VerifyCode
     [ -z "${ZY_VerifyCode}" ] && ZY_VerifyCode=12345
     echo
     echo "---------------------------"
@@ -42,7 +42,7 @@ pre_install_luzhi(){
     echo "---------------------------"
     echo
 	# Set MT_DevID
-    read -p "(请输入媒体服务设备ID，不填则默认54321):" MT_DevID
+    read -ep "(请输入媒体服务设备ID，不填则默认54321):" MT_DevID
     [ -z "${MT_DevID}" ] && MT_DevID=54321
     echo
     echo "---------------------------"
@@ -50,7 +50,7 @@ pre_install_luzhi(){
     echo "---------------------------"
     echo
 	# Set MT_VerifyCode
-    read -p "(请输入媒体服务验证码，不填则默认54321):" MT_VerifyCode
+    read -ep "(请输入媒体服务验证码，不填则默认54321):" MT_VerifyCode
     [ -z "${MT_VerifyCode}" ] && MT_VerifyCode=54321
     echo
     echo "---------------------------"
@@ -58,7 +58,7 @@ pre_install_luzhi(){
     echo "---------------------------"
     echo
 	# Set port
-    read -p "(请输入服务器配置中心端口，不填则默认8443):" port
+    read -ep "(请输入服务器配置中心端口，不填则默认8443):" port
     [ -z "${port}" ] && port=8443
     echo
     echo "---------------------------"
@@ -66,7 +66,7 @@ pre_install_luzhi(){
     echo "---------------------------"
     echo
 	# Set cloud
-    read -p "(是否部署在云端，0：是 不填则默认选择否):" cloud
+    read -ep "(是否部署在云端，0：是 不填则默认选择否):" cloud
     [ -z "${cloud}" ] && cloud=20
     echo
     echo "---------------------------"

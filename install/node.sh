@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月17日                         "*
+echo -e "# *脚本更新时间：2022年4月20日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -18,7 +18,7 @@ echo -e "                                                       "
 # Pre-installation settings
 pre_install_node(){
     # Set Main_ip
-    read -p "(请输入主服务器IP地址或者域名):" main_ip
+    read -ep "(请输入主服务器IP地址或者域名):" main_ip
     [ -z "${Main_ip}" ]
     echo
     echo "---------------------------"
@@ -26,7 +26,7 @@ pre_install_node(){
     echo "---------------------------"
     echo
     # Set main DevID
-    read -p "(请输入节点ID):" main_DevID
+    read -ep "(请输入节点ID):" main_DevID
     [ -z "${Main_DevID}" ]
     echo
     echo "---------------------------"
@@ -34,7 +34,7 @@ pre_install_node(){
     echo "---------------------------"
     echo
     # Set Main_VerifyCode
-    read -p "(请输入节点验证码):" Main_VerifyCode
+    read -ep "(请输入节点验证码):" Main_VerifyCode
     [ -z "${Main_VerifyCode}" ] 
     echo
     echo "---------------------------"
@@ -42,7 +42,7 @@ pre_install_node(){
     echo "---------------------------"
     echo
 	# Set Main_port
-    read -p "(请输入主服务器HTTPS端口，不填则默认8443):" Main_port
+    read -ep "(请输入主服务器HTTPS端口，不填则默认8443):" Main_port
     [ -z "${Main_port}" ] && Main_port=8443
     echo
     echo "---------------------------"

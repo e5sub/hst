@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月17日                         "*
+echo -e "# *脚本更新时间：2022年4月20日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -18,7 +18,7 @@ echo -e "                                                       "
 # Pre-installation settings
 pre_install_webapp(){
     # Set Main_ip
-    read -p "(请输入服务器IP地址或者域名):" main_ip
+    read -ep "(请输入服务器IP地址或者域名):" main_ip
     [ -z "${Main_ip}" ]
     echo
     echo "---------------------------"
@@ -26,7 +26,7 @@ pre_install_webapp(){
     echo "---------------------------"
     echo
 	# Set WSPort
-    read -p "(请输入WS的端口，不填则默认4432):" WSPort
+    read -ep "(请输入WS的端口，不填则默认4432):" WSPort
     [ -z "${WSPort}" ] && WSPort=4432
     echo
     echo "---------------------------"
@@ -34,7 +34,7 @@ pre_install_webapp(){
     echo "---------------------------"
     echo
     # Set IsUseWss
-    read -p "(是否启用ws协议 1：启用 不填则默认不启用):" UseWss
+    read -ep "(是否启用ws协议 1：启用 不填则默认不启用):" UseWss
     [ -z "${UseWss}" ] && UseWss=0
     echo
     echo "---------------------------"
@@ -42,7 +42,7 @@ pre_install_webapp(){
     echo "---------------------------"
     echo
     # Set IsUseFspWbSrv
-    read -p "(是否启用fsp白板 1：启用 不填则默认不启用):" UseFspWbSrv
+    read -ep "(是否启用fsp白板 1：启用 不填则默认不启用):" UseFspWbSrv
     [ -z "${UseFspWbSrv}" ] && UseFspWbSrv=0
     echo
     echo "---------------------------"
@@ -50,7 +50,7 @@ pre_install_webapp(){
     echo "---------------------------"
     echo
 	# Set FspAccessAddr
-    read -p "(请输入FSP服务器IP地址):" AccessAddr
+    read -ep "(请输入FSP服务器IP地址):" AccessAddr
     [ -z "${AccessAddr}" ] 
     echo
     echo "---------------------------"
@@ -58,7 +58,7 @@ pre_install_webapp(){
     echo "---------------------------"
     echo
 	# Set FspPort
-    read -p "(请输入FSP服务器端口，不填则默认21000):" FspPort
+    read -ep "(请输入FSP服务器端口，不填则默认21000):" FspPort
     [ -z "${FspPort}" ] && FspPort=21000
     echo
     echo "---------------------------"
@@ -66,7 +66,7 @@ pre_install_webapp(){
     echo "---------------------------"
     echo
 	# Set Domain
-    read -p "(请输入fsp域，不填则默认pri):" Domain
+    read -ep "(请输入fsp域，不填则默认pri):" Domain
     [ -z "${Domain}" ] && Domain=pri
     echo
     echo "---------------------------"

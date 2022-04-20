@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月14日                         "*
+echo -e "# *脚本更新时间：2022年4月20日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -18,7 +18,7 @@ echo -e "                                                       "
 # Pre-installation settings
 pre_install_H323 gm(){
     # Set h323gw_gcdevid
-    read -p "(请输入H323 gm网关设备ID，):" h323gw_devid
+    read -ep "(请输入H323 gm网关设备ID，):" h323gw_devid
     [ -z "${h323gw_devid}" ] 
     echo
     echo "---------------------------"
@@ -26,7 +26,7 @@ pre_install_H323 gm(){
     echo "---------------------------"
     echo
     # Set verify_gccode
-    read -p "(请输入H323 gm网关设备验证码):" verify_code
+    read -ep "(请输入H323 gm网关设备验证码):" verify_code
     [ -z "${verify_code}" ] 
     echo
     echo "---------------------------"
@@ -34,7 +34,7 @@ pre_install_H323 gm(){
     echo "---------------------------"
     echo
 	# Set h323gw_gmdevid
-    read -p "(请输入H323 gc网关设备ID):" h323gw_gcdevid
+    read -ep "(请输入H323 gc网关设备ID):" h323gw_gcdevid
     [ -z "${h323gw_gcdevid}" ]
     echo
     echo "---------------------------"
@@ -42,7 +42,7 @@ pre_install_H323 gm(){
     echo "---------------------------"
     echo
 	# Set verify_gccode
-    read -p "(请输入H323 gc服务器IP):" gc_ip
+    read -ep "(请输入H323 gc服务器IP):" gc_ip
     [ -z "${gc_ip}" ]
     echo
     echo "---------------------------"

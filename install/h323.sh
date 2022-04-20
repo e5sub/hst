@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月17日                         "*
+echo -e "# *脚本更新时间：2022年4月20日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -18,7 +18,7 @@ echo -e "                                                       "
 # Pre-installation settings
 pre_install_H323(){
     # Set Main_ip
-    read -p "(请输入CES服务器IP地址或者域名):" main_ip
+    read -ep "(请输入CES服务器IP地址或者域名):" main_ip
     [ -z "${Main_ip}" ]
     echo
     echo "---------------------------"
@@ -26,7 +26,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
     # Set h323gw_gcdevid
-    read -p "(请输入H323 gc网关设备ID):" h323gw_gcdevid
+    read -ep "(请输入H323 gc网关设备ID):" h323gw_gcdevid
     [ -z "${h323gw_gcdevid}" ] 
     echo
     echo "---------------------------"
@@ -34,7 +34,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
     # Set verify_gccode
-    read -p "(请输入H323 gc网关设备验证码):" verify_gccode
+    read -ep "(请输入H323 gc网关设备验证码):" verify_gccode
     [ -z "${verify_gccode}" ] 
     echo
     echo "---------------------------"
@@ -42,7 +42,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set h323gw_gcdevid
-    read -p "(请输入H323 gm网关设备ID):" h323gw_gmdevid
+    read -ep "(请输入H323 gm网关设备ID):" h323gw_gmdevid
     [ -z "${h323gw_gmdevid}" ] 
     echo
     echo "---------------------------"
@@ -50,7 +50,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
     # Set verify_gccode
-    read -p "(请输入H323 gm网关设备验证码):" verify_gmcode
+    read -ep "(请输入H323 gm网关设备验证码):" verify_gmcode
     [ -z "${verify_gmcode}" ] 
     echo
     echo "---------------------------"
@@ -58,7 +58,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set verify_gccode
-    read -p "(请输入H323 gc服务器IP，不填则默认127.0.0.1):" gc_ip
+    read -ep "(请输入H323 gc服务器IP，不填则默认127.0.0.1):" gc_ip
     [ -z "${gc_ip}" ] && gc_ip=127.0.0.1
     echo
     echo "---------------------------"
@@ -66,7 +66,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set old_ces
-    read -p "(是否为4.30以下CES服务器，1：是，不填则默认为不是):" old_ces
+    read -ep "(是否为4.30以下CES服务器，1：是，不填则默认为不是):" old_ces
     [ -z "${old_ces}" ] && old_ces=0
     echo
     echo "---------------------------"
@@ -74,7 +74,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set port
-    read -p "(请输入服务器配置中心端口，不填则默认8443):" port
+    read -ep "(请输入服务器配置中心端口，不填则默认8443):" port
     [ -z "${port}" ] && port=8443
     echo
     echo "---------------------------"
@@ -82,7 +82,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set front
-    read -p "(请输入服务器会议业务端口，不填则默认1089):" front
+    read -ep "(请输入服务器会议业务端口，不填则默认1089):" front
     [ -z "${front}" ] && front=1089
     echo
     echo "---------------------------"
