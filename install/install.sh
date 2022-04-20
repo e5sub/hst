@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月17日                         "*
+echo -e "# *脚本更新时间：2022年4月20日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -900,6 +900,7 @@ then
 	sleep 5s
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
+	rm -rf /fsmeeting /usr/local/hst/fsp/
 fi
 if [ $1 = '-resetadmin' ]
 then
