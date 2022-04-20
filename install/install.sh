@@ -749,9 +749,6 @@ then
 	echo -e "\033[33m 【你选择的是安装FSP v1.4.1.17服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
 	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ${FSP141}
 fi
 if [ $1 = '-174fsp' ]
@@ -764,9 +761,6 @@ then
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_store_proxy.sh -O set_store_proxy.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_wb_app_id.sh -O set_wb_app_id.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/add_protocol_addr.sh -O add_protocol_addr.sh
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
 	docker run -d --name=fsp_pri ${FSP174}
 	mkdir -p /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
@@ -794,9 +788,6 @@ then
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_store_proxy.sh -O set_store_proxy.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_wb_app_id.sh -O set_wb_app_id.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/add_protocol_addr.sh -O add_protocol_addr.sh
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
 	docker run -d --name=fsp_pri ${FSP183}
 	mkdir -p /usr/local/hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /usr/local/hst/fsp
@@ -856,9 +847,6 @@ then
 	echo -e "\033[33m 【你选择的是安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
 	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8080:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs4 ccr.ccs.tencentyun.com/1040155/srs4 ./objs/srs -c conf/https.docker.conf
 fi
 if [ $1 = '-iperf' ]
@@ -866,9 +854,6 @@ then
 	echo -e "\033[33m 【你选择的是安装iperf3局域网性能测试工具(服务端)】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
 	docker run -d --restart=unless-stopped -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
 fi
 if [ $1 = '-html5' ]
@@ -876,9 +861,6 @@ then
 	echo -e "\033[33m 【你选择的是安装HTML5网络速度测试工具(服务端)】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	curl -sSL https://get.docker.com/ | sh
-	systemctl enable docker
-	systemctl start docker
 	docker run -d --restart=unless-stopped -p 6688:80 --name hst-speedtest 1040155/hst-speedtest
 fi
 if [ $1 = '-xiezai' ]
