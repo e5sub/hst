@@ -7,10 +7,10 @@ sys_install(){
         echo 'wget 已安装，继续操作'
     fi
 	if ! type docker >/dev/null 2>&1; then
-    echo 'Docker 未安装 正在安装中';
+    echo 'docker 未安装 正在安装中';
 	curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
     else 
-        echo 'Docker 已安装，继续操作'
+        echo 'docker 已安装，继续操作'
     fi
 }
 #脚本启动
