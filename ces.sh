@@ -1,4 +1,4 @@
-#安装依赖
+#检测依赖
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
         echo 'wget 未安装 正在安装中';
@@ -15,7 +15,6 @@ sys_install(){
 }
 #脚本启动
 sys_install
-
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
