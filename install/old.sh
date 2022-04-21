@@ -42,7 +42,7 @@ case $N in
   4341) bash install.sh -434dj ;;
   4342) bash install.sh -434jq ;;
   4343) bash install.sh -434node ;;
-  4344) bash install.sh -434face ;
+  4344) bash install.sh -434face ;;
   4321) bash install.sh -432dj ;;
   4322) bash install.sh -432jq ;;
   4323) bash install.sh -432node ;;
