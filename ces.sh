@@ -98,25 +98,6 @@ echo -e " \033[32m 20. \033[0m CES v4.35.4.5单机版"
 echo -e " \033[32m 21. \033[0m CES v4.35.4.5集群主服务器"
 echo -e " \033[32m 22. \033[0m CES v4.35.4.5集群节点服务器"
 echo -e " \033[32m 23. \033[0m CES v4.35.4.5人脸识别服务器"
-echo -e " \033[31m=====*4.34版本*=====\033[0m"
-echo -e " \033[32m 24. \033[0m CES v4.34.5.1单机版"
-echo -e " \033[32m 25. \033[0m CES v4.34.5.1集群主服务器"
-echo -e " \033[32m 26. \033[0m CES v4.34.5.1集群节点服务器"
-echo -e " \033[32m 27. \033[0m CES v4.34.5.1人脸识别服务器"
-echo -e " \033[44;37m 国产化CES服务端 For ARM \033[0m"
-echo -e " \033[32m 40. \033[0m 国产化CES v4.35.1.30单机版服务器"
-echo -e " \033[32m 41. \033[0m 国产化CES v4.35.1.30集群主服务器"
-echo -e " \033[32m 42. \033[0m 国产化CES v4.35.1.30集群节点服务器"
-echo -e " \033[32m 43. \033[0m 国产化CES v4.35.1.30人脸识别服务器"
-echo -e " \033[32m 44. \033[0m 国产化CES v4.34.5.1单机版服务器"
-echo -e " \033[32m 45. \033[0m 国产化CES v4.34.5.1集群主服务器"
-echo -e " \033[32m 46. \033[0m 国产化CES v4.34.5.1集群节点服务器"
-echo -e " \033[32m 47. \033[0m 国产化CES v4.34.5.1人脸识别服务器"
-echo -e " \033[44;37m 国产化CES服务端 For MIPS \033[0m"
-echo -e " \033[32m 60. \033[0m 国产化CES v4.35.1.30单机版服务器"
-echo -e " \033[32m 61. \033[0m 国产化CES v4.35.1.30集群主服务器"
-echo -e " \033[32m 62. \033[0m 国产化CES v4.35.1.30集群节点服务器"
-echo -e " \033[32m 63. \033[0m 国产化CES v4.35.1.30人脸识别服务器"
 echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
 echo -e " \033[32m 70. \033[0m 安装FSP v1.4.1.17服务器（配套4.31以下服务器）"
 echo -e " \033[32m 71. \033[0m 安装FSP v1.7.4.2服务器（配套4.34以上服务器）"
@@ -141,7 +122,7 @@ echo -e " \033[32m 96. \033[0m 修改节点服务器配置信息（适用于4.35
 echo -e ""
 echo -e " \033[32m 97. \033[0m 自动添加FSP公网地址（1.7.4.2以上才需要执行）"
 echo -e " \033[32m 98. \033[0m 重置后台admin密码"
-echo -e " \033[32m 99. \033[0m 安装CES历史版本"
+echo -e " \033[32m 99. \033[0m 安装CES历史版本以及国产化版本"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
 echo -e ""
 echo -e -n "\033[41;33m 请输入编号:  \033[0m"
@@ -161,18 +142,6 @@ case $N in
   25) bash install.sh -434jq ;;
   26) bash install.sh -434node ;;
   27) bash install.sh -434face ;;
-  40) bash install.sh -gc435dj;;
-  41) bash install.sh -gc435jq;;
-  42) bash install.sh -gc435node;;
-  43) bash install.sh -gc435face;;
-  44) bash install.sh -gc434dj;;
-  45) bash install.sh -gc434jq;;
-  46) bash install.sh -gc434node;;
-  47) bash install.sh -gc434face;;
-  60) bash install.sh -m435dj;;
-  61) bash install.sh -m435jq;;
-  62) bash install.sh -m435node;;
-  63) bash install.sh -m435face;;
   70) bash install.sh -141fsp ;;
   71) bash install.sh -174fsp ;;
   72) bash install.sh -183fsp ;;
