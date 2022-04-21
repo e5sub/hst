@@ -111,8 +111,8 @@ echo -e " \033[32m 82. \033[0m 安装HTML5网络速度测试工具(服务端)（
 echo -e " \033[32m 83. \033[0m 修改时间为中国时区"
 echo -e ""
 echo -e " \033[32m 88. \033[0m 卸载CES服务器"
-echo -e " \033[32m 89. \033[0m 重启FSP服务器"
-echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
+echo -e " \033[32m 89. \033[0m 卸载FSP服务器"
+#echo -e " \033[32m 90. \033[0m 重启FSP服务器"
 echo -e ""
 echo -e " \033[32m 92. \033[0m 修改H323服务器配置信息（适用于2.3.1.12版本，单机版本选这个）"
 echo -e " \033[32m 93. \033[0m 修改H323 GM服务器配置信息（适用于2.3.1.12版本，集群选这个）"
@@ -150,8 +150,8 @@ case $N in
   82) bash install.sh -html5 ;; 
   83) rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime ;; 
   88) bash install.sh -xiezai ;;
-  89) bash install.sh -restartfsp ;;
-  90) bash install.sh -unfsp ;;
+  89) bash install.sh -unfsp ;;
+  90) bash install.sh -restartfsp ;;
   92) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh -O h323.sh && chmod +x h323.sh && bash h323.sh ;;
   93) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323gm.sh -O h323gm.sh && chmod +x h323gm.sh && bash h323gm.sh ;;
   94) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/luzhi.sh -O luzhi.sh && chmod +x luzhi.sh && bash luzhi.sh ;;
