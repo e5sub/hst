@@ -61,7 +61,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年4月20日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2022年4月21日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -120,9 +120,8 @@ echo -e " \033[32m 94. \033[0m 修改录制服务器配置信息（适用于1.0.
 echo -e " \033[32m 95. \033[0m 修改CES webapp配置信息（适用于4.35以上版本，需要先安装FSP服务器）"
 echo -e " \033[32m 96. \033[0m 修改节点服务器配置信息（适用于4.35以上版本，主服务器勿用）"
 echo -e ""
-echo -e " \033[32m 97. \033[0m 自动添加FSP公网地址（1.7.4.2以上才需要执行）"
-echo -e " \033[32m 98. \033[0m 重置后台admin密码"
-echo -e " \033[32m 99. \033[0m 安装CES历史版本以及国产化版本"
+echo -e " \033[32m 97. \033[0m 重置后台admin密码"
+echo -e " \033[32m 98. \033[0m 安装CES历史版本以及国产化版本"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
 echo -e ""
 echo -e -n "\033[41;33m 请输入编号:  \033[0m"
@@ -158,9 +157,8 @@ case $N in
   94) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/luzhi.sh -O luzhi.sh && chmod +x luzhi.sh && bash luzhi.sh ;;
   95) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/webapp.sh -O webapp.sh && chmod +x webapp.sh && bash webapp.sh ;;
   96) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh -O node.sh && chmod +x node.sh && bash node.sh ;;
-  97) bash install.sh -setip ;;
-  98) bash install.sh -resetadmin ;;
-  99) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh && chmod +x old.sh && bash old.sh ;;
+  97) bash install.sh -resetadmin ;;
+  98) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh && chmod +x old.sh && bash old.sh ;;
   00) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh && chmod +x zxces.sh && bash zxces.sh ;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac
