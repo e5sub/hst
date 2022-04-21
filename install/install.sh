@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月20日                         "*
+echo -e "# *脚本更新时间：2022年4月21日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -870,6 +870,8 @@ then
 	sleep 5s
 	cd /usr/local/hst
 	bash server_uninstall.sh
+	yum remove -y docker-scan-plugin.x86_64
+	yum remove -y containerd.io.x86_64
 fi
 if [ $1 = '-restartfsp' ]
 then
