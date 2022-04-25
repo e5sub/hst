@@ -762,7 +762,7 @@ then
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_wb_app_id.sh -O set_wb_app_id.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/add_protocol_addr.sh -O add_protocol_addr.sh
 	docker run -d --name=fsp_pri ${FSP174}
-	mkdir -p /usr/local/hst/fsp
+	mkdir -p /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /hst/fsp
@@ -789,7 +789,7 @@ then
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_wb_app_id.sh -O set_wb_app_id.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/add_protocol_addr.sh -O add_protocol_addr.sh
 	docker run -d --name=fsp_pri ${FSP183}
-	mkdir -p /usr/local/hst/fsp
+	mkdir -p /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /hst/fsp
