@@ -16,7 +16,7 @@ echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "                                                       "
 # Pre-installation settings
-pre_install_H323 gm(){
+pre_install_gm(){
     # Set h323gw_gcdevid
     read -ep "(请输入H323 gm网关设备ID，):" h323gw_devid
     [ -z "${h323gw_devid}" ] 
@@ -52,7 +52,7 @@ pre_install_H323 gm(){
 }
 IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 # Config H323
-config_H323(){
+config_gm(){
     echo "正在写入H323 gm服务器配置文件"	
     sed -i "s|<verify_code>.*|<verify_code>${verify_code}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
     sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_devid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gm/gm.xml
@@ -62,7 +62,7 @@ config_H323(){
 	echo "写入成功，正在重启H323 gm服务器，请耐心等待"
 }
 
-pre_install_H323
-config_H323
+pre_install_gm
+config_gm
 #重启H323服务器
 supervisorctl restart all
