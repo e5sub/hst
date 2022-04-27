@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月21日                         "*
+echo -e "# *脚本更新时间：2022年4月27日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -862,6 +862,20 @@ then
 	echo -e "\n"
 	sleep 5s
 	docker run -d --restart=unless-stopped -p 6688:80 --name hst-speedtest 1040155/hst-speedtest
+fi
+if [ $1 = '-frps' ]
+then
+	echo -e "\033[33m 【你选择的是安装Frp内网穿透服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	docker run --restart=always --network host -d -v /frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps
+fi
+if [ $1 = '-frpc' ]
+then
+	echo -e "\033[33m 【你选择的是安装Frp内网穿透客户端】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	docker run --restart=always --network host -d -v /frp/frpc.ini:/etc/frp/frpc.ini --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-xiezai' ]
 then
