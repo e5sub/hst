@@ -870,8 +870,8 @@ then
 	sleep 5s
 	mkdir -p /frp
 	cd /frp
-	wget --no-check-certificate -P /frp https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frps.ini -O frps.ini
-	docker run --restart=always --network host -d -v /frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frps.ini -O frps.ini
+	docker run --restart=always --network host -d -v /frp:/etc/frp --name frps snowdreamtech/frps
 fi
 if [ $1 = '-frpc' ]
 then
@@ -880,8 +880,8 @@ then
 	sleep 5s
 	mkdir -p /frp
 	cd /frp
-	wget --no-check-certificate -P /frp https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frpc.ini -O frpc.ini
-	docker run --restart=always --network host -d -v /frp/frpc.ini:/etc/frp/frpc.ini --name frpc snowdreamtech/frpc
+	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frpc.ini -O frpc.ini
+	docker run --restart=always --network host -d -v /frp:/etc/frp --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-xiezai' ]
 then
