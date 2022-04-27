@@ -868,6 +868,7 @@ then
 	echo -e "\033[33m 【你选择的是安装Frp内网穿透服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
+	mkdir -p /frp
 	docker run --restart=always --network host -d -v /frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps
 fi
 if [ $1 = '-frpc' ]
@@ -875,6 +876,7 @@ then
 	echo -e "\033[33m 【你选择的是安装Frp内网穿透客户端】 \033[0m"
 	echo -e "\n"
 	sleep 5s
+	mkdir -p /frp
 	docker run --restart=always --network host -d -v /frp/frpc.ini:/etc/frp/frpc.ini --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-xiezai' ]
