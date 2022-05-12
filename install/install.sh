@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月27日                         "*
+echo -e "# *脚本更新时间：2022年5月9日                          "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -60,8 +60,8 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         MIPSZXCES435="wget --no-check-certificate https://yaohst.com/OS/好视通linux服务器安装包/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
         #FSP服务器
         FSP141="1040155/fsp:1.4.1.17"
-        FSP174="1040155/fsp:1.7.4.2"
-        FSP183="1040155/fsp:1.8.3.3"
+        FSP175="1040155/fsp:1.7.5.1"
+        FSP183="1040155/fsp:1.8.3.4"
     else
         #CES标准版安装包下载地址
         CES436="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.1.tar.gz -O ces_linux_hst4.36.5.1.tar.gz"
@@ -84,8 +84,8 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         MIPSZXCES435="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
         #FSP服务器
         FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
-        FSP174="ccr.ccs.tencentyun.com/1040155/fsp:1.7.4.2"
-        FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.3"
+        FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
+        FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.4"
     fi
 #录制服务器和H323安装包下载地址
 LUZHI="wget --no-check-certificate https://yaohst.com/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/mc-1.0.7.16.tar -O mc-1.0.7.16.tar"
@@ -751,17 +751,17 @@ then
 	sleep 5s
 	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ${FSP141}
 fi
-if [ $1 = '-174fsp' ]
+if [ $1 = '-175fsp' ]
 then
-	echo -e "\033[33m 【你选择的是安装FSP v1.7.4.2服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_extra_ip.sh -O set_extra_ip.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_protocol_addr.sh -O set_protocol_addr.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_store_proxy.sh -O set_store_proxy.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/set_wb_app_id.sh -O set_wb_app_id.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.4.2/add_protocol_addr.sh -O add_protocol_addr.sh
-	docker run -d --name=fsp_pri ${FSP174}
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_extra_ip.sh -O set_extra_ip.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_protocol_addr.sh -O set_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_store_proxy.sh -O set_store_proxy.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_wb_app_id.sh -O set_wb_app_id.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
+	docker run -d --name=fsp_pri ${FSP175}
 	mkdir -p /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
@@ -773,21 +773,21 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 5s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep --privileged --hostname fsp_server --net=host --restart=always ${FSP174}
+	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
     echo -e "正在向FSP服务器添加外网IP映射，也可手动执行set_extra_ip.sh添加。请耐心等待（等待大约60秒）"
     sleep 60s
     bash set_extra_ip.sh ${getIpAddress}
 fi
 if [ $1 = '-183fsp' ]
 then
-	echo -e "\033[33m 【你选择的是安装FSP v1.8.3.3服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装FSP v1.8.3.4服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_extra_ip.sh -O set_extra_ip.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_protocol_addr.sh -O set_protocol_addr.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_store_proxy.sh -O set_store_proxy.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/set_wb_app_id.sh -O set_wb_app_id.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.3/add_protocol_addr.sh -O add_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.4/set_extra_ip.sh -O set_extra_ip.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.4/set_protocol_addr.sh -O set_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.4/set_store_proxy.sh -O set_store_proxy.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.4/set_wb_app_id.sh -O set_wb_app_id.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.4/add_protocol_addr.sh -O add_protocol_addr.sh
 	docker run -d --name=fsp_pri ${FSP183}
 	mkdir -p /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
@@ -804,17 +804,6 @@ then
     echo -e "正在向FSP服务器添加外网IP映射，也可手动执行set_extra_ip.sh添加。请耐心等待（等待大约60秒）"
     sleep 60s
 	bash set_extra_ip.sh ${getIpAddress}
-fi
-if [ $1 = '-luzhi' ]
-then
-	echo -e "\033[33m 【你选择的是安装录制服务器v1.0.7.16】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	cd /opt
-	${LUZHI}
-	tar xvf mc-1.0.7.16.tar
-	chmod +x setup.sh
-	bash setup.sh
 fi
 if [ $1 = '-h323' ]
 then
@@ -940,7 +929,7 @@ rm -f resetadmin.sql
 rm -f old.sh
 
 echo -e "                                                                                "
-echo -e "#*******************************************************************************"*                      
+echo -e "#*******************************************************************************"*
 echo -e "#                                                                               "
 echo -e "# *脚本执行完成                                                                 "
 echo -e "#                                                                               "
@@ -948,9 +937,9 @@ echo -e "# *FSP外网映射端口：28000、20020、21000、29100、29400、2971
 echo -e "#                                                                               "
 echo -e "# *CES默认端口：1089、8080、8443                                                "
 echo -e "#                                                                               "
-echo -e "# *内网后台地址（仅限单机版和集群主服务器）：https://${LOCAL_IP}:8443           "
+echo -e "# *内网后台（仅限安装单机版和集群主服务器访问）：https://${LOCAL_IP}:8443       "
 echo -e "#                                                                               "
-echo -e "# *外网后台地址（仅限单机版和集群主服务器）：https://${getIpAddress}:8443       "
+echo -e "# *外网后台（仅限安装单机版和集群主服务器访问）：https://${getIpAddress}:8443   "
 echo -e "#                                                                               "
 echo -e "# *如需外网使用请在路由器中映射上述端口                                         "
 echo -e "#                                                                               "
