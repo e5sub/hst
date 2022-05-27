@@ -88,7 +88,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.5"
     fi
 #录制服务器和H323安装包下载地址
-326record="wget --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.14.tar.gz -O fsp-record-3.2.6.14.tar.gz"
+326record="wget --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz -O fsp-record-3.2.6.17.tar.gz"
 H323MCU="wget --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz -O h323gw_xd_pkg_2.3.1.12.tar.gz"
 H323="wget --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20211231_2.3.1.12.tar -O centos7.installer_MCU20211231_2.3.1.12.tar"
 if [ $1 = '-436dj' ]
@@ -830,12 +830,12 @@ then
 fi
 if [ $1 = '-326record' ]
 then
-	echo -e "\033[33m 【你选择的是安装录制服务器v3.2.6.14】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装录制服务器v3.2.6.17】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
 	${326record}
-	tar xvf fsp-record-3.2.6.14.tar.gz
-	cd ./fsp-record-3.2.6.14
+	tar xvf fsp-record-3.2.6.17.tar.gz
+	cd ./fsp-record-3.2.6.17
 	bash install.sh pri
 fi
 ##########################################################################################服务器安装脚本到此结束##########################################################################################
