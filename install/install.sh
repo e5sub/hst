@@ -917,10 +917,6 @@ then
 	bash set_extra_ip.sh ${getIpAddress}
 fi
 
-#关闭并禁用防火墙
-systemctl stop firewalld.service
-systemctl disable firewalld.service
-
 #删除安装脚本
 rm -f install.sh
 rm -f ces.sh
