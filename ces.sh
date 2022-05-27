@@ -98,11 +98,13 @@ echo -e " \033[32m 21. \033[0m CES v4.35.4.5集群主服务器"
 echo -e " \033[32m 22. \033[0m CES v4.35.4.5集群节点服务器"
 #echo -e " \033[32m 23. \033[0m CES v4.35.4.5人脸识别服务器"
 echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
-echo -e " \033[32m 70. \033[0m 安装FSP v1.4.1.17服务器（配套4.31以下服务器）"
-echo -e " \033[32m 71. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
-echo -e " \033[32m 72. \033[0m 安装FSP v1.8.3.5服务器（配套4.36服务器）"
+echo -e " \033[32m 60. \033[0m 安装FSP v1.4.1.17服务器（配套4.31以下服务器）"
+echo -e " \033[32m 61. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
+echo -e " \033[32m 62. \033[0m 安装FSP v1.8.3.5服务器（配套4.36服务器）"
 echo -e " \033[44;37m 安装H323服务器 \033[0m"
-echo -e " \033[32m 79. \033[0m 安装H323网关服务器v2.3.1.12"
+echo -e " \033[32m 70. \033[0m 安装H323网关服务器v2.3.1.12"
+echo -e " \033[44;37m 安装录制服务器 \033[0m"
+echo -e " \033[32m 71. \033[0m 安装录制服务器v3.2.6.14（适用于4.36版本）"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
 echo -e " \033[32m 80. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/1990/8000/8081/8088端口）"
 echo -e " \033[32m 81. \033[0m 安装iperf3网络性能测试工具(服务端)（5201端口）"
@@ -143,10 +145,11 @@ case $N in
   25) bash install.sh -434jq ;;
   26) bash install.sh -434node ;;
   27) bash install.sh -434face ;;
-  70) bash install.sh -141fsp ;;
-  71) bash install.sh -175fsp ;;
-  72) bash install.sh -183fsp ;;
-  79) bash install.sh -h323 ;;
+  60) bash install.sh -141fsp ;;
+  61) bash install.sh -175fsp ;;
+  62) bash install.sh -183fsp ;;
+  70) bash install.sh -h323 ;;
+  71) bash install.sh -326record ;;
   80) bash install.sh -rtmp ;;
   81) bash install.sh -iperf ;;  
   82) bash install.sh -html5 ;; 
