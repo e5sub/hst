@@ -34,8 +34,8 @@ pre_install_config(){
     #echo "---------------------------"
     #echo
 	# Set fsp_ip
-    read -ep "(请输入FSP服务器IP):" fsp_ip
-    [ -z "${fsp_ip}" ] 
+    read -ep "(请输入FSP服务器IP，若与CES地址一致此项留空即可):" fsp_ip
+    [ -z "${fsp_ip}" ] && fsp_ip=${ces_ip}
     echo
     echo "---------------------------"
     echo "FSP服务器IP = ${fsp_ip}"
@@ -117,7 +117,7 @@ pre_install_config(){
 
 # Config apaas
 config_apaas(){
-    #echo "正在写入apaas配置文件"	
+    echo "正在写入apaas配置文件"	
     #docker exec -ti $docker_id sed -i "s|app-id.*|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     #docker exec -ti $docker_id sed -i "s|secret.*|secret: ${SecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     #docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${record_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
