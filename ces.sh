@@ -149,7 +149,7 @@ case $N in
   61) bash install.sh -175fsp ;;
   62) bash install.sh -183fsp ;;
   70) bash install.sh -h323 ;;
-  71) bash install.sh -326record ;;
+  71) bash install.sh -record326 ;;
   80) bash install.sh -rtmp ;;
   81) bash install.sh -iperf ;;  
   82) bash install.sh -html5 ;; 
