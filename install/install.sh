@@ -766,17 +766,15 @@ then
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /hst/fsp
-	echo -e "正在停止FSP服务器"
+	echo -e "正在映射FSP本地目录/hst/fsp"
 	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 5s
-	echo -e "正在卸载FSP服务器"
+	sleep 10s
+	echo -e "正在停止FSP服务器"
 	docker rm $(docker ps -qf status=exited)
-	sleep 5s
+	sleep 15s
 	echo -e "正在启动FSP服务器"
 	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
-    echo -e "正在向FSP服务器添加外网IP映射，也可手动执行set_extra_ip.sh添加。请耐心等待（等待大约60秒）"
-    sleep 60s
-    bash set_extra_ip.sh ${getIpAddress}
+    echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-183fsp' ]
 then
@@ -793,17 +791,15 @@ then
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /hst/fsp
-	echo -e "正在停止FSP服务器"
+	echo -e "正在映射FSP本地目录/hst/fsp"
 	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 5s
-	echo -e "正在卸载FSP服务器"
+	sleep 10s
+	echo -e "正在停止FSP服务器"
 	docker rm $(docker ps -qf status=exited)
-	sleep 5s
+	sleep 15s
     echo -e "正在启动FSP服务器"
 	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
-    echo -e "正在向FSP服务器添加外网IP映射，也可手动执行set_extra_ip.sh添加。请耐心等待（等待大约60秒）"
-    sleep 60s
-	bash set_extra_ip.sh ${getIpAddress}
+    echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-h323' ]
 then
