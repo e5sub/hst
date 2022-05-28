@@ -156,11 +156,5 @@ pre_install_config
 config_apaas
 config_env
 config_ServiceConfig
-#wbgw appid配置
-sh set_wb_app_id.sh ${AppId}
-sleep 15s
-#set_extra_ip.sh配置
-sh set_extra_ip.sh ${LOCAL_IP}
-sleep 15s
-#重启服务器
-reboot
+#重启服务
+sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${LOCAL_IP} && service fmservice restart
