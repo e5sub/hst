@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月27日                         "*
+echo -e "# *脚本更新时间：2022年5月28日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -15,7 +15,7 @@ echo -e "# ******************************************************"
 echo -e "                                                       "
 docker_id=`docker ps|grep fsp_pri|awk '{print $1}'`
 # Pre-installation settings
-pre_install_apaase(){
+pre_install_apaas(){
     # Set ces_ip
     read -ep "(请输入CES服务器IP):" ces_ip
     [ -z "${ces_ip}" ]

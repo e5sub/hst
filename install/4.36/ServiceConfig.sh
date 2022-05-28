@@ -84,10 +84,10 @@ pre_install_ServiceConfig(){
 # Config ServiceConfig
 config_ServiceConfig(){
     echo "正在写入FMserver配置文件"	
-    sed -i "s|app-id.*|app-id: ${AppId}|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<RabbitMQBroker>.*|<RabbitMQBroker>${fsp_ip}:24000:root:root@/</RabbitMQBroker>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<UserId>.*|<UserId>${UserId}</UserId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
-    sed -i "s|<SecretKey>.*|<SecretKey>${<SecretKey>}</<SecretKey>>|"  /usr/local/hst/FMServer/ServiceConfig.xml
-    sed -i "s|<AppId>.*|<AppId>${AppId}</<AppId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<SecretKey>.*|<SecretKey>${SecretKey}</SecretKey>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<AppId>.*|<AppId>${AppId}</AppId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
 	sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020/server/address</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspDomain>.*|<FspDomain>${FspDomain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
 	sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
