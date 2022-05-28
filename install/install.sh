@@ -766,7 +766,7 @@ then
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /hst/fsp
-	sleep 30s
+	sleep 60s
 	echo -e "正在映射FSP本地目录/hst/fsp"
 	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 	sleep 15s
@@ -792,7 +792,7 @@ then
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /hst/fsp
-	sleep 30s
+	sleep 60s
 	echo -e "正在映射FSP本地目录/hst/fsp"
 	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 	sleep 15s
