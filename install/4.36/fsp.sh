@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月28日                         "*
+echo -e "# *脚本更新时间：2022年5月27日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -68,15 +68,15 @@ pre_install_apaas(){
 
 # Config apaas
 config_apaas(){
-    echo "正在写入apaas配置文件"	
-    docker exec -ti $docker_id sed -i "s|app-id.*|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|secret.*|secret: ${SecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${record_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|address.*|address: http://${record_ip}:28001|"  /boss/admin-web/conf/application.yml
-	docker exec -ti $docker_id sed -i "s|roomAddr.*|roomAddr: ${fsp_ip}:25704|" /boss/boss-pri-cloud-gw/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
-	docker exec -ti $docker_id sed -i "s|id.*|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
-	docker exec -ti $docker_id sed -i "s|secret.*|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
+    echo "正在写入apaas配置文件"		
+    #docker exec -ti $docker_id sed -i "s|app-id.*|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    #docker exec -ti $docker_id sed -i "s|secret.*|secret: ${SecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    #docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${record_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    #docker exec -ti $docker_id sed -i "s|address.*|address: http://${record_ip}:28001|"  /boss/admin-web/conf/application.yml
+	#docker exec -ti $docker_id sed -i "s|roomAddr.*|roomAddr: ${fsp_ip}:25704|" /boss/boss-pri-cloud-gw/conf/application.yml
+    #docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
+	#docker exec -ti $docker_id sed -i "s|id.*|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
+	#docker exec -ti $docker_id sed -i "s|secret.*|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
 	echo "写入成功,正在重启apaas服务"
 }
 

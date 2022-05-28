@@ -121,11 +121,12 @@ echo -e ""
 echo -e " \033[32m 92. \033[0m 修改H323服务器配置信息（适用于2.3.1.12版本，单机版本选这个）"
 echo -e " \033[32m 93. \033[0m 修改H323 GM服务器配置信息（适用于2.3.1.12版本，集群节点选这个）"
 echo -e " \033[32m 94. \033[0m 修改录制服务器配置信息（适用于v3.2.6.17版本的录制服务器）"
-echo -e " \033[32m 95. \033[0m 修改CES webapp配置信息（适用于4.35版本，需先安装FSP服务器）"
-echo -e " \033[32m 96. \033[0m 修改节点服务器配置信息（适用于4.35版本，主服务器勿用）"
+echo -e " \033[32m 95. \033[0m 修改4.36CES配置信息（需先安装FSP服务器）"
+echo -e " \033[32m 96. \033[0m 修改4.35CES配置信息（需先安装FSP服务器）"
+echo -e " \033[32m 97. \033[0m 修改节点服务器配置信息（适用于4.35版本，主服务器勿用）"
 echo -e ""
-echo -e " \033[32m 97. \033[0m 重置后台admin密码"
-echo -e " \033[32m 98. \033[0m 安装CES历史版本以及国产化版本"
+echo -e " \033[32m 98. \033[0m 重置后台admin密码"
+echo -e " \033[32m 99. \033[0m 安装CES历史版本以及国产化版本"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
 echo -e ""
 echo -e -n "\033[41;33m 请输入编号:  \033[0m"
@@ -163,10 +164,11 @@ case $N in
   92) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh -O h323.sh && chmod +x h323.sh && bash h323.sh ;;
   93) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323gm.sh -O h323gm.sh && chmod +x h323gm.sh && bash h323gm.sh ;;
   94) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/storeservice.sh -O storeservice.sh && chmod +x storeservice.sh && bash storeservice.sh ;;
-  95) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/webapp.sh -O webapp.sh && chmod +x webapp.sh && bash webapp.sh ;;
-  96) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh -O node.sh && chmod +x node.sh && bash node.sh ;;
-  97) bash install.sh -resetadmin ;;
-  98) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh && chmod +x old.sh && bash old.sh ;;
+  95) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/config.sh -O config.sh && chmod +x config.sh && bash config.sh ;;
+  96) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/webapp.sh -O webapp.sh && chmod +x webapp.sh && bash webapp.sh ;;
+  97) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh -O node.sh && chmod +x node.sh && bash node.sh ;;
+  98) bash install.sh -resetadmin ;;
+  99) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh && chmod +x old.sh && bash old.sh ;;
   00) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh && chmod +x zxces.sh && bash zxces.sh ;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac
