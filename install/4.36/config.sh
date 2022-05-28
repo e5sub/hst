@@ -117,7 +117,7 @@ pre_install_config(){
 
 # Config apaas
 config_apaas(){
-    echo "正在写入apaas配置文件"	
+    echo "正在写入FSP配置文件（此项有bug，实际上没有修改，未修复前请按照文档手动修改一下）"	
     #docker exec -ti $docker_id sed -i "s|app-id.*|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     #docker exec -ti $docker_id sed -i "s|secret.*|secret: ${SecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     #docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${record_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
