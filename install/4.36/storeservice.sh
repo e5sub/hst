@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月27日                         "*
+echo -e "# *脚本更新时间：2022年5月28日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -50,7 +50,7 @@ config_storeservice(){
     sed -i "s|service_ip.*|service_ip = ${record_ip}|"  /fsmeeting/fsp_record/storeservice/store.conf
 	sed -i "s|service_play_proxy.*|service_play_proxy = https://${record_ip}:8384/hls/%s/index.m3u8|"  /fsmeeting/fsp_record/storeservice/store.conf
     sed -i "s|service_proxy.*|service_proxy = https://${record_ip}:21000|" /fsmeeting/fsp_record/storeservice/store.conf
-	sed -i "s|mq_brokers.*|mq_brokers=${ces_ip}:24000:root:root@/|" /fsmeeting/fsp_record/storeservice/store.conf 
+	sed -i "s|mq_brokers.*|mq_brokers=${fsp_ip}:24000:root:root@/|" /fsmeeting/fsp_record/storeservice/store.conf 
 	echo "写入成功"
 }
 
