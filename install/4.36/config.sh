@@ -161,11 +161,11 @@ config_ServiceConfig(){
     #sed -i "s|<LocalAddr>.*|<LocalAddr>ws://${fsp_ip}:4432</IsUseFspWbSrv>|" /usr/local/hst/FMWebProxy/service_config.xml
     #sed -i "s|<IsUseWss>.*|<IsUseWss>0</IsUseWss>|" /usr/local/hst/FMWebProxy/service_config.xml
     #sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = LiveServiceIceGrid/Locator:ssl -h ${live_ip} -p 10000|" /usr/local/hst/FMServer/live_ice.cfg
-    echo "写入成功，正在重启，建议安装完成之后reboot一次"
+    echo "写入成功，正在重启服务器，稍后请重新登录服务器"
 }
 pre_install_config
 config_apaas
 config_env
 config_ServiceConfig
-#重启服务
-sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${IP} && sh set_protocol_addr.sh ws ${fsp_ip} && service fmservice restart 
+#重启服务器
+sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${IP} && sh set_protocol_addr.sh ws ${fsp_ip} && reboot
