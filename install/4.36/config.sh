@@ -134,8 +134,7 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|url: http://47.107.67.240:8080/fmapi/webservice/jaxws?wsdl|url: http://${ces_ip}:8080/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|id: 9f08cb39074bb831586ce998fd983206|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|secret: c30878b783e17dcb|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
-    echo "写入成功,正在重启fsp服务"
+    docker exec -ti $docker_id sed -i "s|secret: c30878b783e17dcb|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml    
 }
 config_env(){
     echo "正在写入env配置文件"	
@@ -162,7 +161,7 @@ config_ServiceConfig(){
     #sed -i "s|<LocalAddr>.*|<LocalAddr>ws://${fsp_ip}:4432</IsUseFspWbSrv>|" /usr/local/hst/FMWebProxy/service_config.xml
 	#sed -i "s|<IsUseWss>.*|<IsUseWss>0</IsUseWss>|" /usr/local/hst/FMWebProxy/service_config.xml
     #sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = LiveServiceIceGrid/Locator:ssl -h ${live_ip} -p 10000|" /usr/local/hst/FMServer/live_ice.cfg
-    echo "写入成功，正在重启，请耐心等待"
+    echo "写入成功，正在重启，建议重启完成之后reboot一次"
 }
 pre_install_config
 config_apaas
