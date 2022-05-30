@@ -106,13 +106,13 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set IsUseFspWbSrv
-    #read -ep "(是否使用fsp白板服务:0不使用):" IsUseFspWbSrv
-    #[ -z "${IsUseFspWbSrv}" ] && IsUseFspWbSrv=1
-    #echo
-    #echo "---------------------------"
-    #echo "使用fsp白板服务 = ${IsUseFspWbSrv}"
-    #echo "---------------------------"
-    #echo
+    read -ep "(是否使用fsp白板服务:0不使用):" IsUseFspWbSrv
+    [ -z "${IsUseFspWbSrv}" ] && IsUseFspWbSrv=1
+    echo
+    echo "---------------------------"
+    echo "使用fsp白板服务 = ${IsUseFspWbSrv}"
+    echo "---------------------------"
+    echo
 # Set FspDomain
     read -ep "(请输入fsp域，不填则默认pri):" FspDomain
     [ -z "${FspDomain}" ] && FspDomain=pri
@@ -157,7 +157,7 @@ config_ServiceConfig(){
     sed -i "s|<AppId>.*|<AppId>${AppId}</AppId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspDomain>.*|<FspDomain>${FspDomain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
-    #sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
+    sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
     sed -i "s|<LocalAddr>.*|<LocalAddr>wss://${fsp_ip}:4432</LocalAddr>|" /usr/local/hst/FMWebProxy/service_config.xml
     sed -i "s|<IsUseWss>.*|<IsUseWss>1</IsUseWss>|" /usr/local/hst/FMWebProxy/service_config.xml
     sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = LiveServiceIceGrid/Locator:ssl -h ${live_ip} -p 10000|" /usr/local/hst/FMServer/live_ice.cfg
