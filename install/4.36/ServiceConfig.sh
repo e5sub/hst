@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月27日                         "*
+echo -e "# *脚本更新时间：2022年5月30日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -88,11 +88,13 @@ config_ServiceConfig(){
     sed -i "s|<UserId>.*|<UserId>${UserId}</UserId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<SecretKey>.*|<SecretKey>${SecretKey}</SecretKey>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<AppId>.*|<AppId>${AppId}</AppId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
-    sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020/server/address</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspDomain>.*|<FspDomain>${FspDomain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
-    sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
-    sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = LiveServiceIceGrid/Locator:ssl -h ${live_ip} -p 10000|" /usr/local/hst/FMServer/live_ice.cfg
-    echo "写入成功，正在重启FMservice服务，请耐心等待"
+    #sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
+    #sed -i "s|<LocalAddr>.*|<LocalAddr>ws://${fsp_ip}:4432</IsUseFspWbSrv>|" /usr/local/hst/FMWebProxy/service_config.xml
+	#sed -i "s|<IsUseWss>.*|<IsUseWss>0</IsUseWss>|" /usr/local/hst/FMWebProxy/service_config.xml
+    #sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = LiveServiceIceGrid/Locator:ssl -h ${live_ip} -p 10000|" /usr/local/hst/FMServer/live_ice.cfg
+    echo "写入成功，正在重启，请耐心等待"
 }
 
 pre_install_ServiceConfig

@@ -761,6 +761,7 @@ then
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_store_proxy.sh -O set_store_proxy.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_wb_app_id.sh -O set_wb_app_id.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
 	docker run -d --name=fsp_pri ${FSP175}
 	mkdir -p /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
@@ -787,6 +788,7 @@ then
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_store_proxy.sh -O set_store_proxy.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_wb_app_id.sh -O set_wb_app_id.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh -O add_protocol_addr.sh
+    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf -O fsmeeting.conf
 	docker run -d --name=fsp_pri ${FSP183}
 	mkdir -p /hst/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp

@@ -14,7 +14,7 @@ echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "                                                       "
 docker_id=`docker ps|grep fsp_pri|awk '{print $1}'`
-LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 # Pre-installation settings
 pre_install_config(){
 # Set ces_ip
@@ -106,13 +106,13 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set IsUseFspWbSrv
-    read -ep "(是否使用fsp白板服务:0不使用):" IsUseFspWbSrv
-    [ -z "${IsUseFspWbSrv}" ] && IsUseFspWbSrv=1
-    echo
-    echo "---------------------------"
-    echo "使用fsp白板服务 = ${IsUseFspWbSrv}"
-    echo "---------------------------"
-    echo
+    #read -ep "(是否使用fsp白板服务:0不使用):" IsUseFspWbSrv
+    #[ -z "${IsUseFspWbSrv}" ] && IsUseFspWbSrv=1
+    #echo
+    #echo "---------------------------"
+    #echo "使用fsp白板服务 = ${IsUseFspWbSrv}"
+    #echo "---------------------------"
+    #echo
 # Set FspDomain
     read -ep "(请输入fsp域，不填则默认pri):" FspDomain
     [ -z "${FspDomain}" ] && FspDomain=pri
@@ -128,8 +128,8 @@ config_apaas(){
     echo "正在写入fsp配置文件（由于本人技术有限，此项仅限于第一次安装FSP v1.8.3.5使用）"		
     docker exec -ti $docker_id sed -i "s|app-id: 9c45c27746abcaee27852e6279d15814|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "s|secret: 42dade007e0863e8|secret: ${AppSecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${record_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|address: http://127.0.0.1:28001|address: http://${record_ip}:28001|"  /boss/admin-web/conf/application.yml
+    docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${fsp_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    docker exec -ti $docker_id sed -i "s|address: http://127.0.0.1:28001|address: http://${fsp_ip}:28001|"  /boss/admin-web/conf/application.yml
     docker exec -ti $docker_id sed -i "s|roomAddr.*|roomAddr: ${fsp_ip}:25704|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|url: http://47.107.67.240:8080/fmapi/webservice/jaxws?wsdl|url: http://${ces_ip}:8080/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
@@ -156,10 +156,12 @@ config_ServiceConfig(){
     sed -i "s|<UserId>.*|<UserId>${UserId}</UserId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<SecretKey>.*|<SecretKey>${SecretKey}</SecretKey>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<AppId>.*|<AppId>${AppId}</AppId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
-    sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020/server/address</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspDomain>.*|<FspDomain>${FspDomain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
-    sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
-    sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = LiveServiceIceGrid/Locator:ssl -h ${live_ip} -p 10000|" /usr/local/hst/FMServer/live_ice.cfg
+    #sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
+    #sed -i "s|<LocalAddr>.*|<LocalAddr>ws://${fsp_ip}:4432</IsUseFspWbSrv>|" /usr/local/hst/FMWebProxy/service_config.xml
+	#sed -i "s|<IsUseWss>.*|<IsUseWss>0</IsUseWss>|" /usr/local/hst/FMWebProxy/service_config.xml
+    #sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = LiveServiceIceGrid/Locator:ssl -h ${live_ip} -p 10000|" /usr/local/hst/FMServer/live_ice.cfg
     echo "写入成功，正在重启，请耐心等待"
 }
 pre_install_config
@@ -167,4 +169,4 @@ config_apaas
 config_env
 config_ServiceConfig
 #重启服务
-sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${LOCAL_IP} && service fmservice restart
+sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${IP} && sh set_protocol_addr.sh ws ${fsp_ip} && service fmservice restart 
