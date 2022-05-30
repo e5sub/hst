@@ -775,7 +775,7 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 15s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
+	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
     echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-183fsp' ]
@@ -802,7 +802,7 @@ then
 	docker rm $(docker ps -qf status=exited)
 	sleep 15s
          echo -e "正在启动FSP服务器"
-	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr=${LOCAL_IP} -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
          echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-h323' ]
