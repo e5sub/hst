@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月27日                         "*
+echo -e "# *脚本更新时间：2022年5月30日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -811,16 +811,12 @@ then
 	${H323}
 	tar xvf h323gw_xd_pkg_2.3.1.12.tar.gz
 	cd ./h323gw_xd_pkg_2.3.1.12
-	echo -e "\033[33m 正在安装GC，请等待30秒 \033[0m"
+	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
-	bash install.sh pri gc
-	sleep 30s
-	echo -e "\033[33m 正在安装GM，请等待30秒 \033[0m"
-	echo -e "\n"
-	bash install.sh pri gm
-	echo -e "\033[33m 正在安装H323MCU，请等待30秒 \033[0m"
-	echo -e "\n"
-	sleep 30s
+	bash install.sh pri gc && bash install.sh pri gm 
+	sleep 30s	
+	echo -e "\033[33m 正在安装H323MCU，请耐心等待 \033[0m"
+	echo -e "\n"	
 	${H323MCU}
 	tar xvf centos7.installer_MCU20211231_2.3.1.12.tar
 	cd ./centos7.installer

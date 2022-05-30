@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月28日                         "*
+echo -e "# *脚本更新时间：2022年5月27日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -15,7 +15,7 @@ echo -e "# ******************************************************"
 echo -e "                                                       "
 # Pre-installation settings
 pre_install_storeservice(){
-    # Set ces_ip
+# Set ces_ip
     read -ep "(请输入CES服务器IP):" ces_ip
     [ -z "${ces_ip}" ]
     echo 
@@ -23,7 +23,7 @@ pre_install_storeservice(){
     echo "CES服务器IP = ${ces_ip}"
     echo "---------------------------"
     echo
-	# Set record_ip
+# Set record_ip
     read -ep "(请输入录制服务器IP):" record_ip
     [ -z "${record_ip}" ] 
     echo 
@@ -31,7 +31,7 @@ pre_install_storeservice(){
     echo "录制服务器IP = ${record_ip}"
     echo "---------------------------"
     echo
-	# Set fsp_ip
+# Set fsp_ip
     read -ep "(请输入FSP服务器IP):" fsp_ip
     [ -z "${fsp_ip}" ] 
     echo
@@ -48,10 +48,10 @@ config_storeservice(){
     sed -i "s|inner_addr.*|inner_addr=http://127.0.0.1:8080|"  /fsmeeting/fsp_record/storeservice/store.conf
     sed -i "s|nginx_https.*|nginx_https=https://${record_ip}:21000|"  /fsmeeting/fsp_record/storeservice/store.conf
     sed -i "s|service_ip.*|service_ip = ${record_ip}|"  /fsmeeting/fsp_record/storeservice/store.conf
-	sed -i "s|service_play_proxy.*|service_play_proxy = https://${record_ip}:8384/hls/%s/index.m3u8|"  /fsmeeting/fsp_record/storeservice/store.conf
+    sed -i "s|service_play_proxy.*|service_play_proxy = https://${record_ip}:8384/hls/%s/index.m3u8|"  /fsmeeting/fsp_record/storeservice/store.conf
     sed -i "s|service_proxy.*|service_proxy = https://${record_ip}:21000|" /fsmeeting/fsp_record/storeservice/store.conf
-	sed -i "s|mq_brokers.*|mq_brokers=${fsp_ip}:24000:root:root@/|" /fsmeeting/fsp_record/storeservice/store.conf 
-	echo "写入成功"
+    sed -i "s|mq_brokers.*|mq_brokers=${fsp_ip}:24000:root:root@/|" /fsmeeting/fsp_record/storeservice/store.conf 
+    echo "写入成功"
 }
 
 pre_install_storeservice
