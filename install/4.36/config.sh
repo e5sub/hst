@@ -44,7 +44,7 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set live-fb_ip
-    read -ep "(请输入live-fb服务器IP，如没有请留空):" live_ip
+    read -ep "(请输入live-fb服务器IP，若没有请留空):" live_ip
     [ -z "${live_ip}" ] && live_ip=${ces_ip}
     echo
     echo "---------------------------"
@@ -52,7 +52,7 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set media
-    read -ep "(请输入直播media地址，如没有请留空):" media
+    read -ep "(请输入直播media地址，若没有请留空):" media
     [ -z "${media}" ] && media=${ces_ip}
     echo
     echo "---------------------------"
@@ -60,7 +60,7 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set liveurl
-    read -ep "(请输入直播liveurl地址，如没有请留空):" liveurl
+    read -ep "(请输入直播liveurl地址，若没有请留空):" liveurl
     [ -z "${liveurl}" ] && liveurl=${ces_ip}
     echo
     echo "---------------------------"
@@ -68,7 +68,7 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set APAAAS
-    read -ep "(请输入apaas地址，如没有请留空):" APAAAS
+    read -ep "(请输入apaas地址，若没有请留空):" APAAAS
     [ -z "${APAAAS}" ] && APAAAS=${ces_ip}
     echo
     echo "---------------------------"
@@ -123,6 +123,14 @@ pre_install_config(){
     echo "FSP域 = ${FspDomain}"
     echo "---------------------------"
     echo
+# Set ces_Domain
+    read -ep "(请输入CES服务器域名，若没有请留空):" ces_Domain
+    [ -z "${ces_Domain}" ] && ces_Domain=ces.haoshitong.com
+    echo 
+    echo "---------------------------"
+    echo "CES服务器域名 = ${ces_Domain}"
+    echo "---------------------------"
+    echo
 }
 
 # Config apaas
@@ -131,7 +139,7 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "104s|app-id.*|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "105s|secret.*|secret: ${AppSecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${fsp_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "36s|url.*|url: https://ces.haoshitong.com:8443/fmapi/webservice/jaxws?wsdl|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    docker exec -ti $docker_id sed -i "36s|url.*|url: https://${ces_Domain}:8443/fmapi/webservice/jaxws?wsdl|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "13s|address.*|address: http://${fsp_ip}:28001|"  /boss/admin-web/conf/application.yml
     docker exec -ti $docker_id sed -i "s|roomAddr.*|roomAddr: ${fsp_ip}:25704|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
