@@ -13,19 +13,6 @@ sys_install(){
         echo 'docker 已安装，继续操作'
     fi
 }
-#Docker分区挂载
-if [ "$releasever" == "7" ]
-then
-mkdir /fsmeeting
-mkfs.xfs /dev/vdb
-mount /dev/vdb /fsmeeting  && echo "$(blkid /dev/vdb | awk -F\  '{print $2}' | sed 's/\"//g')            /fsmeeting          xfs        defaults              0 0" >> /etc/fstab
-elif [ "$releasever" == "6" ]
-then
-mkdir /fsmeeting
-mkfs.ext4 /dev/vdb
-mount /dev/vdb /fsmeeting  && echo "$(blkid /dev/vdb | awk -F\  '{print $2}' | sed 's/\"//g')            /fsmeeting          ext4        defaults              0 0" >> /etc/fstab
-else
-echo "仅支持CentOS6/CentOS7"
 #脚本启动
 sys_install
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
@@ -67,6 +54,12 @@ disk_total_size=$( calc_disk ${disk_size1[@]} )
 disk_used_size=$( calc_disk ${disk_size2[@]} )
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
+
+#Docker分区挂载
+mkdir /fsmeeting
+mkfs.xfs /dev/vdb
+mount /dev/vdb /fsmeeting  && echo "$(blkid /dev/vdb | awk -F\  '{print $2}' | sed 's/\"//g')            /fsmeeting          xfs        defaults              0 0" >> /etc/fstab
+
 echo "# #####################################################################"#
 echo "#                                                                      "#
 echo "# * 一键安装指定版本FSP服务器和CES服务器                               "#
