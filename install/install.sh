@@ -763,7 +763,7 @@ wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blo
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP175}
-echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
+echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
 mkdir -p /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
@@ -776,7 +776,7 @@ docker rm $(docker ps -qf status=exited)
 sleep 15s
 echo -e "正在启动FSP服务器"
 docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
-echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
+echo -e "恭喜，安装完成"
 fi
 if [ $1 = '-183fsp' ]
 then
@@ -790,7 +790,7 @@ wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blo
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh -O add_protocol_addr.sh
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf -O fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP183}
-echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
+echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
 mkdir -p /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
@@ -803,7 +803,7 @@ docker rm $(docker ps -qf status=exited)
 sleep 15s
 echo -e "正在启动FSP服务器"
 docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
-echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
+echo -e "恭喜，安装完成"
 fi
 if [ $1 = '-h323' ]
 then
