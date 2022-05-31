@@ -764,7 +764,7 @@ wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blo
 wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP175}
 echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
-mkdir -p /fsmeeting/fsp/nginx
+mkdir -p /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
@@ -795,7 +795,7 @@ mkdir -p /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
-docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx/conf.d /fsmeeting/fsp/nginx
+docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx/conf.d /fsmeeting/fsp/nginx/conf.d
 sleep 60s
 docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 sleep 15s
