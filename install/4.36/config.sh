@@ -5,6 +5,8 @@ echo -e "# ******************************************************"
 echo -e "#                                                      "*
 echo -e "# *脚本更新时间：2022年5月31日                         "*
 echo -e "#                                                      "*
+echo -e "# *作者：Sugar                                         "*
+echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
 echo -e "# *如有不明白选项可以保持默认                          "*
@@ -18,21 +20,21 @@ IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | gre
 # Pre-installation settings
 pre_install_config(){
 # Set ces_ip
-    read -ep "(请输入CES服务器IP):" ces_ip
-    [ -z "${ces_ip}" ]
+    read -ep "(请输入CES服务器IP，留空自动获取网卡IP):" ces_ip
+    [ -z "${ces_ip}" ] && ces_ip=${IP}
     echo 
     echo "---------------------------"
     echo "CES服务器IP = ${ces_ip}"
     echo "---------------------------"
     echo
 # Set record_ip
-    read -ep "(请输入录制服务器IP):" record_ip
-    [ -z "${record_ip}" ] 
-    echo 
-    echo "---------------------------"
-    echo "录制服务器IP = ${record_ip}"
-    echo "---------------------------"
-    echo
+    #read -ep "(请输入录制服务器IP):" record_ip
+    #[ -z "${record_ip}" ] 
+    #echo 
+    #echo "---------------------------"
+    #echo "录制服务器IP = ${record_ip}"
+    #echo "---------------------------"
+    #echo
 # Set fsp_ip
     read -ep "(请输入FSP服务器IP，若与CES地址一致直接回车即可):" fsp_ip
     [ -z "${fsp_ip}" ] && fsp_ip=${ces_ip}
@@ -90,23 +92,23 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set AppId
-    read -ep "(请输入开发者创建的应用id):" AppId
-    [ -z "${AppId}" ] 
+    read -ep "(请输入开发者创建的应用id，若没更改过请留空):" AppId
+    [ -z "${AppId}" ] && AppId=3049291591cb6aed78e638c2aed53867
     echo
     echo "---------------------------"
     echo "开发者创建的应用id = ${AppId}"
     echo "---------------------------"
     echo
 # AppSecretKey
-    read -ep "(请输入开发者创建的应用密钥):" AppSecretKey
-    [ -z "${AppSecretKey}" ] 
+    read -ep "(请输入开发者创建的应用密钥，若没更改过请留空):" AppSecretKey
+    [ -z "${AppSecretKey}" ] && AppSecretKey=16753469423db000
     echo
     echo "---------------------------"
     echo "开发者创建的应用id = ${AppSecretKey}"
     echo "---------------------------"
     echo
 # Set IsUseFspWbSrv
-    read -ep "(是否使用fsp白板服务，留空则默认使用):" IsUseFspWbSrv
+    read -ep "(是否使用fsp白板服务，留空默认使用):" IsUseFspWbSrv
     [ -z "${IsUseFspWbSrv}" ] && IsUseFspWbSrv=1
     echo
     echo "---------------------------"
@@ -114,7 +116,7 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set FspDomain
-    read -ep "(请输入fsp域，不填则默认pri):" FspDomain
+    read -ep "(请输入fsp域，留空默认pri):" FspDomain
     [ -z "${FspDomain}" ] && FspDomain=pri
     echo
     echo "---------------------------"
@@ -125,17 +127,17 @@ pre_install_config(){
 
 # Config apaas
 config_apaas(){
-    echo "正在写入fsp配置文件（由于本人技术有限，此项仅限于第一次安装FSP v1.8.3.5使用）"		
-    docker exec -ti $docker_id sed -i "s|app-id: 9c45c27746abcaee27852e6279d15814|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|secret: 42dade007e0863e8|secret: ${AppSecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    echo "正在写入fsp配置文件"		
+    docker exec -ti $docker_id sed -i "104s|app-id.*|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    docker exec -ti $docker_id sed -i "105s|secret.*|secret: ${AppSecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${fsp_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|url: http://localhost:8080/fmapi/webservice/jaxws?wsdl|url: https://ces.haoshitong.com:8443/fmapi/webservice/jaxws?wsdl|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|address: http://127.0.0.1:28001|address: http://${fsp_ip}:28001|"  /boss/admin-web/conf/application.yml
+    docker exec -ti $docker_id sed -i "36s|url.*|url: https://ces.haoshitong.com:8443/fmapi/webservice/jaxws?wsdl|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    docker exec -ti $docker_id sed -i "13s|address.*|address: http://${fsp_ip}:28001|"  /boss/admin-web/conf/application.yml
     docker exec -ti $docker_id sed -i "s|roomAddr.*|roomAddr: ${fsp_ip}:25704|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|url: http://47.107.67.240:8080/fmapi/webservice/jaxws?wsdl|url: http://${ces_ip}:8080/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|id: 9f08cb39074bb831586ce998fd983206|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|secret: c30878b783e17dcb|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
+    docker exec -ti $docker_id sed -i "59s|url.*|url: http://${ces_ip}:8080/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
+    docker exec -ti $docker_id sed -i "106s|id.*|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
+    docker exec -ti $docker_id sed -i "107s|secret.*|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
     docker exec -ti $docker_id echo "127.0.0.1   ces.haoshitong.com">> /etc/hosts
 } 
 config_env(){
@@ -157,7 +159,8 @@ config_ServiceConfig(){
     sed -i "s|<UserId>.*|<UserId>${UserId}</UserId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<SecretKey>.*|<SecretKey>${SecretKey}</SecretKey>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<AppId>.*|<AppId>${AppId}</AppId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
-    sed -i "s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "95s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020/server/address</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "238s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspDomain>.*|<FspDomain>${FspDomain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
     sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
     sed -i "s|<LocalAddr>.*|<LocalAddr>wss://${fsp_ip}:4432</LocalAddr>|" /usr/local/hst/FMWebProxy/service_config.xml
