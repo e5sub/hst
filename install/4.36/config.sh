@@ -106,7 +106,7 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set IsUseFspWbSrv
-    read -ep "(是否使用fsp白板服务:0不使用):" IsUseFspWbSrv
+    read -ep "(是否使用fsp白板服务，留空则默认使用):" IsUseFspWbSrv
     [ -z "${IsUseFspWbSrv}" ] && IsUseFspWbSrv=1
     echo
     echo "---------------------------"
