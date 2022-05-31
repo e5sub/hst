@@ -1,6 +1,6 @@
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月30日                         "*
+echo -e "# *脚本更新时间：2022年5月31日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -763,19 +763,19 @@ then
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
 	docker run -d --name=fsp_pri ${FSP175}
-	mkdir -p /hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /hst/fsp
+	mkdir -p /fsmeeting/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
 	sleep 60s
-	echo -e "正在映射FSP至本地目录/hst/fsp"
+	echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
 	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 	sleep 15s
 	echo -e "正在停止FSP服务器"
 	docker rm $(docker ps -qf status=exited)
 	sleep 15s
 	echo -e "正在启动FSP服务器"
-	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
+	docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
     echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-183fsp' ]
@@ -790,20 +790,20 @@ then
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh -O add_protocol_addr.sh
     wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf -O fsmeeting.conf
 	docker run -d --name=fsp_pri ${FSP183}
-	mkdir -p /hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /hst/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx /hst/fsp
+	mkdir -p /fsmeeting/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx /fsmeeting/fsp
 	sleep 60s
-	echo -e "正在映射FSP至本地目录/hst/fsp"
+	echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
 	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
 	sleep 15s
 	echo -e "正在停止FSP服务器"
 	docker rm $(docker ps -qf status=exited)
     sleep 15s
     echo -e "正在启动FSP服务器"
-	docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss -v /hst/fsp/nginx:/etc/nginx --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+	docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss -v /fsmeeting/fsp/nginx:/etc/nginx --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
     echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-h323' ]
@@ -905,7 +905,7 @@ then
 	sleep 5s
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
-	rm -rf /hst/fsp/
+	rm -rf /fsmeeting/fsp/
 fi
 if [ $1 = '-resetadmin' ]
 then
