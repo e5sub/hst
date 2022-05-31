@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月27日                         "*
+echo -e "# *脚本更新时间：2022年5月31日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -81,9 +81,9 @@ config_env(){
     sed -i "s|FSP_ICE_IP.*|FSP_ICE_IP=\"${ces_ip}\"|"  /usr/local/hst/.env
     sed -i "s|FSP_DEV_ID.*|FSP_DEV_ID=\"${UserId}\"|"  /usr/local/hst/.env
     sed -i "s|FSP_DEV_SECRET.*|FSP_DEV_SECRET=\"${SecretKey}\"|"  /usr/local/hst/.env
-    sed -i "s|LIVE_MEDIA.*|LIVE_MEDIA=\"http://${media}:9096\"|" /usr/local/hst/.env   
-    sed -i "s|LIVE_URL.*|LIVE_URL=\"http://${liveurl}:9096\"|" /usr/local/hst/.env   
-    sed -i "s|PAAS_URL.*|PAAS_URL=\"http://${APAAAS}:9096\"|" /usr/local/hst/.env
+    sed -i "s|LIVE_MEDIA.*|LIVE_MEDIA=\"https://${media}:9096\"|" /usr/local/hst/.env   
+    sed -i "s|LIVE_URL.*|LIVE_URL=\"https://${liveurl}:9096\"|" /usr/local/hst/.env   
+    sed -i "s|PAAS_URL.*|PAAS_URL=\"https://${APAAAS}:9096\"|" /usr/local/hst/.env
     sed -i "s|LIVE_APP_KEY.*|LIVE_APP_KEY=\"2c60f53dfd0c4dbb95640e45388e4d37\"|" /usr/local/hst/.env
     sed -i "s|LIVE_APP_SECRET.*|LIVE_APP_SECRET=\"18dacf578bc2fc56\"|" /usr/local/hst/.env
     echo "写入成功，正在重启docker，请耐心等待"
