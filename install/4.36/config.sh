@@ -22,7 +22,7 @@ echo -e "当前服务器的内网IP：\033[44;37m ${IP} \033[0m"
 echo -e " "
 echo -e "当前服务器的外网IP：\033[44;37m ${getIpAddress} \033[0m"
 echo -e ""
-echo -e "以上信息仅供参考，如果获取的不正确，请手动指定IP地址。"
+echo -e "以上信息仅供参考，如果获取的不正确，请手动指定IP地址。下方的IP信息默认填写服务器内网IP。"
 echo -e ""
 # Pre-installation settings
 pre_install_config(){
