@@ -43,7 +43,7 @@ pre_install_config(){
     echo
 # Set live-fb_ip
     read -ep "(请输入live-fb服务器IP，如没有请留空):" live_ip
-    [ -z "${live_ip}" ] && live_ip=127.0.0.1
+    [ -z "${live_ip}" ] && live_ip=${ces_ip}
     echo
     echo "---------------------------"
     echo "live-fb服务器IP = ${live_ip}"
@@ -51,7 +51,7 @@ pre_install_config(){
     echo
 # Set media
     read -ep "(请输入直播media地址，如没有请留空):" media
-    [ -z "${media}" ] && media=127.0.0.1
+    [ -z "${media}" ] && media=${ces_ip}
     echo
     echo "---------------------------"
     echo "直播media地址 = ${media}"
@@ -59,7 +59,7 @@ pre_install_config(){
     echo
 # Set liveurl
     read -ep "(请输入直播liveurl地址，如没有请留空):" liveurl
-    [ -z "${liveurl}" ] && liveurl=127.0.0.1
+    [ -z "${liveurl}" ] && liveurl=${ces_ip}
     echo
     echo "---------------------------"
     echo "直播liveurl地址 = ${liveurl}"
@@ -67,7 +67,7 @@ pre_install_config(){
     echo
 # Set APAAAS
     read -ep "(请输入apaas地址，如没有请留空):" APAAAS
-    [ -z "${APAAAS}" ] && APAAAS=127.0.0.1
+    [ -z "${APAAAS}" ] && APAAAS=${ces_ip}
     echo
     echo "---------------------------"
     echo "APAAAS地址 = ${APAAAS}"
