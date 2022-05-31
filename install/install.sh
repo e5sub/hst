@@ -20,7 +20,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
 ## China_IP
     if [[ -z "${CN}" ]]; then
         if [[ $(curl -m 10 -s https://ipapi.co/json | grep 'China') != "" ]]; then
-            echo "根据ipapi.co提供的信息，当前IP可能在国内，如下载不了可以输入n切换下载地址"
+            echo "根据ipapi.co提供的信息，当前IP可能在国内"
             read -e -r -p "是否选用国内下载地址? [Y/n] " input
             case $input in
             [yY][eE][sS] | [yY])
