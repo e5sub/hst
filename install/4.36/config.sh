@@ -17,6 +17,13 @@ echo -e "# ******************************************************"
 echo -e "                                                       "
 docker_id=`docker ps|grep fsp_pri|awk '{print $1}'`
 IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
+echo -e "当前服务器的内网IP：\033[44;37m ${IP} \033[0m"
+echo -e " "
+echo -e "当前服务器的外网IP：\033[44;37m ${getIpAddress} \033[0m"
+echo -e ""
+echo -e "以上信息仅供参考，如果获取的不正确，请手动指定IP地址。"
+echo -e ""
 # Pre-installation settings
 pre_install_config(){
 # Set ces_ip
