@@ -54,12 +54,6 @@ disk_total_size=$( calc_disk ${disk_size1[@]} )
 disk_used_size=$( calc_disk ${disk_size2[@]} )
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
-
-#Docker分区挂载
-mkdir /fsmeeting
-mkfs.xfs /dev/vdb
-mount /dev/vdb /fsmeeting  && echo "$(blkid /dev/vdb | awk -F\  '{print $2}' | sed 's/\"//g')            /fsmeeting          xfs        defaults              0 0" >> /etc/fstab
-
 echo "# #####################################################################"#
 echo "#                                                                      "#
 echo "# * 一键安装指定版本FSP服务器和CES服务器                               "#
