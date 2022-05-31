@@ -76,7 +76,7 @@ pre_install_config(){
     echo "---------------------------"
     echo	
 # Set UserId
-    read -ep "(请输入开发者账号id):" UserId
+    read -ep "(请输入开发者账号id，登陆FSP后台后获取):" UserId
     [ -z "${UserId}" ] 
     echo
     echo "---------------------------"
@@ -84,7 +84,7 @@ pre_install_config(){
     echo "---------------------------"
     echo
 # Set SecretKey
-    read -ep "(请输入开发者密钥):" SecretKey
+    read -ep "(请输入开发者密钥，登陆FSP后台后获取):" SecretKey
     [ -z "${SecretKey}" ] 
     echo
     echo "---------------------------"
