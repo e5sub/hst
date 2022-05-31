@@ -135,7 +135,8 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|url: http://47.107.67.240:8080/fmapi/webservice/jaxws?wsdl|url: http://${ces_ip}:8080/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|id: 9f08cb39074bb831586ce998fd983206|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|secret: c30878b783e17dcb|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml     
+    docker exec -ti $docker_id sed -i "s|secret: c30878b783e17dcb|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
+    docker exec -ti $docker_id echo "127.0.0.1   ces.haoshitong.com" >> /etc/hosts  	
 }
 config_env(){
     echo "正在写入env配置文件"	
