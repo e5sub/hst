@@ -129,12 +129,13 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "s|app-id: 9c45c27746abcaee27852e6279d15814|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "s|secret: 42dade007e0863e8|secret: ${AppSecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${fsp_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    docker exec -ti $docker_id sed -i "s|url: http://localhost:8080/fmapi/webservice/jaxws?wsdl|url: https://ces.haoshitong.com:8443/fmapi/webservice/jaxws?wsdl|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "s|address: http://127.0.0.1:28001|address: http://${fsp_ip}:28001|"  /boss/admin-web/conf/application.yml
     docker exec -ti $docker_id sed -i "s|roomAddr.*|roomAddr: ${fsp_ip}:25704|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|url: http://47.107.67.240:8080/fmapi/webservice/jaxws?wsdl|url: http://${ces_ip}:8080/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|id: 9f08cb39074bb831586ce998fd983206|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
-    docker exec -ti $docker_id sed -i "s|secret: c30878b783e17dcb|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml    
+    docker exec -ti $docker_id sed -i "s|secret: c30878b783e17dcb|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml     
 }
 config_env(){
     echo "正在写入env配置文件"	

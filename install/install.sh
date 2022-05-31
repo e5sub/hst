@@ -804,7 +804,7 @@ echo -e "正在停止FSP服务器"
 docker rm $(docker ps -qf status=exited)
 sleep 15s
 echo -e "正在启动FSP服务器"
-docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --add-host=ces.haoshitong.com:127.0.0.1 --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
 #docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss -v /fsmeeting/fsp/nginx/conf.d:/etc/nginx/conf.d --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
 echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
