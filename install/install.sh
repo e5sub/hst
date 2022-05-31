@@ -756,12 +756,12 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_extra_ip.sh -O set_extra_ip.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_protocol_addr.sh -O set_protocol_addr.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_store_proxy.sh -O set_store_proxy.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_wb_app_id.sh -O set_wb_app_id.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_extra_ip.sh -O set_extra_ip.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_protocol_addr.sh -O set_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_store_proxy.sh -O set_store_proxy.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_wb_app_id.sh -O set_wb_app_id.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP175}
 echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
 mkdir -p /fsmeeting/fsp
@@ -783,12 +783,12 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_extra_ip.sh -O set_extra_ip.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_protocol_addr.sh -O set_protocol_addr.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_store_proxy.sh -O set_store_proxy.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_wb_app_id.sh -O set_wb_app_id.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh -O add_protocol_addr.sh
-wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf -O fsmeeting.conf
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_extra_ip.sh -O set_extra_ip.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_protocol_addr.sh -O set_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_store_proxy.sh -O set_store_proxy.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_wb_app_id.sh -O set_wb_app_id.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh -O add_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf -O fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP183}
 echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
 mkdir -p /fsmeeting/fsp
@@ -914,7 +914,7 @@ then
 	echo -e "\033[33m 【你选择的是重置后台admin密码】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
+	wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
 	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
 fi
 if [ $1 = '-setip' ]
