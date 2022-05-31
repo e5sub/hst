@@ -794,7 +794,8 @@ then
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
 	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx /fsmeeting/fsp
+	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx/conf.d /fsmeeting/fsp
+    docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx/certs /fsmeeting/fsp
 	sleep 60s
 	echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
 	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
@@ -803,7 +804,7 @@ then
 	docker rm $(docker ps -qf status=exited)
     sleep 15s
     echo -e "正在启动FSP服务器"
-	docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss -v /fsmeeting/fsp/nginx:/etc/nginx --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+	docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss -v /fsmeeting/fsp/nginx/conf.d:/etc/nginx/conf.d -v /fsmeeting/fsp/nginx/certs:/etc/nginx/certs --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
     echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-h323' ]
