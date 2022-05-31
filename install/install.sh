@@ -753,59 +753,57 @@ then
 fi
 if [ $1 = '-175fsp' ]
 then
-	echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_extra_ip.sh -O set_extra_ip.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_protocol_addr.sh -O set_protocol_addr.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_store_proxy.sh -O set_store_proxy.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_wb_app_id.sh -O set_wb_app_id.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
-	docker run -d --name=fsp_pri ${FSP175}
-	mkdir -p /fsmeeting/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
-	sleep 60s
-	echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
-	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 15s
-	echo -e "正在停止FSP服务器"
-	docker rm $(docker ps -qf status=exited)
-	sleep 15s
-	echo -e "正在启动FSP服务器"
-	docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
-    echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
+echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
+echo -e "\n"
+sleep 5s
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_extra_ip.sh -O set_extra_ip.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_protocol_addr.sh -O set_protocol_addr.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_store_proxy.sh -O set_store_proxy.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_wb_app_id.sh -O set_wb_app_id.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
+docker run -d --name=fsp_pri ${FSP175}
+echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
+mkdir -p /fsmeeting/fsp
+docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
+docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
+docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
+sleep 60s	
+docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
+sleep 15s
+echo -e "正在停止FSP服务器"
+docker rm $(docker ps -qf status=exited)
+sleep 15s
+echo -e "正在启动FSP服务器"
+docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
+echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-183fsp' ]
 then
-	echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_extra_ip.sh -O set_extra_ip.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_protocol_addr.sh -O set_protocol_addr.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_store_proxy.sh -O set_store_proxy.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_wb_app_id.sh -O set_wb_app_id.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh -O add_protocol_addr.sh
-    wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf -O fsmeeting.conf
-	docker run -d --name=fsp_pri ${FSP183}
-	mkdir -p /fsmeeting/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
-	docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx/conf.d /fsmeeting/fsp
-    docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/etc/nginx/certs /fsmeeting/fsp
-	sleep 60s
-	echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
-	docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
-	sleep 15s
-	echo -e "正在停止FSP服务器"
-	docker rm $(docker ps -qf status=exited)
-    sleep 15s
-    echo -e "正在启动FSP服务器"
-	docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss -v /fsmeeting/fsp/nginx/conf.d:/etc/nginx/conf.d -v /fsmeeting/fsp/nginx/certs:/etc/nginx/certs --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
-    echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
+echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
+echo -e "\n"
+sleep 5s
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_extra_ip.sh -O set_extra_ip.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_protocol_addr.sh -O set_protocol_addr.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_store_proxy.sh -O set_store_proxy.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_wb_app_id.sh -O set_wb_app_id.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh -O add_protocol_addr.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf -O fsmeeting.conf
+docker run -d --name=fsp_pri ${FSP183}
+echo -e "正在映射FSP至本地目录/fsmeeting/fsp"
+mkdir -p /fsmeeting/fsp
+docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /fsmeeting/fsp
+docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/middleware /fsmeeting/fsp
+docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/boss /fsmeeting/fsp
+sleep 60s
+docker stop $(docker ps|grep fsp_pri|awk '{print $1}')
+sleep 15s
+echo -e "正在停止FSP服务器"
+docker rm $(docker ps -qf status=exited)
+sleep 15s
+echo -e "正在启动FSP服务器"
+docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+echo -e "建议安装完成之后手动执行bash set_extra_ip.sh添加IP地址映射"
 fi
 if [ $1 = '-h323' ]
 then
