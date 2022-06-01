@@ -157,8 +157,7 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "59s|url.*|url: https://${ces_Domain}:8443/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "106s|id.*|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
     docker exec -ti $docker_id sed -i "107s|secret.*|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
-    docker exec -ti $docker_id echo "127.0.0.1   ces.haoshitong.com">> /etc/hosts
-    docker exec -i $docker_id mysql -uroot -phst@2019.Paas -P27000<"record.sql"
+    docker exec -ti $docker_id echo "127.0.0.1   ces.haoshitong.com">> /etc/hosts    
 } 
 config_env(){
     echo "正在写入env配置文件"	
