@@ -16,18 +16,18 @@ CREATE TABLE IF NOT EXISTS `video_record`.`record_data`(
 );
 ALTER TABLE `video_record`.`record_data` DEFAULT  CHARSET=utf8mb4;
 ALTER TABLE `video_record`.`record_data` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `video_record`.`record_data` ADD `is_sub` int(2) DEFAULT 0 NOT NULL;
-ALTER TABLE `video_record`.`record_data` ADD `main_record_id` varchar(32) NULL;
-ALTER TABLE `video_record`.`record_data` ADD `media_topic` varchar(32) NULL;
-ALTER TABLE `video_record`.`record_data` ADD `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;
-ALTER TABLE `video_record`.`record_data` ADD `control_topic` varchar(32) DEFAULT '';
-ALTER TABLE `video_record`.`record_data` ADD `room_id` int(4) DEFAULT 0 NOT NULL;
-ALTER TABLE `video_record`.`record_data` ADD `encode_end_time` timestamp DEFAULT '1971-01-01 00:00:00';
-ALTER TABLE `video_record`.`record_data` ADD `encode_end_realtime` timestamp DEFAULT '1971-01-01 00:00:00';
-ALTER TABLE `video_record`.`record_data` ADD `encode_end_time_1st` timestamp DEFAULT '1971-01-01 00:00:00';
-ALTER TABLE `video_record`.`mission_data` ADD `encode_end_time` timestamp DEFAULT '1971-01-01 00:00:00';
-ALTER TABLE `video_record`.`mission_data` ADD `encode_evaluated_dura` int(4) DEFAULT 0;
-ALTER TABLE `video_record`.`record_data` ADD `mission_start_id` int(4) DEFAULT 1 NOT NULL;
+#ALTER TABLE `video_record`.`record_data` ADD `is_sub` int(2) DEFAULT 0 NOT NULL;
+#ALTER TABLE `video_record`.`record_data` ADD `main_record_id` varchar(32) NULL;
+#ALTER TABLE `video_record`.`record_data` ADD `media_topic` varchar(32) NULL;
+#ALTER TABLE `video_record`.`record_data` ADD `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;
+#ALTER TABLE `video_record`.`record_data` ADD `control_topic` varchar(32) DEFAULT '';
+#ALTER TABLE `video_record`.`record_data` ADD `room_id` int(4) DEFAULT 0 NOT NULL;
+#ALTER TABLE `video_record`.`record_data` ADD `encode_end_time` timestamp DEFAULT '1971-01-01 00:00:00';
+#ALTER TABLE `video_record`.`record_data` ADD `encode_end_realtime` timestamp DEFAULT '1971-01-01 00:00:00';
+#ALTER TABLE `video_record`.`record_data` ADD `encode_end_time_1st` timestamp DEFAULT '1971-01-01 00:00:00';
+#ALTER TABLE `video_record`.`mission_data` ADD `encode_end_time` timestamp DEFAULT '1971-01-01 00:00:00';
+#ALTER TABLE `video_record`.`mission_data` ADD `encode_evaluated_dura` int(4) DEFAULT 0;
+#ALTER TABLE `video_record`.`record_data` ADD `mission_start_id` int(4) DEFAULT 1 NOT NULL;
 CREATE TABLE IF NOT EXISTS `video_record`.`mission_data`(
   `record_id` varchar(32) NOT NULL,
   `mission_id` int(8) NOT NULL,
@@ -39,15 +39,15 @@ CREATE TABLE IF NOT EXISTS `video_record`.`mission_data`(
 ALTER TABLE `video_record`.`mission_data` DEFAULT  CHARSET=utf8mb4;
 ALTER TABLE `video_record`.`mission_data` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-ALTER TABLE `video_record`.`mission_data` ADD `temp_files` varchar(3200) NULL;
-ALTER TABLE `video_record`.`mission_data` ADD `del_temp_file` int(2) DEFAULT 0 NULL;
-ALTER TABLE `video_record`.`mission_data` ADD `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;
-ALTER TABLE `video_record`.`mission_data` ADD `file_addr` varchar(255) NULL;
-ALTER TABLE `video_record`.`mission_data` ADD `mix_topic` varchar(255) NULL;
-ALTER TABLE `video_record`.`mission_data` ADD `file_id` varchar(128) NULL;
-ALTER TABLE `video_record`.`mission_data` ADD `duration`  bigint DEFAULT 0;
-ALTER TABLE `video_record`.`mission_data` ADD `file_size`  bigint DEFAULT 0;
-ALTER TABLE `video_record`.`mission_data` ADD `thumbnail_id` varchar(128) NULL;
+#ALTER TABLE `video_record`.`mission_data` ADD `temp_files` varchar(3200) NULL;
+#ALTER TABLE `video_record`.`mission_data` ADD `del_temp_file` int(2) DEFAULT 0 NULL;
+#ALTER TABLE `video_record`.`mission_data` ADD `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;
+#ALTER TABLE `video_record`.`mission_data` ADD `file_addr` varchar(255) NULL;
+#ALTER TABLE `video_record`.`mission_data` ADD `mix_topic` varchar(255) NULL;
+#ALTER TABLE `video_record`.`mission_data` ADD `file_id` varchar(128) NULL;
+#ALTER TABLE `video_record`.`mission_data` ADD `duration`  bigint DEFAULT 0;
+#ALTER TABLE `video_record`.`mission_data` ADD `file_size`  bigint DEFAULT 0;
+#ALTER TABLE `video_record`.`mission_data` ADD `thumbnail_id` varchar(128) NULL;
 CREATE TABLE IF NOT EXISTS `video_record`.`record_volume` (
   `app_id` varchar(64) NOT NULL,
   `use_volume` bigint(20) DEFAULT 0,
