@@ -26,6 +26,7 @@ echo -e "以上信息仅供参考，如果获取的不正确，请手动指定IP
 echo -e ""
 #解决CES查询后台录制文件大小为0的问题
 wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/record.sql
+docker cp record.sql $docker_id:/
 # Pre-installation settings
 pre_install_config(){
 # Set ces_ip
@@ -157,6 +158,7 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "106s|id.*|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
     docker exec -ti $docker_id sed -i "107s|secret.*|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
     docker exec -ti $docker_id echo "127.0.0.1   ces.haoshitong.com">> /etc/hosts
+    docker exec -ti $docker_id mysql -uroot -phst@2019.Paas -P27000<"record.sql"
 } 
 config_env(){
     echo "正在写入env配置文件"	
