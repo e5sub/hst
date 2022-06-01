@@ -1,3 +1,10 @@
+#!/usr/bin/env bash
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+#调整Docker镜像存储路径，防止磁盘空间不足
+#echo "正在调整Docker镜像存储路径，防止磁盘空间不足，非第一次运行报错属于正常情况"
+#mkdir -p /fsmeeting/docker
+#mkdir -p /var/lib/docker
+#ln -s /fsmeeting/docker /var/lib/docker
 #检测依赖
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
