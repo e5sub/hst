@@ -15,7 +15,7 @@ sys_install(){
 }
 #脚本启动
 sys_install
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh -O install.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
@@ -161,14 +161,14 @@ case $N in
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
   90) bash install.sh -restartfsp ;;
-  92) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh -O h323.sh && chmod +x h323.sh && bash h323.sh ;;
-  93) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323gm.sh -O h323gm.sh && chmod +x h323gm.sh && bash h323gm.sh ;;
-  94) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/storeservice.sh -O storeservice.sh && chmod +x storeservice.sh && bash storeservice.sh ;;
-  95) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/config.sh -O config.sh && chmod +x config.sh && bash config.sh ;;
-  96) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/webapp.sh -O webapp.sh && chmod +x webapp.sh && bash webapp.sh ;;
-  97) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh -O node.sh && chmod +x node.sh && bash node.sh ;;
+  92) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh && bash h323.sh ;;
+  93) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323gm.sh && bash h323gm.sh ;;
+  94) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/storeservice.sh && bash storeservice.sh ;;
+  95) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/config.sh && bash config.sh ;;
+  96) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/webapp.sh && bash webapp.sh ;;
+  97) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh && bash node.sh ;;
   98) bash install.sh -resetadmin ;;
-  99) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh -O old.sh && chmod +x old.sh && bash old.sh ;;
-  00) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh -O zxces.sh && chmod +x zxces.sh && bash zxces.sh ;;
+  99) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh && bash old.sh ;;
+  00) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh && bash zxces.sh ;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac

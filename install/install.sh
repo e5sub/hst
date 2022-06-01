@@ -40,57 +40,57 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
     fi
     if [[ -z "${CN}" ]]; then
         #CES标准版安装包下载地址
-        CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.36.5.4.tar.gz -O ces_linux_hst4.36.5.4.tar.gz"
-        CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.35.4.5.tar.gz -O ces_linux_hst4.35.4.5.tar.gz"
-        CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz -O ces_linux_hst4.34.5.1.tar.gz"
-        CES432="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz -O ces_linux_hst4.32.8.5.tar.gz"
-        CES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz -O ces_linux_hst4.31.3.5.tar.gz"
-        ARMCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz -O ces_linux_arm4.35.1.30.tar.gz"
-        ARMCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz -O ces_linux_arm4.34.5.1.tar.gz"
-        ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/ARM/ces_linux_arm4.31.2.16.tar.gz -O ces_linux_arm4.31.2.16.tar.gz"
-        MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/标准版/ces_linux_mips4.35.1.30.tar.gz -O ces_linux_mips4.35.1.30.tar.gz"
+        CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.36.5.4.tar.gz"
+        CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.35.4.5.tar.gz"
+        CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz"
+        CES432="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz"
+        CES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz"
+        ARMCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz"
+        ARMCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz"
+        ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/ARM/ces_linux_arm4.31.2.16.tar.gz"
+        MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/标准版/ces_linux_mips4.35.1.30.tar.gz"
         #CES中性版安装包下载地址
-        ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.36.5.4.tar.gz -O ces_linux_zx4.36.5.4.tar.gz"
-        ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.35.4.5.tar.gz -O ces_linux_zx4.35.4.5.tar.gz"
-        ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz"
-        ZXCES432="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz"
-        ZXCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz"
-        ARMZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz -O ces_linux_arm_zx4.35.1.30.tar.gz"
-        ARMZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz"
-        MIPSZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
+        ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.36.5.4.tar.gz"
+        ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.35.4.5.tar.gz"
+        ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz"
+        ZXCES432="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz"
+        ZXCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz"
+        ARMZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz"
+        ARMZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz"
+        MIPSZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz"
         #FSP服务器
         FSP141="1040155/fsp:1.4.1.17"
         FSP175="1040155/fsp:1.7.5.1"
         FSP183="1040155/fsp:1.8.3.5"
     else
         #CES标准版安装包下载地址
-        CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.4.tar.gz -O ces_linux_hst4.36.5.4.tar.gz"
-        CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz -O ces_linux_hst4.35.4.5.tar.gz"
-        CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz -O ces_linux_hst4.34.5.1.tar.gz"
-        CES432="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz -O ces_linux_hst4.32.8.5.tar.gz"
-        CES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz -O ces_linux_hst4.31.3.5.tar.gz"
-        ARMCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz -O ces_linux_arm4.35.1.30.tar.gz"
-        ARMCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz -O ces_linux_arm4.34.5.1.tar.gz"
-        ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.31.2.16.tar.gz -O ces_linux_arm4.31.2.16.tar.gz"
-        MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/标准版/ces_linux_mips4.35.1.30.tar.gz -O ces_linux_mips4.35.1.30.tar.gz"
+        CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.4.tar.gz"
+        CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz"
+        CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz"
+        CES432="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz"
+        CES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz"
+        ARMCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz"
+        ARMCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz"
+        ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.31.2.16.tar.gz"
+        MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/标准版/ces_linux_mips4.35.1.30.tar.gz"
         #CES中性版安装包下载地址
-        ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.5.4.tar.gz -O ces_linux_zx4.36.5.4.tar.gz"
-        ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.4.5.tar.gz -O ces_linux_zx4.35.4.5.tar.gz"
-        ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz -O ces_linux_zx4.34.5.1.tar.gz"
-        ZXCES432="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz -O ces_linux_zx4.32.8.5.tar.gz"
-        ZXCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz -O ces_linux_zx4.31.3.5.tar.gz"
-        ARMZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz -O ces_linux_arm_zx4.35.1.30.tar.gz"
-        ARMZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz -O ces_linux_arm_zx4.34.5.1.tar.gz"
-        MIPSZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz -O ces_linux_mips_zx4.35.1.30.tar.gz"
+        ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.5.4.tar.gz"
+        ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.4.5.tar.gz"
+        ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz"
+        ZXCES432="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz"
+        ZXCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz"
+        ARMZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz"
+        ARMZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz"
+        MIPSZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz"
         #FSP服务器
         FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
         FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
         FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.5"
     fi
 #录制服务器和H323安装包下载地址
-record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz -O fsp-record-3.2.6.17.tar.gz"
-H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz -O h323gw_xd_pkg_2.3.1.12.tar.gz"
-H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20211231_2.3.1.12.tar -O centos7.installer_MCU20211231_2.3.1.12.tar"
+record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
+H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz"
+H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20211231_2.3.1.12.tar"
 if [ $1 = '-436dj' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.36.5.4单机版】 \033[0m"
@@ -756,12 +756,12 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_extra_ip.sh -O set_extra_ip.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_protocol_addr.sh -O set_protocol_addr.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_store_proxy.sh -O set_store_proxy.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_wb_app_id.sh -O set_wb_app_id.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh -O add_protocol_addr.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf -O fsmeeting.conf
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_extra_ip.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_store_proxy.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/set_wb_app_id.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/add_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.7.5.1/fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP175}
 echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
 mkdir -p /fsmeeting/fsp
@@ -783,12 +783,12 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_extra_ip.sh -O set_extra_ip.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_protocol_addr.sh -O set_protocol_addr.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_store_proxy.sh -O set_store_proxy.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_wb_app_id.sh -O set_wb_app_id.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh -O add_protocol_addr.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf -O fsmeeting.conf
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_extra_ip.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_store_proxy.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_wb_app_id.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP183}
 echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
 mkdir -p /fsmeeting/fsp
@@ -867,7 +867,7 @@ then
 	sleep 5s
 	mkdir -p /frp
 	cd /frp
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frps.ini -O frps.ini
+	wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frps.ini
 	docker run --restart=always --network host -d -v /frp:/etc/frp --name frps snowdreamtech/frps
 fi
 if [ $1 = '-frpc' ]
@@ -877,7 +877,7 @@ then
 	sleep 5s
 	mkdir -p /frp
 	cd /frp
-	wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frpc.ini -O frpc.ini
+	wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frpc.ini
 	docker run --restart=always --network host -d -v /frp:/etc/frp --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-xiezai' ]
@@ -914,7 +914,7 @@ then
 	echo -e "\033[33m 【你选择的是重置后台admin密码】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
-	wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql -O resetadmin.sql
+	wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/resetadmin.sql
 	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
 fi
 if [ $1 = '-setip' ]
