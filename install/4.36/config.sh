@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年5月31日                         "*
+echo -e "# *脚本更新时间：2022年6月1日                          "*
 echo -e "#                                                      "*
 echo -e "# *作者：Sugar                                         "*
 echo -e "#                                                      "*
@@ -24,6 +24,8 @@ echo -e "当前服务器的外网IP：\033[44;37m ${getIpAddress} \033[0m"
 echo -e ""
 echo -e "以上信息仅供参考，如果获取的不正确，请手动指定IP地址。下方的IP信息默认填写服务器内网IP。"
 echo -e ""
+#解决CES查询后台录制文件大小为0的问题
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/record.sql
 # Pre-installation settings
 pre_install_config(){
 # Set ces_ip
@@ -147,10 +149,10 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "105s|secret.*|secret: ${AppSecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${fsp_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "36s|url.*|url: https://${ces_Domain}:8443/fmapi/webservice/jaxws?wsdl|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    docker exec -ti $docker_id sed -i "39s|url.*|url: https://localhost:8443/|" /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "13s|address.*|address: http://${fsp_ip}:28001|"  /boss/admin-web/conf/application.yml
     docker exec -ti $docker_id sed -i "s|roomAddr.*|roomAddr: ${fsp_ip}:25704|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:1089|" /boss/boss-pri-cloud-gw/conf/application.yml
-    #docker exec -ti $docker_id sed -i "59s|url.*|url: http://${ces_ip}:8080/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "59s|url.*|url: https://${ces_Domain}:8443/fmapi/webservice/jaxws?wsdl|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "106s|id.*|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
     docker exec -ti $docker_id sed -i "107s|secret.*|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
