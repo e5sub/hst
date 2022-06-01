@@ -5,6 +5,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 #mkdir -p /fsmeeting/docker
 #mkdir -p /var/lib/docker
 #ln -s /fsmeeting/docker /var/lib/docker
+#sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
 #检测依赖
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
