@@ -3,9 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 #调整Docker镜像存储路径，防止磁盘空间不足
 #echo "正在调整Docker镜像存储路径，防止磁盘空间不足，非第一次运行报错属于正常情况"
 #mkdir -p /fsmeeting/docker
-#mkdir -p /var/lib/docker
 #ln -s /fsmeeting/docker /var/lib/docker
-#sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
 #检测依赖
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
@@ -16,11 +14,14 @@ sys_install(){
     fi
 	if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
-        curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
+        curl -sSL https://get.docker.com/ | sh && systemctl enable docker
     else 
         echo 'docker 已安装，继续操作'
     fi
 }
+#sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
+#启动docker
+systemctl start docker
 #脚本启动
 sys_install
 wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh
