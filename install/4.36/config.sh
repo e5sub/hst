@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年6月1日                          "*
+echo -e "# *脚本更新时间：2022年6月2日                          "*
 echo -e "#                                                      "*
 echo -e "# *作者：Sugar                                         "*
 echo -e "#                                                      "*
@@ -158,7 +158,7 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "106s|id.*|id: ${UserId}|" /boss/pri-bgw/conf/application.yml
     docker exec -ti $docker_id sed -i "107s|secret.*|secret: ${SecretKey}|" /boss/pri-bgw/conf/application.yml
     docker exec -ti $docker_id echo "127.0.0.1   ces.haoshitong.com">> /etc/hosts
-    docker exec -i $docker_id mysql -uroot -phst@2019.Paas -P27000 video_record<record.sql    
+    #docker exec -i $docker_id mysql -uroot -phst@2019.Paas -P27000 video_record<record.sql    
 } 
 config_env(){
     echo "正在写入env配置文件"	
