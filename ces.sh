@@ -24,6 +24,8 @@ sys_install(){
 systemctl start docker
 #脚本启动
 sys_install
+#更新Centos7
+yum -y update
 wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/install.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
