@@ -12,7 +12,7 @@ echo -e "#                                                      "*
 echo -e "# *如有不明白选项可以保持默认                          "*
 echo -e "#                                                      "*
 echo -e "# *如有问题或者遗漏的参数信息，请及时反馈              "*
-echo -e "                                                       "
+echo -e "#                                                      "*
 echo -e "# ******************************************************"
 echo -e "                                                       "
 docker_id=`docker ps|grep fsp_pri|awk '{print $1}'`
