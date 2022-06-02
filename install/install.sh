@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年6月1日                          "*
+echo -e "# *脚本更新时间：2022年6月2日                          "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -926,7 +926,8 @@ then
 	sleep 5s	
 	bash set_extra_ip.sh ${getIpAddress}
 fi
-
+#关闭系统防火墙
+systemctl stop firewalld.service && systemctl disable firewalld.service
 #删除安装脚本
 rm -f install.sh
 rm -f ces.sh
