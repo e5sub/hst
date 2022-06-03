@@ -37,14 +37,6 @@ pre_install_config(){
     echo "CES服务器IP = ${ces_ip}"
     echo "---------------------------"
     echo
-# Set record_ip
-    #read -ep "(请输入录制服务器IP):" record_ip
-    #[ -z "${record_ip}" ] 
-    #echo 
-    #echo "---------------------------"
-    #echo "录制服务器IP = ${record_ip}"
-    #echo "---------------------------"
-    #echo
 # Set fsp_ip
     read -ep "(请输入FSP服务器IP，若与CES地址一致直接回车即可):" fsp_ip
     [ -z "${fsp_ip}" ] && fsp_ip=${ces_ip}
@@ -183,8 +175,8 @@ config_ServiceConfig(){
     sed -i "239s|<FspAccessAddr>.*|<FspAccessAddr>http://${fsp_ip}:20020</FspAccessAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<FspDomain>.*|<FspDomain>${FspDomain}</FspDomain>|" /usr/local/hst/FMServer/ServiceConfig.xml    
     sed -i "s|<IsUseFspWbSrv>.*|<IsUseFspWbSrv>${IsUseFspWbSrv}</IsUseFspWbSrv>|" /usr/local/hst/FMServer/ServiceConfig.xml    
-    sed -i "s|<LocalAddr>.*|<LocalAddr>wss://${fsp_ip}:4432</LocalAddr>|" /usr/local/hst/FMWebProxy/service_config.xml
-    sed -i "s|<IsUseWss>.*|<IsUseWss>1</IsUseWss>|" /usr/local/hst/FMWebProxy/service_config.xml
+    sed -i "s|<LocalAddr>.*|<LocalAddr>ws://${fsp_ip}:4432</LocalAddr>|" /usr/local/hst/FMWebProxy/service_config.xml
+    sed -i "s|<IsUseWss>.*|<IsUseWss>0</IsUseWss>|" /usr/local/hst/FMWebProxy/service_config.xml
     sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = LiveServiceIceGrid/Locator:ssl -h ${live_ip} -p 10000|" /usr/local/hst/FMServer/live_ice.cfg
     echo "写入成功，正在重启服务器，稍后请重新登录服务器"
 }
@@ -193,4 +185,4 @@ config_apaas
 config_env
 config_ServiceConfig
 #重启服务器
-sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${IP} && sh set_protocol_addr.sh wss ${fsp_ip} && reboot
+sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${IP} && sh set_protocol_addr.sh ws ${fsp_ip} && reboot
