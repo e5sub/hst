@@ -87,7 +87,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         #FSP服务器
         FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
         FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
-        FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.7"
+        FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.5"
     fi
 #录制服务器和H323安装包下载地址
 record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
@@ -782,15 +782,15 @@ echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-183fsp' ]
 then
-echo -e "\033[33m 【你选择的是安装FSP v1.8.3.7服务器】 \033[0m"
+echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.7/set_extra_ip.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.7/set_protocol_addr.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.7/set_store_proxy.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.7/set_wb_app_id.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.7/add_protocol_addr.sh
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.7/fsmeeting.conf
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_extra_ip.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_store_proxy.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/set_wb_app_id.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/add_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/1.8.3.5/fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP183}
 echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
 #mkdir -p /fsmeeting/fsp
