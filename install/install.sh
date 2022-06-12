@@ -883,13 +883,13 @@ then
 fi
 if [ $1 = '-time' ]
 then
-          echo -e "\033[33m 【你选择的是网络同步服务器时间】 \033[0m"
-          echo -e "\n"
-          sleep 5s
-          rm -rf /etc/localtime
-          ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-          getTime=$(curl -sS --connect-timeout 10 -m 60 http://www.bt.cn/api/index/get_time)
-          date -s "$(date -d @$getTime +"%Y-%m-%d %H:%M:%S")"
+    echo -e "\033[33m 【你选择的是网络同步服务器时间】 \033[0m"
+    echo -e "\n"
+    sleep 5s
+    rm -rf /etc/localtime
+    ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    getTime=$(curl -sS --connect-timeout 10 -m 60 http://www.bt.cn/api/index/get_time)
+    date -s "$(date -d @$getTime +"%Y-%m-%d %H:%M:%S")"
 fi
 if [ $1 = '-xiezai' ]
 then
