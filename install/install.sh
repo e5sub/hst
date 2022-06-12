@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年6月6日                          "*
+echo -e "# *脚本更新时间：2022年6月12日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -16,7 +16,6 @@ echo -e "                                                       "
 #获取内外网IP地址，端口
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
-
 ##########################################################################################以下是服务器安装脚本##########################################################################################
 
 ## China_IP
@@ -881,6 +880,16 @@ then
 	cd /frp
 	wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/frp/frpc.ini
 	docker run --restart=always --network host -d -v /frp:/etc/frp --name frpc snowdreamtech/frpc
+fi
+if [ $1 = '-time' ]
+then
+	echo -e "\033[33m 【你选择的是网络同步服务器时间】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+    rm -rf /etc/localtime
+    ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    getTime=$(curl -sS --connect-timeout 10 -m 60 http://www.bt.cn/api/index/get_time)
+    date -s "$(date -d @$getTime +"%Y-%m-%d %H:%M:%S")"
 fi
 if [ $1 = '-xiezai' ]
 then
