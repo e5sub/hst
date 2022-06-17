@@ -98,15 +98,12 @@ H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/0
     if [[ -z "${docker_store}" ]]; then    
         read -e -r -p "是否需要修改docker存储路径? 留空默认不修改[y/n] " input
         case $input in
-        [yY][eE][sS] | [yY])
-            echo "选择修改docker存储路径"
+        [yY][eE][sS] | [yY])            
             docker_store=true
             ;;
-        [nN][oO] | [nN])
-            echo "选择不修改docker存储路径"
+        [nN][oO] | [nN])            
             ;;
-        *)
-            echo "选择不修改docker存储路径"                
+        *)                            
             ;;
             esac        
     fi
