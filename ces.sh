@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
-#调整Docker镜像存储路径，防止磁盘空间不足
-#echo "正在调整Docker镜像存储路径，防止磁盘空间不足，非第一次运行报错属于正常情况"
-#mkdir -p /fsmeeting/docker
-#ln -s /fsmeeting/docker /var/lib/docker
 #检测依赖
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
@@ -20,14 +16,11 @@ sys_install(){
     fi
 	if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
-        curl -sSL https://get.docker.com/ | sh && systemctl enable docker
+        curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi
 }
-#sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
-#启动docker
-systemctl start docker
 #脚本启动
 sys_install
 #更新Centos7
@@ -77,7 +70,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年6月12日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2022年6月17日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
