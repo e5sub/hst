@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年6月12日                         "*
+echo -e "# *脚本更新时间：2022年6月17日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -22,7 +22,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
     if [[ -z "${CN}" ]]; then
         if [[ $(curl -m 10 -s https://ipapi.co/json | grep 'China') != "" ]]; then
             echo "根据ipapi.co提供的信息，当前IP可能在国内"
-            read -e -r -p "是否选用国内下载地址? [Y/n] " input
+            read -e -r -p "是否选用国内下载地址? 留空默认使用国内下载地址[Y/n] " input
             case $input in
             [yY][eE][sS] | [yY])
                 echo "使用国内下载地址"
@@ -88,10 +88,39 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
         FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.5"
     fi
+	
 #录制服务器和H323安装包下载地址
 record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
 H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz"
 H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20211231_2.3.1.12.tar"
+
+## docker存储路径修改
+    if [[ -z "${docker}" ]]; then    
+        read -e -r -p "是否需要修改docker存储路径? 留空默认不修改[y/n] " input
+        case $input in
+        [yY][eE][sS] | [yY])
+            echo "你选择的是修改存储路径"
+            docker=true
+            ;;
+        [nN][oO] | [nN])
+            echo "你选择的是不修改存储路径"
+            ;;
+        *)
+            echo "你选择的是不修改存储路径"                
+            ;;
+            esac        
+    fi
+    if [[ -z "${docker}" ]]; then
+          echo "你选择的是不修改存储路径，跳过，不做修改" 
+    else
+          systemctl stop docker
+          mkdir -p /fsmeeting/docker
+          ln -s /fsmeeting/docker /var/lib/docker		  
+          sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
+          systemctl start docker
+          echo "docker默认存储路径已经修改为/fsmeeting/docker，如有外接存储，可挂载到/fsmeeting目录"
+    fi
+	
 if [ $1 = '-436dj' ]
 then
 	echo -e "\033[33m 【你选择的是只安装CES v4.36.5.4单机版】 \033[0m"
