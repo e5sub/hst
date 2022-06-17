@@ -93,30 +93,6 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
 record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
 H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz"
 H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20211231_2.3.1.12.tar"
-
-## 调整docker镜像存储路径，防止磁盘空间不足
-    if [[ -z "${docker_store}" ]]; then    
-        read -e -r -p "是否需要修改docker存储路径? 留空默认不修改[y/n] " input
-        case $input in
-        [yY][eE][sS] | [yY])            
-            docker_store=true
-            ;;
-        [nN][oO] | [nN])            
-            ;;
-        *)                            
-            ;;
-            esac        
-    fi
-    if [[ -z "${docker_store}" ]]; then
-          echo "不修改docker存储路径，跳过" 
-    else
-          systemctl stop docker
-          mkdir -p /fsmeeting/docker
-          ln -s /fsmeeting/docker /var/lib/docker		  
-          sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
-          systemctl start docker
-          echo "docker默认存储路径已经修改为/fsmeeting/docker，如有外接存储，可手动挂载到/fsmeeting目录"
-    fi
 	
 if [ $1 = '-436dj' ]
 then
@@ -780,6 +756,29 @@ then
 fi
 if [ $1 = '-175fsp' ]
 then
+## 调整docker镜像存储路径，防止磁盘空间不足
+    if [[ -z "${docker_store}" ]]; then    
+        read -e -r -p "是否需要修改docker存储路径? 留空默认不修改[y/n] " input
+        case $input in
+        [yY][eE][sS] | [yY])            
+            docker_store=true
+            ;;
+        [nN][oO] | [nN])            
+            ;;
+        *)                            
+            ;;
+            esac        
+    fi
+    if [[ -z "${docker_store}" ]]; then
+          echo "不修改docker存储路径，跳过" 
+    else
+          systemctl stop docker
+          mkdir -p /fsmeeting/docker
+          ln -s /fsmeeting/docker /var/lib/docker		  
+          sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
+          systemctl start docker
+          echo "docker默认存储路径已经修改为/fsmeeting/docker，如有外接存储，可手动挂载到/fsmeeting目录"
+    fi
 echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
@@ -807,6 +806,29 @@ echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-183fsp' ]
 then
+## 调整docker镜像存储路径，防止磁盘空间不足
+    if [[ -z "${docker_store}" ]]; then    
+        read -e -r -p "是否需要修改docker存储路径? 留空默认不修改[y/n] " input
+        case $input in
+        [yY][eE][sS] | [yY])            
+            docker_store=true
+            ;;
+        [nN][oO] | [nN])            
+            ;;
+        *)                            
+            ;;
+            esac        
+    fi
+    if [[ -z "${docker_store}" ]]; then
+          echo "不修改docker存储路径，跳过" 
+    else
+          systemctl stop docker
+          mkdir -p /fsmeeting/docker
+          ln -s /fsmeeting/docker /var/lib/docker		  
+          sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
+          systemctl start docker
+          echo "docker默认存储路径已经修改为/fsmeeting/docker，如有外接存储，可手动挂载到/fsmeeting目录"
+    fi
 echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
