@@ -96,7 +96,7 @@ H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/0
 
 ## 调整docker镜像存储路径，防止磁盘空间不足
     if [[ -z "${docker_store}" ]]; then    
-        read -e -r -p "是否需要修改docker存储路径? 留空默认不修改，若已经修改过直接留空即可[y/n] " input
+        read -e -r -p "是否需要修改docker存储路径? 留空默认不修改[y/n] " input
         case $input in
         [yY][eE][sS] | [yY])            
             docker_store=true
@@ -108,7 +108,7 @@ H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/0
             esac        
     fi
     if [[ -z "${docker_store}" ]]; then
-          echo "选择不修改docker存储路径，跳过，不做任何修改" 
+          echo "不修改docker存储路径，跳过" 
     else
           systemctl stop docker
           mkdir -p /fsmeeting/docker
