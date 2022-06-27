@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年6月17日                         "*
+echo -e "# *脚本更新时间：2022年6月27日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -772,7 +772,7 @@ then
     if [[ -z "${docker_store}" ]]; then
           echo "不修改docker存储路径，跳过" 
     else
-          systemctl stop docker
+          systemctl stop docker.socket
           mkdir -p /fsmeeting/docker
           ln -s /fsmeeting/docker /var/lib/docker		  
           sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
@@ -822,7 +822,7 @@ then
     if [[ -z "${docker_store}" ]]; then
           echo "不修改docker存储路径，跳过" 
     else
-          systemctl stop docker
+          systemctl stop docker.socket
           mkdir -p /fsmeeting/docker
           ln -s /fsmeeting/docker /var/lib/docker		  
           sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
