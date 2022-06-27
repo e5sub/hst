@@ -772,7 +772,7 @@ then
     if [[ -z "${docker_store}" ]]; then
           echo "不修改docker存储路径，跳过" 
     else
-          systemctl stop docker.socket
+          systemctl stop docker.service
           mkdir -p /fsmeeting/docker
           ln -s /fsmeeting/docker /var/lib/docker		  
           sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
@@ -822,7 +822,7 @@ then
     if [[ -z "${docker_store}" ]]; then
           echo "不修改docker存储路径，跳过" 
     else
-          systemctl stop docker.socket
+          systemctl stop docker.service
           mkdir -p /fsmeeting/docker
           ln -s /fsmeeting/docker /var/lib/docker		  
           sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/fsmeeting/docker|" /usr/lib/systemd/system/docker.service
