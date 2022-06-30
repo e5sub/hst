@@ -70,7 +70,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年6月29日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2022年6月30日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -122,12 +122,12 @@ echo -e " \033[32m 82. \033[0m 安装HTML5网络速度测试工具(服务端)（
 echo -e " \033[32m 83. \033[0m 安装Frp内网穿透服务器（配置文件存放路径/frp/frps.ini）"
 echo -e " \033[32m 84. \033[0m 安装Frp内网穿透客户端（配置文件存放路径/frp/frpc.ini）"
 echo -e " \033[32m 85. \033[0m 安装动态域名解析服务（浏览器打开主机IP:9876）"
-echo -e " \033[32m 86. \033[0m 网络同步服务器时间（需要服务器能连接公网）"
-echo -e " \033[32m 87. \033[0m 放行服务器所有端口"
+echo -e " \033[32m 86. \033[0m 安装ansible（用于批量管理服务器）"
+echo -e " \033[32m 87. \033[0m 网络同步服务器时间（需要服务器能连接公网）"
+echo -e " \033[32m 88. \033[0m 放行服务器所有端口"
 echo -e ""
-echo -e " \033[32m 88. \033[0m 卸载CES服务器"
-echo -e " \033[32m 89. \033[0m 卸载FSP服务器"
-#echo -e " \033[32m 90. \033[0m 重启FSP服务器"
+echo -e " \033[32m 89. \033[0m 卸载CES服务器"
+echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
 echo -e ""
 echo -e " \033[32m 92. \033[0m 修改H323服务器配置信息（适用于2.3.1.12版本，单机版本选这个）"
 echo -e " \033[32m 93. \033[0m 修改H323 GM服务器配置信息（适用于2.3.1.12版本，集群节点选这个）"
@@ -168,11 +168,11 @@ case $N in
   83) bash install.sh -frps ;;
   84) bash install.sh -frpc ;;
   85) docker run -d --name ddns-go --restart=always --net=host -v /opt/ddns-go:/root jeessy/ddns-go ;;
-  86) bash install.sh -time ;;
-  87) systemctl stop firewalld.service && systemctl disable firewalld.service ;;
-  88) bash install.sh -xiezai ;;
-  89) bash install.sh -unfsp ;;
-  90) bash install.sh -restartfsp ;;
+  86) yum -y install epel-release.noarch && yum install -y ansible && yum install -y tree ;;
+  87) bash install.sh -time ;;
+  88) systemctl stop firewalld.service && systemctl disable firewalld.service ;;
+  89) bash install.sh -xiezai ;;
+  90) bash install.sh -unfsp ;;
   92) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh && bash h323.sh ;;
   93) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323gm.sh && bash h323gm.sh ;;
   94) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/storeservice.sh && bash storeservice.sh ;;
