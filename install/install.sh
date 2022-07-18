@@ -22,7 +22,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
     if [[ -z "${CN}" ]]; then
         if [[ $(curl -m 10 -s https://ipapi.co/json | grep 'China') != "" ]]; then
             echo "根据ipapi.co提供的信息，当前IP可能在国内"
-            read -e -r -p "是否选用国内下载地址? 留空默认使用国内下载地址[Y/n] " input
+            read -e -r -p "是否选用国内下载地址? 留空使用国内下载地址[Y/n] " input
             case $input in
             [yY][eE][sS] | [yY])
                 echo "使用国内下载地址"
@@ -91,18 +91,19 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
 	
 ## CES安装版本选择（Y：单机 N：集群）
     if [[ -z "${ver}" ]]; then    
-        read -e -r -p "是否安装单机版，留空默认安装单机版（Y=单机 N=集群）[y/n] " input
+        read -e -r -p "是否安装单机版，留空安装单机版（Y=单机 N=集群）[y/n] " input
 		echo ""
         case $input in
-        [yY][eE][sS] | [yY])   
-            echo "安装单机版"
+        [yY][eE][sS] | [yY]) 
+            echo ""
             ver=true
             ;;
         [nN][oO] | [nN]) 
-            echo "安装集群版"		
+            echo "集群版"
+            echo ""			
             ;;
-        *)   
-            echo "安装单机版"	
+        *)  
+            echo ""			
             ver=true			
             ;;
             esac        
