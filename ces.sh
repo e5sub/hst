@@ -95,22 +95,21 @@ echo -e "# * 外网IP               : ${getIpAddress}"
 echo "                                                                       "
 echo "# #####################################################################"#
 echo "                                                       "
-echo "请选择需要安装的版本【默认安装标准版】:"
+echo "请选择需要安装的版本【标准版】:"
 echo ""
 echo -e " \033[31m=====*4.36版本*=====\033[0m"
-echo -e " \033[32m 16. \033[0m CES v4.36.5.5单机版"
-echo -e " \033[32m 17. \033[0m CES v4.36.5.5集群主服务器"
-echo -e " \033[32m 18. \033[0m CES v4.36.5.5集群节点服务器"
-#echo -e " \033[32m 19. \033[0m CES v4.36.5.5人脸识别服务器"
+echo -e " \033[32m 1. \033[0m CES v4.36.5.5服务器"
+echo -e " \033[32m 2. \033[0m CES v4.36.5.5节点服务器"
 echo -e " \033[31m=====*4.35版本*=====\033[0m"
-echo -e " \033[32m 20. \033[0m CES v4.35.4.5单机版"
-echo -e " \033[32m 21. \033[0m CES v4.35.4.5集群主服务器"
-echo -e " \033[32m 22. \033[0m CES v4.35.4.5集群节点服务器"
-#echo -e " \033[32m 23. \033[0m CES v4.35.4.5人脸识别服务器"
-echo -e " \033[44;37m 只安装FSP服务器 \033[0m"
+echo -e " \033[32m 3. \033[0m CES v4.35.4.5服务器"
+echo -e " \033[32m 4. \033[0m CES v4.35.4.5节点服务器"
+echo -e " \033[31m=====*4.34版本*=====\033[0m"
+echo -e " \033[32m 5. \033[0m CES v4.34.5.1服务器"
+echo -e " \033[32m 6. \033[0m CES v4.34.5.1节点服务器"
+echo -e " \033[44;37m 安装FSP服务器 \033[0m"
 echo -e " \033[32m 60. \033[0m 安装FSP v1.4.1.17服务器（配套4.31以下服务器）"
 echo -e " \033[32m 61. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
-echo -e " \033[32m 62. \033[0m 安装FSP v1.8.3.5服务器（配套4.36服务器）"
+echo -e " \033[32m 62. \033[0m 安装FSP v1.8.3.9服务器（配套4.36服务器）"
 echo -e " \033[44;37m 安装H323服务器 \033[0m"
 echo -e " \033[32m 70. \033[0m 安装H323网关服务器v2.3.1.12"
 echo -e " \033[44;37m 安装录制服务器 \033[0m"
@@ -145,18 +144,12 @@ echo ""
 read N 
 echo ""
 case $N in
-  16) bash install.sh -436dj ;;
-  17) bash install.sh -436jq ;;
-  18) bash install.sh -436node ;;
-  19) bash install.sh -436face ;;
-  20) bash install.sh -435dj ;;
-  21) bash install.sh -435jq ;;
-  22) bash install.sh -435node ;;
-  23) bash install.sh -435face ;;
-  24) bash install.sh -434dj ;;
-  25) bash install.sh -434jq ;;
-  26) bash install.sh -434node ;;
-  27) bash install.sh -434face ;;
+  1) bash install.sh -436 ;;
+  2) bash install.sh -436node ;;
+  3) bash install.sh -435 ;;
+  4) bash install.sh -435node ;;
+  5) bash install.sh -434 ;;
+  6) bash install.sh -434node ;;
   60) bash install.sh -141fsp ;;
   61) bash install.sh -175fsp ;;
   62) bash install.sh -183fsp ;;
