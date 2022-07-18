@@ -91,7 +91,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
 	
 ## CES安装版本选择（Y：单机 N：集群 安装节点服务器时不受此项影响）
     if [[ -z "${ver}" ]]; then    
-        read -e -r -p "留空安装单机版（y=单机 y=集群）[y/n] " input
+        read -e -r -p "留空安装单机版（y=单机 n=集群）" input
 		echo ""
 		echo -e "\033[44;37m 温馨提示：【节点服务器】和【其他服务】均为单独安装项，不受此项影响，可直接留空 \033[0m"
 		echo ""
