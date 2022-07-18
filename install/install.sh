@@ -376,7 +376,7 @@ then
 fi
 if [ $1 = '-zx431' ]
 then
-	echo -e "\033[33m 【你选择的是只安装CES v4.31.3.6服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	${ZXCES431}
@@ -396,7 +396,7 @@ then
 fi
 if [ $1 = '-zx432' ]
 then
-	echo -e "\033[33m 【你选择的是只安装CES v4.32.8.5服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	${ZXCES432}
@@ -406,7 +406,7 @@ then
 fi
 if [ $1 = '-mzx435' ]
 then
-	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.30服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	${MIPSZXCES435}
@@ -416,7 +416,7 @@ then
 fi
 if [ $1 = '-mzx435node' ]
 then
-	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.30节点服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30节点服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	${MIPSZXCES435}
@@ -426,7 +426,7 @@ then
 fi
 if [ $1 = '-gczx435' ]
 then
-	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.30服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES435}
@@ -436,7 +436,7 @@ then
 fi
 if [ $1 = '-gczx435node' ]
 then
-	echo -e "\033[33m 【你选择的是只安装国产化CES v4.35.1.30节点服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30节点服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES435}
@@ -446,7 +446,7 @@ then
 fi
 if [ $1 = '-gczx434' ]
 then
-	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装国产化CES v4.34.5.1服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES434}
@@ -456,7 +456,7 @@ then
 fi
 if [ $1 = '-gczx434node' ]
 then
-	echo -e "\033[33m 【你选择的是只安装国产化CES v4.34.5.1节点服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装国产化CES v4.34.5.1节点服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES434}
