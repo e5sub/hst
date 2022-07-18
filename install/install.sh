@@ -535,27 +535,6 @@ then
 fi
 ##########################################################################################服务器安装脚本到此结束##########################################################################################
 
-if [ $1 = '-rtmp' ]
-then
-	echo -e "\033[33m 【你选择的是安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	docker run -d --restart=unless-stopped -p 1935:1935 -p 1985:1985 -p 8081:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs ossrs/srs:4 ./objs/srs -c conf/https.docker.conf
-fi
-if [ $1 = '-iperf' ]
-then
-	echo -e "\033[33m 【你选择的是安装iperf3局域网性能测试工具(服务端)】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	docker run -d --restart=unless-stopped -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s
-fi
-if [ $1 = '-html5' ]
-then
-	echo -e "\033[33m 【你选择的是安装HTML5网络速度测试工具(服务端)】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	docker run -d --restart=unless-stopped -p 6688:80 --name hst-speedtest 1040155/hst-speedtest
-fi
 if [ $1 = '-frps' ]
 then
 	echo -e "\033[33m 【你选择的是安装Frp内网穿透服务器】 \033[0m"

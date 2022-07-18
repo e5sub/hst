@@ -155,9 +155,9 @@ case $N in
   62) bash install.sh -183fsp ;;
   70) bash install.sh -h323 ;;
   71) bash install.sh -record326 ;;
-  80) bash install.sh -rtmp ;;
-  81) bash install.sh -iperf ;;  
-  82) bash install.sh -html5 ;; 
+  80) docker run -d --restart=always -p 1935:1935 -p 1985:1985 -p 8081:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs ossrs/srs:4 ./objs/srs -c conf/https.docker.conf ;;
+  81) docker run -d --restart=always -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s ;;  
+  82) docker run -d --restart=always -p 6688:80 --name hst-speedtest 1040155/hst-speedtest ;; 
   83) bash install.sh -frps ;;
   84) bash install.sh -frpc ;;
   85) docker run -d --name ddns-go --restart=always --net=host -v /opt/ddns-go:/root jeessy/ddns-go ;;
