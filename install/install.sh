@@ -89,9 +89,11 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.9"
     fi
 	
-## CES安装版本选择（Y：单机 N：集群）
+## CES安装版本选择（Y：单机 N：集群 安装节点服务器时不受此项影响）
     if [[ -z "${ver}" ]]; then    
-        read -e -r -p "是否安装单机版，留空安装单机版（Y=单机 N=集群）[y/n] " input
+        read -e -r -p "留空安装单机版（y=单机 y=集群）[y/n] " input
+		echo ""
+		echo "\033[44;37m 温馨提示：【节点服务器】和【其他服务】均为单独安装项，不受此项影响，可直接留空 \033[0m"
 		echo ""
         case $input in
         [yY][eE][sS] | [yY]) 
@@ -99,7 +101,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
             ver=true
             ;;
         [nN][oO] | [nN]) 
-            echo "集群版"
+            echo "安装集群版"
             echo ""			
             ;;
         *)  
