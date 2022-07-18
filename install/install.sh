@@ -93,7 +93,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
     if [[ -z "${ver}" ]]; then    
         read -e -r -p "留空安装单机版（y=单机 y=集群）[y/n] " input
 		echo ""
-		echo "\033[44;37m 温馨提示：【节点服务器】和【其他服务】均为单独安装项，不受此项影响，可直接留空 \033[0m"
+		echo -e "\033[44;37m 温馨提示：【节点服务器】和【其他服务】均为单独安装项，不受此项影响，可直接留空 \033[0m"
 		echo ""
         case $input in
         [yY][eE][sS] | [yY]) 
