@@ -41,48 +41,48 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
     fi
     if [[ -z "${CN}" ]]; then
         #CES标准版安装包下载地址
-        CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.36.5.5.tar.gz"
-        CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.35.4.5.tar.gz"
-        CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz"
-        CES432="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz"
-        CES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz"
-        ARMCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz"
-        ARMCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz"
-        ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/ARM/ces_linux_arm4.31.2.16.tar.gz"
-        MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/标准版/ces_linux_mips4.35.1.30.tar.gz"
+        CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.36.5.5.tar.gz && tar zxvf ces_linux_hst4.36.5.5.tar.gz && cd ./ces_linux4.36.5.5"
+        CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.35.4.5.tar.gz && tar zxvf ces_linux_hst4.35.4.5.tar.gz && cd ./ces_linux4.35.4.5"
+        CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz && tar zxvf ces_linux_hst4.34.5.1.tar.gz && cd ./ces_linux4.34.5.1"
+        CES432="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz && tar zxvf ces_linux_hst4.32.8.5.tar.gz && cd ./ces_linux4.32.8.5"
+        CES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz && tar zxvf ces_linux_hst4.31.3.5.tar.gz && cd ./ces_linux4.31.3.5"
+        ARMCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz && tar zxvf ces_linux_arm4.35.1.30.tar.gz && cd ./ces_linux4.35.1.30"
+        ARMCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz && tar zxvf ces_linux_arm4.34.5.1.tar.gz && cd ./ces_linux4.34.5.1"
+        ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/ARM/ces_linux_arm4.31.2.16.tar.gz && tar zxvf ces_linux_arm4.31.2.16.tar.gz && cd ./ces_linux4.31.2.16"
+        MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/标准版/ces_linux_mips4.35.1.30.tar.gz && tar zxvf ces_linux_mips4.35.1.30.tar.gz && cd ./ces_linux4.35.1.30"
         #CES中性版安装包下载地址
-        ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.36.5.5.tar.gz"
-        ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.35.4.5.tar.gz"
-        ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz"
-        ZXCES432="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz"
-        ZXCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz"
-        ARMZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz"
-        ARMZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz"
-        MIPSZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz"
+        ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.36.5.5.tar.gz && tar zxvf ces_linux_zx4.36.5.5.tar.gz && cd ./ces_linux4.36.5.5"
+        ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.35.4.5.tar.gz && tar zxvf ces_linux_zx4.35.4.5.tar.gz && cd ./ces_linux4.35.4.5"
+        ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz && tar zxvf ces_linux_zx4.34.5.1.tar.gz && cd ./ces_linux4.34.5.1"
+        ZXCES432="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz && tar zxvf ces_linux_zx4.32.8.5.tar.gz && cd ./ces_linux4.32.8.5"
+        ZXCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz && tar zxvf ces_linux_zx4.31.3.5.tar.gz && cd ./ces_linux4.31.3.5"
+        ARMZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz && tar zxvf ces_linux_arm_zx4.35.1.30.tar.gz && cd ./ces_linux4.35.1.30"
+        ARMZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz && tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz && cd ./ces_linux4.34.5.1"
+        MIPSZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz && tar zxvf ces_linux_mips_zx4.35.1.30.tar.gz && cd ./ces_linux4.35.1.30"
         #FSP服务器
         FSP141="1040155/fsp:1.4.1.17"
         FSP175="1040155/fsp:1.7.5.1"
         FSP183="1040155/fsp:1.8.3.9"
     else
         #CES标准版安装包下载地址
-        CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.5.tar.gz"
-        CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz"
-        CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz"
-        CES432="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz"
-        CES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz"
-        ARMCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz"
-        ARMCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz"
-        ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.31.2.16.tar.gz"
-        MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/标准版/ces_linux_mips4.35.1.30.tar.gz"
+        CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.5.5.tar.gz && tar zxvf ces_linux_hst4.36.5.5.tar.gz && cd ./ces_linux4.36.5.5"
+        CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz && tar zxvf ces_linux_hst4.35.4.5.tar.gz && cd ./ces_linux4.35.4.5"
+        CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz && tar zxvf ces_linux_hst4.34.5.1.tar.gz && cd ./ces_linux4.34.5.1"
+        CES432="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.32.8.5.tar.gz && tar zxvf ces_linux_hst4.32.8.5.tar.gz && cd ./ces_linux4.32.8.5"
+        CES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.31.3.5.tar.gz && tar zxvf ces_linux_hst4.31.3.5.tar.gz && cd ./ces_linux4.31.3.5"
+        ARMCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.35.1.30.tar.gz && tar zxvf ces_linux_arm4.35.1.30.tar.gz && cd ./ces_linux4.35.1.30"
+        ARMCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.34.5.1.tar.gz && tar zxvf ces_linux_arm4.34.5.1.tar.gz && cd ./ces_linux4.34.5.1"
+        ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.31.2.16.tar.gz && tar zxvf ces_linux_arm4.31.2.16.tar.gz && cd ./ces_linux4.31.2.16"
+        MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/标准版/ces_linux_mips4.35.1.30.tar.gz && tar zxvf ces_linux_mips4.35.1.30.tar.gz && cd ./ces_linux4.35.1.30"
         #CES中性版安装包下载地址
-        ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.5.5.tar.gz"
-        ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.4.5.tar.gz"
-        ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz"
-        ZXCES432="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz"
-        ZXCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz"
-        ARMZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz"
-        ARMZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz"
-        MIPSZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz"
+        ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.5.5.tar.gz && tar zxvf ces_linux_zx4.36.5.5.tar.gz && cd ./ces_linux4.36.5.5"
+        ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.4.5.tar.gz && tar zxvf ces_linux_zx4.35.4.5.tar.gz && cd ./ces_linux4.35.4.5"
+        ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz && tar zxvf ces_linux_zx4.34.5.1.tar.gz && cd ./ces_linux4.34.5.1"
+        ZXCES432="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.32.8.5.tar.gz && tar zxvf ces_linux_zx4.32.8.5.tar.gz && cd ./ces_linux4.32.8.5"
+        ZXCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.31.3.5.tar.gz && tar zxvf ces_linux_zx4.31.3.5.tar.gz && cd ./ces_linux4.31.3.5"
+        ARMZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.35.1.30.tar.gz && tar zxvf ces_linux_arm_zx4.35.1.30.tar.gz && cd ./ces_linux4.35.1.30"
+        ARMZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/中性版/ces_linux_arm_zx4.34.5.1.tar.gz && tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz && cd ./ces_linux4.34.5.1"
+        MIPSZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/中性版/ces_linux_mips_zx4.35.1.30.tar.gz && tar zxvf ces_linux_mips_zx4.35.1.30.tar.gz && cd ./ces_linux4.35.1.30"
         #FSP服务器
         FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
         FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
@@ -125,8 +125,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES436}
-	tar zxvf ces_linux_hst4.36.5.5.tar.gz
-	cd ./ces_linux4.36.5.5
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-436node' ]
@@ -135,8 +133,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES436}
-	tar zxvf ces_linux_hst4.36.5.5.tar.gz
-	cd ./ces_linux4.36.5.5
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-435' ]
@@ -145,8 +141,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES435}
-	tar zxvf ces_linux_hst4.35.4.5.tar.gz
-	cd ./ces_linux4.35.4.5
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-435node' ]
@@ -155,8 +149,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES435}
-	tar zxvf ces_linux_hst4.35.4.5.tar.gz
-	cd ./ces_linux4.35.4.5
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-434' ]
@@ -165,8 +157,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES434}
-	tar zxvf ces_linux_hst4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-434node' ]
@@ -175,8 +165,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES434}
-	tar zxvf ces_linux_hst4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-431node' ]
@@ -185,8 +173,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES431}
-	tar zxvf ces_linux_hst4.31.3.5.tar.gz
-	cd ./ces_linux4.31.3.5
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-431' ]
@@ -195,8 +181,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES431}
-	tar zxvf ces_linux_hst4.31.3.5.tar.gz
-	cd ./ces_linux4.31.3.5
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-432node' ]
@@ -205,8 +189,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES432}
-	tar zxvf ces_linux_hst4.32.8.5.tar.gz
-	cd ./ces_linux4.32.8.5
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-432' ]
@@ -215,8 +197,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES432}
-	tar zxvf ces_linux_hst4.32.8.5.tar.gz
-	cd ./ces_linux4.32.8.5
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-m435' ]
@@ -225,8 +205,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${MIPSCES435}
-	tar zxvf ces_linux_mips4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-m435node' ]
@@ -235,8 +213,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${MIPSCES435}
-	tar zxvf ces_linux_mips4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-gc435' ]
@@ -245,8 +221,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES435}
-	tar zxvf ces_linux_arm4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-gc435node' ]
@@ -255,8 +229,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES435}
-	tar zxvf ces_linux_arm4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-gc434' ]
@@ -265,8 +237,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES434}
-	tar zxvf ces_linux_arm4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-gc434node' ]
@@ -275,8 +245,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES434}
-	tar zxvf ces_linux_arm4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-gc431' ]
@@ -285,8 +253,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES431}
-	tar zxvf ces_linux_arm4.31.2.16.tar.gz
-	cd ./ces_linux4.31.2.16
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-gc431node' ]
@@ -295,8 +261,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES431}
-	tar zxvf ces_linux_arm4.31.2.16.tar.gz
-	cd ./ces_linux4.31.2.16
 	bash server_install.sh cluster node
 fi
 
@@ -308,8 +272,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES436}
-	tar zxvf ces_linux_zx4.36.5.5.tar.gz
-	cd ./ces_linux4.36.5.5
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-zx436node' ]
@@ -318,8 +280,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES436}
-	tar zxvf ces_linux_zx4.36.5.5.tar.gz
-	cd ./ces_linux4.36.5.5
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-zx435' ]
@@ -328,8 +288,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES435}
-	tar zxvf ces_linux_zx4.35.4.5.tar.gz
-	cd ./ces_linux4.35.4.5
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-zx435node' ]
@@ -338,8 +296,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES435}
-	tar zxvf ces_linux_zx4.35.4.5.tar.gz
-	cd ./ces_linux4.35.4.5
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-zx434' ]
@@ -348,8 +304,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES434}
-	tar zxvf ces_linux_zx4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-zx434node' ]
@@ -358,8 +312,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES434}
-	tar zxvf ces_linux_zx4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-zx431node' ]
@@ -368,8 +320,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES431}
-	tar zxvf ces_linux_zx4.31.3.5.tar.gz
-	cd ./ces_linux4.31.3.5
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-zx431' ]
@@ -378,8 +328,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES431}
-	tar zxvf ces_linux_zx4.31.3.5.tar.gz
-	cd ./ces_linux4.31.3.5
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-zx432node' ]
@@ -388,8 +336,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES432}
-	tar zxvf ces_linux_zx4.32.8.5.tar.gz
-	cd ./ces_linux4.32.8.5
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-zx432' ]
@@ -398,8 +344,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES432}
-	tar zxvf ces_linux_zx4.32.8.5.tar.gz
-	cd ./ces_linux4.32.8.5
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-mzx435' ]
@@ -408,8 +352,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${MIPSZXCES435}
-	tar zxvf ces_linux_mips_zx4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-mzx435node' ]
@@ -418,8 +360,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${MIPSZXCES435}
-	tar zxvf ces_linux_mips_zx4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-gczx435' ]
@@ -428,8 +368,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES435}
-	tar zxvf ces_linux_arm_zx4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-gczx435node' ]
@@ -438,8 +376,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES435}
-	tar zxvf ces_linux_arm_zx4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-gczx434' ]
@@ -448,8 +384,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES434}
-	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
 if [ $1 = '-gczx434node' ]
@@ -458,8 +392,6 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES434}
-	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
 	bash server_install.sh cluster node
 fi
 if [ $1 = '-141fsp' ]
