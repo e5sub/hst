@@ -70,7 +70,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年7月18日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2022年7月19日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -99,13 +99,10 @@ echo "请选择需要安装的版本【标准版】:"
 echo ""
 echo -e " \033[31m=====*4.36版本*=====\033[0m"
 echo -e " \033[32m 1. \033[0m CES v4.36.5.5服务器"
-echo -e " \033[32m 2. \033[0m CES v4.36.5.5节点服务器"
 echo -e " \033[31m=====*4.35版本*=====\033[0m"
-echo -e " \033[32m 3. \033[0m CES v4.35.4.5服务器"
-echo -e " \033[32m 4. \033[0m CES v4.35.4.5节点服务器"
+echo -e " \033[32m 2. \033[0m CES v4.35.4.5服务器"
 echo -e " \033[31m=====*4.34版本*=====\033[0m"
-echo -e " \033[32m 5. \033[0m CES v4.34.5.1服务器"
-echo -e " \033[32m 6. \033[0m CES v4.34.5.1节点服务器"
+echo -e " \033[32m 3. \033[0m CES v4.34.5.1服务器"
 echo -e " \033[44;37m 安装FSP服务器 \033[0m"
 echo -e " \033[32m 60. \033[0m 安装FSP v1.4.1.17服务器（配套4.31以下服务器）"
 echo -e " \033[32m 61. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
@@ -145,11 +142,8 @@ read N
 echo ""
 case $N in
   1) bash install.sh -436 ;;
-  2) bash install.sh -436node ;;
-  3) bash install.sh -435 ;;
-  4) bash install.sh -435node ;;
-  5) bash install.sh -434 ;;
-  6) bash install.sh -434node ;;
+  2) bash install.sh -435 ;;
+  3) bash install.sh -434 ;;
   60) bash install.sh -141fsp ;;
   61) bash install.sh -175fsp ;;
   62) bash install.sh -183fsp ;;

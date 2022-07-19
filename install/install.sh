@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月18日                         "*
+echo -e "# *脚本更新时间：2022年7月19日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -93,7 +93,7 @@ pre_install_config(){
 # Set version
     echo -e "\033[44;37m 温馨提示：安装非CES服务器时不受此项影响，请直接留空该项 \033[0m"
     echo ""
-    echo -e "\033[44;37m 输入cluster main安装集群版，输入cluster node安装节点服务器\033[0m"
+    echo -e "输入 cluster main 安装集群版，输入 cluster node 安装节点服务器"
     echo ""
     read -ep "(请输入要安装的版本，留空则安装单机版):" version
     [ -z "${version}" ] && version=single
@@ -102,34 +102,8 @@ pre_install_config(){
     echo "安装版本 = ${version}"
     echo "---------------------------"
     echo
-	
-## CES安装版本选择（Y：单机 N：集群 安装节点服务器时不受此项影响）
-#    if [[ -z "${ver}" ]]; then
-#       echo ""
-#        echo -e "\033[44;37m 温馨提示：【节点服务器】和【其他服务】均为单独安装项，不受此项影响，可直接留空 \033[0m"
-#        echo ""
-#       read -e -r -p "选择要安装的版本，留空安装单机版（y=单机 n=集群）" input
-#        case $input in
-#        [yY][eE][sS] | [yY]) 
-#            echo ""
-#            ver=true
-#            ;;
-#        [nN][oO] | [nN]) 
-#            echo "安装集群版"
-#            echo ""			
-#            ;;
-#        *)  
-#            echo ""			
-#            ver=true			
-#            ;;
-#            esac        
-#    fi
-#    if [[ -z "${ver}" ]]; then
-#          version="cluster main"
-#    else
-#          version="single"
-#    fi
-
+}
+pre_install_config
 #录制服务器和H323安装包下载地址
 record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
 H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz"
@@ -145,16 +119,6 @@ then
 	cd ./ces_linux4.36.5.5
 	bash server_install.sh ${version}
 fi
-if [ $1 = '-436node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.36.5.5节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${CES436}
-	tar zxvf ces_linux_hst4.36.5.5.tar.gz
-	cd ./ces_linux4.36.5.5
-	bash server_install.sh cluster node
-fi
 if [ $1 = '-435' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.35.4.5服务器】 \033[0m"
@@ -164,16 +128,6 @@ then
 	tar zxvf ces_linux_hst4.35.4.5.tar.gz
 	cd ./ces_linux4.35.4.5
 	bash server_install.sh ${version}
-fi
-if [ $1 = '-435node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.35.4.5节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${CES435}
-	tar zxvf ces_linux_hst4.35.4.5.tar.gz
-	cd ./ces_linux4.35.4.5
-	bash server_install.sh cluster node
 fi
 if [ $1 = '-434' ]
 then
@@ -185,26 +139,6 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
-if [ $1 = '-434node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.34.5.1节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${CES434}
-	tar zxvf ces_linux_hst4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
-	bash server_install.sh cluster node
-fi
-if [ $1 = '-431node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${CES431}
-	tar zxvf ces_linux_hst4.31.3.5.tar.gz
-	cd ./ces_linux4.31.3.5
-	bash server_install.sh cluster node
-fi
 if [ $1 = '-431' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6服务器】 \033[0m"
@@ -214,16 +148,6 @@ then
 	tar zxvf ces_linux_hst4.31.3.5.tar.gz
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh ${version}
-fi
-if [ $1 = '-432node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${CES432}
-	tar zxvf ces_linux_hst4.32.8.5.tar.gz
-	cd ./ces_linux4.32.8.5
-	bash server_install.sh cluster node
 fi
 if [ $1 = '-432' ]
 then
@@ -245,16 +169,6 @@ then
 	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
-if [ $1 = '-m435node' ]
-then
-	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${MIPSCES435}
-	tar zxvf ces_linux_mips4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
-	bash server_install.sh cluster node
-fi
 if [ $1 = '-gc435' ]
 then
 	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30服务器】 \033[0m"
@@ -264,16 +178,6 @@ then
 	tar zxvf ces_linux_arm4.35.1.30.tar.gz
 	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
-fi
-if [ $1 = '-gc435node' ]
-then
-	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ARMCES435}
-	tar zxvf ces_linux_arm4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
-	bash server_install.sh cluster node
 fi
 if [ $1 = '-gc434' ]
 then
@@ -285,16 +189,6 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
-if [ $1 = '-gc434node' ]
-then
-	echo -e "\033[33m 【你选择的是安装国产化CES v4.34.5.1节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ARMCES434}
-	tar zxvf ces_linux_arm4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
-	bash server_install.sh cluster node
-fi
 if [ $1 = '-gc431' ]
 then
 	echo -e "\033[33m 【你选择的是安装国产化CES v4.31.2.16服务器】 \033[0m"
@@ -304,16 +198,6 @@ then
 	tar zxvf ces_linux_arm4.31.2.16.tar.gz
 	cd ./ces_linux4.31.2.16
 	bash server_install.sh ${version}
-fi
-if [ $1 = '-gc431node' ]
-then
-	echo -e "\033[33m 【你选择的是安装国产化CES v4.31.2.16节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ARMCES431}
-	tar zxvf ces_linux_arm4.31.2.16.tar.gz
-	cd ./ces_linux4.31.2.16
-	bash server_install.sh cluster node
 fi
 
 ##########################################################################################以下是中性版本##########################################################################################
@@ -328,16 +212,6 @@ then
 	cd ./ces_linux4.36.5.5
 	bash server_install.sh ${version}
 fi
-if [ $1 = '-zx436node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.36.5.5节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ZXCES436}
-	tar zxvf ces_linux_zx4.36.5.5.tar.gz
-	cd ./ces_linux4.36.5.5
-	bash server_install.sh cluster node
-fi
 if [ $1 = '-zx435' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.35.4.5服务器】 \033[0m"
@@ -347,16 +221,6 @@ then
 	tar zxvf ces_linux_zx4.35.4.5.tar.gz
 	cd ./ces_linux4.35.4.5
 	bash server_install.sh ${version}
-fi
-if [ $1 = '-zx435node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.35.4.5节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ZXCES435}
-	tar zxvf ces_linux_zx4.35.4.5.tar.gz
-	cd ./ces_linux4.35.4.5
-	bash server_install.sh cluster node
 fi
 if [ $1 = '-zx434' ]
 then
@@ -368,26 +232,6 @@ then
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
-if [ $1 = '-zx434node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.34.5.1节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ZXCES434}
-	tar zxvf ces_linux_zx4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
-	bash server_install.sh cluster node
-fi
-if [ $1 = '-zx431node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ZXCES431}
-	tar zxvf ces_linux_zx4.31.3.5.tar.gz
-	cd ./ces_linux4.31.3.5
-	bash server_install.sh cluster node
-fi
 if [ $1 = '-zx431' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.31.3.6服务器】 \033[0m"
@@ -397,16 +241,6 @@ then
 	tar zxvf ces_linux_zx4.31.3.5.tar.gz
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh ${version}
-fi
-if [ $1 = '-zx432node' ]
-then
-	echo -e "\033[33m 【你选择的是安装CES v4.32.8.5节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ZXCES432}
-	tar zxvf ces_linux_zx4.32.8.5.tar.gz
-	cd ./ces_linux4.32.8.5
-	bash server_install.sh cluster node
 fi
 if [ $1 = '-zx432' ]
 then
@@ -428,16 +262,6 @@ then
 	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
-if [ $1 = '-mzx435node' ]
-then
-	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${MIPSZXCES435}
-	tar zxvf ces_linux_mips_zx4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
-	bash server_install.sh cluster node
-fi
 if [ $1 = '-gczx435' ]
 then
 	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30服务器】 \033[0m"
@@ -448,16 +272,6 @@ then
 	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
-if [ $1 = '-gczx435node' ]
-then
-	echo -e "\033[33m 【你选择的是安装国产化CES v4.35.1.30节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ARMZXCES435}
-	tar zxvf ces_linux_arm_zx4.35.1.30.tar.gz
-	cd ./ces_linux4.35.1.30
-	bash server_install.sh cluster node
-fi
 if [ $1 = '-gczx434' ]
 then
 	echo -e "\033[33m 【你选择的是安装国产化CES v4.34.5.1服务器】 \033[0m"
@@ -467,16 +281,6 @@ then
 	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
-fi
-if [ $1 = '-gczx434node' ]
-then
-	echo -e "\033[33m 【你选择的是安装国产化CES v4.34.5.1节点服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	${ARMZXCES434}
-	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
-	cd ./ces_linux4.34.5.1
-	bash server_install.sh cluster node
 fi
 if [ $1 = '-141fsp' ]
 then
@@ -693,7 +497,6 @@ then
 	sleep 5s	
 	bash set_extra_ip.sh ${getIpAddress}
 fi
-pre_install_config
 #关闭系统防火墙
 systemctl stop firewalld.service && systemctl disable firewalld.service
 #删除安装脚本
