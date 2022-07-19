@@ -88,33 +88,47 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
         FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.9"
     fi
+
+pre_install_config(){
+# Set version
+    echo -e "\033[44;37m 温馨提示：安装非CES服务器时不受此项影响，请直接留空该项 \033[0m"
+    echo ""
+    echo -e "\033[44;37m 输入cluster main安装集群版，输入cluster node安装节点服务器\033[0m"
+    echo ""
+    read -ep "(请输入要安装的版本，留空则安装单机版):" version
+    [ -z "${version}" ] && version=single
+    echo 
+    echo "---------------------------"
+    echo "安装版本 = ${version}"
+    echo "---------------------------"
+    echo
 	
 ## CES安装版本选择（Y：单机 N：集群 安装节点服务器时不受此项影响）
-    if [[ -z "${ver}" ]]; then
-        echo ""
-        echo -e "\033[44;37m 温馨提示：【节点服务器】和【其他服务】均为单独安装项，不受此项影响，可直接留空 \033[0m"
-        echo ""
-        read -e -r -p "选择要安装的版本，留空安装单机版（y=单机 n=集群）" input
-        case $input in
-        [yY][eE][sS] | [yY]) 
-            echo ""
-            ver=true
-            ;;
-        [nN][oO] | [nN]) 
-            echo "安装集群版"
-            echo ""			
-            ;;
-        *)  
-            echo ""			
-            ver=true			
-            ;;
-            esac        
-    fi
-    if [[ -z "${ver}" ]]; then
-          version="cluster main"
-    else
-          version="single"
-    fi
+#    if [[ -z "${ver}" ]]; then
+#       echo ""
+#        echo -e "\033[44;37m 温馨提示：【节点服务器】和【其他服务】均为单独安装项，不受此项影响，可直接留空 \033[0m"
+#        echo ""
+#       read -e -r -p "选择要安装的版本，留空安装单机版（y=单机 n=集群）" input
+#        case $input in
+#        [yY][eE][sS] | [yY]) 
+#            echo ""
+#            ver=true
+#            ;;
+#        [nN][oO] | [nN]) 
+#            echo "安装集群版"
+#            echo ""			
+#            ;;
+#        *)  
+#            echo ""			
+#            ver=true			
+#            ;;
+#            esac        
+#    fi
+#    if [[ -z "${ver}" ]]; then
+#          version="cluster main"
+#    else
+#          version="single"
+#    fi
 
 #录制服务器和H323安装包下载地址
 record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
@@ -679,6 +693,7 @@ then
 	sleep 5s	
 	bash set_extra_ip.sh ${getIpAddress}
 fi
+pre_install_config
 #关闭系统防火墙
 systemctl stop firewalld.service && systemctl disable firewalld.service
 #删除安装脚本
