@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月19日                         "*
+echo -e "# *脚本更新时间：2022年7月21日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -106,8 +106,8 @@ pre_install_config(){
 pre_install_config
 #录制服务器和H323安装包下载地址
 record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
-H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.3.1.12.tar.gz"
-H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20211231_2.3.1.12.tar"
+H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.4.1.13.tar.gz"
+H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20220712_2.4.1.13.tar.gz"
 	
 if [ $1 = '-436' ]
 then
@@ -394,12 +394,12 @@ echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-h323' ]
 then
-	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.3.1.12】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.4.1.13】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
 	${H323}
-	tar xvf h323gw_xd_pkg_2.3.1.12.tar.gz
-	cd ./h323gw_xd_pkg_2.3.1.12
+	tar xvf h323gw_xd_pkg_2.4.1.13.tar.gz
+	cd ./h323gw_xd_pkg_2.4.1.13
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
 	bash install.sh pri gc && bash install.sh pri gm 
@@ -407,7 +407,7 @@ then
 	echo -e "\033[33m 正在安装H323MCU，请耐心等待 \033[0m"
 	echo -e "\n"	
 	${H323MCU}
-	tar xvf centos7.installer_MCU20211231_2.3.1.12.tar
+	tar xvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
 	cd ./centos7.installer
 	bash install.sh
 fi
@@ -523,7 +523,7 @@ echo -e "# *如需外网使用请在路由器中映射上述端口              
 echo -e "#                                                                               "
 echo -e "# *后台默认用户名密码均为admin（4.35之后版本默认密码为HSTadmin123，用户名不变） "
 echo -e "#                                                                               "
-echo -e "# *使用过程中如有问题，请拨打400-1699-666转1号键联系我们                        "
+echo -e "# *使用过程中如有问题，请拨打400-1199-666转1号键联系我们                        "
 echo -e "#                                                                               "
 echo -e "# *本脚本作者：Sugar                                                            "
 echo -e "#                                                                               "
