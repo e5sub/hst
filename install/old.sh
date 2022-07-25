@@ -20,13 +20,13 @@ echo ""
 read N
 echo ""
 case $N in
-  4341) bash install.sh -434 ;;
-  4321) bash install.sh -432 ;;
-  4311) bash install.sh -431 ;;
-  40) bash install.sh -gc435;;
-  41) bash install.sh -gc434;;
-  42) bash install.sh -gc431;;
-  50) bash install.sh -m435;;
-  00) wget --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh -O ces.sh && chmod +x ces.sh && bash ces.sh;;
+  4341) bash cesinstall.sh -434 ;;
+  4321) bash cesinstall.sh -432 ;;
+  4311) bash cesinstall.sh -431 ;;
+  40) bash cesinstall.sh -gc435;;
+  41) bash cesinstall.sh -gc434;;
+  42) bash cesinstall.sh -gc431;;
+  50) bash cesinstall.sh -m435;;
+  00) wget --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/ces.sh -O ces.sh && chmod +x ces.sh && bash ces.sh;;
    *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac

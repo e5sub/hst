@@ -193,27 +193,3 @@ config_env
 config_ServiceConfig
 #重启服务器
 sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${IP} && sh set_protocol_addr.sh wss ${fsp_ip} && reboot
-
-echo -e "                                                                                "
-echo -e "#*******************************************************************************"*
-echo -e "#                                                                               "
-echo -e "# *安装完成                                                                     "
-echo -e "#                                                                               "
-echo -e "# *FSP外网映射端口：28000、20020、21000、29100、29400、29710                    "
-echo -e "#                                                                               "
-echo -e "# *CES默认端口：1089、8443                                                      "
-echo -e "#                                                                               "
-echo -e "# *内网后台（仅限安装单机版和集群版访问）：https://${LOCAL_IP}:8443             "
-echo -e "#                                                                               "
-echo -e "# *如需外网使用请在路由器中映射上述端口                                         "
-echo -e "#                                                                               "
-echo -e "# *后台默认用户名密码均为admin（4.35之后版本默认密码为HSTadmin123，用户名不变） "
-echo -e "#                                                                               "
-echo -e "# *使用过程中如有问题，请拨打400-1199-666转1号键联系我们                        "
-echo -e "#                                                                               "
-echo -e "# *本脚本作者：Sugar                                                            "
-echo -e "#                                                                               "
-echo -e "# *博客地址：https://www.yaohst.com                                             "
-echo -e "#                                                                               "
-echo -e "# ******************************************************************************"
-echo -e "                                                                                "
