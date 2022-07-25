@@ -21,4 +21,4 @@
 
 一键安装脚本：     
 
-bash <(curl -Ls https://ghproxy.com/https://github.com/e5sub/hst/blob/master/ces.sh)
+bash <(curl -Ls https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/ces.sh)
