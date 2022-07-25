@@ -108,7 +108,7 @@ config_H323(){
 # CES前置地址
 	sed -i "s|<front>.*|<front>TCP:${main_ip}:${front};</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GC本地IP	
-	sed -i "s|<local_ip>.*|<local_ip>${gc_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<local_ip>.*|<local_ip>${LOCAL_IP}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GM设备验证码
 	sed -i "s|<verify_code>.*|<verify_code>${verify_gmcode}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
 # H323 GM设备ID
@@ -118,7 +118,7 @@ config_H323(){
 # H323 GC服务器IP
 	sed -i "s|<tcp>.*|<tcp>tcp:${gc_ip}:1088</tcp>|"  /fsmeeting/h323gw_xd/gm/gm.xml
 # H323 GM本地IP
-	sed -i "s|<local_ip>.*|<local_ip>${gc_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
+	sed -i "s|<local_ip>.*|<local_ip>${LOCAL_IP}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
 	echo "写入成功，正在重启H323服务器，请耐心等待"
 }
 
