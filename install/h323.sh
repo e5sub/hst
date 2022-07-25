@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月20日                         "*
+echo -e "# *脚本更新时间：2022年7月25日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -27,7 +27,7 @@ pre_install_H323(){
     echo
     # Set h323gw_gcdevid
     read -ep "(请输入H323 gc网关设备ID):" h323gw_gcdevid
-    [ -z "${h323gw_gcdevid}" ] 
+    [ -z "${h323gw_gcdevid}" ] && h323gw_gcdevid=h323gw_gc
     echo
     echo "---------------------------"
     echo "H323 gc网关设备ID = ${h323gw_gcdevid}"
@@ -35,7 +35,7 @@ pre_install_H323(){
     echo
     # Set verify_gccode
     read -ep "(请输入H323 gc网关设备验证码):" verify_gccode
-    [ -z "${verify_gccode}" ] 
+    [ -z "${verify_gccode}" ] && verify_gccode=1114
     echo
     echo "---------------------------"
     echo "H323 gc网关设备验证码 = ${verify_gccode}"
@@ -43,7 +43,7 @@ pre_install_H323(){
     echo
 	# Set h323gw_gcdevid
     read -ep "(请输入H323 gm网关设备ID):" h323gw_gmdevid
-    [ -z "${h323gw_gmdevid}" ] 
+    [ -z "${h323gw_gmdevid}" ] && h323gw_gmdevid=h323gw_gm1
     echo
     echo "---------------------------"
     echo "H323 gm网关设备ID = ${h323gw_gmdevid}"
@@ -51,7 +51,7 @@ pre_install_H323(){
     echo
     # Set verify_gccode
     read -ep "(请输入H323 gm网关设备验证码):" verify_gmcode
-    [ -z "${verify_gmcode}" ] 
+    [ -z "${verify_gmcode}" ] && verify_gmcode=1114
     echo
     echo "---------------------------"
     echo "H323 gm网关设备验证码 = ${verify_gmcode}"
@@ -107,7 +107,7 @@ config_H323(){
 # CES前置地址
 	sed -i "s|<front>.*|<front>TCP:${main_ip}:${front};</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GC本地IP	
-	sed -i "s|<local_ip>.*|<local_ip>${IP}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<local_ip>.*|<local_ip>${gc_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GM设备验证码
 	sed -i "s|<verify_code>.*|<verify_code>${verify_gmcode}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
 # H323 GM设备ID

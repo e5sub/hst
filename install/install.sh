@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月21日                         "*
+echo -e "# *脚本更新时间：2022年7月25日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -91,7 +91,8 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
 
 pre_install_config(){
 # Set version
-    echo -e "\033[44;37m 温馨提示：安装非CES服务器时不受此项影响，请直接留空该项 \033[0m"
+    echo ""
+    echo -e "\033[44;37m 温馨提示：安装非CES服务器时不用输入安装的版本，请直接回车即可！ \033[0m"
     echo ""
     echo -e "输入 cluster main 安装集群版，输入 cluster node 安装节点服务器"
     echo ""
