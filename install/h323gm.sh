@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年4月20日                         "*
+echo -e "# *脚本更新时间：2022年7月25日                         "*
 echo -e "#                                                      "*
 echo -e "# *请按照提示填写相应的参数                            "* 
 echo -e "#                                                      "*
@@ -15,6 +15,7 @@ echo -e "# *如有问题或者遗漏的参数信息，请及时反馈           
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "                                                       "
+LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 # Pre-installation settings
 pre_install_gm(){
     # Set h323gw_gcdevid
@@ -41,9 +42,9 @@ pre_install_gm(){
     echo "H323 gc网关设备ID = ${h323gw_gcdevid}"
     echo "---------------------------"
     echo
-	# Set verify_gccode
+	# Set gc_ip
     read -ep "(请输入H323 gc服务器IP):" gc_ip
-    [ -z "${gc_ip}" ]
+    [ -z "${gc_ip}" ] 
     echo
     echo "---------------------------"
     echo "H323 gc服务器IP = ${gc_ip}"
@@ -58,7 +59,7 @@ config_gm(){
     sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_devid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gm/gm.xml
     sed -i "s|dev_id>.*|dev_id>${h323gw_gcdevid}</dev_id>|" /fsmeeting/h323gw_xd/gm/gm.xml
 	sed -i "s|<tcp>.*|<tcp>tcp:${gc_ip}:1088</tcp>|"  /fsmeeting/h323gw_xd/gm/gm.xml
-	sed -i "s|<local_ip>.*|<local_ip>=${IP}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
+	sed -i "s|<local_ip>.*|<local_ip>${gc_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
 	echo "写入成功，正在重启H323 gm服务器，请耐心等待"
 }
 

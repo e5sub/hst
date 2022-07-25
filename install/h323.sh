@@ -15,6 +15,7 @@ echo -e "# *如有问题或者遗漏的参数信息，请及时反馈           
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "                                                       "
+LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 # Pre-installation settings
 pre_install_H323(){
     # Set Main_ip
@@ -58,8 +59,8 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set verify_gccode
-    read -ep "(请输入H323 gc服务器IP，不填则默认127.0.0.1):" gc_ip
-    [ -z "${gc_ip}" ] && gc_ip=127.0.0.1
+    read -ep "(请输入H323 gc服务器IP，不填则默认获取网卡地址):" gc_ip
+    [ -z "${gc_ip}" ] && gc_ip=${LOCAL_IP}
     echo
     echo "---------------------------"
     echo "H323 gc服务器IP = ${gc_ip}"
@@ -117,7 +118,7 @@ config_H323(){
 # H323 GC服务器IP
 	sed -i "s|<tcp>.*|<tcp>tcp:${gc_ip}:1088</tcp>|"  /fsmeeting/h323gw_xd/gm/gm.xml
 # H323 GM本地IP
-	sed -i "s|<local_ip>.*|<local_ip>${IP}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
+	sed -i "s|<local_ip>.*|<local_ip>${gc_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
 	echo "写入成功，正在重启H323服务器，请耐心等待"
 }
 

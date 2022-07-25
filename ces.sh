@@ -125,12 +125,11 @@ echo -e ""
 echo -e " \033[32m 89. \033[0m 卸载CES服务器"
 echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
 echo -e ""
-echo -e " \033[32m 92. \033[0m 修改H323服务器配置信息（适用于2.4.1.13版本，单机版本选这个）"
-echo -e " \033[32m 93. \033[0m 修改H323 GM服务器配置信息（适用于2.4.1.13版本，集群节点选这个）"
-echo -e " \033[32m 94. \033[0m 修改录制服务器配置信息（适用于v3.2.6.17版本的录制服务器）"
-echo -e " \033[32m 95. \033[0m 修改CES V4.36 配置信息（需先安装FSP服务器）"
-echo -e " \033[32m 96. \033[0m 修改CES V4.35 配置信息（需先安装FSP服务器）"
-echo -e " \033[32m 97. \033[0m 修改节点服务器配置信息（主服务器勿用）"
+echo -e " \033[32m 91. \033[0m 修改H323服务器配置信息（适用于2.4.1.13版本）"
+echo -e " \033[32m 92. \033[0m 修改录制服务器配置信息（适用于v3.2.6.17版本的录制服务器）"
+echo -e " \033[32m 93. \033[0m 修改CES V4.36 配置信息（需先安装FSP服务器）"
+echo -e " \033[32m 94. \033[0m 修改CES V4.35 配置信息（需先安装FSP服务器）"
+echo -e " \033[32m 95. \033[0m 修改节点服务器配置信息（主服务器勿用）"
 echo -e ""
 echo -e " \033[32m 98. \033[0m 重置后台admin密码"
 echo -e " \033[32m 99. \033[0m 安装CES历史版本以及国产化版本"
@@ -160,12 +159,11 @@ case $N in
   88) systemctl stop firewalld.service && systemctl disable firewalld.service ;;
   89) bash install.sh -xiezai ;;
   90) bash install.sh -unfsp ;;
-  92) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh && bash h323.sh ;;
-  93) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323gm.sh && bash h323gm.sh ;;
-  94) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/storeservice.sh && bash storeservice.sh ;;
-  95) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/config.sh && bash config.sh ;;
-  96) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/webapp.sh && bash webapp.sh ;;
-  97) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh && bash node.sh ;;
+  91) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/h323.sh && bash h323.sh ;;
+  92) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/storeservice.sh && bash storeservice.sh ;;
+  93) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/config.sh && bash config.sh ;;
+  94) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/webapp.sh && bash webapp.sh ;;
+  95) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/node.sh && bash node.sh ;;
   98) bash install.sh -resetadmin ;;
   99) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/old.sh && bash old.sh ;;
   00) wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/zxces.sh && bash zxces.sh ;;
