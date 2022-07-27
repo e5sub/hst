@@ -316,7 +316,7 @@ fi
 #    if [[ -z "${fw}" ]]; then
 #          echo "不关闭系统防火墙" 
 #    else
-#          systemctl stop firewalld.service && systemctl disable firewalld.service 
+#         systemctl stop firewalld.service && systemctl disable firewalld.service 
 #         echo "系统防火墙已关闭"
 #		  echo "如需打开请输入systemctl start firewalld.service && systemctl enable firewalld.service"
 #    fi
