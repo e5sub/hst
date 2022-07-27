@@ -240,8 +240,26 @@ then
 	sleep 5s	
 	bash set_extra_ip.sh ${getIpAddress}
 fi
-#关闭系统防火墙
-systemctl stop firewalld.service && systemctl disable firewalld.service
+## 是否关闭系统防火墙
+#    if [[ -z "${fw}" ]]; then    
+#        read -e -r -p "是否需要关闭防火墙？留空默认不关闭[y/n] " input
+#        case $input in
+#        [yY][eE][sS] | [yY])            
+#            fw=true
+#            ;;
+#        [nN][oO] | [nN])            
+#            ;;
+#        *)                            
+#            ;;
+#            esac        
+#    fi
+#    if [[ -z "${fw}" ]]; then
+#          echo "不关闭系统防火墙" 
+#    else
+#          systemctl stop firewalld.service && systemctl disable firewalld.service 
+#         echo "系统防火墙已关闭"
+#		  echo "如需打开请输入systemctl start firewalld.service && systemctl enable firewalld.service"
+#    fi
 #删除安装脚本
 rm -f install.sh
 rm -f ces.sh
