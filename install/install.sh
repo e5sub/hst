@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月26日                         "*
+echo -e "# *脚本更新时间：2022年7月27日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -80,6 +80,36 @@ docker rm $(docker ps -qf status=exited)
 sleep 15s
 echo -e "正在启动FSP服务器"
 docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
+#开放FSP服务器防火墙端口
+firewall-cmd --zone=public --add-port=21000/tcp --permanent
+firewall-cmd --zone=public --add-port=21100/tcp --permanent
+firewall-cmd --zone=public --add-port=21001/tcp --permanent
+firewall-cmd --zone=public --add-port=21002/tcp --permanent
+firewall-cmd --zone=public --add-port=24000/tcp --permanent
+firewall-cmd --zone=public --add-port=25000/tcp --permanent
+firewall-cmd --zone=public --add-port=26000/tcp --permanent
+firewall-cmd --zone=public --add-port=27000/tcp --permanent
+firewall-cmd --zone=public --add-port=28000/tcp --permanent
+firewall-cmd --zone=public --add-port=28001/tcp --permanent
+firewall-cmd --zone=public --add-port=28002/tcp --permanent
+firewall-cmd --zone=public --add-port=28900/tcp --permanent
+firewall-cmd --zone=public --add-port=29000/tcp --permanent
+firewall-cmd --zone=public --add-port=29100/tcp --permanent
+firewall-cmd --zone=public --add-port=29200/tcp --permanent
+firewall-cmd --zone=public --add-port=29400/tcp --permanent
+firewall-cmd --zone=public --add-port=29400/udp --permanent
+firewall-cmd --zone=public --add-port=29700/tcp --permanent
+firewall-cmd --zone=public --add-port=29700/udp --permanent
+firewall-cmd --zone=public --add-port=29710/tcp --permanent
+firewall-cmd --zone=public --add-port=29710/udp --permanent
+firewall-cmd --zone=public --add-port=29800/tcp --permanent
+firewall-cmd --zone=public --add-port=20020/tcp --permanent
+firewall-cmd --zone=public --add-port=20010/tcp --permanent
+firewall-cmd --zone=public --add-port=20000/tcp --permanent
+firewall-cmd --zone=public --add-port=20014/tcp --permanent
+firewall-cmd --zone=public --add-port=23100/tcp --permanent
+firewall-cmd --zone=public --add-port=30504/tcp --permanent
+firewall-cmd --zone=public --add-port=30510/tcp --permanent
 echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-183fsp' ]
@@ -133,6 +163,36 @@ sleep 15s
 echo -e "正在启动FSP服务器"
 #docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss --add-host=ces.haoshitong.com:127.0.0.1 --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
 docker run -d -v /fsmeeting/fsp/fsmeeting:/fsmeeting -v /fsmeeting/fsp/middleware:/middleware -v /fsmeeting/fsp/boss:/boss -v /fsmeeting/fsp/nginx/conf.d:/etc/nginx/conf.d --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+#开放FSP服务器防火墙端口
+firewall-cmd --zone=public --add-port=21000/tcp --permanent
+firewall-cmd --zone=public --add-port=21100/tcp --permanent
+firewall-cmd --zone=public --add-port=21001/tcp --permanent
+firewall-cmd --zone=public --add-port=21002/tcp --permanent
+firewall-cmd --zone=public --add-port=24000/tcp --permanent
+firewall-cmd --zone=public --add-port=25000/tcp --permanent
+firewall-cmd --zone=public --add-port=26000/tcp --permanent
+firewall-cmd --zone=public --add-port=27000/tcp --permanent
+firewall-cmd --zone=public --add-port=28000/tcp --permanent
+firewall-cmd --zone=public --add-port=28001/tcp --permanent
+firewall-cmd --zone=public --add-port=28002/tcp --permanent
+firewall-cmd --zone=public --add-port=28900/tcp --permanent
+firewall-cmd --zone=public --add-port=29000/tcp --permanent
+firewall-cmd --zone=public --add-port=29100/tcp --permanent
+firewall-cmd --zone=public --add-port=29200/tcp --permanent
+firewall-cmd --zone=public --add-port=29400/tcp --permanent
+firewall-cmd --zone=public --add-port=29400/udp --permanent
+firewall-cmd --zone=public --add-port=29700/tcp --permanent
+firewall-cmd --zone=public --add-port=29700/udp --permanent
+firewall-cmd --zone=public --add-port=29710/tcp --permanent
+firewall-cmd --zone=public --add-port=29710/udp --permanent
+firewall-cmd --zone=public --add-port=29800/tcp --permanent
+firewall-cmd --zone=public --add-port=20020/tcp --permanent
+firewall-cmd --zone=public --add-port=20010/tcp --permanent
+firewall-cmd --zone=public --add-port=20000/tcp --permanent
+firewall-cmd --zone=public --add-port=20014/tcp --permanent
+firewall-cmd --zone=public --add-port=23100/tcp --permanent
+firewall-cmd --zone=public --add-port=30504/tcp --permanent
+firewall-cmd --zone=public --add-port=30510/tcp --permanent
 echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-h323' ]
