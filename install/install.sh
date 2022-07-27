@@ -141,7 +141,7 @@ then
 	echo -e "\n"
 	sleep 5s	
 	${H323}
-	tar xvf h323gw_xd_pkg_2.4.1.13.tar.gz
+	tar -zxvf h323gw_xd_pkg_2.4.1.13.tar.gz
 	cd ./h323gw_xd_pkg_2.4.1.13
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
@@ -150,7 +150,7 @@ then
 	echo -e "\033[33m 正在安装H323MCU，请耐心等待 \033[0m"
 	echo -e "\n"	
 	${H323MCU}
-	tar xvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
+	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
 	cd ./centos7.installer
 	bash install.sh
 fi
@@ -160,7 +160,7 @@ then
 	echo -e "\n"
 	sleep 5s	
 	${record326}
-	tar xvf fsp-record-3.2.6.17.tar.gz
+	tar -zxvf fsp-record-3.2.6.17.tar.gz
 	cd ./fsp-record-install-3.2.6.17
 	bash install.sh pri
 fi

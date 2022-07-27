@@ -28,7 +28,7 @@ pre_install_config(){
 pre_install_config
 
 #解压CES、FSP安装包
-tar zxvf ces_linux*.tar.gz && tar zxvf fsp_pack*.tar.gz
+tar -zxvf ces_linux*.tar.gz && tar -zxvf fsp_pack*.tar.gz
 #安装CES服务器
 cd ces_linux*/ && bash server_install.sh ${version}
 #安装FSP服务器

@@ -104,7 +104,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES436}
-	tar zxvf ces_linux_hst4.36.6.2.tar.gz
+	tar -zxvf ces_linux_hst4.36.6.2.tar.gz
 	cd ./ces_linux4.36.6.2
 	bash server_install.sh ${version}
 fi
@@ -114,7 +114,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES435}
-	tar zxvf ces_linux_hst4.35.4.5.tar.gz
+	tar -zxvf ces_linux_hst4.35.4.5.tar.gz
 	cd ./ces_linux4.35.4.5
 	bash server_install.sh ${version}
 fi
@@ -124,7 +124,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES434}
-	tar zxvf ces_linux_hst4.34.5.1.tar.gz
+	tar -zxvf ces_linux_hst4.34.5.1.tar.gz
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
@@ -134,7 +134,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES431}
-	tar zxvf ces_linux_hst4.31.3.5.tar.gz
+	tar -zxvf ces_linux_hst4.31.3.5.tar.gz
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh ${version}
 fi
@@ -144,7 +144,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${CES432}
-	tar zxvf ces_linux_hst4.32.8.5.tar.gz
+	tar -zxvf ces_linux_hst4.32.8.5.tar.gz
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh ${version}
 fi
@@ -154,7 +154,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${MIPSCES435}
-	tar zxvf ces_linux_mips4.35.1.30.tar.gz
+	tar -zxvf ces_linux_mips4.35.1.30.tar.gz
 	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
@@ -164,7 +164,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES435}
-	tar zxvf ces_linux_arm4.35.1.30.tar.gz
+	tar -zxvf ces_linux_arm4.35.1.30.tar.gz
 	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
@@ -174,7 +174,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES434}
-	tar zxvf ces_linux_arm4.34.5.1.tar.gz
+	tar -zxvf ces_linux_arm4.34.5.1.tar.gz
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
@@ -184,7 +184,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMCES431}
-	tar zxvf ces_linux_arm4.31.2.16.tar.gz
+	tar -zxvf ces_linux_arm4.31.2.16.tar.gz
 	cd ./ces_linux4.31.2.16
 	bash server_install.sh ${version}
 fi
@@ -197,7 +197,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES436}
-	tar zxvf ces_linux_zx4.36.6.2.tar.gz
+	tar -zxvf ces_linux_zx4.36.6.2.tar.gz
 	cd ./ces_linux4.36.6.2
 	bash server_install.sh ${version}
 fi
@@ -207,7 +207,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES435}
-	tar zxvf ces_linux_zx4.35.4.5.tar.gz
+	tar -zxvf ces_linux_zx4.35.4.5.tar.gz
 	cd ./ces_linux4.35.4.5
 	bash server_install.sh ${version}
 fi
@@ -217,7 +217,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES434}
-	tar zxvf ces_linux_zx4.34.5.1.tar.gz
+	tar -zxvf ces_linux_zx4.34.5.1.tar.gz
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
@@ -227,7 +227,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES431}
-	tar zxvf ces_linux_zx4.31.3.5.tar.gz
+	tar -zxvf ces_linux_zx4.31.3.5.tar.gz
 	cd ./ces_linux4.31.3.5
 	bash server_install.sh ${version}
 fi
@@ -237,7 +237,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ZXCES432}
-	tar zxvf ces_linux_zx4.32.8.5.tar.gz
+	tar -zxvf ces_linux_zx4.32.8.5.tar.gz
 	cd ./ces_linux4.32.8.5
 	bash server_install.sh ${version}
 fi
@@ -247,7 +247,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${MIPSZXCES435}
-	tar zxvf ces_linux_mips_zx4.35.1.30.tar.gz
+	tar -zxvf ces_linux_mips_zx4.35.1.30.tar.gz
 	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
@@ -257,7 +257,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES435}
-	tar zxvf ces_linux_arm_zx4.35.1.30.tar.gz
+	tar -zxvf ces_linux_arm_zx4.35.1.30.tar.gz
 	cd ./ces_linux4.35.1.30
 	bash server_install.sh ${version}
 fi
@@ -267,7 +267,7 @@ then
 	echo -e "\n"
 	sleep 5s
 	${ARMZXCES434}
-	tar zxvf ces_linux_arm_zx4.34.5.1.tar.gz
+	tar -zxvf ces_linux_arm_zx4.34.5.1.tar.gz
 	cd ./ces_linux4.34.5.1
 	bash server_install.sh ${version}
 fi
