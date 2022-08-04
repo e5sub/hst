@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月27日                         "*
+echo -e "# *脚本更新时间：2022年7月29日                         "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -22,7 +22,7 @@ FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
 FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
 FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.10"
 #录制服务器和H323安装包下载地址
-record326="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
+record328="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.8.66.tar.gz"
 H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.4.1.13.tar.gz"
 H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20220712_2.4.1.13.tar.gz"
 if [ $1 = '-141fsp' ]
@@ -214,14 +214,14 @@ then
 	cd ./centos7.installer
 	bash install.sh
 fi
-if [ $1 = '-record326' ]
+if [ $1 = '-record328' ]
 then
-	echo -e "\033[33m 【你选择的是安装录制服务器v3.2.6.17】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装录制服务器v3.2.8.66】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
-	${record326}
-	tar -zxvf fsp-record-3.2.6.17.tar.gz
-	cd ./fsp-record-install-3.2.6.17
+	${record328}
+	tar -zxvf fsp-record-3.2.8.66.tar.gz
+	cd ./fsp-record-3.2.8.66
 	bash install.sh pri
 fi
 ##########################################################################################服务器安装脚本到此结束##########################################################################################

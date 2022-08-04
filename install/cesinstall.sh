@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月26日                         "*
+echo -e "# *脚本更新时间：2022年8月4日                          "*
 echo -e "#                                                      "*
 echo -e "# *正在执行所选择的项目，请耐心等待                    "* 
 echo -e "#                                                      "*
@@ -97,7 +97,8 @@ pre_install_config(){
     echo "安装版本 = ${version}"
     echo "---------------------------"
     echo
-}	
+}
+pre_install_config	
 if [ $1 = '-436' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.36.6.2服务器】 \033[0m"
