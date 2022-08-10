@@ -6,4 +6,5 @@ iperf.exe -v
 @echo 如要取消测试请按Ctrl+C取消之后再关闭窗口。
 @echo.
 set /p SerIP=请输入服务端的ip：
-iperf.exe -c %SerIP% -p 5201 -f 'M' -t 6000 -w 64k -R
+set /p port=请输入服务端的端口号：
+iperf.exe -c %SerIP% -p %port% -f 'M' -t 6000 -w 64k -R

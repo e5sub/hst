@@ -6,5 +6,6 @@ iperf.exe -v
 @echo 如要取消测试请按Ctrl+C取消之后再关闭窗口。
 @echo.
 set /p SerIP=请输入服务端的ip：
+set /p port=请输入服务端的端口号：
 set /p size=请输入测试数据包大小（单位:M）：
-iperf.exe -u -c %SerIP% -p 5201 -f 'M' -b %size%M -t 6000 -R
+iperf.exe -u -c %SerIP% -p %port% -f 'M' -b %size%M -t 6000 -R
