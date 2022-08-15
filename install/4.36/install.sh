@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月19日                         "*
+echo -e "# *脚本更新时间：2022年8月15日                         "*
 echo -e "#                                                      "*
 echo -e "# *使用此脚本前，请将脚本服务器安装包放在同一目录下    "*
 echo -e "#                                                      "*
@@ -11,9 +11,23 @@ echo -e "                                                       "
 #获取内外网IP地址
 IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 ##########################################################################################以下是服务器安装脚本##########################################################################################
+## 自动下载FSP
+    if [[ -z "${ces}" ]]; then    
+        read -e -r -p "安装CES和FSP服务器(y) or 修改配置文件(n)？留空安装服务器[y/n] " input
+        case $input in
+        [yY][eE][sS] | [yY])        
+            ;;
+        [nN][oO] | [nN])
+            ces=true		
+            ;;
+        *)  		
+            ;;
+            esac        
+    fi
+    if [[ -z "${ces}" ]]; then
+    echo "已选择安装服务器"
 pre_install_config(){
 # Set version
-    echo -e "\033[44;37m 温馨提示：安装非CES服务器时不受此项影响，请直接留空该项 \033[0m"
     echo ""
     echo -e "输入 cluster main 安装集群版，输入 cluster node 安装节点服务器"
     echo ""
@@ -26,16 +40,16 @@ pre_install_config(){
     echo
 }
 pre_install_config
-
 #解压CES、FSP安装包
-tar -zxvf ces_linux*.tar.gz && tar -zxvf fsp_pack*.tar.gz
+    tar -zxvf ces_linux*.tar.gz && tar -zxvf fsp_pack*.tar.gz
 #安装CES服务器
-cd ces_linux*/ && bash server_install.sh ${version}
+    cd ces_linux*/ && bash server_install.sh ${version}
 #安装FSP服务器
-cd .. && cd fsp_pack && bash docker_install.sh
+    cd .. && cd fsp_pack && bash docker_install.sh  
+    else
+	echo "已选择修改配置文件"
 #修改服务器配置文件
-docker_id=`docker ps|grep fsp|awk '{print $1}'`
-echo -e "\033[44;37m 配置文件修改仅支持【4.36】版本的服务端，如不需要修改可按Ctrl+Z取消\033[0m"
+    docker_id=`docker ps|grep fsp|awk '{print $1}'`		
 pre_config(){
 # Set ces_ip
     read -ep "(请输入CES服务器IP，留空自动获取网卡IP):" ces_ip
@@ -193,3 +207,5 @@ config_env
 config_ServiceConfig
 #重启服务器
 sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${IP} && sh set_protocol_addr.sh wss ${fsp_ip} && reboot
+    fi
+
