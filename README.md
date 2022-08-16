@@ -29,5 +29,5 @@ bash <(curl -Ls https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/
 ![avatar](https://pan.yaohst.com/d/%E6%B8%B8%E5%AE%A2%E4%B8%8A%E4%BC%A0/douyin.png)     
 
 微信视频号：  
-![avatar](https://pan.yaohst.com/d/%E6%B8%B8%E5%AE%A2%E4%B8%8A%E4%BC%A0/weixin.jpg)  
+![avatar](https://pan.yaohst.com/d/%E6%B8%B8%E5%AE%A2%E4%B8%8A%E4%BC%A0/weixin.png)  
 
