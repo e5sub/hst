@@ -206,6 +206,9 @@ pre_config
 config_apaas
 config_env
 config_ServiceConfig
+#添加宿主机hosts解析，防止重启之后FSP端口启动不了
+echo "127.0.0.1   ces.haoshitong.com">> /etc/hosts
+echo "127.0.0.1   interface.haoshitong.com">> /etc/hosts
 #重启服务器
 sh set_wb_app_id.sh ${AppId} && sh set_extra_ip.sh ${IP} && sh set_protocol_addr.sh wss ${fsp_ip} && reboot
     fi
