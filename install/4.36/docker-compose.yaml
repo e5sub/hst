@@ -1,0 +1,44 @@
+version: '3'
+
+networks:
+  ces:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.212.12.0/24
+          gateway: 10.212.12.1
+
+services:
+  ces-nginx:
+    container_name: ces-nginx
+    image: harbor.hst.com:8443/cesweb/nginx:${CES_WEB_NGINX_VERSION:-web-4.36.5}
+    restart: always
+    networks:
+      - ces
+    ports:
+      - ${NGINX_HTTP_PORT:-8080}:${NGINX_HTTP_PORT:-8080}
+      - ${NGINX_HTTPS_PORT:-8443}:${NGINX_HTTPS_PORT:-8443}
+      - 38444:38444
+    env_file:
+      - .env
+    volumes:
+      - /usr/local/hst/hst.crt:/opt/hst.crt
+      - /usr/local/hst/hst.key:/opt/hst.key
+      - /usr/local/hst/nginx_38444.conf:/etc/nginx/conf.d/nginx_38444.conf
+
+  ces-manager:
+    container_name: ces-manager
+    restart: always
+    image: harbor.hst.com:8443/cesweb/ces_manager:${CES_WEB_MANAGER_VERSION:-web-4.36.5}
+    networks:
+      - ces
+    env_file:
+      - .env
+    extra_hosts:
+      - fmserver:${FM_SERVER_IP}
+    volumes:
+      - ${CES_INSTALL_DIR:-/usr/local/hst}:${CES_INSTALL_DIR:-/usr/local/hst}
+      - ${CES_FTP_DIR:-/usr/FMFiles/ftp}:${CES_FTP_DIR:-/usr/FMFiles/ftp}
+      - /usr/local/data/NetMeetingDataBackup:/usr/local/data/NetMeetingDataBackup
+
