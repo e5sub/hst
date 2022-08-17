@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年8月16日                         "*
+echo -e "# *脚本更新时间：2022年8月17日                         "*
 echo -e "#                                                      "*
 echo -e "# *博客：https://www.yaohst.com                        "*
 echo -e "#                                                      "*
@@ -212,6 +212,8 @@ config_env(){
 config_ServiceConfig(){
     echo "正在写入FMserver配置文件"	
     sed -i "s|<RabbitMQBroker>.*|<RabbitMQBroker>${fsp_ip}:24000:root:root@/</RabbitMQBroker>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<UserAuthAddr>.*|<UserAuthAddr>https://127.0.0.1:${https_prot}</UserAuthAddr>|"  /usr/local/hst/FMServer/ServiceConfig.xml
+    sed -i "s|<ConfigCenter>.*|<ConfigCenter>https://127.0.0.1:${https_prot}</ConfigCenter>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<UserId>.*|<UserId>${UserId}</UserId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<SecretKey>.*|<SecretKey>${SecretKey}</SecretKey>|"  /usr/local/hst/FMServer/ServiceConfig.xml
     sed -i "s|<AppId>.*|<AppId>${AppId}</AppId>|"  /usr/local/hst/FMServer/ServiceConfig.xml
