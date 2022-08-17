@@ -71,7 +71,7 @@ echo "# * 一键安装指定版本FSP服务器和CES服务器                   
 echo "#                                                                      "#
 echo "# * 脚本作者：Sugar                                                    "#
 echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年7月29日，如有遇到安装问题请及时反馈            "#
+echo "# * 脚本更新时间：2022年8月17日，如有遇到安装问题请及时反馈            "#
 echo "#                                                                      "#
 echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
 echo "#                                                                      "#
@@ -131,6 +131,7 @@ echo -e " \033[32m 92. \033[0m 修改录制服务器配置信息（适用于v3.2
 echo -e " \033[32m 93. \033[0m 修改CES V4.36 配置信息（需先安装FSP服务器）"
 echo -e " \033[32m 94. \033[0m 修改CES V4.35 配置信息（需先安装FSP服务器）"
 echo -e " \033[32m 95. \033[0m 修改节点服务器配置信息（主服务器勿用）"
+echo -e " \033[32m 96. \033[0m Nginx转发8443端口，隐藏公网8443后台页面（转发端口号18443）"
 echo -e ""
 echo -e " \033[32m 98. \033[0m 重置后台admin密码"
 echo -e " \033[32m 99. \033[0m 安装CES历史版本以及国产化版本"
@@ -165,6 +166,7 @@ case $N in
   93) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/config.sh && bash config.sh ;;
   94) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/webapp.sh && bash webapp.sh ;;
   95) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/node.sh && bash node.sh ;;
+  96) bash install.sh -nginx ;;
   98) bash install.sh -resetadmin ;;
   99) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/old.sh && bash old.sh ;;
   00) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/zxces.sh && bash zxces.sh ;;

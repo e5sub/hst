@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月29日                         "*
+echo -e "# *脚本更新时间：2022年8月17日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -286,6 +286,15 @@ then
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
 	rm -rf /fsmeeting/fsp/
+fi
+if [ $1 = '-nginx' ]
+then
+	echo -e "\033[33m 【你选择的是Nginx转发8443端口，隐藏公网8443后台页面（转发端口号18443）】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	cd /usr/local/hst
+    wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/nginx.tar.gz	
+	tar zxvf nginx.tar.gz && service fmservice restart
 fi
 if [ $1 = '-resetadmin' ]
 then
