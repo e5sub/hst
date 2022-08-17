@@ -19,13 +19,13 @@ services:
     ports:
       - ${NGINX_HTTP_PORT:-8080}:${NGINX_HTTP_PORT:-8080}
       - ${NGINX_HTTPS_PORT:-8443}:${NGINX_HTTPS_PORT:-8443}
-      - 38444:38444
+      - 18443:18443
     env_file:
       - .env
     volumes:
       - /usr/local/hst/hst.crt:/opt/hst.crt
       - /usr/local/hst/hst.key:/opt/hst.key
-      - /usr/local/hst/nginx_38444.conf:/etc/nginx/conf.d/nginx_38444.conf
+      - /usr/local/hst/nginx_18443.conf:/etc/nginx/conf.d/nginx_18443.conf
 
   ces-manager:
     container_name: ces-manager
