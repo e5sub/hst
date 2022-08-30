@@ -21,6 +21,29 @@ sys_install(){
         echo 'docker 已安装，继续操作'
     fi
 }
+sh_ver="1.0.0"
+Error="${Red_font_prefix}[错误]${Font_color_suffix}"
+github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
+#更新脚本
+Update_Shell(){
+	echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
+	sh_new_ver=$(wget --no-check-certificate -qO- "http://${github}/ces.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
+	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 检测最新版本失败 !" && start_menu
+	if [[ ${sh_new_ver} != ${sh_ver} ]]; then
+		echo -e "发现新版本[ ${sh_new_ver} ]，是否更新？[Y/n]"
+		read -p "(默认: y):" yn
+		[[ -z "${yn}" ]] && yn="y"
+		if [[ ${yn} == [Yy] ]]; then
+			wget -N --no-check-certificate http://${github}/ces.sh && chmod +x ces.sh
+			echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
+		else
+			echo && echo "	已取消..." && echo
+		fi
+	else
+		echo -e "当前已是最新版本[ ${sh_new_ver} ] !"
+		sleep 5s
+	fi
+}
 #脚本启动
 sys_install
 #更新Centos7
@@ -65,21 +88,20 @@ disk_total_size=$( calc_disk ${disk_size1[@]} )
 disk_used_size=$( calc_disk ${disk_size2[@]} )
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
-echo "# #####################################################################"#
-echo "#                                                                      "#
-echo "# * 一键安装指定版本FSP服务器和CES服务器                               "#
-echo "#                                                                      "#
-echo "# * 脚本作者：Sugar                                                    "#
-echo "#                                                                      "#
-echo "# * 脚本更新时间：2022年8月17日，如有遇到安装问题请及时反馈            "#
-echo "#                                                                      "#
-echo "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "#
-echo "#                                                                      "#
-echo "# * 博客地址：https://www.yaohst.com                                   "#
-echo "#                                                                      "#
-echo "                                                                       "#
-echo "#------------------------- 本机硬件配置信息 ---------------------------"#
-echo "                                                                       "
+echo -e "# #####################################################################"#
+echo -e "#                                                                      "
+echo -e "# * 一键安装指定版本FSP服务器和CES服务器                               "
+echo -e "#                                                                      "
+echo -e "# * 脚本作者：Sugar    版本：${sh_ver}                                 "
+echo -e "#                                                                      "
+echo -e "# * 抖音、微信视频号：萌萌哒菜芽，欢迎关注！                           "
+echo -e "#                                                                      "
+echo -e "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "
+echo -e "#                                                                      "
+echo -e "# * 博客地址：https://www.yaohst.com                                   "
+echo -e "#                                                                      "
+echo -e "#------------------------- 本机硬件配置信息 ---------------------------"#
+echo -e "                                                                       "
 echo -e "# * CPU 型号             : ${SKYBLUE}$cname${PLAIN}                 "
 echo -e "# * CPU 核心数           : ${SKYBLUE}$cores${PLAIN}                 "
 echo -e "# * CPU 频率             : ${SKYBLUE}$freq MHz${PLAIN}              "
@@ -94,9 +116,12 @@ echo -e "# * 内核                 : ${SKYBLUE}$kern${PLAIN}"
 echo -e "# * 本地IP               : ${LOCAL_IP}"
 echo -e "# * 外网IP               : ${getIpAddress}"
 echo "                                                                       "
-echo "# #####################################################################"#
+echo -e "# #####################################################################"#
 echo "                                                       "
+start_menu(){
 echo "请选择需要安装的版本【标准版】:"
+echo ""
+echo -e " \033[32m 0. \033[0m 更新安装脚本"
 echo ""
 echo -e " \033[31m=====*4.36版本*=====\033[0m"
 echo -e " \033[32m 1. \033[0m CES v4.36.6.2服务器"
@@ -142,6 +167,7 @@ echo ""
 read N 
 echo ""
 case $N in
+  0) Update_Shell ;;
   1) bash cesinstall.sh -436 ;;
   2) bash cesinstall.sh -435 ;;
   3) bash cesinstall.sh -434 ;;
@@ -170,5 +196,12 @@ case $N in
   98) bash install.sh -resetadmin ;;
   99) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/old.sh && bash old.sh ;;
   00) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/zxces.sh && bash zxces.sh ;;
-  *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
+  *)
+      clear
+      echo -e "${Error}:请输入正确的数字"
+      sleep 5s
+      start_menu
+	  ;;
 esac
+}
+start_menu
