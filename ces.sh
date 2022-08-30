@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.0.2"
+sh_ver="1.0.3"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -131,9 +131,8 @@ echo -e " \033[32m 2. \033[0m CES v4.35.4.5服务器"
 echo -e " \033[31m=====*4.34版本*=====\033[0m"
 echo -e " \033[32m 3. \033[0m CES v4.34.5.1服务器"
 echo -e " \033[44;37m 安装FSP服务器 \033[0m"
-echo -e " \033[32m 60. \033[0m 安装FSP v1.4.1.17服务器（配套4.31以下服务器）"
-echo -e " \033[32m 61. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
-echo -e " \033[32m 62. \033[0m 安装FSP v1.8.3.10服务器（配套4.36服务器）"
+echo -e " \033[32m 60. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
+echo -e " \033[32m 61. \033[0m 安装FSP v1.8.3.10服务器（配套4.36服务器）"
 echo -e " \033[44;37m 安装H323服务器 \033[0m"
 echo -e " \033[32m 70. \033[0m 安装H323网关服务器v2.4.1.13（私有云版本）"
 echo -e " \033[44;37m 安装录制服务器 \033[0m"
@@ -145,12 +144,11 @@ echo -e " \033[32m 82. \033[0m 安装HTML5网络速度测试工具(服务端)（
 echo -e " \033[32m 83. \033[0m 安装Frp内网穿透服务器（配置文件存放路径/frp/frps.ini）"
 echo -e " \033[32m 84. \033[0m 安装Frp内网穿透客户端（配置文件存放路径/frp/frpc.ini）"
 echo -e " \033[32m 85. \033[0m 安装动态域名解析服务（浏览器打开主机IP:9876）"
-echo -e " \033[32m 86. \033[0m 安装ansible（用于批量管理服务器）"
-echo -e " \033[32m 87. \033[0m 网络同步服务器时间（需要服务器能连接公网）"
-echo -e " \033[32m 88. \033[0m 放行服务器所有端口"
+echo -e " \033[32m 86. \033[0m 网络同步服务器时间（需要服务器能连接公网）"
+echo -e " \033[32m 87. \033[0m 放行服务器所有端口"
 echo -e ""
-echo -e " \033[32m 89. \033[0m 卸载CES服务器"
-echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
+echo -e " \033[32m 88. \033[0m 卸载CES服务器"
+echo -e " \033[32m 99. \033[0m 卸载FSP服务器"
 echo -e ""
 echo -e " \033[32m 91. \033[0m 修改H323服务器配置信息（适用于2.4.1.13版本）"
 echo -e " \033[32m 92. \033[0m 修改CES V4.36 配置信息（需先安装FSP服务器）"
@@ -170,9 +168,8 @@ case $N in
   1) bash cesinstall.sh -436 ;;
   2) bash cesinstall.sh -435 ;;
   3) bash cesinstall.sh -434 ;;
-  60) bash install.sh -141fsp ;;
-  61) bash install.sh -175fsp ;;
-  62) bash install.sh -183fsp ;;
+  60) bash install.sh -175fsp ;;
+  61) bash install.sh -183fsp ;;
   70) bash install.sh -h323 ;;
   75) bash install.sh -record328 ;;
   80) docker run -d --restart=always -p 1935:1935 -p 1985:1985 -p 8081:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs ossrs/srs:4 ./objs/srs -c conf/https.docker.conf ;;
@@ -181,11 +178,10 @@ case $N in
   83) bash install.sh -frps ;;
   84) bash install.sh -frpc ;;
   85) docker run -d --name ddns-go --restart=always --net=host -v /opt/ddns-go:/root jeessy/ddns-go ;;
-  86) yum -y install epel-release.noarch && yum install -y ansible && yum install -y tree ;;
-  87) bash install.sh -time ;;
-  88) systemctl stop firewalld.service && systemctl disable firewalld.service ;;
-  89) bash install.sh -xiezai ;;
-  90) bash install.sh -unfsp ;;
+  86) bash install.sh -time ;;
+  87) systemctl stop firewalld.service && systemctl disable firewalld.service ;;
+  88) bash install.sh -xiezai ;;
+  89) bash install.sh -unfsp ;;
   91) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323.sh && bash h323.sh ;;
   92) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/config.sh && bash config.sh ;;
   93) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/node.sh && bash node.sh ;;
