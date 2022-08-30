@@ -153,11 +153,9 @@ echo -e " \033[32m 89. \033[0m 卸载CES服务器"
 echo -e " \033[32m 90. \033[0m 卸载FSP服务器"
 echo -e ""
 echo -e " \033[32m 91. \033[0m 修改H323服务器配置信息（适用于2.4.1.13版本）"
-#echo -e " \033[32m 92. \033[0m 修改录制服务器配置信息（适用于v3.2.6.17版本的录制服务器）"
-echo -e " \033[32m 93. \033[0m 修改CES V4.36 配置信息（需先安装FSP服务器）"
-#echo -e " \033[32m 94. \033[0m 修改CES V4.35 配置信息（需先安装FSP服务器）"
-echo -e " \033[32m 95. \033[0m 修改节点服务器配置信息（主服务器勿用）"
-echo -e " \033[32m 96. \033[0m Nginx转发8443端口，隐藏公网8443后台页面（转发端口号18443）"
+echo -e " \033[32m 92. \033[0m 修改CES V4.36 配置信息（需先安装FSP服务器）"
+echo -e " \033[32m 93. \033[0m 修改节点服务器配置信息（主服务器勿用）"
+echo -e " \033[32m 94. \033[0m Nginx转发8443端口，隐藏公网8443后台页面（转发端口号18443）"
 echo -e ""
 echo -e " \033[32m 98. \033[0m 重置后台admin密码"
 echo -e " \033[32m 99. \033[0m 安装CES历史版本以及国产化版本"
@@ -189,11 +187,9 @@ case $N in
   89) bash install.sh -xiezai ;;
   90) bash install.sh -unfsp ;;
   91) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323.sh && bash h323.sh ;;
-#  92) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/storeservice.sh && bash storeservice.sh ;;
-  93) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/config.sh && bash config.sh ;;
-#  94) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/webapp.sh && bash webapp.sh ;;
-  95) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/node.sh && bash node.sh ;;
-  96) bash install.sh -nginx ;;
+  92) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/config.sh && bash config.sh ;;
+  93) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/node.sh && bash node.sh ;;
+  94) bash install.sh -nginx ;;
   98) bash install.sh -resetadmin ;;
   99) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/old.sh && bash old.sh ;;
   00) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/zxces.sh && bash zxces.sh ;;
