@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年7月25日                         "*
+echo -e "# *脚本更新时间：2022年8月31日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -20,12 +20,12 @@ echo -e "                                                       "
 LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 # Pre-installation settings
 pre_install_H323(){
-    # Set Main_ip
-    read -ep "(请输入CES服务器IP地址或者域名):" main_ip
-    [ -z "${Main_ip}" ]
+    # Set ces_ip
+    read -ep "(请输入CES服务器IP地址或者域名):" ces_ip
+    [ -z "${ces_ip}" ]
     echo
     echo "---------------------------"
-    echo "CES服务器IP = ${main_ip}"
+    echo "CES服务器IP = ${ces_ip}"
     echo "---------------------------"
     echo
     # Set h323gw_gcdevid
@@ -61,7 +61,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set verify_gccode
-    read -ep "(请输入H323 gc服务器IP，不填则默认获取网卡地址):" gc_ip
+    read -ep "(请输入H323 gc服务器IP，留空默认获取网卡地址):" gc_ip
     [ -z "${gc_ip}" ] && gc_ip=${LOCAL_IP}
     echo
     echo "---------------------------"
@@ -69,7 +69,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set old_ces
-    read -ep "(是否为4.30以下CES服务器，1：是，不填则默认为不是):" old_ces
+    read -ep "(是否为4.30以下CES服务器，1：是，留空默认不是):" old_ces
     [ -z "${old_ces}" ] && old_ces=0
     echo
     echo "---------------------------"
@@ -102,13 +102,13 @@ config_H323(){
 # H323 GC设备ID	
     sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_gcdevid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # CES数据库IP
-    sed -i "s|<dbip>.*|<dbip>${main_ip}</dbip>|" /fsmeeting/h323gw_xd/gc/gc.xml
+    sed -i "s|<dbip>.*|<dbip>${ces_ip}</dbip>|" /fsmeeting/h323gw_xd/gc/gc.xml
 # 是否为4.30以下CES
     sed -i "s|<old_ces.*|<old_ces type="'"private"'">${old_ces}</old_ces>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # CES配置中心地址
-	sed -i "s|<register_url>.*|<register_url>https://${main_ip}:${port}</register_url>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<register_url>.*|<register_url>https://${ces_ip}:${port}</register_url>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # CES前置地址
-	sed -i "s|<front>.*|<front>TCP:${main_ip}:${front};</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<front>.*|<front>TCP:${ces_ip}:${front};</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GC本地IP	
 	sed -i "s|<local_ip>.*|<local_ip>${LOCAL_IP}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
 # H323 GM设备验证码
