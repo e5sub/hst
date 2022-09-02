@@ -233,7 +233,7 @@ then
 	${H323MCU}
 	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
 	chmod -R 777 ./centos7.installer && cd ./centos7.installer
-	bash install.sh  
+	yum -y install bzip2 && bash install.sh  
 fi
 if [ $1 = '-323' ]
 then
@@ -254,7 +254,7 @@ then
 	${H323MCU}
 	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
 	chmod -R 777 ./centos7.installer && cd ./centos7.installer
-	bash install.sh
+	yum -y install bzip2 && bash install.sh 
 fi
 if [ $1 = '-record328' ]
 then
