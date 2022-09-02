@@ -188,8 +188,8 @@ case $N in
 #  87) bash install.sh -frpc ;;
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
-  90) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323.sh && bash h323.sh ;;
-  91) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/323.sh && bash 323.sh ;;
+  90) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323pri.sh && bash h323pri.sh ;;
+  91) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323pub.sh && bash h323pub.sh ;;
   92) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/config.sh && bash config.sh ;;
   93) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/node.sh && bash node.sh ;;
   94) bash install.sh -nginx ;;
