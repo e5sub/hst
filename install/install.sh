@@ -222,18 +222,19 @@ then
 	sleep 5s	
 	${H323}
 	tar -zxvf h323gw_xd_pkg_2.4.2.2.tar.gz
-	chmod -R 777 ./h323gw_xd_pkg_2.4.2.2 
+	chmod -R 777 h323gw_xd_pkg_2.4.2.2 
 	cd ./h323gw_xd_pkg_2.4.2.2
     echo -e "\n"
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
-	bash install.sh pri gc && bash install.sh pri gm 
+	bash install.sh pri gc 
+	bash install.sh pri gm 
 	sleep 10s	
 	echo -e "\033[33m 正在安装H323MCU，请耐心等待 \033[0m"
 	echo -e "\n"	
 	${H323MCU}
 	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
-	chmod -R 777 ./centos7.installer 
+	chmod -R 777 centos7.installer 
 	cd ./centos7.installer	
 	bash install.sh  
 fi
@@ -244,19 +245,21 @@ then
 	sleep 5s	
 	${H323}
 	tar -zxvf h323gw_xd_pkg_2.4.2.2.tar.gz
-	chmod -R 777 ./h323gw_xd_pkg_2.4.2.2 
+	chmod -R 777 h323gw_xd_pkg_2.4.2.2 
 	cd ./h323gw_xd_pkg_2.4.2.2
     echo -e "\n"
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
-	bash install.sh pub gc && bash install.sh pub gm && bash install.sh pub ma 
+	bash install.sh pub gc 
+	bash install.sh pub gm 
+	bash install.sh pub ma 
 	sleep 10s
     echo -e "\n"	
 	echo -e "\033[33m 正在安装H323MCU，请耐心等待 \033[0m"
 	echo -e "\n"	
 	${H323MCU}
 	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
-	chmod -R 777 ./centos7.installer
+	chmod -R 777 centos7.installer
 	cd ./centos7.installer	
 	bash install.sh 
 fi
