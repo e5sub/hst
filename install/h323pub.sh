@@ -109,7 +109,7 @@ config_H323(){
 #    sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_devid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gm/gm.xml
 #    sed -i "s|<verify_code>.*|<verify_code>${verify_code}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
 	sed -i "s|<local_ip>.*|<local_ip>${local_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
-	sed -i "s|<dev_id>.*|<local_ip>${h323gw_devid}</dev_id>|"    /fsmeeting/h323gw_xd/gm/gm.xml
+	sed -i "s|<dev_id>.*|<dev_id>${h323gw_devid}</dev_id>|"    /fsmeeting/h323gw_xd/gm/gm.xml
     sed -i "s|<tcp>.*|<tcp>tcp:${local_ip}:1088</tcp>|"    /fsmeeting/h323gw_xd/gm/gm.xml
     sed -i "s|<GateWebSocketUrl>.*|<GateWebSocketUrl>${GateWebSocketUrl}</GateWebSocketUrl>|"    /fsmeeting/ma323/ma323_config.xml
     sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = FMServiceIceGrid/Locator:tcp -h boss-ice1.hst.com -p 10001:tcp -h boss-ice2.hst.com -p 10001|"  /fsmeeting/h323gw_xd/gc/ice.property.cfg
