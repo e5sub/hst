@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年8月31日                         "*
+echo -e "# *脚本更新时间：2022年9月2日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -17,79 +17,79 @@ echo -e "# *如有问题或者遗漏的参数信息，请及时反馈           
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "                                                       "
-LOCAL_IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 # Pre-installation settings
 pre_install_H323(){
-    # Set ces_ip
-    read -ep "(请输入CES服务器IP地址或者域名):" ces_ip
-    [ -z "${ces_ip}" ]
+    # Set h323gw_devid
+    read -ep "(请输入下沉网关的网关号，BOSS后台获取):" h323gw_devid
+    [ -z "${h323gw_devid}" ]
     echo
     echo "---------------------------"
-    echo "CES服务器IP = ${ces_ip}"
+    echo "下沉网关的网关号 = ${h323gw_devid}"
     echo "---------------------------"
     echo
-    # Set h323gw_gcdevid
-    read -ep "(请输入H323 gc网关设备ID):" h323gw_gcdevid
-    [ -z "${h323gw_gcdevid}" ] && h323gw_gcdevid=h323gw_gc
+    # Set verify_code
+    read -ep "(请输入下沉网关的验证码，BOSS后台获取):" verify_code
+    [ -z "${verify_code}" ] 
     echo
     echo "---------------------------"
-    echo "H323 gc网关设备ID = ${h323gw_gcdevid}"
+    echo "下沉网关的验证码 = ${verify_code}"
     echo "---------------------------"
     echo
-    # Set verify_gccode
-    read -ep "(请输入H323 gc网关设备验证码):" verify_gccode
-    [ -z "${verify_gccode}" ] && verify_gccode=1114
+	# Set company_id
+    read -ep "(请输入企业ID，BOSS后台获取):" company_id
+    [ -z "${company_id}" ] 
     echo
     echo "---------------------------"
-    echo "H323 gc网关设备验证码 = ${verify_gccode}"
+    echo "企业ID = ${company_id}"
     echo "---------------------------"
     echo
-	# Set h323gw_gcdevid
-    read -ep "(请输入H323 gm网关设备ID):" h323gw_gmdevid
-    [ -z "${h323gw_gmdevid}" ] && h323gw_gmdevid=h323gw_gm1
+	# Set local_ip
+    read -ep "(请输入gc本机地址，留空默认获取网卡IP):" local_ip
+    [ -z "${local_ip}" ] && local_ip=${IP}
     echo
     echo "---------------------------"
-    echo "H323 gm网关设备ID = ${h323gw_gmdevid}"
+    echo "gc本机地址 = ${local_ip}"
     echo "---------------------------"
     echo
-    # Set verify_gccode
-    read -ep "(请输入H323 gm网关设备验证码):" verify_gmcode
-    [ -z "${verify_gmcode}" ] && verify_gmcode=1114
+    # Set domain
+    read -ep "(请输入企业所在域，没特别需求此项请留空):" domain
+    [ -z "${domain}" ] && domain=fsp2
     echo
     echo "---------------------------"
-    echo "H323 gm网关设备验证码 = ${verify_gmcode}"
+    echo "企业所在域 = ${domain}"
     echo "---------------------------"
     echo
-	# Set verify_gccode
-    read -ep "(请输入H323 gc服务器IP，留空默认获取网卡地址):" gc_ip
-    [ -z "${gc_ip}" ] && gc_ip=${LOCAL_IP}
+	# Set app_id
+    read -ep "(请输入网关的应用ID，没特别需求此项请留空):" app_id
+    [ -z "${app_id}" ] && app_id=2688c8f746ebc1b28d968d2f1823d704
     echo
     echo "---------------------------"
-    echo "H323 gc服务器IP = ${gc_ip}"
+    echo "网关的应用id = ${app_id}"
     echo "---------------------------"
     echo
-	# Set old_ces
-    read -ep "(是否为4.30以下CES服务器，1：是，留空默认不是):" old_ces
-    [ -z "${old_ces}" ] && old_ces=0
+	# Set access_addr
+    read -ep "(请输入fsp access地址，没特别需求此项请留空):" access_addr
+    [ -z "${access_addr}" ] && access_addr=https://mt.hst.com/paas/server/address
     echo
     echo "---------------------------"
-    echo "是否为4.30以下CES服务器 = ${old_ces}"
+    echo "fsp access地址 = ${access_addr}"
     echo "---------------------------"
     echo
-	# Set port
-    read -ep "(请输入服务器配置中心端口，不填则默认8443):" port
-    [ -z "${port}" ] && port=8443
+	# Set app_key
+    read -ep "(请输入访问配置中心需要的key，没特别需求此项请留空):" app_key
+    [ -z "${app_key}" ] && app_key=a4483b4aa16578ef714c8162717bd0aa
     echo
     echo "---------------------------"
-    echo "CES配置中心端口 = ${port}"
+    echo "配置中心需要的key = ${app_key}"
     echo "---------------------------"
     echo
-	# Set front
-    read -ep "(请输入服务器会议业务端口，不填则默认1089):" front
-    [ -z "${front}" ] && front=1089
+	# Set GateWebSocketUrl
+    read -ep "(请输入运维网关的web地址,默认为部署手册上的地址):" GateWebSocketUrl
+    [ -z "${GateWebSocketUrl}" ] && GateWebSocketUrl=wss://omc-gw.haoshitong.com/websocket
     echo
     echo "---------------------------"
-    echo "会议业务端口 = ${front}"
+    echo "运维网关的web地址 = ${GateWebSocketUrl}"
     echo "---------------------------"
     echo
 }
@@ -97,30 +97,22 @@ IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | gre
 # Config H323
 config_H323(){
     echo "正在写入H323服务器配置文件"
-# H323 GC设备验证码	
-    sed -i "s|<verify_code>.*|<verify_code>${verify_gccode}</verify_code>|"  /fsmeeting/h323gw_xd/gc/gc.xml
-# H323 GC设备ID	
-    sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_gcdevid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gc/gc.xml
-# CES数据库IP
-    sed -i "s|<dbip>.*|<dbip>${ces_ip}</dbip>|" /fsmeeting/h323gw_xd/gc/gc.xml
-# 是否为4.30以下CES
-    sed -i "s|<old_ces.*|<old_ces type="'"private"'">${old_ces}</old_ces>|"  /fsmeeting/h323gw_xd/gc/gc.xml
-# CES配置中心地址
-	sed -i "s|<register_url>.*|<register_url>https://${ces_ip}:${port}</register_url>|"  /fsmeeting/h323gw_xd/gc/gc.xml
-# CES前置地址
-	sed -i "s|<front>.*|<front>TCP:${ces_ip}:${front};</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
-# H323 GC本地IP	
-	sed -i "s|<local_ip>.*|<local_ip>${LOCAL_IP}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
-# H323 GM设备验证码
-	sed -i "s|<verify_code>.*|<verify_code>${verify_gmcode}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
-# H323 GM设备ID
-    sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_gmdevid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gm/gm.xml
-# H323 GC设备ID
-    sed -i "s|<dev_id>.*|<dev_id>${h323gw_gcdevid}</dev_id>|" /fsmeeting/h323gw_xd/gm/gm.xml
-# H323 GC服务器IP
-	sed -i "s|<tcp>.*|<tcp>tcp:${gc_ip}:1088</tcp>|"  /fsmeeting/h323gw_xd/gm/gm.xml
-# H323 GM本地IP
-	sed -i "s|<local_ip>.*|<local_ip>${LOCAL_IP}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
+    sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_devid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+    sed -i "s|<verify_code>.*|<verify_code>${verify_code}</verify_code>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+    sed -i "s|<domain>.*|<domain>${domain}</domain>|" /fsmeeting/h323gw_xd/gc/gc.xml
+    sed -i "s|<app_id>.*|<app_id>${app_id}</app_id>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<company_id>.*|<company_id>${company_id}</company_id>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<access_addr>.*|<access_addr>${access_addr}</access_addr>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<local_ip>.*|<local_ip>${local_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
+	sed -i "s|<front>.*|<front>TCP:a.hst.com:1089;TCP:t.hst.com:1089;</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+    sed -i "s|<app_key>.*|<app_key>${app_key}</app_key>|"  /fsmeeting/h323gw_xd/gc/gc.xml
+    sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_devid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gm/gm.xml
+    sed -i "s|<verify_code>.*|<verify_code>${verify_code}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
+	sed -i "s|<local_ip>.*|<local_ip>${local_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
+	sed -i "s|<dev_id>.*|<local_ip>${h323gw_devid}</dev_id>|"    /fsmeeting/h323gw_xd/gm/gm.xml
+    sed -i "s|<tcp>.*|<tcp>tcp:${local_ip}:1088</tcp>|"    /fsmeeting/h323gw_xd/gm/gm.xml
+    sed -i "s|<GateWebSocketUrl>.*|<GateWebSocketUrl>${GateWebSocketUrl}</GateWebSocketUrl>|"    /fsmeeting/ma323/ma323_config.xml
+    sed -i "s|Ice.Default.Locator.*|Ice.Default.Locator = FMServiceIceGrid/Locator:tcp -h boss-ice1.hst.com -p 10001:tcp -h boss-ice2.hst.com -p 10001|"  /fsmeeting/h323gw_xd/gc/ice.property.cfg
 	echo "写入成功，正在重启H323服务器，请耐心等待"
 }
 

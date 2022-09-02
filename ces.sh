@@ -174,8 +174,8 @@ case $N in
   3) bash cesinstall.sh -434 ;;
   60) bash install.sh -175fsp ;;
   61) bash install.sh -183fsp ;;
-  70) bash install.sh -h323 ;;
-  71) bash install.sh -323 ;;
+  70) bash install.sh -h323pri ;;
+  71) bash install.sh -h323pub ;;
   75) bash install.sh -record328 ;;
   80) docker run -d --restart=always -p 1935:1935 -p 1985:1985 -p 8081:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs ossrs/srs:4 ./objs/srs -c conf/https.docker.conf ;;
   81) docker run -d --restart=always -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s ;;  
