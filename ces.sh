@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.0.4"
+sh_ver="1.0.5"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -181,7 +181,8 @@ case $N in
   84) bash install.sh -frpc ;;
   85) docker run -d --name ddns-go --restart=always --net=host -v /opt/ddns-go:/root jeessy/ddns-go ;;
   86) bash install.sh -time ;;
-  87) systemctl stop firewalld.service && systemctl disable firewalld.service ;;
+  87) systemctl stop firewalld.service
+      systemctl disable firewalld.service ;;
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
   91) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323.sh && bash h323.sh ;;
