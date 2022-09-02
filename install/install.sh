@@ -29,10 +29,16 @@ H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/0
 H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20220712_2.4.1.13.tar.gz"
 if [ $1 = '-141fsp' ]
 then
-	echo -e "\033[33m 【你选择的是安装FSP v1.4.1.17服务器】 \033[0m"
-	echo -e "\n"
-	sleep 5s
-	docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ${FSP141}
+echo -e "\033[33m 【你选择的是安装FSP v1.4.1.17服务器】 \033[0m"
+echo -e "\n"
+sleep 5s
+if ! type docker >/dev/null 2>&1; then
+echo 'docker 未安装 正在安装中';
+curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
+else 
+echo 'docker 已安装，继续操作'
+fi
+docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ${FSP141}
 fi
 if [ $1 = '-175fsp' ]
 then
@@ -62,6 +68,12 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
+if ! type docker >/dev/null 2>&1; then
+echo 'docker 未安装 正在安装中';
+curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
+else 
+echo 'docker 已安装，继续操作'
+fi
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/set_extra_ip.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/set_protocol_addr.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/set_store_proxy.sh
@@ -142,6 +154,12 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.8.3.10服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
+if ! type docker >/dev/null 2>&1; then
+echo 'docker 未安装 正在安装中';
+curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
+else 
+echo 'docker 已安装，继续操作'
+fi
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_extra_ip.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_protocol_addr.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_store_proxy.sh
@@ -204,7 +222,7 @@ then
 	sleep 5s	
 	${H323}
 	tar -zxvf h323gw_xd_pkg_2.4.1.13.tar.gz
-	cd ./h323gw_xd_pkg_2.4.1.13
+	chmod -R 777 ./h323gw_xd_pkg_2.4.1.13 && cd ./h323gw_xd_pkg_2.4.1.13
     echo -e "\n"
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
@@ -214,8 +232,8 @@ then
 	echo -e "\n"	
 	${H323MCU}
 	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
-	cd ./centos7.installer
-	chmod +x install.sh && chmod +x sysinstall.sh && bash install.sh   
+	chmod -R 777 ./centos7.installer && cd ./centos7.installer
+	bash install.sh  
 fi
 if [ $1 = '-323' ]
 then
@@ -224,7 +242,7 @@ then
 	sleep 5s	
 	${H323}
 	tar -zxvf h323gw_xd_pkg_2.4.1.13.tar.gz
-	cd ./h323gw_xd_pkg_2.4.1.13
+	chmod -R 777 ./h323gw_xd_pkg_2.4.1.13 && cd ./h323gw_xd_pkg_2.4.1.13
     echo -e "\n"
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
@@ -235,8 +253,8 @@ then
 	echo -e "\n"	
 	${H323MCU}
 	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
-	cd ./centos7.installer
-	chmod +x install.sh && chmod +x sysinstall.sh && bash install.sh  
+	chmod -R 777 ./centos7.installer && cd ./centos7.installer
+	bash install.sh
 fi
 if [ $1 = '-record328' ]
 then
