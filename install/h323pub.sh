@@ -86,7 +86,7 @@ pre_install_H323(){
     echo
 	# Set GateWebSocketUrl
     read -ep "(请输入运维网关的web地址,默认为部署手册上的地址):" GateWebSocketUrl
-    [ -z "${GateWebSocketUrl}" ] && GateWebSocketUrl=wss://omc-gw.haoshitong.com/websocket
+    [ -z "${GateWebSocketUrl}" ] && GateWebSocketUrl=wss://omc-gw.hst.com/websocket
     echo
     echo "---------------------------"
     echo "运维网关的web地址 = ${GateWebSocketUrl}"
