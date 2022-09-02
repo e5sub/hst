@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年8月17日                         "*
+echo -e "# *脚本更新时间：2022年9月2日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -199,22 +199,44 @@ echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-h323' ]
 then
-	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.4.1.13】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.4.1.13（私有云）】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
 	${H323}
 	tar -zxvf h323gw_xd_pkg_2.4.1.13.tar.gz
 	cd ./h323gw_xd_pkg_2.4.1.13
+    echo -e "\n"
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
 	bash install.sh pri gc && bash install.sh pri gm 
-	sleep 30s	
+	sleep 10s	
 	echo -e "\033[33m 正在安装H323MCU，请耐心等待 \033[0m"
 	echo -e "\n"	
 	${H323MCU}
 	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
 	cd ./centos7.installer
-	bash install.sh
+	chmod +x install.sh && chmod +x sysinstall.sh && bash install.sh   
+fi
+if [ $1 = '-323' ]
+then
+	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.4.1.13（云会议）】 \033[0m"
+	echo -e "\n"
+	sleep 5s	
+	${H323}
+	tar -zxvf h323gw_xd_pkg_2.4.1.13.tar.gz
+	cd ./h323gw_xd_pkg_2.4.1.13
+    echo -e "\n"
+	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
+	echo -e "\n"
+	bash install.sh pub gc && bash install.sh pub gm && bash install.sh pub ma 
+	sleep 10s
+    echo -e "\n"	
+	echo -e "\033[33m 正在安装H323MCU，请耐心等待 \033[0m"
+	echo -e "\n"	
+	${H323MCU}
+	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
+	cd ./centos7.installer
+	chmod +x install.sh && chmod +x sysinstall.sh && bash install.sh  
 fi
 if [ $1 = '-record328' ]
 then
