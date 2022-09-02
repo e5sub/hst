@@ -85,7 +85,7 @@ pre_install_H323(){
     echo "---------------------------"
     echo
 	# Set GateWebSocketUrl
-    read -ep "(请输入运维网关的web地址,默认为部署手册上的地址):" GateWebSocketUrl
+    read -ep "(请输入运维网关的web地址,没特别需求此项请留空):" GateWebSocketUrl
     [ -z "${GateWebSocketUrl}" ] && GateWebSocketUrl=wss://omc-gw.hst.com/websocket
     echo
     echo "---------------------------"
@@ -106,8 +106,8 @@ config_H323(){
 	sed -i "s|<local_ip>.*|<local_ip>${local_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gc/gc.xml
 	sed -i "s|<front>.*|<front>TCP:a.hst.com:1089;TCP:t.hst.com:1089;</front>|"  /fsmeeting/h323gw_xd/gc/gc.xml
     sed -i "s|<app_key>.*|<app_key>${app_key}</app_key>|"  /fsmeeting/h323gw_xd/gc/gc.xml
-    sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_devid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gm/gm.xml
-    sed -i "s|<verify_code>.*|<verify_code>${verify_code}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
+#    sed -i "s|<h323gw_devid>.*|<h323gw_devid>${h323gw_devid}</h323gw_devid>|"  /fsmeeting/h323gw_xd/gm/gm.xml
+#    sed -i "s|<verify_code>.*|<verify_code>${verify_code}</verify_code>|"  /fsmeeting/h323gw_xd/gm/gm.xml
 	sed -i "s|<local_ip>.*|<local_ip>${local_ip}</local_ip>|"    /fsmeeting/h323gw_xd/gm/gm.xml
 	sed -i "s|<dev_id>.*|<local_ip>${h323gw_devid}</dev_id>|"    /fsmeeting/h323gw_xd/gm/gm.xml
     sed -i "s|<tcp>.*|<tcp>tcp:${local_ip}:1088</tcp>|"    /fsmeeting/h323gw_xd/gm/gm.xml
