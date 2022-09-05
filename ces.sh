@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.0.6"
+sh_ver="1.0.7"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -163,9 +163,7 @@ echo -e " \033[32m 98. \033[0m 重置后台admin密码"
 echo -e " \033[32m 99. \033[0m 安装CES历史版本以及国产化版本"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
 echo -e ""
-echo -e -n "\033[41;33m 请输入编号:  \033[0m"
-echo ""
-read N 
+echo && read -ep "请输入数字选择: " N
 echo ""
 case $N in
   0) Update_Shell ;;
