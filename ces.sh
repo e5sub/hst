@@ -139,7 +139,7 @@ echo -e " \033[44;37m 安装H323服务器 \033[0m"
 echo -e " \033[32m 70. \033[0m 安装H323网关服务器v2.4.2.2（私有云版本）"
 echo -e " \033[32m 71. \033[0m 安装H323网关服务器v2.4.2.2（云会议版本）"
 echo -e " \033[44;37m 安装录制服务器 \033[0m"
-echo -e " \033[32m 75. \033[0m 安装录制服务器v3.2.8.66（适用于CES V4.36版本，不能与FSP安装在同一台）"
+echo -e " \033[32m 75. \033[0m 安装录制服务器v3.2.6.17（适用于CES V4.36版本，不能与FSP安装在同一台）"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
 echo -e " \033[32m 80. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/1990/8000/8081/8088端口）"
 echo -e " \033[32m 81. \033[0m 安装iperf3网络性能测试工具(服务端)（5201端口）"
@@ -174,7 +174,7 @@ case $N in
   61) bash install.sh -183fsp ;;
   70) bash install.sh -h323pri ;;
   71) bash install.sh -h323pub ;;
-  75) bash install.sh -record328 ;;
+  75) bash install.sh -record ;;
   80) docker run -d --restart=always -p 1935:1935 -p 1985:1985 -p 8081:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs ossrs/srs:4 ./objs/srs -c conf/https.docker.conf ;;
   81) docker run -d --restart=always -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s ;;  
   82) docker run -d --restart=always -p 6688:80 --name hst-speedtest 1040155/hst-speedtest ;; 

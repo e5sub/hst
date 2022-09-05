@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年9月2日                          "*
+echo -e "# *脚本更新时间：2022年9月5日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -24,7 +24,7 @@ FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
 FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
 FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.10"
 #录制服务器和H323安装包下载地址
-record328="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.8.66.tar.gz"
+record="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
 H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.4.2.2.tar.gz"
 H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20220712_2.4.1.13.tar.gz"
 if [ $1 = '-141fsp' ]
@@ -263,14 +263,14 @@ then
 	cd ./centos7.installer	
 	bash install.sh 
 fi
-if [ $1 = '-record328' ]
+if [ $1 = '-record' ]
 then
-	echo -e "\033[33m 【你选择的是安装录制服务器v3.2.8.66】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装录制服务器v3.2.6.17】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
-	${record328}
-	tar -zxvf fsp-record-3.2.8.66.tar.gz
-	cd ./fsp-record-3.2.8.66
+	${record}
+	tar -zxvf fsp-record-3.2.6.17.tar.gz
+	cd ./fsp-record-install-3.2.6.17
 	bash install.sh pri
 fi
 ##########################################################################################服务器安装脚本到此结束##########################################################################################
@@ -341,7 +341,8 @@ then
 	sleep 5s	
 	cd /usr/local/hst
     wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/nginx.tar.gz	
-	tar zxvf nginx.tar.gz && service fmservice restart
+	tar zxvf nginx.tar.gz
+	service fmservice restart
 fi
 if [ $1 = '-resetadmin' ]
 then
@@ -350,13 +351,6 @@ then
 	sleep 5s	
 	wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/resetadmin.sql
 	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
-fi
-if [ $1 = '-setip' ]
-then
-	echo -e "\033[33m 【你选择的是自动添加FSP公网地址（1.7.1.19以上才需要执行）】 \033[0m"
-	echo -e "\n"
-	sleep 5s	
-	bash set_extra_ip.sh ${getIpAddress}
 fi
 ## 是否关闭系统防火墙
 #    if [[ -z "${fw}" ]]; then    
@@ -379,12 +373,12 @@ fi
 #		  echo "如需打开请输入systemctl start firewalld.service && systemctl enable firewalld.service"
 #    fi
 #删除安装脚本
-rm -f install.sh
-rm -f ces.sh
-rm -f zxces.sh
-rm -f resetadmin.sql
-rm -f old.sh
-rm -f cesinstall.sh
+rm -rf install.sh
+rm -rf ces.sh
+rm -rf zxces.sh
+rm -rf resetadmin.sql
+rm -rf old.sh
+rm -rf cesinstall.sh
 
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"*
