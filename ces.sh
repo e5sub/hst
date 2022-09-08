@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.0.7"
+sh_ver="1.0.8"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -99,7 +99,7 @@ echo -e "# * 脚本作者：Sugar    版本：${sh_ver}                         
 echo -e "#                                                                      "
 echo -e "# * 抖音、微信视频号：萌萌哒菜芽，欢迎关注！                           "
 echo -e "#                                                                      "
-echo -e "# * 建议服务器内存16G以上，避免因内存不够导致安装失败                  "
+echo -e "# * 部署CES和FSP,建议服务器内存16G以上，避免因内存不够导致安装失败     "
 echo -e "#                                                                      "
 echo -e "# * 博客地址：https://www.yaohst.com                                   "
 echo -e "#                                                                      "
@@ -122,6 +122,8 @@ echo "                                                                       "
 echo -e "# #####################################################################"#
 echo "                                                       "
 start_menu(){
+echo -e "*****使用该脚本前强烈建议更新脚本之后再使用"
+echo ""
 echo "请选择需要安装的版本【标准版】:"
 echo ""
 echo -e " \033[32m 0. \033[0m 更新安装脚本，当前正在使用的版本：[${sh_ver}]"
