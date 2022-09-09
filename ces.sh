@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.0.8"
+sh_ver="1.0.9"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -122,7 +122,7 @@ echo "                                                                       "
 echo -e "# #####################################################################"#
 echo "                                                       "
 start_menu(){
-echo -e "*****使用该脚本前强烈建议更新脚本之后再使用"
+echo -e "*****使用该脚本前强烈建议更新脚本之后再使用*****"
 echo ""
 echo "请选择需要安装的版本【标准版】:"
 echo ""
@@ -160,6 +160,7 @@ echo -e " \033[32m 91. \033[0m 修改H323服务器配置信息（适用于2.4.2.
 echo -e " \033[32m 92. \033[0m 修改CES V4.36 配置信息（需先安装FSP服务器）"
 echo -e " \033[32m 93. \033[0m 修改节点服务器配置信息（主服务器勿用）"
 echo -e " \033[32m 94. \033[0m Nginx转发8443端口，隐藏公网8443后台页面（转发端口号18443）"
+echo -e " \033[32m 95. \033[0m Nginx反代1089/8443/20020端口（需手动修改/usr/local/nginx/conf/nginx.conf里的地址）"
 echo -e ""
 echo -e " \033[32m 98. \033[0m 重置后台admin密码"
 echo -e " \033[32m 99. \033[0m 安装CES历史版本以及国产化版本"
@@ -193,6 +194,7 @@ case $N in
   92) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/config.sh && bash config.sh ;;
   93) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/node.sh && bash node.sh ;;
   94) bash install.sh -nginx ;;
+  95) bash install.sh -proxy ;;
   98) bash install.sh -resetadmin ;;
   99) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/old.sh && bash old.sh ;;
   00) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/zxces.sh && bash zxces.sh ;;

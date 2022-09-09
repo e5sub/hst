@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年9月5日                          "*
+echo -e "# *脚本更新时间：2022年9月9日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -343,6 +343,28 @@ then
     wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/nginx.tar.gz	
 	tar zxvf nginx.tar.gz
 	service fmservice restart
+fi
+if [ $1 = '-proxy' ]
+then
+	echo -e "\033[33m 【你选择的是Nginx反代1089/8443端口,需手动修改/usr/local/nginx/conf/nginx.conf里的地址】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+#创建证书文件夹	
+    mkdir -p /etc/nginx/ssl
+#创建nginx日志文件夹
+    mkdir -p /var/log/nginx
+#安装nginx
+    yum -y install gcc gcc-c++ autoconf automake make pcre* openssl*
+    wget -N --no-check-certificate http://labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz
+    wget -N --no-check-certificate wget http://nginx.org/download/nginx-1.22.0.tar.gz
+    tar -zxvf ngx_cache_purge-2.3.tar.gz -C /usr/local/src
+    tar -xvf nginx-1.22.0.tar.gz
+    cd nginx-1.22.0 && ./configure --prefix=/usr/local/nginx --add-module=/usr/local/src/ngx_cache_purge-2.3 --with-http_stub_status_module --with-stream --with-http_stub_status_module --with-http_ssl_module    
+	make && make install
+    wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/proxy.tar.gz
+    tar -zxvf proxy.tar.gz -C /usr/local/nginx/conf
+    wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/ssl.tar.gz
+    tar -zxvf ssl.tar.gz -C /etc/nginx/ssl
 fi
 if [ $1 = '-resetadmin' ]
 then
