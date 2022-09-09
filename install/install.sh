@@ -360,7 +360,7 @@ then
     tar -zxvf ngx_cache_purge-2.3.tar.gz -C /usr/local/src
     tar -xvf nginx-1.22.0.tar.gz
     cd nginx-1.22.0 && ./configure --prefix=/usr/local/nginx --add-module=/usr/local/src/ngx_cache_purge-2.3 --with-http_stub_status_module --with-stream --with-http_stub_status_module --with-http_ssl_module    
-	make && make install
+    make && make install
     wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/proxy.tar.gz
     tar -zxvf proxy.tar.gz -C /usr/local/nginx/conf
     wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/ssl.tar.gz
