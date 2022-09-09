@@ -356,9 +356,9 @@ then
 #安装nginx
     yum -y install gcc gcc-c++ autoconf automake make pcre* openssl*
     wget -N --no-check-certificate http://labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz
-    wget -N --no-check-certificate wget http://nginx.org/download/nginx-1.22.0.tar.gz
+    wget -N --no-check-certificate http://nginx.org/download/nginx-1.22.0.tar.gz
     tar -zxvf ngx_cache_purge-2.3.tar.gz -C /usr/local/src
-    tar -xvf nginx-1.22.0.tar.gz
+    tar -zxvf nginx-1.22.0.tar.gz
     cd nginx-1.22.0 && ./configure --prefix=/usr/local/nginx --add-module=/usr/local/src/ngx_cache_purge-2.3 --with-http_stub_status_module --with-stream --with-http_stub_status_module --with-http_ssl_module    
     make && make install
     wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/proxy.tar.gz
