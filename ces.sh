@@ -52,6 +52,7 @@ sys_install
 #更新Centos7
 yum -y update
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/install.sh
+wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/cesinstall.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
@@ -169,9 +170,9 @@ echo && read -ep "请输入数字选择: " N
 echo ""
 case $N in
   0) Update_Shell ;;
-  1) bash install.sh -436 ;;
-  2) bash install.sh -435 ;;
-  3) bash install.sh -434 ;;
+  1) bash cesinstall.sh -436 ;;
+  2) bash cesinstall.sh -435 ;;
+  3) bash cesinstall.sh -434 ;;
   60) bash install.sh -175fsp ;;
   61) bash install.sh -183fsp ;;
   70) bash install.sh -h323pri ;;
