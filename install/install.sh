@@ -362,9 +362,9 @@ then
     tar -zxvf proxy.tar.gz -C /usr/local/nginx
     wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/ssl.tar.gz
     tar -zxvf ssl.tar.gz -C /usr/local/nginx/ssl
-	sleep 10s
+	sleep 5s
     docker stop $(docker ps|grep nginx_proxy|awk '{print $1}')
-    sleep 10s
+    sleep 5s
     docker rm $(docker ps -qf status=exited)
     sleep 5s
     docker run -d --name nginx_proxy -v /usr/local/nginx/html:/usr/share/nginx/html -v /usr/local/nginx:/etc/nginx -v /usr/local/nginx/logs:/var/log/nginx -v /usr/local/nginx/ssl:/etc/nginx/ssl -e TZ=Asia/Shanghai --net=host --hostname nginx_proxy --restart=always nginx
