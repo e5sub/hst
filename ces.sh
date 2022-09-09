@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.0.9"
+sh_ver="1.1.0"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -170,9 +170,9 @@ echo && read -ep "请输入数字选择: " N
 echo ""
 case $N in
   0) Update_Shell ;;
-  1) bash cesinstall.sh -436 ;;
-  2) bash cesinstall.sh -435 ;;
-  3) bash cesinstall.sh -434 ;;
+  1) bash install.sh -436 ;;
+  2) bash install.sh -435 ;;
+  3) bash install.sh -434 ;;
   60) bash install.sh -175fsp ;;
   61) bash install.sh -183fsp ;;
   70) bash install.sh -h323pri ;;
