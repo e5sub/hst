@@ -44,7 +44,7 @@ Update_Shell(){
 	else
 		echo -e "当前已是最新版本[ ${sh_new_ver} ] !"
 		sleep 5s
-		bash ces.sh
+		bash <(curl -Ls https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/ces.sh) 
 	fi
 }
 #脚本启动
