@@ -346,25 +346,28 @@ then
 fi
 if [ $1 = '-proxy' ]
 then
-	echo -e "\033[33m 【你选择的是Nginx反代1089/8443端口,需手动修改/usr/local/nginx/conf/nginx.conf里的地址】 \033[0m"
+	echo -e "\033[33m 【你选择的是Nginx反代1089/8443端口,需手动修改/usr/local/nginx/nginx.conf里的地址】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-#创建证书文件夹	
-    mkdir -p /etc/nginx/ssl
-#创建nginx日志文件夹
-    mkdir -p /var/log/nginx
-#安装nginx
-    yum -y install gcc gcc-c++ autoconf automake make pcre* openssl*
-    wget -N --no-check-certificate http://labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz
-    wget -N --no-check-certificate http://nginx.org/download/nginx-1.22.0.tar.gz
-    tar -zxvf ngx_cache_purge-2.3.tar.gz -C /usr/local/src
-    tar -zxvf nginx-1.22.0.tar.gz
-    cd nginx-1.22.0 && ./configure --prefix=/usr/local/nginx --add-module=/usr/local/src/ngx_cache_purge-2.3 --with-http_stub_status_module --with-stream --with-http_stub_status_module --with-http_ssl_module    
-    make && make install
+    if ! type docker >/dev/null 2>&1; then
+    echo 'docker 未安装 正在安装中';
+    curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
+    else 
+    echo 'docker 已安装，继续操作'
+    fi
+    docker run -d --name nginx_proxy --net=host --hostname nginx_proxy --restart=always nginx
+    docker cp $(docker ps|grep nginx_proxy|awk '{print $1}'):/etc/nginx /usr/local/nginx
+    mkdir -p /usr/local/nginx/ssl
     wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/proxy.tar.gz
-    tar -zxvf proxy.tar.gz -C /usr/local/nginx/conf
+    tar -zxvf proxy.tar.gz -C /usr/local/nginx
     wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/ssl.tar.gz
-    tar -zxvf ssl.tar.gz -C /etc/nginx/ssl
+    tar -zxvf ssl.tar.gz -C /usr/local/nginx/ssl
+	sleep 10s
+    docker stop $(docker ps|grep nginx_proxy|awk '{print $1}')
+    sleep 10s
+    docker rm $(docker ps -qf status=exited)
+    sleep 5s
+    docker run -d --name nginx_proxy -v /usr/local/nginx/html:/usr/share/nginx/html -v /usr/local/nginx:/etc/nginx -v /usr/local/nginx/logs:/var/log/nginx -v /usr/local/nginx/ssl:/etc/nginx/ssl --net=host --hostname nginx_proxy --restart=always nginx
 fi
 if [ $1 = '-resetadmin' ]
 then
