@@ -39,6 +39,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
     fi
     if [[ -z "${CN}" ]]; then
         #CES标准版安装包下载地址
+        CES437="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.37.0.31.tar.gz"
         CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.36.6.2.tar.gz"
         CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.35.4.5.tar.gz"
         CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz"
@@ -49,6 +50,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/ARM/ces_linux_arm4.31.2.16.tar.gz"
         MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/mips/标准版/ces_linux_mips4.35.1.30.tar.gz"
         #CES中性版安装包下载地址
+        ZXCES437="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.37.0.31.tar.gz"
         ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.36.6.2.tar.gz"
         ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/中性版/ces_linux_zx4.35.4.5.tar.gz"
         ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/HST/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz"
@@ -63,6 +65,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         FSP183="1040155/fsp:1.8.3.10"
     else
         #CES标准版安装包下载地址
+        CES437="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.37.0.31.tar.gz"
         CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.36.6.2.tar.gz"
         CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.35.4.5.tar.gz"
         CES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/标准版/ces_linux_hst4.34.5.1.tar.gz"
@@ -73,6 +76,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
         ARMCES431="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/ARM/标准版/ces_linux_arm4.31.2.16.tar.gz"
         MIPSCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/mips/标准版/ces_linux_mips4.35.1.30.tar.gz"
         #CES中性版安装包下载地址
+        ZXCES437="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.37.0.31.tar.gz"
         ZXCES436="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.36.6.2.tar.gz"
         ZXCES435="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.35.4.5.tar.gz"
         ZXCES434="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/中性版/ces_linux_zx4.34.5.1.tar.gz"
@@ -101,6 +105,16 @@ pre_install_config(){
     echo
 }
 pre_install_config	
+if [ $1 = '-437' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.37.0.31服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	${CES437}
+	tar -zxvf ces_linux_hst4.37.0.31.tar.gz
+	cd ./ces_linux4.37.0.31
+	bash server_install.sh ${version}
+fi
 if [ $1 = '-436' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.36.6.2服务器】 \033[0m"
@@ -194,6 +208,16 @@ fi
 
 ##########################################################################################以下是中性版本##########################################################################################
 
+if [ $1 = '-zx437' ]
+then
+	echo -e "\033[33m 【你选择的是安装CES v4.37.0.31服务器】 \033[0m"
+	echo -e "\n"
+	sleep 5s
+	${ZXCES437}
+	tar -zxvf ces_linux_zx4.37.0.31.tar.gz
+	cd ./ces_linux4.37.0.31
+	bash server_install.sh ${version}
+fi
 if [ $1 = '-zx436' ]
 then
 	echo -e "\033[33m 【你选择的是安装CES v4.36.6.2服务器】 \033[0m"

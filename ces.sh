@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.1.0"
+sh_ver="1.1.1"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -128,12 +128,14 @@ echo "请选择需要安装的版本【标准版】:"
 echo ""
 echo -e " \033[32m 0. \033[0m 更新安装脚本，当前正在使用的版本：[${sh_ver}]"
 echo ""
+echo -e " \033[31m=====*4.37版本*=====\033[0m"
+echo -e " \033[32m 1. \033[0m CES v4.37.0.31服务器"
 echo -e " \033[31m=====*4.36版本*=====\033[0m"
-echo -e " \033[32m 1. \033[0m CES v4.36.6.2服务器"
+echo -e " \033[32m 2. \033[0m CES v4.36.6.2服务器"
 echo -e " \033[31m=====*4.35版本*=====\033[0m"
-echo -e " \033[32m 2. \033[0m CES v4.35.4.5服务器"
+echo -e " \033[32m 3. \033[0m CES v4.35.4.5服务器"
 echo -e " \033[31m=====*4.34版本*=====\033[0m"
-echo -e " \033[32m 3. \033[0m CES v4.34.5.1服务器"
+echo -e " \033[32m 4. \033[0m CES v4.34.5.1服务器"
 echo -e " \033[44;37m 安装FSP服务器 \033[0m"
 echo -e " \033[32m 60. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
 echo -e " \033[32m 61. \033[0m 安装FSP v1.8.3.10服务器（配套4.36服务器）"
@@ -170,9 +172,10 @@ echo && read -ep "请输入数字选择: " N
 echo ""
 case $N in
   0) Update_Shell ;;
-  1) bash cesinstall.sh -436 ;;
-  2) bash cesinstall.sh -435 ;;
-  3) bash cesinstall.sh -434 ;;
+  1) bash cesinstall.sh -437 ;;
+  2) bash cesinstall.sh -436 ;;
+  3) bash cesinstall.sh -435 ;;
+  4) bash cesinstall.sh -434 ;;
   60) bash install.sh -175fsp ;;
   61) bash install.sh -183fsp ;;
   70) bash install.sh -h323pri ;;
