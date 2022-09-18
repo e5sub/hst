@@ -41,13 +41,13 @@ fi
 docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ${FSP141}
 fi
 if [ $1 = '-175fsp' ]
+then
 if ! type docker >/dev/null 2>&1; then
 echo 'docker 未安装 正在安装中';
 curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
 else 
 echo 'docker 已安装，继续操作'
 fi
-then
 ## 调整docker镜像存储路径，防止磁盘空间不足
     if [[ -z "${docker_store}" ]]; then    
         read -e -r -p "是否需要修改docker存储路径? 留空默认不修改[y/n] " input
@@ -127,13 +127,13 @@ firewall-cmd --zone=public --add-port=30510/tcp --permanent
 echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-183fsp' ]
+then
 if ! type docker >/dev/null 2>&1; then
 echo 'docker 未安装 正在安装中';
 curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
 else 
 echo 'docker 已安装，继续操作'
 fi
-then
 ## 调整docker镜像存储路径，防止磁盘空间不足
     if [[ -z "${docker_store}" ]]; then    
         read -e -r -p "是否需要修改docker存储路径? 留空默认不修改[y/n] " input
