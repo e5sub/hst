@@ -355,6 +355,7 @@ then
     else 
     echo 'docker 已安装，继续操作'
     fi
+    mkdir -p /usr/local/nginx
     docker run -d --name nginx_proxy --net=host --hostname nginx_proxy --restart=always nginx
     docker cp $(docker ps|grep nginx_proxy|awk '{print $1}'):/etc/nginx /usr/local/nginx
     mkdir -p /usr/local/nginx/ssl
