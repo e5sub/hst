@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年9月9日                          "*
+echo -e "# *脚本更新时间：2022年9月18日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -41,6 +41,12 @@ fi
 docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ${FSP141}
 fi
 if [ $1 = '-175fsp' ]
+if ! type docker >/dev/null 2>&1; then
+echo 'docker 未安装 正在安装中';
+curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
+else 
+echo 'docker 已安装，继续操作'
+fi
 then
 ## 调整docker镜像存储路径，防止磁盘空间不足
     if [[ -z "${docker_store}" ]]; then    
@@ -68,12 +74,6 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-if ! type docker >/dev/null 2>&1; then
-echo 'docker 未安装 正在安装中';
-curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
-else 
-echo 'docker 已安装，继续操作'
-fi
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/set_extra_ip.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/set_protocol_addr.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/set_store_proxy.sh
@@ -127,6 +127,12 @@ firewall-cmd --zone=public --add-port=30510/tcp --permanent
 echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-183fsp' ]
+if ! type docker >/dev/null 2>&1; then
+echo 'docker 未安装 正在安装中';
+curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
+else 
+echo 'docker 已安装，继续操作'
+fi
 then
 ## 调整docker镜像存储路径，防止磁盘空间不足
     if [[ -z "${docker_store}" ]]; then    
@@ -154,12 +160,6 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.8.3.10服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-if ! type docker >/dev/null 2>&1; then
-echo 'docker 未安装 正在安装中';
-curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
-else 
-echo 'docker 已安装，继续操作'
-fi
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_extra_ip.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_protocol_addr.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_store_proxy.sh
