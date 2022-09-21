@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年9月18日                         "*
+echo -e "# *脚本更新时间：2022年9月21日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -22,7 +22,7 @@ getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAd
 #FSP Docker仓库地址
 FSP141="ccr.ccs.tencentyun.com/1040155/fsp:1.4.1.17"
 FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
-FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.10"
+FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.5"
 #录制服务器和H323安装包下载地址
 record="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
 H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.4.2.2.tar.gz"
@@ -157,15 +157,15 @@ fi
           systemctl start docker
           echo "docker默认存储路径已经修改为/fsmeeting/docker，如有外接存储，可手动挂载到/fsmeeting目录"
     fi
-echo -e "\033[33m 【你选择的是安装FSP v1.8.3.10服务器】 \033[0m"
+echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_extra_ip.sh
-wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_protocol_addr.sh
-wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_store_proxy.sh
-wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/set_wb_app_id.sh
-wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/add_protocol_addr.sh
-wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.10/fsmeeting.conf
+wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/set_extra_ip.sh
+wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/set_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/set_store_proxy.sh
+wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/set_wb_app_id.sh
+wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/add_protocol_addr.sh
+wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/fsmeeting.conf
 docker run -d --name=fsp_pri ${FSP183}
 echo -e "请稍等，正在映射FSP至本地目录/fsmeeting/fsp"
 #mkdir -p /fsmeeting/fsp
