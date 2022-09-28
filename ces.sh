@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.1.1"
+sh_ver="1.1.2"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -151,8 +151,8 @@ echo -e " \033[32m 82. \033[0m 安装HTML5网络速度测试工具(服务端)（
 echo -e " \033[32m 83. \033[0m 安装动态域名解析服务（浏览器打开主机IP:9876）"
 echo -e " \033[32m 84. \033[0m 网络同步服务器时间（需要服务器能连接公网）"
 echo -e " \033[32m 85. \033[0m 放行服务器所有端口"
-#echo -e " \033[32m 86. \033[0m 安装Frp内网穿透服务器（配置文件存放路径/frp/frps.ini）"
-#echo -e " \033[32m 87. \033[0m 安装Frp内网穿透客户端（配置文件存放路径/frp/frpc.ini）"
+echo -e " \033[32m 86. \033[0m 安装Frp内网穿透服务器（配置文件存放路径/frp/frps.ini）"
+echo -e " \033[32m 87. \033[0m 安装Frp内网穿透客户端（配置文件存放路径/frp/frpc.ini）"
 echo -e ""
 echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 卸载FSP服务器"
@@ -188,8 +188,8 @@ case $N in
   84) bash install.sh -time ;;
   85) systemctl stop firewalld.service
       systemctl disable firewalld.service ;;
-#  86) bash install.sh -frps ;;
-#  87) bash install.sh -frpc ;;
+  86) bash install.sh -frps ;;
+  87) bash install.sh -frpc ;;
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
   90) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323pri.sh && bash h323pri.sh ;;
