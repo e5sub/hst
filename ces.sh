@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.1.2"
+sh_ver="1.1.3"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -140,8 +140,8 @@ echo -e " \033[44;37m 安装FSP服务器 \033[0m"
 echo -e " \033[32m 60. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
 echo -e " \033[32m 61. \033[0m 安装FSP v1.8.3.5服务器（配套4.36服务器）"
 echo -e " \033[44;37m 安装H323服务器 \033[0m"
-echo -e " \033[32m 70. \033[0m 安装H323网关服务器v2.4.2.2（私有云版本）"
-echo -e " \033[32m 71. \033[0m 安装H323网关服务器v2.4.2.2（云会议版本）"
+echo -e " \033[32m 70. \033[0m 安装H323网关服务器v2.4.3.2（私有云版本）"
+echo -e " \033[32m 71. \033[0m 安装H323网关服务器v2.4.3.2（云会议版本）"
 echo -e " \033[44;37m 安装录制服务器 \033[0m"
 echo -e " \033[32m 75. \033[0m 安装录制服务器v3.2.6.17（适用于CES V4.36版本，不能与FSP安装在同一台）"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"

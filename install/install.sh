@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年9月21日                         "*
+echo -e "# *脚本更新时间：2022年10月8日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -25,7 +25,7 @@ FSP175="ccr.ccs.tencentyun.com/1040155/fsp:1.7.5.1"
 FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.5"
 #录制服务器和H323安装包下载地址
 record="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
-H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.4.2.2.tar.gz"
+H323="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/h323gw_xd_pkg_2.4.3.2.tar.gz"
 H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/H323网关MCU/centos7.installer_MCU20220712_2.4.1.13.tar.gz"
 if [ $1 = '-141fsp' ]
 then
@@ -217,13 +217,13 @@ echo -e "恭喜，安装完成，首次启动FSP速度较慢，请耐心等待"
 fi
 if [ $1 = '-h323pri' ]
 then
-	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.4.2.2（私有云）】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.4.3.2（私有云）】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
 	${H323}
-	tar -zxvf h323gw_xd_pkg_2.4.2.2.tar.gz
-	chmod -R 777 ./h323gw_xd_pkg_2.4.2.2 
-	cd ./h323gw_xd_pkg_2.4.2.2
+	tar -zxvf h323gw_xd_pkg_2.4.3.2.tar.gz
+	chmod -R 777 ./h323gw_xd_pkg_2.4.3.2 
+	cd ./h323gw_xd_pkg_2.4.3.2
     echo -e "\n"
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
@@ -240,13 +240,13 @@ then
 fi
 if [ $1 = '-h323pub' ]
 then
-	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.4.2.2（云会议）】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装H323网关服务器v2.4.3.2（云会议）】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
 	${H323}
-	tar -zxvf h323gw_xd_pkg_2.4.2.2.tar.gz
-	chmod -R 777 ./h323gw_xd_pkg_2.4.2.2
-	cd ./h323gw_xd_pkg_2.4.2.2
+	tar -zxvf h323gw_xd_pkg_2.4.3.2.tar.gz
+	chmod -R 777 ./h323gw_xd_pkg_2.4.3.2
+	cd ./h323gw_xd_pkg_2.4.3.2
     echo -e "\n"
 	echo -e "\033[33m 正在安装H323网关，请耐心等待 \033[0m"
 	echo -e "\n"
