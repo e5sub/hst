@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年9月21日                         "*
+echo -e "# *脚本更新时间：2022年10月21日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -106,7 +106,7 @@ then
 	echo -e "\033[33m 【你选择的是安装CES v4.37.0.31服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/hstdeploy-4.7.tar.gz
+    wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/hstdeploy-5.0.tar.gz
     mkdir -p /data/pri/90
     cd /data/pri/90
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/fsp-base-1.0.0.41.tar.gz
@@ -115,7 +115,7 @@ then
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/fsp-live-1.0.0.14.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/meeting-4.37.0.31.tar.gz
 	cd /root
-    tar -zxvf hstdeploy-4.7.tar.gz
+    tar -zxvf hstdeploy-5.0.tar.gz
 	cd ./hstdeploy
 	bash install.sh
 fi
@@ -217,7 +217,7 @@ then
 	echo -e "\033[33m 【你选择的是安装CES v4.37.0.31服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/hstdeploy-4.7.tar.gz
+    wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/hstdeploy-5.0.tar.gz
     mkdir -p /data/pri/90
     cd /data/pri/90
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/fsp-base-1.0.0.41.tar.gz
@@ -226,7 +226,7 @@ then
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/fsp-live-1.0.0.14.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/meeting-4.37.0.31.tar.gz
 	cd /root
-    tar -zxvf hstdeploy-4.7.tar.gz
+    tar -zxvf hstdeploy-5.0.tar.gz
 	cd ./hstdeploy
 	bash install.sh
 fi
