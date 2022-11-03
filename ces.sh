@@ -22,7 +22,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.1.3"
+sh_ver="1.1.4"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -131,7 +131,7 @@ echo ""
 echo -e " \033[31m=====*4.37版本*=====\033[0m"
 echo -e " \033[32m 1. \033[0m CES v4.37.0.31服务器(测试版)"
 echo -e " \033[31m=====*4.36版本*=====\033[0m"
-echo -e " \033[32m 2. \033[0m CES v4.36.5.4服务器"
+echo -e " \033[32m 2. \033[0m CES v4.36.6.2服务器"
 echo -e " \033[31m=====*4.35版本*=====\033[0m"
 echo -e " \033[32m 3. \033[0m CES v4.35.4.5服务器"
 echo -e " \033[31m=====*4.34版本*=====\033[0m"
