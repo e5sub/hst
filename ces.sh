@@ -193,8 +193,8 @@ case $N in
   82) docker run -d --restart=always -p 6688:80 --name hst-speedtest 1040155/hst-speedtest ;; 
   83) docker run -d --name ddns-go --restart=always --net=host -v /opt/ddns-go:/root jeessy/ddns-go ;;
   84) bash install.sh -time ;;
-  85) docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v /home/rustdesk:/root -td rustdesk/rustdesk-server hbbs -r ${getIpAddress} 
-      docker run --name hbbr -p 21117:21117 -p 21119:21119 -v /home/rustdesk:/root -td rustdesk/rustdesk-server hbbr  ;;
+  85) docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v /home/rustdesk:/root -td --restart=always rustdesk/rustdesk-server hbbs -r ${getIpAddress} 
+      docker run --name hbbr -p 21117:21117 -p 21119:21119 -v /home/rustdesk:/root -td --restart=always rustdesk/rustdesk-server hbbr  ;;
   86) bash install.sh -frps ;;
   87) bash install.sh -frpc ;;
   88) bash install.sh -xiezai ;;
