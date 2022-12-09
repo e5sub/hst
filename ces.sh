@@ -25,7 +25,7 @@ sys_install(){
         curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
-fi
+    fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 sh_ver="1.1.5"
