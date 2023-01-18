@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年12月6日                         "*
+echo -e "# *脚本更新时间：2023年1月18日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -330,12 +330,6 @@ then
 	echo -e "\033[33m 【你选择的是Nginx反代1089/8443端口,需手动修改/usr/local/nginx/nginx.conf里的地址】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    if ! type docker >/dev/null 2>&1; then
-    echo 'docker 未安装 正在安装中';
-    curl -sSL https://get.docker.com/ | sh && systemctl enable docker && systemctl start docker
-    else 
-    echo 'docker 已安装，继续操作'
-    fi
     mkdir -p /usr/local/nginx
     docker run -d --name nginx_proxy --net=host --hostname nginx_proxy --restart=always nginx
     docker cp $(docker ps|grep nginx_proxy|awk '{print $1}'):/etc/nginx /usr/local/nginx

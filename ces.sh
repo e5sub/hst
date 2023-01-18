@@ -28,7 +28,7 @@ sys_install(){
     fi
 }
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.1.5"
+sh_ver="1.1.6"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -193,7 +193,7 @@ case $N in
   82) docker run -d --restart=always -p 6688:80 --name hst-speedtest 1040155/hst-speedtest ;; 
   83) docker run -d --name ddns-go --restart=always --net=host -v /opt/ddns-go:/root jeessy/ddns-go ;;
   84) bash install.sh -time ;;
-  85) docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v /home/rustdesk:/root -td --restart=always rustdesk/rustdesk-server hbbs -r ${getIpAddress} 
+  85) docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v /home/rustdesk:/root -td --restart=always rustdesk/rustdesk-server hbbs -r ${LOCAL_IP}
       docker run --name hbbr -p 21117:21117 -p 21119:21119 -v /home/rustdesk:/root -td --restart=always rustdesk/rustdesk-server hbbr  ;;
   86) bash install.sh -frps ;;
   87) bash install.sh -frpc ;;
