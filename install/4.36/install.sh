@@ -184,8 +184,8 @@ config_apaas(){
     docker exec -ti $docker_id sed -i "104s|app-id.*|app-id: ${AppId}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "105s|secret.*|secret: ${AppSecretKey}|"  /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "s|videoDomain.*|videoDomain: http://${fsp_ip}:29000/child/live/media/player|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "36s|url.*|url: https://${ces_Domain}:${https_prot}/fmapi/webservice/jaxws?wsdl|"  /boss/boss-pri-cloud-apaas/conf/application.yml
-    docker exec -ti $docker_id sed -i "39s|url.*|url: https://${ces_ip}:${https_prot}/|" /boss/boss-pri-cloud-apaas/conf/application.yml
+    docker exec -ti $docker_id sed -i "36s|url.*|url: http://${ces_Domain}:8080/fmapi/webservice/jaxws?wsdl|"  /boss/boss-pri-cloud-apaas/conf/application.yml
+    docker exec -ti $docker_id sed -i "39s|url.*|url: http://${ces_ip}:8080/|" /boss/boss-pri-cloud-apaas/conf/application.yml
     docker exec -ti $docker_id sed -i "13s|address.*|address: http://${fsp_ip}:28001|"  /boss/admin-web/conf/application.yml
     docker exec -ti $docker_id sed -i "s|roomAddr.*|roomAddr: ${fsp_ip}:25704|" /boss/boss-pri-cloud-gw/conf/application.yml
     docker exec -ti $docker_id sed -i "s|mcuAddr.*|mcuAddr: ${ces_ip}:${ces_prot}|" /boss/boss-pri-cloud-gw/conf/application.yml
@@ -203,9 +203,9 @@ config_env(){
     sed -i "s|FSP_ICE_IP.*|FSP_ICE_IP=\"${ces_ip}\"|"  /usr/local/hst/.env
     sed -i "s|FSP_DEV_ID.*|FSP_DEV_ID=\"${UserId}\"|"  /usr/local/hst/.env
     sed -i "s|FSP_DEV_SECRET.*|FSP_DEV_SECRET=\"${SecretKey}\"|"  /usr/local/hst/.env
-    sed -i "s|LIVE_MEDIA.*|LIVE_MEDIA=\"https://${media}:9096\"|" /usr/local/hst/.env   
-    sed -i "s|LIVE_URL.*|LIVE_URL=\"https://${liveurl}:9096\"|" /usr/local/hst/.env   
-    sed -i "s|PAAS_URL.*|PAAS_URL=\"https://${APAAAS}:9096\"|" /usr/local/hst/.env
+    sed -i "s|LIVE_MEDIA.*|LIVE_MEDIA=\"http://${media}:9096\"|" /usr/local/hst/.env   
+    sed -i "s|LIVE_URL.*|LIVE_URL=\"http://${liveurl}:9096\"|" /usr/local/hst/.env   
+    sed -i "s|PAAS_URL.*|PAAS_URL=\"http://${APAAAS}:9096\"|" /usr/local/hst/.env
     sed -i "s|LIVE_APP_KEY.*|LIVE_APP_KEY=\"2c60f53dfd0c4dbb95640e45388e4d37\"|" /usr/local/hst/.env
     sed -i "s|LIVE_APP_SECRET.*|LIVE_APP_SECRET=\"18dacf578bc2fc56\"|" /usr/local/hst/.env	
 }
