@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年1月18日                         "*
+echo -e "# *脚本更新时间：2023年3月19日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -54,9 +54,9 @@ then
     else
           systemctl stop docker.service
           mkdir -p /hst/docker
-          ln -s /hst/docker /var/lib/docker		  
-          sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/hst/docker|" /usr/lib/systemd/system/docker.service
-          systemctl start docker
+          ln -s /hst/docker /var/lib
+          sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --data-root=/hst/docker|" /usr/lib/systemd/system/docker.service
+		  systemctl daemon-reload && systemctl start docker
           echo "docker默认存储路径已经修改为/hst/docker，如有外接存储，可手动挂载到/hst目录"
     fi
 echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
@@ -134,9 +134,9 @@ then
     else
           systemctl stop docker.service
           mkdir -p /hst/docker
-          ln -s /hst/docker /var/lib/docker		  
-          sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --graph=/hst/docker|" /usr/lib/systemd/system/docker.service
-          systemctl start docker
+          ln -s /hst/docker /var/lib	  
+          sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --data-root=/hst/docker|" /usr/lib/systemd/system/docker.service
+		  systemctl daemon-reload && systemctl start docker          
           echo "docker默认存储路径已经修改为/hst/docker，如有外接存储，可手动挂载到/hst目录"
     fi
 echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
