@@ -136,7 +136,7 @@ then
           mkdir -p /hst/docker
           ln -s /hst/docker /var/lib	  
           sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --data-root=/hst/docker|" /usr/lib/systemd/system/docker.service
-		  systemctl daemon-reload && systemctl start docker          
+		  systemctl daemon-reload && systemctl start docker
           echo "docker默认存储路径已经修改为/hst/docker，如有外接存储，可手动挂载到/hst目录"
     fi
 echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
