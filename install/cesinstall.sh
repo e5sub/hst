@@ -106,13 +106,13 @@ then
 	echo -e "\033[33m 【你选择的是安装CES v4.37.6.8服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/hstdeploy-4.37.tar.gz
+    wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/hstdeploy-5.0.39.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/fsp-base-1.0.4.5.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/fsp-store-1.2.15.43.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/fsp-record-3.2.9.1.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/fsp-live-1.0.0.16.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通标准版自动化部署/meeting-4.37.6.8.tar.gz
-    tar -zxvf hstdeploy-4.37.tar.gz
+    tar -zxvf hstdeploy-5.0.39.tar.gz
 	cd ./hstdeploy
 	bash install.sh
 fi
@@ -214,13 +214,13 @@ then
 	echo -e "\033[33m 【你选择的是安装CES v4.37.6.8服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/hstdeploy-4.37.tar.gz
+    wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/hstdeploy-5.0.39.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/fsp-base-1.0.4.5.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/fsp-store-1.2.15.43.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/fsp-record-3.2.9.1.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/fsp-live-1.0.0.16.tar.gz
     wget -N --no-check-certificate https://pan.yaohst.com/d/Aliyun/好视通/02好视通视频会议企业版服务器/linux服务端/好视通中性版自动化部署/meeting-4.37.6.8.tar.gz
-    tar -zxvf hstdeploy-4.37.tar.gz
+    tar -zxvf hstdeploy-5.0.39.tar.gz
 	cd ./hstdeploy
 	bash install.sh
 fi
