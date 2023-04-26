@@ -21,7 +21,7 @@ echo -e "                                                       "
 df -lh
 #提取root和home卷标
 r=$(df -lh / | awk '$NF=="/" {print $1}')
-h=$(df -lh / | awk '$NF=="/home" {print $1}')
+h=$(df -lh | awk '$NF=="/home" {print $1}')
 echo
 echo "默认会自动提取卷标,如果获取的不正确,请手动输入卷标"
 echo "请注意进行扩容之后会丢失home所有数据,请注意备份!!!"
@@ -55,6 +55,8 @@ config_kuorong(){
 #调用函数
 pre_kuorong
 config_kuorong
-
+#备份并删除/etc/fstab挂载路径
+sudo cp /etc/fstab ./fstab_bak
+sudo sed -i "\|^$home|d" /etc/fstab
 #查看是否成功扩容
 df -lh
