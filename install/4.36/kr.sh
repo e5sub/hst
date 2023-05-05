@@ -48,7 +48,7 @@ pre_kuorong(){
 config_kuorong(){
     echo "正在调整根分区大小"       
     umount ${home} 
-    lvremove ${home} 
+    lvremove ${home} -y
     lvextend -l +100%FREE ${root}
     xfs_growfs ${root}
 } 
