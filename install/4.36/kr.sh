@@ -56,7 +56,7 @@ config_kuorong(){
 pre_kuorong
 config_kuorong
 #备份并删除/etc/fstab挂载路径
-sudo cp /etc/fstab ./fstab_bak
+sudo cp /etc/fstab /etc/fstab_bak
 sudo sed -i "\|^$home|d" /etc/fstab
 #查看是否成功扩容
 df -lh
