@@ -476,9 +476,9 @@ then
 	echo -e "\033[33m 正在安装H323MCU，请耐心等待 \033[0m"
 	echo -e "\n"	
 	${H323MCU}
-	tar -zxvf centos7.installer_MCU20220712_2.4.1.13.tar.gz
-	chmod -R 777 ./centos7.installer
-	cd ./centos7.installer	
+	tar -zxvf centos7.installer_MCU_2.4.3.2.tar.gz
+	chmod -R 777 ./centos7.installer_MCU_2.4.3.2
+	cd ./centos7.installer_MCU_2.4.3.2
 	bash install.sh 
 fi
 if [ $1 = '-record' ]
