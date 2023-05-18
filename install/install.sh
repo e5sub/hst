@@ -26,7 +26,7 @@ FSP183="ccr.ccs.tencentyun.com/1040155/fsp:1.8.3.5"
 #录制服务器和H323安装包下载地址
 record="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/录制服务器软部署/fsp-record-3.2.6.17.tar.gz"
 H323="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/H323网关MCU/h323gw_xd_pkg_2.4.3.2.tar.gz"
-H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/H323网关MCU/centos7.installer_MCU20220712_2.4.1.13.tar.gz"
+H323MCU="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/H323网关MCU/centos7.installer_MCU_2.4.3.2.tar.gz"
 #CES标准版安装包下载地址
 CES436="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.36.6.2.tar.gz"
 CES435="wget -N --no-check-certificate https://pan.yaohst.com/d/OS/好视通linux服务器安装包/标准版/ces_linux_hst4.35.4.5.tar.gz"
