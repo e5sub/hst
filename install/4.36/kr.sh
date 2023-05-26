@@ -25,6 +25,7 @@ h=$(df -lh | awk '$NF=="/home" {print $1}')
 echo
 echo "默认会自动提取卷标,如果获取的不正确,请手动输入卷标"
 echo "请注意进行扩容之后会丢失home所有数据,请注意备份!!!"
+echo "请确保/root有少量剩余空间,否则有可能导致扩容失败!!!"
 echo
 pre_kuorong(){
     # Set root
