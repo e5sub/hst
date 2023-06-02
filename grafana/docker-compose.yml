@@ -10,7 +10,7 @@ services:
     environment:
       consul_token: xxx
       consul_url: http://xxx:8500/v1
-      admin_passwd: xxx
+      admin_passwd: jigehenniubi
       log_level: INFO
   nginx-consul:
     image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/nginx-consul:latest
