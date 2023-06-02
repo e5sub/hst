@@ -26,7 +26,6 @@ yum -y install consul-1.14.5-1
 mkdir /home/grafana/consul
 cd /home/grafana/consul
 wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul_config.sh && bash consul_config.sh 
-mkdir /opt/consul
 chown -R consul:consul /opt/consul
 systemctl enable consul.service
 systemctl start consul.service
