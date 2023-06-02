@@ -40,5 +40,5 @@ sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" docker-compose
 sed -i "s/token:.*/token: '$consul_acl_token'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 # 重启服务
-docker restart node-exporter && docker restart prometheus && grafana && docker-compose pull && docker-compose restart
+docker restart node-exporter && docker restart prometheus && docker restart grafana && docker-compose pull && docker-compose restart
 # 模板下载地址 https://grafana.com/api/dashboards/8919/revisions/25/download
