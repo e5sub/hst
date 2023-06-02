@@ -58,6 +58,8 @@ echo -e "# *grafana: http://$local_ip:3000/   (默认帐号密码admin)         
 echo -e "#                                                                               "
 echo -e "# *consul: http://$local_ip:1026/    (默认密码jigehenniubi)                     "
 echo -e "#                                                                               "
+echo -e "# *consul配置文件路径:/home/grafana/consul/docker-compose.yml 可更新token和登陆密码"
+echo -e "#                                                                               "
 echo -e "# *模板下载地址 https://grafana.com/api/dashboards/8919/revisions/25/download   "
 echo -e "#                                                                               "
 echo -e "# ******************************************************************************"
