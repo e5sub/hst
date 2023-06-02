@@ -17,6 +17,8 @@ mkdir /home/grafana/prometheus
 wget -N --no-check-certificate -P /home/grafana/prometheus https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.yml
 docker run  -d -p 9090:9090 -v /home/grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml --name prometheus --restart=always prom/prometheus
 # 使用docker部署grafana
+mkdir /home/grafana/grafana
+chmod 777 /home/grafana/grafana
 docker run -d -p 3000:3000 --name=grafana -v /home/grafana/grafana:/var/lib/grafana --name grafana --restart=always grafana/grafana
 # 使用yum部署consul
 yum install -y yum-utils
@@ -30,6 +32,7 @@ chown -R consul:consul /opt/consul
 systemctl enable consul.service
 systemctl start consul.service
 wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
+docker-compose up -d
 # 获取 Consul ACL Token
 consul_acl_token=$(consul acl bootstrap | grep SecretID | awk '{print $2}')
 # 获取 local IP address
@@ -40,5 +43,24 @@ sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" docker-compose
 sed -i "s/token:.*/token: '$consul_acl_token'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 # 重启服务
-docker restart node-exporter && docker restart prometheus && docker restart grafana && docker-compose pull && docker-compose restart
+docker restart node-exporter && docker restart prometheus && docker restart grafana
+cd /home/grafana/consul
+docker-compose pull && docker-compose restart
 # 模板下载地址 https://grafana.com/api/dashboards/8919/revisions/25/download
+echo -e "                                                                                "
+echo -e "#*******************************************************************************"*
+echo -e "#                                                                               "
+echo -e "# *登陆信息                                                                     "
+echo -e "#                                                                               "
+echo -e "# *node-exporter: http://$local_ip:9100/metrics                                 "
+echo -e "#                                                                               "
+echo -e "# *prometheus：http://$local_ip:9090/targets                                    "
+echo -e "#                                                                               "
+echo -e "# *grafana: http://$local_ip:3000/   (默认帐号密码admin)                        "
+echo -e "#                                                                               "
+echo -e "# *consul: http://$local_ip:1026/    (默认密码jigehenniubi)                     "
+echo -e "#                                                                               "
+echo -e "# *模板下载地址 https://grafana.com/api/dashboards/8919/revisions/25/download   "
+echo -e "#                                                                               "*
+echo -e "# ******************************************************************************"
+echo -e "                                                                                "
