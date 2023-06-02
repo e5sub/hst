@@ -6,9 +6,9 @@ echo -e "# *脚本更新时间：2023年6月2日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
-echo -e "# *安装前请确保环境干净,脚本不支持覆盖安装!            "*
+echo -e "# *安装前请确保环境干净,本脚本不支持覆盖安装!          "*
 echo -e "#                                                      "*
-echo -e "# *脚本支持Centos7/Ubuntu/Debian                       "*
+echo -e "# *本脚本只支持Centos7,暂不支持Ubuntu/Debian!          "*
 echo -e "#                                                      "*
 echo -e "# ******************************************************"
 echo -e "                                                       "
@@ -26,21 +26,10 @@ docker run  -d -p 9090:9090 -v /home/grafana/prometheus/prometheus.yml:/etc/prom
 mkdir /home/grafana/grafana
 chmod 777 /home/grafana/grafana
 docker run -d -p 3000:3000 --name=grafana -v /home/grafana/grafana:/var/lib/grafana --name grafana --restart=always grafana/grafana
-# 检测系统类型
-if [[ -f /etc/redhat-release ]]; then
-    # CentOS 系统安装consul
-    yum install -y yum-utils
-    yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-    yum -y install consul-1.14.5-1
-elif [[ -f /etc/lsb-release ]]; then
-    # Ubuntu/Debian 系统安装consul
-    wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-    sudo apt update && sudo apt install consul-1.14.5-1
-else
-    echo "不支持的操作系统"
-    exit 1
-fi
+# 使用yum部署consul
+yum install -y yum-utils
+yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+yum -y install consul-1.14.5-1
 mkdir /home/grafana/consul
 cd /home/grafana/consul
 wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul_config.sh && bash consul_config.sh 
