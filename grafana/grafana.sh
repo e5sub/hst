@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+#!/bin/bash
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
 echo -e "# *脚本更新时间：2023年6月2日                          "*
@@ -46,9 +45,8 @@ sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus
 docker restart node-exporter && docker restart prometheus && docker restart grafana
 cd /home/grafana/consul
 docker-compose pull && docker-compose restart
-# 模板下载地址 https://grafana.com/api/dashboards/8919/revisions/25/download
 echo -e "                                                                                "
-echo -e "#*******************************************************************************"*
+echo -e "#*******************************************************************************"
 echo -e "#                                                                               "
 echo -e "# *登陆信息                                                                     "
 echo -e "#                                                                               "
@@ -61,6 +59,6 @@ echo -e "#                                                                      
 echo -e "# *consul: http://$local_ip:1026/    (默认密码jigehenniubi)                     "
 echo -e "#                                                                               "
 echo -e "# *模板下载地址 https://grafana.com/api/dashboards/8919/revisions/25/download   "
-echo -e "#                                                                               "*
+echo -e "#                                                                               "
 echo -e "# ******************************************************************************"
 echo -e "                                                                                "
