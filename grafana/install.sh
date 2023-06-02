@@ -36,7 +36,7 @@ elif [[ -f /etc/lsb-release ]]; then
     # Ubuntu/Debian 系统安装consul
     wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-    sudo apt update && sudo apt install consul-1.14.5-1
+    sudo apt update && sudo apt install -y consul-1.14.5-1 
 else
     echo "不支持的操作系统"
     exit 1
