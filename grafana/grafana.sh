@@ -7,8 +7,9 @@ echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！        
 echo -e "#                                                      "*
 echo -e "# ******************************************************"
 echo -e "                                                       "
-# 安装docker
+# 安装docker和docker-compose
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun | systemctl enable docker && systemctl start docker
+pip3 install -upgrade pip && pip3 install docker-compose
 # 使用docker部署node-exporter
 docker run -d -p 9100:9100 -v /home/grafana/node-exporter/proc:/host/proc:ro -v /home/grafana/node-exporter/sys:/host/sys:ro -v /home/grafana/node-exporter/:/homefs:ro --name node-exporter --restart=always prom/node-exporter
 # 使用docker部署prometheus
