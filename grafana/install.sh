@@ -17,19 +17,19 @@ echo -e "                                                       "
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
         echo 'wget 未安装 正在安装中';
-        apt install wget -y || yum install wget -y
+        sudo apt install wget -y || yum install wget -y
     else
         echo 'wget 已安装，继续操作'
     fi
     if ! type curl >/dev/null 2>&1; then
         echo 'curl 未安装 正在安装中';
-        apt install curl -y || yum install curl -y
+        sudo apt install curl -y || yum install curl -y
     else
         echo 'curl 已安装，继续操作'
     fi
     if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
-        curl -sSL https://get.docker.com/ | sh | systemctl enable docker && systemctl start docker
+        sudo curl -sSL https://get.docker.com/ | sh | systemctl enable docker && systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi
