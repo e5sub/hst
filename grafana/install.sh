@@ -106,7 +106,7 @@ consul_acl_token=$(consul acl bootstrap | grep SecretID | awk '{print $2}')
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/consul_token:.*/consul_token: $consul_acl_token/" /home/grafana/consul/docker-compose.yml
 sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" /home/grafana/consul/docker-compose.yml
-sed -i "s/- ip:9093/- $ip_address:9093/g" /home/grafana/prometheus/prometheus.yml
+sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml
 sed -i "s/token:.*/token: '$consul_acl_token'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 
