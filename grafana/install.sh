@@ -48,19 +48,21 @@ chown -R consul:consul /opt/consul
 systemctl enable consul.service
 systemctl start consul.service
 wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
-docker-compose up -d
 # 获取 Consul ACL Token
 consul_acl_token=$(consul acl bootstrap | grep SecretID | awk '{print $2}')
+
 # 获取 local IP address
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/consul_token:.*/consul_token: $consul_acl_token/" docker-compose.yml
 sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" docker-compose.yml
 sed -i "s/token:.*/token: '$consul_acl_token'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
-# 重启服务
+
+# 启动服务
 cd /home/grafana/consul
-docker-compose pull && docker-compose restart
+docker-compose pull && docker-compose up -d
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"
 echo -e "#                                                                               "
