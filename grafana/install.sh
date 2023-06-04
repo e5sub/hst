@@ -38,9 +38,14 @@ sys_install
 # 获取网卡IP
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 
+# 下载alertmanager配置文件
+mkdir -p /home/grafana/alertmanager
+wget -N --no-check-certificate -P /home/grafana/alertmanager https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/alertmanager.yml
+
 # 下载prometheus配置文件
 mkdir -p /home/grafana/prometheus
 wget -N --no-check-certificate -P /home/grafana/prometheus https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.yml
+wget -N --no-check-certificate -P /home/grafana/prometheus https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/rules.yml
 
 # 设置grafana文件夹权限
 mkdir -p /home/grafana/grafana
@@ -101,6 +106,7 @@ consul_acl_token=$(consul acl bootstrap | grep SecretID | awk '{print $2}')
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/consul_token:.*/consul_token: $consul_acl_token/" /home/grafana/consul/docker-compose.yml
 sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" /home/grafana/consul/docker-compose.yml
+sed -i "s/- ip:9093/- $ip_address:9093/g" /home/grafana/prometheus/prometheus.yml
 sed -i "s/token:.*/token: '$consul_acl_token'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 

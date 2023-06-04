@@ -1,0 +1,18 @@
+global:
+  resolve_timeout: 5m
+  smtp_from: 'xxx@xxx.xxx'  # 邮箱账号
+  smtp_smarthost: 'smtp.163.com:25' 
+  smtp_auth_username: 'xxx@xxx.xxx' # 邮箱账号
+  smtp_auth_password: 'xxxxxxxx' # 邮箱授权码，可百度邮箱如何开通smtp服务
+  smtp_hello: '163.com'
+  smtp_require_tls: false
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 1m
+  receiver: 'email'
+receivers:
+- name: 'email'
+  email_configs:
+  - to: 'xxx@xxx.xxx'
