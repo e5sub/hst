@@ -7,7 +7,7 @@ alerting:
     - targets:
        - ip:9093 
 rule_files:
-  - "/home/grafana/prometheus/rules.yml"     #报警规则
+  - "/etc/prometheus/rules.yml"     #报警规则
 scrape_configs:
   - job_name: node_exporter
     scrape_interval: 15s
