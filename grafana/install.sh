@@ -16,16 +16,15 @@ sleep 5s
 # 安装docker和docker-compose
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun | systemctl enable docker && systemctl start docker
 pip3 install -upgrade pip && pip3 install docker-compose
-# 使用docker部署node-exporter
-docker run -d -p 9100:9100 -v /home/grafana/node-exporter/proc:/host/proc:ro -v /home/grafana/node-exporter/sys:/host/sys:ro -v /home/grafana/node-exporter/:/homefs:ro --name node-exporter --restart=always prom/node-exporter
-# 使用docker部署prometheus
+
+# 下载prometheus配置文件
 mkdir /home/grafana/prometheus
 wget -N --no-check-certificate -P /home/grafana/prometheus https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.yml
-docker run  -d -p 9090:9090 -v /home/grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml --name prometheus --restart=always prom/prometheus
-# 使用docker部署grafana
+
+# 设置grafana文件夹权限
 mkdir /home/grafana/grafana
 chmod 777 /home/grafana/grafana
-docker run -d -p 3000:3000 --name=grafana -v /home/grafana/grafana:/var/lib/grafana --name grafana --restart=always grafana/grafana
+
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
     # CentOS 系统安装consul
@@ -41,6 +40,7 @@ else
     echo "不支持的操作系统"
     exit 1
 fi
+
 mkdir /home/grafana/consul
 cd /home/grafana/consul
 wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul_config.sh && bash consul_config.sh 
@@ -59,7 +59,6 @@ sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" docker-compose
 sed -i "s/token:.*/token: '$consul_acl_token'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 # 重启服务
-docker restart node-exporter && docker restart prometheus && docker restart grafana
 cd /home/grafana/consul
 docker-compose pull && docker-compose restart
 echo -e "                                                                                "
