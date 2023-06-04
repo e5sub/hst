@@ -121,6 +121,8 @@ echo -e "# *登陆入口及账号密码信息                                   
 echo -e "#                                                                               "
 echo -e "# *Node-exporter: http://$local_ip:9100/metrics                                 "
 echo -e "#                                                                               "
+echo -e "# *Alertmanager：http://$local_ip:9093                                          "
+echo -e "#                                                                               "
 echo -e "# *Prometheus：http://$local_ip:9090/targets                                    "
 echo -e "#                                                                               "
 echo -e "# *Grafana: http://$local_ip:3000/   登录帐号密码:admin                         "

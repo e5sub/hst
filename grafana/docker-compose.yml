@@ -18,6 +18,8 @@ services:
       - "9093:9093"
     volumes:
       - /home/grafana/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
 
   node-exporter:
     image: prom/node-exporter
