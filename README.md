@@ -16,7 +16,7 @@
 11、修改H323服务器配置信息    
 12、重置后台admin密码    
 13、[ddns-go动态域名解析服务](https://github.com/jeessy2/ddns-go)    
-14、一键部署Prometheus+Grafana+node-exporter+consul+alertmanager      
+14、一键部署Prometheus+Grafana+node-exporter+consul+alertmanager+blackbox_exporter     
 
 推流服务器采用了ossrs开源代码 
   
