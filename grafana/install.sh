@@ -13,6 +13,10 @@ echo -e "#                                                      "*
 echo -e "# ******************************************************"
 echo -e "                                                       "
 sleep 5s
+
+# 获取网卡IP
+local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+
 # 安装docker和docker-compose
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun | systemctl enable docker && systemctl start docker
 pip3 install -upgrade pip && pip3 install docker-compose
@@ -40,29 +44,43 @@ else
     echo "不支持的操作系统"
     exit 1
 fi
-
 mkdir /home/grafana/consul
 cd /home/grafana/consul
-wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul_config.sh && bash consul_config.sh 
+# 修改consul配置文件
+config_file="/etc/consul.d/consul.hcl"
+echo "log_level = \"ERROR\"" > "$config_file"
+echo "advertise_addr = \"$local_ip\"" >> "$config_file"
+echo "data_dir = \"/opt/consul\"" >> "$config_file"
+echo "client_addr = \"0.0.0.0\"" >> "$config_file"
+echo "ui_config {" >> "$config_file"
+echo "  enabled = true" >> "$config_file"
+echo "}" >> "$config_file"
+echo "server = true" >> "$config_file"
+echo "bootstrap = true" >> "$config_file"
+echo "acl {" >> "$config_file"
+echo "  enabled = true" >> "$config_file"
+echo "  default_policy = \"deny\"" >> "$config_file"
+echo "  enable_token_persistence = true" >> "$config_file"
+echo "}" >> "$config_file"
+echo "配置已写入 $config_file 文件。"
 chown -R consul:consul /opt/consul
 systemctl enable consul.service
 systemctl start consul.service
 wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
+
 # 获取 Consul ACL Token
 consul_acl_token=$(consul acl bootstrap | grep SecretID | awk '{print $2}')
 
-# 获取 local IP address
-local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
-
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
-sed -i "s/consul_token:.*/consul_token: $consul_acl_token/" docker-compose.yml
-sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" docker-compose.yml
+sed -i "s/consul_token:.*/consul_token: $consul_acl_token/" /home/grafana/consul/docker-compose.yml
+sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" /home/grafana/consul/docker-compose.yml
 sed -i "s/token:.*/token: '$consul_acl_token'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 
 # 启动服务
 cd /home/grafana/consul
 docker-compose pull && docker-compose up -d
+
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"
 echo -e "#                                                                               "
