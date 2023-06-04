@@ -39,11 +39,11 @@ sys_install
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 
 # 下载prometheus配置文件
-mkdir /home/grafana/prometheus
+mkdir -p /home/grafana/prometheus
 wget -N --no-check-certificate -P /home/grafana/prometheus https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.yml
 
 # 设置grafana文件夹权限
-mkdir /home/grafana/grafana
+mkdir -p /home/grafana/grafana
 chmod 777 /home/grafana/grafana
 
 # 检测系统类型
@@ -63,12 +63,12 @@ elif [[ -f /etc/lsb-release ]]; then
 	wget -N --no-check-certificate -P /usr/lib/systemd/system https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.service
 	wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.env
 	wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.hcl
-	mkdir /opt/consul
+	mkdir -p /opt/consul
 else
     echo "不支持的操作系统"
     exit 1
 fi
-mkdir /home/grafana/consul
+mkdir -p /home/grafana/consul
 cd /home/grafana/consul
 # 修改consul配置文件
 config_file="/etc/consul.d/consul.hcl"
