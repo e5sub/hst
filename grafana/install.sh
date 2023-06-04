@@ -52,13 +52,15 @@ if [[ -f /etc/redhat-release ]]; then
     yum install -y yum-utils
     yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
     yum -y install consul-1.14.5-1
-    pip3 install -upgrade pip
+    yum -y install python3-pip
+    pip3 install --upgrade pip
     pip3 install docker-compose
 elif [[ -f /etc/lsb-release ]]; then
 # Ubuntu/Debian 系统安装consul
     wget -N --no-check-certificate https://releases.hashicorp.com/consul/1.14.5/consul_1.14.5_linux_amd64.zip
 	sudo unzip consul_1.14.5_linux_amd64.zip -d /usr/bin
     sudo apt install python3-pip -y
+	sudo pip3 install --upgrade pip
 	sudo pip3 install docker-compose
 	wget -N --no-check-certificate -P /usr/lib/systemd/system https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.service
 	wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.env

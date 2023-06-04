@@ -22,7 +22,7 @@ sys_install(){
 sys_install
 # 安装docker和docker-compose
 sudo curl -sSL https://get.docker.com/ | sh | systemctl enable docker && systemctl start docker
-pip3 install -upgrade pip && pip3 install docker-compose
+pip3 install --upgrade pip && pip3 install docker-compose
 # 使用docker部署node-exporter
 docker run -d -p 9100:9100 -v /home/grafana/node-exporter/proc:/host/proc:ro -v /home/grafana/node-exporter/sys:/host/sys:ro -v /home/grafana/node-exporter/:/homefs:ro --name node-exporter --restart=always prom/node-exporter
 echo -e "                                                                                "
