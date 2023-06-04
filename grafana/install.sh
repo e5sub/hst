@@ -12,16 +12,31 @@ echo -e "# *脚本支持Centos7/Ubuntu/Debian                       "*
 echo -e "#                                                      "*
 echo -e "# ******************************************************"
 echo -e "                                                       "
-sleep 5s
 
+#检测依赖
+sys_install(){
+    if ! type wget >/dev/null 2>&1; then
+        echo 'wget 未安装 正在安装中';
+        apt install wget -y || yum install wget -y
+    else
+        echo 'wget 已安装，继续操作'
+    fi
+    if ! type curl >/dev/null 2>&1; then
+        echo 'curl 未安装 正在安装中';
+        apt install curl -y || yum install curl -y
+    else
+        echo 'curl 已安装，继续操作'
+    fi
+    if ! type docker >/dev/null 2>&1; then
+        echo 'docker 未安装 正在安装中';
+        curl -sSL https://get.docker.com/ | sh | systemctl enable docker && systemctl start docker
+    else 
+        echo 'docker 已安装，继续操作'
+    fi
+}
+sys_install
 # 获取网卡IP
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
-
-# 安装docker和docker-compose
-apt install python3-pip -y || yum install python3-pip -y
-sudo curl -sSL https://get.docker.com/ | sh
-systemctl enable docker && systemctl start docker
-pip3 install -upgrade pip && pip3 install docker-compose
 
 # 下载prometheus配置文件
 mkdir /home/grafana/prometheus
@@ -33,15 +48,22 @@ chmod 777 /home/grafana/grafana
 
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
-    # CentOS 系统安装consul
+# CentOS 系统安装consul
     yum install -y yum-utils
     yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
     yum -y install consul-1.14.5-1
+    pip3 install -upgrade pip
+    pip3 install docker-compose
 elif [[ -f /etc/lsb-release ]]; then
-    # Ubuntu/Debian 系统安装consul
-    wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-    sudo apt update && sudo apt install -y consul-1.14.5-1 
+# Ubuntu/Debian 系统安装consul
+    wget -N --no-check-certificate https://releases.hashicorp.com/consul/1.14.5/consul_1.14.5_linux_amd64.zip
+	sudo unzip consul_1.14.5_linux_amd64.zip -d /usr/local/bin/
+    sudo apt install python3-pip -y
+	sudo pip3 install docker-compose
+	wget -N --no-check-certificate -P /usr/lib/systemd/system https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.service
+	wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.env
+	wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.hcl
+	mkdir /opt/consul
 else
     echo "不支持的操作系统"
     exit 1
