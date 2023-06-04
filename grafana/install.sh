@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年6月4日                          "*
+echo -e "# *脚本更新时间：2023年6月5日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -41,6 +41,10 @@ local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 # 下载alertmanager配置文件
 mkdir -p /home/grafana/alertmanager
 wget -N --no-check-certificate -P /home/grafana/alertmanager https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/alertmanager.yml
+
+# 下载blackbox_exporter配置文件
+mkdir -p /home/grafana/blackbox_exporter
+wget -N --no-check-certificate -P /home/grafana/blackbox_exporter https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/blackbox.yml
 
 # 下载prometheus配置文件
 mkdir -p /home/grafana/prometheus
@@ -117,9 +121,11 @@ docker-compose pull && docker-compose up -d
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"
 echo -e "#                                                                               "
-echo -e "# *登陆入口及账号密码信息                                                       "
+echo -e "# *登陆入口及账号密码信息,推荐使用ConsulManager管理服务器!                      "
 echo -e "#                                                                               "
 echo -e "# *Node-exporter: http://$local_ip:9100/metrics                                 "
+echo -e "#                                                                               "
+echo -e "# *Blackbox_exporter：http://$local_ip:9115                                     "
 echo -e "#                                                                               "
 echo -e "# *Alertmanager：http://$local_ip:9093  报警规则路径/home/grafana/prometheus/rules.yml"
 echo -e "#                                                                               "

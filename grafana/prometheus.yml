@@ -41,5 +41,33 @@ scrape_configs:
       - source_labels: ['__meta_consul_service_metadata_instance']
         target_label: instance
       - source_labels: [instance]
-        target_label: __address__
+        target_label: __address__    
+  - job_name: 'blackbox_exporter'
+    scrape_interval: 15s
+    scrape_timeout: 5s
+    metrics_path: /probe
+    consul_sd_configs:
+      - server: 'xxx:8500'
+        token: 'xxx'
+        services: ['blackbox_exporter']
+    relabel_configs:
+      - source_labels: ["__meta_consul_service_metadata_instance"]
+        target_label: __param_target
+      - source_labels: [__meta_consul_service_metadata_module]
+        target_label: __param_module
+      - source_labels: [__meta_consul_service_metadata_module]
+        target_label: module
+      - source_labels: ["__meta_consul_service_metadata_company"]
+        target_label: company
+      - source_labels: ["__meta_consul_service_metadata_env"]
+        target_label: env
+      - source_labels: ["__meta_consul_service_metadata_name"]
+        target_label: name
+      - source_labels: ["__meta_consul_service_metadata_project"]
+        target_label: project
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+
 

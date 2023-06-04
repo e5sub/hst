@@ -20,6 +20,18 @@ services:
       - /home/grafana/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
+      
+  blackbox_exporter:
+    image: prom/blackbox-exporter
+    container_name: blackbox_exporter
+    restart: always
+    ports:
+      - "9115:9115"
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /home/grafana/blackbox_exporter/blackbox.yml:/etc/blackbox_exporter/blackbox.yml
+    command:
+      - '--config.file=/etc/blackbox_exporter/blackbox.yml'
 
   node-exporter:
     image: prom/node-exporter
