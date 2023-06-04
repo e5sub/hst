@@ -27,6 +27,7 @@ sys_install(){
         echo 'docker 已安装，继续操作'
     fi
 }
+sys_install
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 sh_ver="1.3.0"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
@@ -53,8 +54,6 @@ Update_Shell(){
 		bash <(curl -Ls https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/ces.sh) 
 	fi
 }
-#脚本启动
-sys_install
 #更新Centos7
 yum -y update
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/install.sh
