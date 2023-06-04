@@ -19,7 +19,7 @@ local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 
 # 安装docker和docker-compose
 apt install python3-pip -y || yum install python3-pip -y
-sudo curl -sSL https://get.daocloud.io/docker/ | sh 
+sudo curl -sSL https://get.docker.com/ | sh
 systemctl enable docker && systemctl start docker
 pip3 install -upgrade pip && pip3 install docker-compose
 
