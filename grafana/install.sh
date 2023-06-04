@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年6月2日                          "*
+echo -e "# *脚本更新时间：2023年6月4日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -53,7 +53,7 @@ docker-compose up -d
 consul_acl_token=$(consul acl bootstrap | grep SecretID | awk '{print $2}')
 # 获取 local IP address
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
-# 更新 docker-compose.yml 和 prometheus.yml
+# 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/consul_token:.*/consul_token: $consul_acl_token/" docker-compose.yml
 sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" docker-compose.yml
 sed -i "s/token:.*/token: '$consul_acl_token'/" /home/grafana/prometheus/prometheus.yml
@@ -64,17 +64,19 @@ docker-compose pull && docker-compose restart
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"
 echo -e "#                                                                               "
-echo -e "# *登陆信息                                                                     "
+echo -e "# *登陆入口及账号密码信息                                                       "
 echo -e "#                                                                               "
-echo -e "# *node-exporter: http://$local_ip:9100/metrics                                 "
+echo -e "# *Node-exporter: http://$local_ip:9100/metrics                                 "
 echo -e "#                                                                               "
-echo -e "# *prometheus：http://$local_ip:9090/targets                                    "
+echo -e "# *Prometheus：http://$local_ip:9090/targets                                    "
 echo -e "#                                                                               "
-echo -e "# *grafana: http://$local_ip:3000/   (默认帐号密码admin)                        "
+echo -e "# *Grafana: http://$local_ip:3000/   登录帐号密码admin                          "
 echo -e "#                                                                               "
-echo -e "# *consul: http://$local_ip:1026/    (默认密码jigehenniubi)                     "
+echo -e "# *Consul: http://$local_ip:8500/  登录密码$consul_acl_token                    "
 echo -e "#                                                                               "
-echo -e "# *consul配置文件路径:/home/grafana/consul/docker-compose.yml 可更新token和登陆密码"
+echo -e "# *ConsulManager: http://$local_ip:1026/    登录密码jigehenniubi                "
+echo -e "#                                                                               "
+echo -e "# *Consul配置文件路径:/home/grafana/consul/docker-compose.yml 可更新token和登陆密码"
 echo -e "#                                                                               "
 echo -e "# *模板下载地址 https://grafana.com/api/dashboards/8919/revisions/25/download   "
 echo -e "#                                                                               "
