@@ -18,7 +18,9 @@ sleep 5s
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 
 # 安装docker和docker-compose
-curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun | systemctl enable docker && systemctl start docker
+apt install python3-pip -y || yum install python3-pip -y
+sudo curl -sSL https://get.docker.com/ | sh 
+systemctl enable docker && systemctl start docker
 pip3 install -upgrade pip && pip3 install docker-compose
 
 # 下载prometheus配置文件
