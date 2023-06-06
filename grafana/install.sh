@@ -118,6 +118,9 @@ sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus
 cd /home/grafana/consul
 docker-compose pull && docker-compose up -d
 
+# 显示脚本安装次数
+counter=$(curl -s https://www.yaohst.com/counter.php)
+
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"
 echo -e "#                                                                               "
@@ -142,6 +145,8 @@ echo -e "#                                                                      
 echo -e "# *主机监控模板下载地址:https://grafana.com/api/dashboards/8919/revisions/25/download"
 echo -e "#                                                                               "
 echo -e "# *黑盒监控模板下载地址:https://grafana.com/api/dashboards/9965/revisions/3/download"
+echo -e "#                                                                               "
+echo -e "# *$counter                                                                     "
 echo -e "#                                                                               "
 echo -e "# ******************************************************************************"
 echo -e "                                                                                "
