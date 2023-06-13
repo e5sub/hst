@@ -29,7 +29,7 @@ sys_install(){
 }
 sys_install
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-sh_ver="1.3.0"
+sh_ver="1.4"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
 github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
@@ -133,33 +133,35 @@ echo "请选择需要安装的版本【标准版】:"
 echo ""
 echo -e " \033[32m 0. \033[0m 更新安装脚本，当前正在使用的版本：[${sh_ver}]"
 echo ""
+echo -e " \033[31m=====*4.38版本*=====\033[0m"
+echo -e " \033[32m 1. \033[0m CES v4.38.0.15服务器"
 echo -e " \033[31m=====*4.37版本*=====\033[0m"
-echo -e " \033[32m 1. \033[0m CES v4.37.6.8服务器"
+echo -e " \033[32m 2. \033[0m CES v4.37.6.8服务器"
 echo -e " \033[31m=====*4.36版本*=====\033[0m"
-echo -e " \033[32m 2. \033[0m CES v4.36.6.2服务器"
+echo -e " \033[32m 3. \033[0m CES v4.36.6.2服务器"
 echo -e " \033[31m=====*4.35版本*=====\033[0m"
-echo -e " \033[32m 3. \033[0m CES v4.35.4.5服务器"
+echo -e " \033[32m 4. \033[0m CES v4.35.4.5服务器"
 echo -e " \033[31m=====*4.34版本*=====\033[0m"
-echo -e " \033[32m 4. \033[0m CES v4.34.5.1服务器"
+echo -e " \033[32m 5. \033[0m CES v4.34.5.1服务器"
 echo -e " \033[44;37m 安装FSP服务器 \033[0m"
-echo -e " \033[32m 5. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
-echo -e " \033[32m 6. \033[0m 安装FSP v1.8.3.5服务器（配套4.36服务器）"
+echo -e " \033[32m 6. \033[0m 安装FSP v1.7.5.1服务器（配套4.34、4.35服务器）"
+echo -e " \033[32m 7. \033[0m 安装FSP v1.8.3.5服务器（配套4.36服务器）"
 echo -e " \033[44;37m 安装H323服务器 \033[0m"
-echo -e " \033[32m 7. \033[0m 安装H323网关服务器v2.4.3.2（私有云版本）"
-echo -e " \033[32m 8. \033[0m 安装H323网关服务器v2.4.3.2（云会议版本）"
+echo -e " \033[32m 8. \033[0m 安装H323网关服务器v2.4.3.2（私有云版本）"
+echo -e " \033[32m 9. \033[0m 安装H323网关服务器v2.4.3.2（云会议版本）"
 echo -e " \033[44;37m 安装录制服务器 \033[0m"
-echo -e " \033[32m 9. \033[0m 安装录制服务器v3.2.6.17（适用于CES V4.36版本，不能与FSP安装在同一台）"
+echo -e " \033[32m 10. \033[0m 安装录制服务器v3.2.6.17（适用于CES V4.36版本，不能与FSP安装在同一台）"
 echo -e " \033[44;37m 其他（非好视通产品） \033[0m"
-echo -e " \033[32m 10. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/1990/8000/8081/8088端口）"
-echo -e " \033[32m 11. \033[0m 安装iperf3网络性能测试工具(服务端)（5201端口）"
-echo -e " \033[32m 12. \033[0m 安装HTML5网络速度测试工具(服务端)（6688端口）"
-echo -e " \033[32m 13. \033[0m 安装动态域名解析服务（浏览器打开主机IP:9876）"
-echo -e " \033[32m 14. \033[0m 网络同步服务器时间（需要服务器能连接公网）"
-echo -e " \033[32m 15. \033[0m 安装RustDesk远程桌面服务器（21115/21116/21117/21118/21119端口）"
-echo -e " \033[32m 16. \033[0m 安装Frp内网穿透服务器（配置文件存放路径/frp/frps.ini）"
-echo -e " \033[32m 17. \033[0m 安装Frp内网穿透客户端（配置文件存放路径/frp/frpc.ini）"
-echo -e " \033[32m 18. \033[0m 安装Prometheus+Grafana+node-exporter+consul+alertmanager+blackbox-exporter"
-echo -e " \033[32m 19. \033[0m 安装node-exporter"
+echo -e " \033[32m 11. \033[0m 安装RTMP/WebRTC/HLS/HTTP-FLV/SRT实时视频服务器（1935/1985/1990/8000/8081/8088端口）"
+echo -e " \033[32m 12. \033[0m 安装iperf3网络性能测试工具(服务端)（5201端口）"
+echo -e " \033[32m 13. \033[0m 安装HTML5网络速度测试工具(服务端)（6688端口）"
+echo -e " \033[32m 14. \033[0m 安装动态域名解析服务（浏览器打开主机IP:9876）"
+echo -e " \033[32m 15. \033[0m 网络同步服务器时间（需要服务器能连接公网）"
+echo -e " \033[32m 16. \033[0m 安装RustDesk远程桌面服务器（21115/21116/21117/21118/21119端口）"
+echo -e " \033[32m 17. \033[0m 安装Frp内网穿透服务器（配置文件存放路径/frp/frps.ini）"
+echo -e " \033[32m 18. \033[0m 安装Frp内网穿透客户端（配置文件存放路径/frp/frpc.ini）"
+echo -e " \033[32m 19. \033[0m 安装Prometheus+Grafana+node-exporter+consul+alertmanager+blackbox-exporter"
+echo -e " \033[32m 20. \033[0m 安装node-exporter"
 echo -e ""
 echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 卸载FSP服务器"
@@ -180,26 +182,27 @@ echo && read -ep "请输入数字选择: " N
 echo ""
 case $N in
   0) Update_Shell ;;
-  1) bash install.sh -437 ;;
-  2) bash install.sh -436 ;;
-  3) bash install.sh -435 ;;
-  4) bash install.sh -434 ;;
-  5) bash install.sh -175fsp ;;
-  6) bash install.sh -183fsp ;;
-  7) bash install.sh -h323pri ;;
-  8) bash install.sh -h323pub ;;
-  9) bash install.sh -record ;;
-  10) docker run -d --restart=always -p 1935:1935 -p 1985:1985 -p 8081:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs ossrs/srs:4 ./objs/srs -c conf/https.docker.conf ;;
-  11) docker run -d --restart=always -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s ;;  
-  12) docker run -d --restart=always -p 6688:80 --name hst-speedtest 1040155/hst-speedtest ;; 
-  13) docker run -d --name ddns-go --restart=always --net=host -v /opt/ddns-go:/root jeessy/ddns-go ;;
-  14) bash install.sh -time ;;
-  15) docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v /home/rustdesk:/root -td --restart=always rustdesk/rustdesk-server hbbs -r ${LOCAL_IP}
+  1) bash install.sh -438 ;;
+  2) bash install.sh -437 ;;
+  3) bash install.sh -436 ;;
+  4) bash install.sh -435 ;;
+  5) bash install.sh -434 ;;
+  6) bash install.sh -175fsp ;;
+  7) bash install.sh -183fsp ;;
+  8) bash install.sh -h323pri ;;
+  9) bash install.sh -h323pub ;;
+  10) bash install.sh -record ;;
+  11) docker run -d --restart=always -p 1935:1935 -p 1985:1985 -p 8081:8080 -p 1990:1990 -p 8088:8088 --env CANDIDATE="${LOCAL_IP}" -p 8000:8000/udp --name srs ossrs/srs:4 ./objs/srs -c conf/https.docker.conf ;;
+  12) docker run -d --restart=always -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s ;;  
+  13) docker run -d --restart=always -p 6688:80 --name hst-speedtest 1040155/hst-speedtest ;; 
+  14) docker run -d --name ddns-go --restart=always --net=host -v /opt/ddns-go:/root jeessy/ddns-go ;;
+  15) bash install.sh -time ;;
+  16) docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v /home/rustdesk:/root -td --restart=always rustdesk/rustdesk-server hbbs -r ${LOCAL_IP}
       docker run --name hbbr -p 21117:21117 -p 21119:21119 -v /home/rustdesk:/root -td --restart=always rustdesk/rustdesk-server hbbr  ;;
-  16) bash install.sh -frps ;;
-  17) bash install.sh -frpc ;;
-  18) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/install.sh && bash install.sh ;;
-  19) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/node.sh && bash node.sh ;;
+  17) bash install.sh -frps ;;
+  18) bash install.sh -frpc ;;
+  19) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/install.sh && bash install.sh ;;
+  20) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/node.sh && bash node.sh ;;
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
   90) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323pri.sh && bash h323pri.sh ;;
