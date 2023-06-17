@@ -54,8 +54,6 @@ Update_Shell(){
 		bash <(curl -Ls https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/ces.sh) 
 	fi
 }
-#更新Centos7
-yum -y update
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/install.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/cesinstall.sh
 get_opsy() {

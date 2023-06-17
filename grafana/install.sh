@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年6月5日                          "*
+echo -e "# *脚本更新时间：2023年6月17日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -64,7 +64,7 @@ if [[ -f /etc/redhat-release ]]; then
     yum -y install python3-pip
     pip3 install --upgrade pip
     pip3 install docker-compose
-elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
+elif [[ -f /etc/lsb-release || -f /etc/os-release ]]; then
 # Ubuntu/Debian 系统安装consul
     wget -N --no-check-certificate https://releases.hashicorp.com/consul/1.14.5/consul_1.14.5_linux_amd64.zip
 	sudo unzip consul_1.14.5_linux_amd64.zip -d /usr/bin
