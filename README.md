@@ -2,6 +2,8 @@
        
 #由于4.37之后版本有官方的部署工具,故4.37之后只提供安装包下载,不再提供安装脚本    
 #好视通服务器安装脚本6月1日起停止更新, 只做维护不在更新服务器版本    
+     
+#如无特殊说明,docker映射文件夹地址均在home目录下     	 
 
 脚本目前功能：  
 1、同步linux时间  
@@ -19,6 +21,7 @@
 13、[ddns-go动态域名解析服务](https://github.com/jeessy2/ddns-go)    
 14、一键部署Prometheus+Grafana+node-exporter+consul+alertmanager+blackbox_exporter     
 15、一键部署Emby流媒体服务器     
+16、一键部署Alist文件列表程序     
 
 一键安装脚本：     
 
