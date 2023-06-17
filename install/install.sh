@@ -531,7 +531,7 @@ then
 	mkdir -p /frp
 	cd /frp
 	wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/frp/frps.ini
-	docker run --restart=always --network host -dit -v /frp:/etc/frp --name frps snowdreamtech/frps
+	docker run --restart=always --network host -dit -v /home/frp:/etc/frp --name frps snowdreamtech/frps
 fi
 if [ $1 = '-frpc' ]
 then
@@ -541,7 +541,7 @@ then
 	mkdir -p /frp
 	cd /frp
 	wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/frp/frpc.ini
-	docker run --restart=always --network host -dit -v /frp:/etc/frp --name frpc snowdreamtech/frpc
+	docker run --restart=always --network host -dit -v /home/frp:/etc/frp --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-time' ]
 then
@@ -580,7 +580,7 @@ then
 	sleep 5s
 	echo -e "正在卸载FSP服务器"
 	docker rm $(docker ps -qf status=exited)
-	rm -rf /fsmeeting/fsp/
+	rm -rf /hst/fsp/fsmeeting
 fi
 if [ $1 = '-nginx' ]
 then
@@ -610,7 +610,7 @@ then
     sleep 5s
     docker rm $(docker ps -qf status=exited)
     sleep 5s
-    docker run -d --name nginx_proxy -v /usr/local/nginx/html:/usr/share/nginx/html -v /usr/local/nginx:/etc/nginx -v /usr/local/nginx/logs:/var/log/nginx -v /usr/local/nginx/ssl:/etc/nginx/ssl -e TZ=Asia/Shanghai --net=host --hostname nginx_proxy --restart=always nginx
+    docker run -dit --name nginx_proxy -v /usr/local/nginx/html:/usr/share/nginx/html -v /usr/local/nginx:/etc/nginx -v /usr/local/nginx/logs:/var/log/nginx -v /usr/local/nginx/ssl:/etc/nginx/ssl -e TZ=Asia/Shanghai --net=host --hostname nginx_proxy --restart=always nginx
 fi
 if [ $1 = '-resetadmin' ]
 then
