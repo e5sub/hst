@@ -41,7 +41,40 @@ scrape_configs:
       - source_labels: ['__meta_consul_service_metadata_instance']
         target_label: instance
       - source_labels: [instance]
-        target_label: __address__    
+        target_label: __address__
+  - job_name: windows_exporter
+    scrape_interval: 15s
+    scrape_timeout: 5s
+    consul_sd_configs:
+      - server: 'xxx:8500'
+        token: 'xxx'
+        refresh_interval: 30s
+        services: ['selfnode_exporter']
+        tags: ['windows']
+    relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        regex: .*OFF.*
+        action: drop
+      - source_labels: ['__meta_consul_service']
+        target_label: cservice
+      - source_labels: ['__meta_consul_service_metadata_vendor']
+        target_label: vendor
+      - source_labels: ['__meta_consul_service_metadata_region']
+        target_label: region
+      - source_labels: ['__meta_consul_service_metadata_group']
+        target_label: group
+      - source_labels: ['__meta_consul_service_metadata_account']
+        target_label: account
+      - source_labels: ['__meta_consul_service_metadata_name']
+        target_label: name
+      - source_labels: ['__meta_consul_service_metadata_iid']
+        target_label: iid
+      - source_labels: ['__meta_consul_service_metadata_exp']
+        target_label: exp
+      - source_labels: ['__meta_consul_service_metadata_instance']
+        target_label: instance
+      - source_labels: [instance]
+        target_label: __address__        
   - job_name: 'blackbox_exporter'
     scrape_interval: 15s
     scrape_timeout: 5s
