@@ -528,8 +528,8 @@ then
 	echo -e "\033[33m 【你选择的是安装Frp内网穿透服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	mkdir -p /frp
-	cd /frp
+	mkdir -p /home/frp
+	cd /home/frp
 	wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/frp/frps.ini
 	docker run --restart=always --network host -dit -v /home/frp:/etc/frp --name frps snowdreamtech/frps
 fi
@@ -538,8 +538,8 @@ then
 	echo -e "\033[33m 【你选择的是安装Frp内网穿透客户端】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	mkdir -p /frp
-	cd /frp
+	mkdir -p /home/frp
+	cd /home/frp
 	wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/frp/frpc.ini
 	docker run --restart=always --network host -dit -v /home/frp:/etc/frp --name frpc snowdreamtech/frpc
 fi
