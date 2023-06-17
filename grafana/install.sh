@@ -116,7 +116,7 @@ sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus
 
 # 启动服务
 cd /home/grafana/consul
-docker-compose pull && docker-compose up -d
+docker-compose pull && docker-compose up -d 
 
 # 显示脚本安装次数
 counter=$(curl -s https://www.yaohst.com/counter.php)
