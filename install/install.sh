@@ -299,7 +299,7 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.4.1.17服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-docker run -d --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ${FSP141}
+docker run -dit --restart=unless-stopped -p 29100:29100 -p 28000:28000 --name fsp_pri ${FSP141}
 fi
 if [ $1 = '-175fsp' ]
 then
@@ -335,7 +335,7 @@ wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/set_wb_app_id.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/add_protocol_addr.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.7.5.1/fsmeeting.conf
-docker run -d --name=fsp_pri ${FSP175}
+docker run -dit --name=fsp_pri ${FSP175}
 echo -e "请稍等，正在映射FSP至本地目录/hst/fsp"
 mkdir -p /hst/fsp
 docker cp $(docker ps|grep fsp_pri|awk '{print $1}'):/fsmeeting /hst/fsp
@@ -348,7 +348,7 @@ echo -e "正在停止FSP服务器"
 docker rm $(docker ps -qf status=exited)
 sleep 15s
 echo -e "正在启动FSP服务器"
-docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
+docker run -dit -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP175}
 #开放FSP服务器防火墙端口
 firewall-cmd --zone=public --add-port=21000/tcp --permanent
 firewall-cmd --zone=public --add-port=21100/tcp --permanent
@@ -415,7 +415,7 @@ wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/set_wb_app_id.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/add_protocol_addr.sh
 wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/1.8.3.5/fsmeeting.conf
-docker run -d --name=fsp_pri ${FSP183}
+docker run -dit --name=fsp_pri ${FSP183}
 echo -e "请稍等，正在映射FSP至本地目录/hst/fsp"
 #mkdir -p /hst/fsp
 mkdir -p /hst/fsp/nginx
@@ -430,7 +430,7 @@ echo -e "正在停止FSP服务器"
 docker rm $(docker ps -qf status=exited)
 sleep 15s
 echo -e "正在启动FSP服务器"
-docker run -d -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss -v /hst/fsp/nginx/conf.d:/etc/nginx/conf.d --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
+docker run -dit -v /hst/fsp/fsmeeting:/fsmeeting -v /hst/fsp/middleware:/middleware -v /hst/fsp/boss:/boss -v /hst/fsp/nginx/conf.d:/etc/nginx/conf.d --name=fsp_pri -e addr="${LOCAL_IP}" -e service=wb2.web.ep.mds -e use_default_app=true --privileged --hostname fsp_server --net=host --restart=always ${FSP183}
 #开放FSP服务器防火墙端口
 firewall-cmd --zone=public --add-port=21000/tcp --permanent
 firewall-cmd --zone=public --add-port=21100/tcp --permanent
@@ -531,7 +531,7 @@ then
 	mkdir -p /frp
 	cd /frp
 	wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/frp/frps.ini
-	docker run --restart=always --network host -d -v /frp:/etc/frp --name frps snowdreamtech/frps
+	docker run --restart=always --network host -dit -v /frp:/etc/frp --name frps snowdreamtech/frps
 fi
 if [ $1 = '-frpc' ]
 then
@@ -541,7 +541,7 @@ then
 	mkdir -p /frp
 	cd /frp
 	wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/frp/frpc.ini
-	docker run --restart=always --network host -d -v /frp:/etc/frp --name frpc snowdreamtech/frpc
+	docker run --restart=always --network host -dit -v /frp:/etc/frp --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-time' ]
 then
