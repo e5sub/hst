@@ -22,6 +22,7 @@
 14、一键部署Prometheus+Grafana+node-exporter+consul+alertmanager+blackbox_exporter     
 15、一键部署Emby流媒体服务器     
 16、一键部署Alist文件列表程序     
+17、一键部署Umeet Pro会管服务器     
 
 一键安装脚本：     
 
