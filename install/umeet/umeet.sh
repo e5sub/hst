@@ -4,8 +4,6 @@ echo -e "# ******************************************************"
 echo -e "#                                                      "*
 echo -e "# *脚本更新时间：2023年7月31日                         "*
 echo -e "#                                                      "*
-echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
-echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
 echo -e "# *可按Ctrl+Z取消安装                                  "*
@@ -184,8 +182,6 @@ systemctl enable docker.service
 systemctl start docker.service
 fi
 
-
-
 #修改Umeet配置文件
 systec_dir=/opt/systec/service/
 services=(process proxy report device system task umeet gateway apphub migrate live imhub)
@@ -197,7 +193,6 @@ for i in ${services[*]};do
 done
 
 #安装umeet
-cd /opt/systec
 ln -s /opt/systec/umeet /usr/bin/umeet
 umeet create
 
@@ -212,13 +207,9 @@ echo -e "#**********************************************************************
 echo -e "#                                                                               "
 echo -e "# *恭喜！Umeet Pro服务器安装完成！                                              "
 echo -e "#                                                                               "
-echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！                                     "
-echo -e "#                                                                               "
 echo -e "# *Umeet后台：https://${IP}:6102                                                "
 echo -e "#                                                                               "
 echo -e "# *Umeet前台：https://${IP}                                                     "
-echo -e "#                                                                               "
-echo -e "# *如需外网使用请在路由器中映射上述端口                                         "
 echo -e "#                                                                               "
 echo -e "# *后台初始用户名密码均为admin                                                  "
 echo -e "#                                                                               "
