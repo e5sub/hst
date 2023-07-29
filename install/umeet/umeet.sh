@@ -77,7 +77,12 @@ IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | gre
 
 # 判断网络环境,默认使用安装包下载地址检测
 function check_internet() {
-    yum install wget -y
+	if ! type wget >/dev/null 2>&1; then
+        echo 'wget 未安装 正在安装中';
+        timeout 30 yum -y install wget
+    else 
+        echo 'wget 已安装，继续操作'
+    fi
     wget --no-check-certificate -q -T 10 --spider https://pan.yaohst.com/d/OS/umeet/umeet-v4.7.0.zip
     if [ $? -eq 0 ]; then      
         return 0
@@ -108,19 +113,38 @@ sys_install(){
 sys_install
 
 #Umeet Pro下载并解压
-wget -N --no-check-certificate -P /opt https://pan.yaohst.com/d/189cloud/umeet/umeet-v4.7.0.zip && unzip /opt/umeet-v4.7.0.zip -d /opt 
+wget -N --no-check-certificate  https://pan.yaohst.com/d/189cloud/umeet/umeet-v4.7.0.zip && unzip /opt/umeet-v4.7.0.zip -d /opt 
 else
 echo "未检测到外网环境,本次将使用离线安装方式,安装前请将脚本放在docker和umeet安装包同一个目录下"
-#检测安装包
-if [ ! -f docker*.tgz ]; then
-    echo "需要的docker.tgz文件不存在，无法进行离线安装"
-    exit 1
-fi
+#检测安装环境
+while true; do
+    if [ ! -f docker*.tgz ]; then
+        echo "需要的docker.tgz文件不存在，无法进行离线安装"
+        read -p "请将docker.tgz文件放置到当前目录下，然后按回车键继续..."
+    else
+        break
+    fi
+done
 
-if [ ! -f umeet-*.zip ]; then
-    echo "需要的umeet.zip文件不存在，无法进行离线安装"
-    exit 1
-fi
+while true; do
+    if [ ! -f umeet-*.zip ]; then
+        echo "需要的umeet.zip文件不存在，无法进行离线安装"
+        read -p "请将umeet.zip文件放置到当前目录下，然后按回车键继续..."
+    else
+        break
+    fi
+done
+while ! command -v unzip &> /dev/null; do
+    echo "unzip命令不可用，无法进行离线安装"
+    read -p "请将unzip.rpm文件放置到当前目录下，然后按回车键继续..."
+    rpm -ivh unzip*.rpm
+    if [ $? -eq 0 ]; then
+        echo "unzip安装成功！"
+        break
+    else
+        echo "unzip安装失败，请检查安装包名称或手动安装。"
+    fi
+done
 
 #安装docker
 tar -zxvf docker*.tgz
