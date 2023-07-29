@@ -12,6 +12,9 @@ echo -e "# *可按Ctrl+Z取消安装                                  "*
 echo -e "#                                                      "*
 echo -e "# ******************************************************"
 echo -e "                                                       "
+#获取内网IP地址
+IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+
 ## 调整root根目录大小
     if [[ -z "${kr}" ]]; then    
         read -e -r -p "是否需要调整root根目录大小？留空默认不调整[y/n] " input
@@ -73,29 +76,116 @@ echo -e "                                                       "
      #查看是否成功扩容
        df -lh
     fi
-#获取内网IP地址
-IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+
+# 判断网络环境,默认使用安装包下载地址检测
+function check_internet() {
+    yum install wget -y
+    wget --no-check-certificate -q -T 10 --spider https://pan.yaohst.com/d/OS/umeet/umeet-v4.7.0.zip
+    if [ $? -eq 0 ]; then      
+        return 0
+    else
+        return 1
+    fi
+}
+check_internet
+if [ $? -eq 0 ]; then
+    echo "检测到外网环境,本次将使用在线安装方式,即将安装4.7.0版本的Umeet Pro"
 #检测依赖
 sys_install(){
-    if ! type wget >/dev/null 2>&1; then
-        echo 'wget 未安装 正在安装中';
-        apt install wget -y || yum install wget -y
-    else
-        echo 'wget 已安装，继续操作'
-    fi
     if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
-        curl -sSL https://get.docker.com/ | sh | systemctl enable docker && systemctl start docker
+        curl -sSL https://get.docker.com/ | sh 
+		systemctl enable docker
+		systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi
+	if ! type unzip >/dev/null 2>&1; then
+        echo 'unzip 未安装 正在安装中';
+        yum -y install unzip
+    else 
+        echo 'unzip 已安装，继续操作'
+    fi
 }
 sys_install
-#Umeet Pro安装包下载地址
-wget -N --no-check-certificate -P /opt https://pan.yaohst.com/OS/umeet/umeet-v4.7.0.zip
-#解压安装包
-cd /opt
+
+#Umeet Pro下载并解压
+wget -N --no-check-certificate -P /opt https://pan.yaohst.com/d/189cloud/umeet/umeet-v4.7.0.zip && unzip /opt/umeet-v4.7.0.zip -d /opt 
+else
+echo "未检测到外网环境,本次将使用离线安装方式,安装前请将脚本放在docker和umeet安装包同一个目录下"
+#检测安装包
+if [ ! -f docker*.tgz ]; then
+    echo "需要的docker.tgz文件不存在，无法进行离线安装"
+    exit 1
+fi
+
+if [ ! -f umeet-*.zip ]; then
+    echo "需要的umeet.zip文件不存在，无法进行离线安装"
+    exit 1
+fi
+
+#安装docker
+tar -zxvf docker*.tgz
+cp docker/* /usr/bin/
+
+#解压umeet安装包
 unzip umeet*.zip
+mv systec /opt
+
+# 创建docker.service文件
+DOCKER_SERVICE_FILE="/etc/systemd/system/docker.service"
+
+# 写入docker.service的内容
+cat <<EOL > "$DOCKER_SERVICE_FILE"
+[Unit]
+Description=Docker Application Container Engine
+Documentation=https://docs.docker.com
+After=network-online.target firewalld.service
+Wants=network-online.target
+
+[Service]
+Type=notify
+# 默认情况下不使用systemd管理cgroup，因为委托问题仍然存在
+# 而且systemd目前不支持运行docker容器所需的cgroup特性集
+ExecStart=/usr/bin/dockerd --selinux-enabled=false --insecure-registry=172.16.40.210
+ExecReload=/bin/kill -s HUP \$MAINPID
+# 非零的Limit*s会导致由于内核中的会计开销而出现性能问题
+# 我们建议使用cgroups来进行容器的本地账户管理
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+
+# 如果你的systemd版本支持，取消注释TasksMax
+# 仅systemd 226及以上版本支持此选项
+#TasksMax=infinity
+
+TimeoutStartSec=0
+# 设置委派为yes，以便systemd不会重置docker容器的cgroup
+Delegate=yes
+# 仅终止docker进程，而不终止cgroup中的所有进程
+KillMode=process
+# 如果docker进程异常退出，则重启docker进程
+Restart=on-failure
+StartLimitBurst=3
+StartLimitInterval=60s
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+# 修改docker.service文件中的ExecStart行
+sed -i "s|ExecStart=/usr/bin/dockerd.*|ExecStart=/usr/bin/dockerd --selinux-enabled=false --insecure-registry=$IP|" /etc/systemd/system/docker.service
+
+# 重新加载systemd并启用新的Docker服务
+systemctl daemon-reload
+systemctl enable docker.service
+
+# 使用新的服务启动Docker
+systemctl start docker.service
+fi
+
+
+
 #修改Umeet配置文件
 systec_dir=/opt/systec/service/
 services=(process proxy report device system task umeet gateway apphub migrate live imhub)
@@ -105,10 +195,12 @@ for i in ${services[*]};do
 	#mysql
 	#sed -i -r "/spring.datasource.url=/s#127.0.0.1:3306#${IP}:3306#" ${systec_dir}${i}/config.properties
 done
+
 #安装umeet
 cd /opt/systec
 ln -s /opt/systec/umeet /usr/bin/umeet
 umeet create
+
 #设置防火墙
 #systemctl stop firewalld.service
 #systemctl disable firewalld.service

@@ -134,7 +134,7 @@ systemctl start docker.service
 
 #解压Umeet安装包
 unzip umeet*.zip
-mv systec /opt/systec
+mv systec /opt
 
 #修改Umeet配置文件
 systec_dir=/opt/systec/service/
