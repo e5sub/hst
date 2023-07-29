@@ -216,6 +216,30 @@ for i in ${services[*]};do
 	#sed -i -r "/spring.datasource.url=/s#127.0.0.1:3306#${IP}:3306#" ${systec_dir}${i}/config.properties
 done
 
+#系统环境设置
+content="
+net.core.somaxconn = 512
+net.ipv4.ip_forward=1
+"
+
+#检查是否已经存在这些内容，如果不存在则追加
+if ! grep -Fxq "$content" /etc/sysctl.conf
+then
+    echo "$content" >> /etc/sysctl.conf
+    echo "内容已添加到/etc/sysctl.conf。"
+else
+    echo "内容已存在于/etc/sysctl.conf，无需添加。"
+fi
+
+#加载新的内核参数
+sysctl -p
+
+#修改系统的打开文件数量限制
+echo '* - nofile 20000' | sudo tee -a /etc/security/limits.conf
+
+#关闭selinux
+sed -i '/^SELINUX=/c SELINUX=disabled' /etc/selinux/config 
+
 #安装umeet
 ln -s /opt/systec/umeet /usr/bin/umeet
 umeet create
