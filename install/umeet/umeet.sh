@@ -79,7 +79,7 @@ IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | gre
 function check_internet() {
 	if ! type wget >/dev/null 2>&1; then
         echo 'wget 未安装 正在安装中';
-        timeout 30 yum -y install wget
+        timeout 20 yum -y install wget
     else 
         echo 'wget 已安装，继续操作'
     fi
@@ -113,9 +113,9 @@ sys_install(){
 sys_install
 
 #Umeet Pro下载并解压
-wget -N --no-check-certificate  https://pan.yaohst.com/d/189cloud/umeet/umeet-v4.7.0.zip && unzip /opt/umeet-v4.7.0.zip -d /opt 
+wget -N --no-check-certificate  https://pan.yaohst.com/d/189cloud/umeet/umeet-v4.7.0.zip && unzip umeet*.zip -d /opt 
 else
-echo "未检测到外网环境,本次将使用离线安装方式,安装前请将脚本放在docker和umeet安装包同一个目录下"
+echo "未检测到外网环境,本次将使用离线安装方式"
 #检测安装环境
 while true; do
     if [ ! -f docker*.tgz ]; then
@@ -134,15 +134,20 @@ while true; do
         break
     fi
 done
+
 while ! command -v unzip &> /dev/null; do
-    echo "unzip命令不可用，无法进行离线安装"
-    read -p "请将unzip.rpm文件放置到当前目录下，然后按回车键继续..."
-    rpm -ivh unzip*.rpm
-    if [ $? -eq 0 ]; then
-        echo "unzip安装成功！"
-        break
+    echo "unzip命令不可用，无法进行离线安装,5秒钟之后自动检测安装包"
+    if [ -f unzip*.rpm ]; then
+        rpm -ivh unzip*.rpm
+        if [ $? -eq 0 ]; then
+            echo "unzip安装成功！"
+            break
+        else
+            echo "unzip安装失败，请检查安装包名称或手动安装。"
+        fi
     else
-        echo "unzip安装失败，请检查安装包名称或手动安装。"
+        echo "未找到unzip.rpm安装包，请将安装包放置到当前目录下。"  
+        sleep 5  # 等待5秒后继续检测		
     fi
 done
 
