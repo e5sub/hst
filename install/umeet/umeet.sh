@@ -252,7 +252,7 @@ umeet create
 #设置防火墙
 #systemctl stop firewalld.service
 #systemctl disable firewalld.service
-firewall-cmd --permanent --add-port=80/tcp --add-port=443/tcp --add-port=6102/tcp --add-port=6100/tcp --add-port=6101/tcp
+firewall-cmd --permanent --add-port=80/tcp --add-port=443/tcp --add-port=6102/tcp --add-port=6100/tcp --add-port=6101/tcp --add-port=6199/tcp
 firewall-cmd --reload
 
 echo -e "                                                                                "
