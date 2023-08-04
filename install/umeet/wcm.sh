@@ -79,11 +79,11 @@ IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | gre
 function check_internet() {
 	if ! type wget >/dev/null 2>&1; then
         echo 'wget 未安装 正在安装中';
-        timeout 20 yum -y install wget
+        timeout 60 yum -y install wget
     else 
         echo 'wget 已安装，继续操作'
     fi
-    wget --no-check-certificate -q -T 10 --spider https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
+    wget --no-check-certificate -q -T 10 --spider https://pan.yaohst.com/d/OS/umeet/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
     if [ $? -eq 0 ]; then      
         return 0
     else
@@ -113,9 +113,9 @@ sys_install(){
 sys_install
 
 # 下载所需的安装包
-wget -N --no-check-certificate https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
-wget -N --no-check-certificate http://download.redis.io/redis-stable.tar.gz
-wget -N --no-check-certificate https://pan.yaohst.com/d/189cloud/umeet/wcm_install_saas_2.6.zip
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.0.12.rpm
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/wcm_install_saas_2.6.zip
 else
 echo "未检测到外网环境,本次将使用离线安装方式"
 # 检测安装环境
@@ -138,9 +138,9 @@ while true; do
 done
 
 while true; do
-    if [ ! -f redis*.tar.gz ]; then
-        echo "需要的redis.tar.gz文件不存在，无法进行离线安装"
-        read -p "请将redis.tar.gz文件放置到当前目录下，然后按回车键继续..."
+    if [ ! -f redis*.rpm ]; then
+        echo "需要的redis.rpm文件不存在，无法进行离线安装"
+        read -p "请将redis.rpm文件放置到当前目录下，然后按回车键继续..."
     else
         break
     fi
@@ -220,18 +220,34 @@ fi
 
 # 移除任何已经安装的 MySQL 或者 MariaDB
 rpm -e `rpm -qa | grep -i mysql`
-rpm -e `rpm -qa | grep -i maria`
+rpm -e --nodeps `rpm -qa | grep -i mariadb`
 
 # 解压Mysql5.7安装包
-tar -zxvf mysql-5.7*.tar
+tar -xvf mysql-5.7*.tar
  
 # 安装Mysql5.7
 rpm -ivh mysql-community-common-5.7*.rpm
 rpm -ivh mysql-community-libs-5.7*.rpm
 rpm -ivh mysql-community-client-5.7*.rpm
-rpm -ivh mysql-community-server-5.7*.rpm
+rpm -ivh --nodeps mysql-community-server-5.7*.rpm
 
-# 更新my.cnf配置文件
+# 启动Mysql5.7
+systemctl start mysqld
+
+# 提取临时密码
+temp_password=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
+
+# 设置mysql和redis新密码
+new_password="wecom,123!"
+read -p "请输入mysql和redis的新密码（默认为：$new_password）：" input
+new_password=${input:-$new_password}
+
+# 使用临时密码登录并修改密码
+mysql -uroot --password="${temp_password}" --connect-expired-password -e "set global validate_password_policy=0; set global validate_password_mixed_case_count=0; ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_password}'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${new_password}'; FLUSH PRIVILEGES;"
+echo "Mysql密码已修改为${new_password}"
+
+# 备份并更新my.cnf配置文件
+cp /etc/my.cnf /etc/my_bak.cnf
 echo "" > /etc/my.cnf
 cat << EOF > /etc/my.cnf
 # For advice on how to change settings please see
@@ -289,50 +305,20 @@ innodb_buffer_pool_size = 4G
 sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES 
 EOF
 
-# 启动Mysql5.7
-systemctl start mysqld
+# 重启Mysql5.7
+systemctl restart mysqld
 
-# 提取临时密码
-temp_password=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
-
-# 设置mysql和redis新密码
-read -p "请输入mysql和redis的新密码：" -i "wecom,123!" new_password
-
-# 使用临时密码登录并修改密码
-mysql -uroot -p"${temp_password}" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_password}';"
-echo "Mysql密码已修改为${new_password}"
-
-# 允许所有IP访问数据库
-mysql -uroot -p"${new_password}" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${new_password}'; FLUSH PRIVILEGES;"
-
-# 解压 Redis 源码包并编译
-tar -zxvf redis-stable.tar.gz
-make -C redis-stable
-make -C redis-stable test
-make -C redis-stable install
-
-# 创建 Redis 配置目录并复制配置文件
-mkdir /etc/redis
-cp ./redis-stable/redis.conf /etc/redis
+# 安装Redis
+rpm -ivh redis*.rpm
 
 # 修改密码并允许所有IP访问
+cp /etc/redis/redis.conf /etc/redis/redis_bak.conf
 REDIS_CONF="/etc/redis/redis.conf"
 sed -i "s/^# requirepass .*/requirepass $new_password/" $REDIS_CONF
 sed -i 's/^bind.*/bind 0.0.0.0/' $REDIS_CONF
 echo "Redis密码已修改为${new_password}"
 
 # 设置开机自启
-echo "[Unit]
-Description=Redis service
-After=network.target
-
-[Service]
-User=root
-ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf
-Restart=always
-
-[Install]
-WantedBy=multi-user.target" | sudo tee /etc/systemd/system/redis.service
 systemctl start redis
 systemctl enable redis
 
