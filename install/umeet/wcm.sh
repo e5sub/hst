@@ -238,7 +238,7 @@ systemctl start mysqld
 temp_password=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
 # 设置mysql和redis新密码
-read -p "请输入mysql和redis的新密码(默认为wecom,123!)：" -i "wecom,123!" new_password
+read -p "请输入mysql和redis的新密码：" -i "wecom,123!" new_password
 
 # 使用临时密码登录并修改密码
 mysql -uroot -p"${temp_password}" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_password}';"
