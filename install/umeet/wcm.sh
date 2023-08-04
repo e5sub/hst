@@ -237,8 +237,8 @@ systemctl start mysqld
 # 提取临时密码
 temp_password=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
-# 设置新密码
-new_password="wecom,123!"
+# 设置mysql和redis新密码
+read -p "请输入mysql和redis的新密码(默认为wecom,123!)：" -i "wecom,123!" new_password
 
 # 使用临时密码登录并修改密码
 mysql -uroot -p"${temp_password}" --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_password}';"
@@ -259,9 +259,9 @@ cp ./redis-stable/redis.conf /etc/redis
 
 # 修改密码并允许所有IP访问
 REDIS_CONF="/etc/redis/redis.conf"
-NEW_PASS="wecom,123!"
-sed -i "s/^# requirepass .*/requirepass $NEW_PASS/" $REDIS_CONF
+sed -i "s/^# requirepass .*/requirepass $new_password/" $REDIS_CONF
 sed -i 's/^bind.*/bind 0.0.0.0/' $REDIS_CONF
+echo "Redis密码已修改为${new_password}"
 
 # 设置开机自启
 echo "[Unit]
