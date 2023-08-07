@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年8月4日                          "*
+echo -e "# *脚本更新时间：2023年8月7日                          "*
 echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
@@ -83,7 +83,7 @@ function check_internet() {
     else 
         echo 'wget 已安装，继续操作'
     fi
-    wget --no-check-certificate -q -T 10 --spider https://pan.yaohst.com/d/OS/umeet/umeet-v4.7.0.zip
+    wget --no-check-certificate -q -T 10 --spider https://pan.yaohst.com/d/OS/umeet/umeet-v4.8.0.zip
     if [ $? -eq 0 ]; then      
         return 0
     else
@@ -92,7 +92,7 @@ function check_internet() {
 }
 check_internet
 if [ $? -eq 0 ]; then
-    echo "检测到外网环境,本次将使用在线安装方式,即将安装4.7.0版本的Umeet Pro"
+    echo "检测到外网环境,本次将使用在线安装方式,即将安装4.8.0版本的Umeet Pro"
 #检测依赖
 sys_install(){
     if ! type docker >/dev/null 2>&1; then
@@ -113,7 +113,7 @@ sys_install(){
 sys_install
 
 #Umeet Pro下载并解压
-wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/umeet-v4.7.0.zip && unzip umeet*.zip -d /opt 
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/umeet-v4.8.0.zip && unzip umeet*.zip -d /opt 
 else
 echo "未检测到外网环境,本次将使用离线安装方式"
 #检测安装环境
