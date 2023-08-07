@@ -330,23 +330,28 @@ echo "Redis 安装成功!"
 read -p "是否安装会话存档应用? (y/n，默认为n) " answer
 answer=${answer:-n}
 case $answer in
-    [Yy]* ) echo "你选择了安装会话存档应用."; 
-	# 检测会话存档安装包
-	while true; do
-    if [ ! -f wcm_install*.zip ]; then
-        echo "需要的wcm_install.zip文件不存在，无法进行离线安装"
-        read -p "请将wcm_install.zip文件放置到当前目录下，然后按回车键继续..."
-    else
-        break
-    fi
-    done
-    # 解压并安装wcm
-    unzip wcm*.zip
-    cat install.sh wcm_install.tar.gz > wcm_install.run
-    bash wcm_install.run
-    ;;
-    [Nn]* | "" ) echo "你选择了不安装会话存档应用."; exit;;
-    * ) echo "请输入 y 或 n."; exit;;
+    [Yy]* ) 
+        echo "你选择了安装会话存档应用"; 
+        # 检测会话存档安装包
+        while true; do
+            if [ ! -f wcm_install*.zip ]; then
+                echo "需要的wcm_install.zip文件不存在，无法进行离线安装"
+                read -p "请将wcm_install.zip文件放置到当前目录下，然后按回车键继续..."
+            else
+                break
+            fi
+        done
+        # 解压并安装wcm
+        unzip wcm*.zip
+        cat install.sh wcm_install.tar.gz > wcm_install.run
+        bash wcm_install.run
+        ;;
+    [Nn]* | "" ) 
+        echo "你选择了不安装会话存档应用"
+        ;;
+    * ) 
+        echo "请输入 y 或 n"
+        ;;
 esac
 
 # 系统环境设置
