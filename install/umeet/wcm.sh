@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年8月4日                          "*
+echo -e "# *脚本更新时间：2023年8月7日                          "*
 echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
@@ -315,6 +315,7 @@ rpm -ivh redis*.rpm
 cp /etc/redis/redis.conf /etc/redis/redis_bak.conf
 REDIS_CONF="/etc/redis/redis.conf"
 sed -i "s/^# requirepass .*/requirepass $new_password/" $REDIS_CONF
+sed -i "s/^# masterauth .*/masterauth $new_password/" $REDIS_CONF
 sed -i 's/^bind.*/bind 0.0.0.0/' $REDIS_CONF
 echo "Redis密码已修改为${new_password}"
 
