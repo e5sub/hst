@@ -1,22 +1,36 @@
+version: "3"
 services:
   mysql-server:
-    image: mysql:5.7
+    image: mysql:8.0
+    hostname: mysql-server
     container_name: mysql-server
+    command: 
+    - --character-set-server=utf8mb4
+    - --collation-server=utf8mb4_bin
+    restart: always
     environment:
-      MYSQL_DATABASE: zabbix
-      MYSQL_USER: zabbix
-      MYSQL_PASSWORD: zabbix
-      MYSQL_ROOT_PASSWORD: zabbix
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=zabbix
     volumes:
+      - /etc/localtime:/etc/localtime 
       - /home/zabbix/mysql:/var/lib/mysql
+    networks:
+      - zabbix-net
       
   zabbix-java-gateway:
     image: zabbix/zabbix-java-gateway:latest
     container_name: zabbix-java-gateway
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
+    networks:
+      - zabbix-net  
 
-  zabbix-server-mysql:
+  zabbix-server:
     image: zabbix/zabbix-server-mysql:latest
-    container_name: zabbix-server-mysql
+    container_name: zabbix-server
     ports:
       - "10051:10051"
     environment:
@@ -25,15 +39,20 @@ services:
       MYSQL_USER: zabbix
       MYSQL_PASSWORD: zabbix
       MYSQL_ROOT_PASSWORD: zabbix
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
     depends_on:
       - mysql-server
       - zabbix-java-gateway
+    networks:
+      - zabbix-net
 
   zabbix-web-nginx-mysql:
     image: zabbix/zabbix-web-nginx-mysql:latest
     container_name: zabbix-web-nginx-mysql
     ports:
-      - "8080:80"
+      - "8080:8080"
     environment:
       DB_SERVER_HOST: mysql-server
       MYSQL_DATABASE: zabbix
@@ -41,6 +60,28 @@ services:
       MYSQL_PASSWORD: zabbix
       MYSQL_ROOT_PASSWORD: zabbix
       ZBX_JAVAGATEWAY: zabbix-java-gateway
+    restart: always
     depends_on:
       - mysql-server
-      - zabbix-server-mysql
+      - zabbix-server
+    volumes:
+      - /etc/localtime:/etc/localtime
+    networks:
+      - zabbix-net
+      
+  zabbix-agent:
+    image: zabbix/zabbix-agent:latest
+    container_name: zabbix-agent
+    environment:
+      ZBX_HOSTNAME: zabbix-agent
+      ZBX_SERVER_HOST: zabbix-server
+    restart: always
+    ports:
+      - "10050:10050"
+    depends_on:    
+      - zabbix-server
+    networks:
+      - zabbix-net
+networks:
+  zabbix-net:
+    driver: bridge

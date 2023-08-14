@@ -68,7 +68,7 @@ echo -e "#**********************************************************************
 echo -e "#                                                                               "
 echo -e "# *登陆入口及账号密码信息                                                       "
 echo -e "#                                                                               "
-echo -e "# *zabbix: http://$local_ip:8080 默认账号密码：admin                            "
+echo -e "# *zabbix: http://$local_ip:8080 默认账号密码：Admin/zabbix                     "
 echo -e "#                                                                               "
 echo -e "# *$counter                                                                     "
 echo -e "#                                                                               "
