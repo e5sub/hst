@@ -62,7 +62,7 @@ docker-compose pull && docker-compose up -d
 
 # 修改zabbix-server的NodeAddress
 docker exec zabbix-server sed -i "s/#NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /etc/zabbix/zabbix_server.conf
-echo "zabbix_server.conf 已经被修改为使用 IP 地址 $local_ip"
+echo "zabbix_server.conf 已经被修改为网卡IP：$local_ip"
 sleep 15s
 docker restart zabbix-server
 
