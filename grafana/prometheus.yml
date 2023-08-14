@@ -102,7 +102,7 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: 127.0.0.1:9115
- - job_name: multi_mysqld_exporter
+  - job_name: multi_mysqld_exporter
     scrape_interval: 15s
     scrape_timeout: 5s
     metrics_path: /probe

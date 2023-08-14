@@ -65,14 +65,16 @@ if [[ -f /etc/redhat-release ]]; then
 #    yum -y install consul
     yum -y install python3-pip
     pip3 install --upgrade pip
+    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     pip3 install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian 系统安装consul
 #    wget -N --no-check-certificate https://releases.hashicorp.com/consul/1.14.5/consul_1.14.5_linux_amd64.zip
 #	 sudo unzip consul_1.14.5_linux_amd64.zip -d /usr/bin
     sudo apt install python3-pip -y
-	sudo pip3 install --upgrade pip
-	sudo pip3 install docker-compose
+    sudo pip3 install --upgrade pip
+    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    sudo pip3 install docker-compose
 #	 wget -N --no-check-certificate -P /usr/lib/systemd/system https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.service
 #	 wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.env
 #	 wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.hcl
