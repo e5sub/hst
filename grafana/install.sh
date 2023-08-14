@@ -17,19 +17,19 @@ echo -e "                                                       "
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
         echo 'wget 未安装 正在安装中';
-        sudo apt install wget -y || yum install wget -y
+        apt install wget -y || yum install wget -y
     else
         echo 'wget 已安装，继续操作'
     fi
     if ! type curl >/dev/null 2>&1; then
         echo 'curl 未安装 正在安装中';
-        sudo apt install curl -y || yum install curl -y
+        apt install curl -y || yum install curl -y
     else
         echo 'curl 已安装，继续操作'
     fi
     if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
-        sudo curl -sSL https://get.docker.com/ | sh 
+        curl -sSL https://get.docker.com/ | sh 
 		systemctl enable docker 
 		systemctl start docker
     else 
@@ -59,27 +59,11 @@ chmod 777 /home/grafana/grafana
 
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
-# CentOS 系统安装consul
-#    yum install -y yum-utils
-#    yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-#    yum -y install consul
-    yum -y install python3-pip
-    pip3 install --upgrade pip
-    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-    pip3 install docker-compose
+# CentOS
+    yum -y install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
-# Ubuntu/Debian 系统安装consul
-#    wget -N --no-check-certificate https://releases.hashicorp.com/consul/1.14.5/consul_1.14.5_linux_amd64.zip
-#	 sudo unzip consul_1.14.5_linux_amd64.zip -d /usr/bin
-    sudo apt install python3-pip -y
-    sudo pip3 install --upgrade pip
-    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-    sudo pip3 install docker-compose
-#	 wget -N --no-check-certificate -P /usr/lib/systemd/system https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.service
-#	 wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.env
-#	 wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.hcl
-#	 mkdir -p /opt/consul
-#	 sudo groupadd consul && useradd -r -s /sbin/nologin -g consul consul
+# Ubuntu/Debian
+    apt install -y uuid-runtime docker-compose
 else
     echo "不支持的操作系统"
     exit 1
@@ -134,8 +118,6 @@ sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/consul_token: xxx/consul_token: $uuid/" /home/grafana/consul/docker-compose.yml
 sed -i "s/admin_passwd: xxx/admin_passwd: $adminpwd/" /home/grafana/consul/docker-compose.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
-#sed -i "s/consul_token:.*/consul_token: $consul_acl_token/" /home/grafana/consul/docker-compose.yml
-#sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" /home/grafana/consul/docker-compose.yml
 
 # 启动服务
 cd /home/grafana/consul
