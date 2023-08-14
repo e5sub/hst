@@ -44,8 +44,8 @@ local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 if [[ -f /etc/redhat-release ]]; then
 # CentOS
     yum -y install python3-pip
-    pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     pip3 install --upgrade pip
+    pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     pip3 install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian
