@@ -66,7 +66,7 @@ chmod 777 /home/grafana/grafana
 #    yum -y install python3-pip
 #    pip3 install --upgrade pip
 #    pip3 install docker-compose
-elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
+#elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian 系统安装consul
 #    wget -N --no-check-certificate https://releases.hashicorp.com/consul/1.14.5/consul_1.14.5_linux_amd64.zip
 #	sudo unzip consul_1.14.5_linux_amd64.zip -d /usr/bin
