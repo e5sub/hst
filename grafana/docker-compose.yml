@@ -53,6 +53,21 @@ services:
     volumes:
       - /home/grafana/grafana:/var/lib/grafana
       
+  consul:
+    image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/consul:latest
+    container_name: consul
+    hostname: consul
+    restart: always
+    ports:
+      - "8500:8500"
+    volumes:
+     - /home/grafana/consul/data:/consul/data
+     - /home/grafana/consul/config:/consul/config
+     - /usr/share/zoneinfo/PRC:/etc/localtime
+    command: "agent"
+    networks:
+      - TenSunS
+
   flask-consul:
     image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/flask-consul:latest
     container_name: flask-consul
@@ -62,10 +77,14 @@ services:
       - /usr/share/zoneinfo/PRC:/etc/localtime
     environment:
       consul_token: xxx
-      consul_url: http://xxx:8500/v1
-      admin_passwd: jigehenniubi
+      consul_url: http://consul:8500/v1
+      admin_passwd: xxx
       log_level: INFO
-      
+    depends_on:
+      - consul
+    networks:
+      - TenSunS
+
   nginx-consul:
     image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/nginx-consul:latest
     container_name: nginx-consul
@@ -75,3 +94,14 @@ services:
       - "1026:1026"
     volumes:
       - /usr/share/zoneinfo/PRC:/etc/localtime
+    depends_on:
+      - flask-consul
+    networks:
+      - TenSunS
+
+networks:
+  TenSunS:
+    name: TenSunS
+    driver: bridge
+    ipam:
+      driver: default

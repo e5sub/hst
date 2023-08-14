@@ -246,6 +246,9 @@ new_password=${input:-$new_password}
 mysql -uroot --password="${temp_password}" --connect-expired-password -e "set global validate_password_policy=0; set global validate_password_mixed_case_count=0; ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_password}'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${new_password}'; FLUSH PRIVILEGES;"
 echo "Mysql密码已修改为${new_password}"
 
+# 导入init.sql文件到MySQL
+mysql -uroot --password="${new_password}"< init.sql
+
 # 备份并更新my.cnf配置文件
 cp /etc/my.cnf /etc/my_bak.cnf
 echo "" > /etc/my.cnf
