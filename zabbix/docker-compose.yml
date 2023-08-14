@@ -42,6 +42,7 @@ services:
     restart: always
     volumes:
       - /etc/localtime:/etc/localtime
+      - /home/zabbix/zabbix_server.conf:/etc/zabbix/zabbix_server.conf
     depends_on:
       - mysql-server
       - zabbix-java-gateway
