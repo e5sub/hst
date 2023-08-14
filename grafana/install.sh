@@ -111,9 +111,6 @@ EOF
 chmod 777 -R $tsspath/consul/config
 wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
 
-# 获取 Consul ACL Token
-#consul_acl_token=$(consul acl bootstrap | grep SecretID | awk '{print $2}')
-
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml
 sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
