@@ -54,7 +54,7 @@ else
     echo "不支持的操作系统"
     exit 1
 fi
-wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/docker-compose.yml
+wget -N --no-check-certificate -P /home/zabbix https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/docker-compose.yml
 
 # 启动服务
 cd /home/zabbix
