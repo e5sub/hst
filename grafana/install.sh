@@ -30,8 +30,8 @@ sys_install(){
     if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
         curl -sSL https://get.docker.com/ | sh 
-		systemctl enable docker 
-		systemctl start docker
+        systemctl enable docker 
+        systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi
@@ -60,7 +60,10 @@ chmod 777 /home/grafana/grafana
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
 # CentOS
-    yum -y install docker-compose
+    yum -y install python3-pip
+    pip3 install --upgrade pip
+    pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    pip3 install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian
     apt install -y uuid-runtime docker-compose
