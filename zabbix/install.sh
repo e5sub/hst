@@ -67,6 +67,8 @@ sleep 150s
 
 # 修改zabbix-server的NodeAddress
 sed -i "s/#\s*NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /home/zabbix/zabbix_server.conf
+sleep 10s
+docker restart zabbix-server
 
 # 显示脚本安装次数
 counter=$(curl -s https://www.yaohst.com/counter.php)
