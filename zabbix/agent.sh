@@ -15,18 +15,6 @@ echo -e "                                                       "
 
 #检测依赖
 sys_install(){
-    if ! type wget >/dev/null 2>&1; then
-        echo 'wget 未安装 正在安装中';
-        apt install wget -y || yum install wget -y
-    else
-        echo 'wget 已安装，继续操作'
-    fi
-    if ! type curl >/dev/null 2>&1; then
-        echo 'curl 未安装 正在安装中';
-        apt install curl -y || yum install curl -y
-    else
-        echo 'curl 已安装，继续操作'
-    fi
     if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
         curl -sSL https://get.docker.com/ | sh 
@@ -37,44 +25,35 @@ sys_install(){
     fi
 }
 sys_install
+
 # 获取网卡IP
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 
-# 检测系统类型
-if [[ -f /etc/redhat-release ]]; then
-# CentOS
-    yum -y install python3-pip
-	pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-    pip3 install --upgrade pip
-    pip3 install docker-compose
-elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
-# Ubuntu/Debian
-    apt install -y docker-compose
-else
-    echo "不支持的操作系统"
-    exit 1
-fi
-wget -N --no-check-certificate -P /home/zabbix https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/docker-compose.yml
+# 创建网络
+docker network create zabbix-net
 
-# 启动服务
-cd /home/zabbix
-docker-compose pull && docker-compose up -d 
+# 提示用户输入环境变量
+read -p "请输入ZBX_HOSTNAME: " ZBX_HOSTNAME
+read -p "请输入ZBX_SERVER_HOST: " ZBX_SERVER_HOST
+read -p "请输入ZBX_SERVER_PORT (default is 10051): " ZBX_SERVER_PORT
+ZBX_SERVER_PORT=${ZBX_SERVER_PORT:-10051}
 
-# 修改zabbix-server的NodeAddress
-docker exec zabbix-server sed -i "s/#NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /etc/zabbix/zabbix_server.conf
-echo "zabbix_server.conf 已经被修改为使用 IP 地址 $IP_ADDRESS"
-sleep 15s
-docker restart zabbix-server
+# 启动agent容器
+docker run -dit \
+  --name zabbix-agent \
+  --network zabbix-net \
+  -e ZBX_HOSTNAME=$ZBX_HOSTNAME \
+  -e ZBX_SERVER_HOST=$ZBX_SERVER_HOST \
+  -e ZBX_SERVER_PORT=$ZBX_SERVER_PORT \
+  -v /etc/localtime:/etc/localtime \
+  -p 10050:10050 \
+  zabbix/zabbix-agent:latest
 
 # 显示脚本安装次数
 counter=$(curl -s https://www.yaohst.com/counter.php)
 
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"
-echo -e "#                                                                               "
-echo -e "# *登陆入口及账号密码信息                                                       "
-echo -e "#                                                                               "
-echo -e "# *zabbix: http://$local_ip:8080 默认账号密码：Admin/zabbix                     "
 echo -e "#                                                                               "
 echo -e "# *$counter                                                                     "
 echo -e "#                                                                               "
