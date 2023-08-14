@@ -58,30 +58,30 @@ mkdir -p /home/grafana/grafana
 chmod 777 /home/grafana/grafana
 
 # 检测系统类型
-#if [[ -f /etc/redhat-release ]]; then
+if [[ -f /etc/redhat-release ]]; then
 # CentOS 系统安装consul
 #    yum install -y yum-utils
 #    yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 #    yum -y install consul
-#    yum -y install python3-pip
-#    pip3 install --upgrade pip
-#    pip3 install docker-compose
-#elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
+    yum -y install python3-pip
+    pip3 install --upgrade pip
+    pip3 install docker-compose
+elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian 系统安装consul
 #    wget -N --no-check-certificate https://releases.hashicorp.com/consul/1.14.5/consul_1.14.5_linux_amd64.zip
-#	sudo unzip consul_1.14.5_linux_amd64.zip -d /usr/bin
-#    sudo apt install python3-pip -y
-#	sudo pip3 install --upgrade pip
-#	sudo pip3 install docker-compose
-#	wget -N --no-check-certificate -P /usr/lib/systemd/system https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.service
-#	wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.env
-#	wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.hcl
-#	mkdir -p /opt/consul
-#	sudo groupadd consul && useradd -r -s /sbin/nologin -g consul consul
-#else
-#    echo "不支持的操作系统"
-#    exit 1
-#fi
+#	 sudo unzip consul_1.14.5_linux_amd64.zip -d /usr/bin
+    sudo apt install python3-pip -y
+	sudo pip3 install --upgrade pip
+	sudo pip3 install docker-compose
+#	 wget -N --no-check-certificate -P /usr/lib/systemd/system https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.service
+#	 wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.env
+#	 wget -N --no-check-certificate -P /etc/consul.d https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/consul.hcl
+#	 mkdir -p /opt/consul
+#	 sudo groupadd consul && useradd -r -s /sbin/nologin -g consul consul
+else
+    echo "不支持的操作系统"
+    exit 1
+fi
 mkdir -p /home/grafana/consul
 tsspath="/home/grafana"
 uuid=`uuidgen`
