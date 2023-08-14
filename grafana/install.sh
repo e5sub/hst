@@ -145,7 +145,7 @@ echo -e "# *后羿运维平台默认的admin密码是：\033[31;1m$adminpwd\033[
 echo -e "#                                                                               "
 echo -e "# *修改密码请编辑 /home/grafana/consul/docker-compose.yaml 查找并修改变量 admin_passwd 的值"
 echo -e "#                                                                               "
-echo -e "# *请使用浏览器访问 http://$local_ip:1026 并登录使用\n                          "
+echo -e "# *请使用浏览器访问 http://$local_ip:1026 并登录使用                            "
 echo -e "#                                                                               "
 echo -e "# *主机监控模板下载地址:https://grafana.com/api/dashboards/8919/revisions/25/download"
 echo -e "#                                                                               "
