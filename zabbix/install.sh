@@ -44,7 +44,7 @@ local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 if [[ -f /etc/redhat-release ]]; then
 # CentOS
     yum -y install python3-pip
-	pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     pip3 install --upgrade pip
     pip3 install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
@@ -62,7 +62,7 @@ docker-compose pull && docker-compose up -d
 
 # 修改zabbix-server的NodeAddress
 docker exec zabbix-server sed -i "s/#NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /etc/zabbix/zabbix_server.conf
-echo "zabbix_server.conf 已经被修改为使用 IP 地址 $IP_ADDRESS"
+echo "zabbix_server.conf 已经被修改为使用 IP 地址 $local_ip"
 sleep 15s
 docker restart zabbix-server
 
