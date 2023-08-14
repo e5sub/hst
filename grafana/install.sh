@@ -131,7 +131,7 @@ sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/consul_token: xxx/consul_token: $uuid/" /home/grafana/consul/docker-compose.yml
 sed -i "s/admin_passwd: xxx/admin_passwd: $adminpwd/" /home/grafana/consul/docker-compose.yml
-#sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
+sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 #sed -i "s/consul_token:.*/consul_token: $consul_acl_token/" /home/grafana/consul/docker-compose.yml
 #sed -i "s/consul_url:.*/consul_url: http:\/\/$local_ip:8500\/v1/" /home/grafana/consul/docker-compose.yml
 
@@ -157,7 +157,9 @@ echo -e "# *Prometheus：http://$local_ip:9090/targets                          
 echo -e "#                                                                               "
 echo -e "# *Grafana: http://$local_ip:3000/   登录帐号密码:admin                         "
 echo -e "#                                                                               "
-echo -e "\n后羿运维平台默认的admin密码是：\033[31;1m$adminpwd\033[0m\n修改密码请编辑 $tsspath/docker-compose.yaml 查找并修改变量 admin_passwd 的值\n"
+echo -e "#后羿运维平台默认的admin密码是：\033[31;1m$adminpwd\033[0m                      "
+echo -e "#                                                                               "
+echo -e "#修改密码请编辑 /home/grafana/consul/docker-compose.yaml 查找并修改变量 admin_passwd 的值"
 echo -e "#                                                                               "
 echo -e "请使用浏览器访问 http://$local_ip:1026 并登录使用\n                             "
 echo -e "#                                                                               "

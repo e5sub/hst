@@ -74,7 +74,7 @@ scrape_configs:
       - source_labels: ['__meta_consul_service_metadata_instance']
         target_label: instance
       - source_labels: [instance]
-        target_label: __address__        
+        target_label: __address__
   - job_name: 'blackbox_exporter'
     scrape_interval: 15s
     scrape_timeout: 5s
