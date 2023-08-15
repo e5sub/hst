@@ -205,9 +205,9 @@ case $N in
       docker run --name hbbr -p 21117:21117 -p 21119:21119 -v /home/rustdesk:/root -dit --restart=always rustdesk/rustdesk-server hbbr  ;;
   17) bash install.sh -frps ;;
   18) bash install.sh -frpc ;;
-  19) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/install.sh && bash install.sh ;;
+  19) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.sh && bash prometheus.sh ;;
   20) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/node.sh && bash node.sh ;;
-  21) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/install.sh && bash install.sh ;;
+  21) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/zabbix.sh && bash zabbix.sh ;;
   22) wget -N --no-check-certificate https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/agent.sh && bash agent.sh ;;
   23) docker run -dit -e PUID=0 -e PGID=0 -v /home/emby/movies:/data/movies -v /home/emby/config:/config -p 8096:8096 -p 8920:8920 --name=emby --restart=always xinjiawei1/emby_unlockd:latest ;;
   24) docker run -dit --restart=always -v /home/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest ;;
