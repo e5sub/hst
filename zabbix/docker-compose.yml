@@ -16,8 +16,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime 
       - /home/zabbix/mysql:/var/lib/mysql
-    networks:
-      - zabbix-net
       
   zabbix-java-gateway:
     image: zabbix/zabbix-java-gateway:latest
@@ -25,8 +23,6 @@ services:
     restart: always
     volumes:
       - /etc/localtime:/etc/localtime
-    networks:
-      - zabbix-net  
 
   zabbix-server:
     image: zabbix/zabbix-server-mysql:latest
@@ -46,8 +42,9 @@ services:
     depends_on:
       - mysql-server
       - zabbix-java-gateway
-    networks:
-      - zabbix-net
+    links:
+      - mysql-server
+      - zabbix-java-gateway
 
   zabbix-web-nginx-mysql:
     image: zabbix/zabbix-web-nginx-mysql:latest
@@ -65,25 +62,21 @@ services:
     depends_on:
       - mysql-server
       - zabbix-server
+    links:
+      - mysql-server
+      - zabbix-server
     volumes:
       - /etc/localtime:/etc/localtime
-    networks:
-      - zabbix-net
       
-  zabbix-agent:
-    image: zabbix/zabbix-agent:latest
-    container_name: zabbix-agent
-    environment:
-      ZBX_HOSTNAME: Zabbix server
-      ZBX_SERVER_HOST: xxx
-      ZBX_SERVER_PORT: 10051
-    restart: always
-    ports:
-      - "10050:10050"
-    volumes:
-      - /etc/localtime:/etc/localtime
-    networks:
-      - zabbix-net
-networks:
-  zabbix-net:
-    driver: bridge
+#  zabbix-agent:
+#    image: zabbix/zabbix-agent:latest
+#    container_name: zabbix-agent
+#    environment:
+#      ZBX_HOSTNAME: Zabbix server
+#      ZBX_SERVER_HOST: xxx
+#      ZBX_SERVER_PORT: 10051
+#    restart: always
+#    ports:
+#      - "10050:10050"
+#    volumes:
+#      - /etc/localtime:/etc/localtime
