@@ -78,6 +78,8 @@ services:
       ZBX_SERVER_HOST: xxx
       ZBX_SERVER_PORT: 10051
     restart: always
+    ports:
+      - "10050:10050"
     volumes:
       - /etc/localtime:/etc/localtime
     networks:
