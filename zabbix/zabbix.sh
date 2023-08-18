@@ -56,19 +56,18 @@ else
 fi
 wget -N --no-check-certificate -P /home/zabbix https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/docker-compose.yml
 wget -N --no-check-certificate -P /home/zabbix https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/zabbix_server.conf
+sed -i "s/#\s*NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /home/zabbix/zabbix_server.conf
+sed -i "s/ZBX_SERVER_HOST:.*/ZBX_SERVER_HOST: $local_ip/"  /home/zabbix/docker-compose.yml
 
 
 # 启动服务
 cd /home/zabbix
 docker-compose pull && docker-compose up -d 
 
-echo '请稍后，zabbix容器正在启动，大约需要2-3分钟'
-sleep 150s
-
 # 修改zabbix-server的NodeAddress
-sed -i "s/#\s*NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /home/zabbix/zabbix_server.conf
-sleep 10s
-docker restart zabbix-server
+#sed -i "s/#\s*NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /home/zabbix/zabbix_server.conf
+#sleep 10s
+#docker restart zabbix-server
 
 # 显示脚本安装次数
 counter=$(curl -s https://www.yaohst.com/counter.php)
