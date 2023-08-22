@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年8月7日                          "*
+echo -e "# *脚本更新时间：2023年8月21日                         "*
 echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
@@ -116,6 +116,7 @@ sys_install
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.0.12.rpm
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/wcm_install_saas_2.6.zip
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/init.sql
 else
 echo "未检测到外网环境,本次将使用离线安装方式"
 # 检测安装环境
@@ -247,7 +248,7 @@ mysql -uroot --password="${temp_password}" --connect-expired-password -e "set gl
 echo "Mysql密码已修改为${new_password}"
 
 # 导入init.sql文件到MySQL
-mysql -uroot --password="${new_password}"< init.sql
+#mysql -uroot --password="${new_password}"< init.sql 待测试
 
 # 备份并更新my.cnf配置文件
 cp /etc/my.cnf /etc/my_bak.cnf
