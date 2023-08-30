@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年8月21日                         "*
+echo -e "# *脚本更新时间：2023年8月30日                         "*
 echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
@@ -113,7 +113,7 @@ sys_install(){
 sys_install
 
 # 下载所需的安装包
-wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
+wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.0.12.rpm
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/wcm_install_saas_2.6.zip
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/init.sql
