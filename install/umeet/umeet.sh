@@ -92,7 +92,7 @@ function check_internet() {
 }
 check_internet
 if [ $? -eq 0 ]; then
-    echo "检测到外网环境,本次将使用在线安装方式,即将安装4.8.0版本的Umeet Pro"
+    echo "检测到外网环境,本次将使用在线安装方式,即将安装4.9.0版本的Umeet Pro"
 #检测依赖
 sys_install(){
     if ! type docker >/dev/null 2>&1; then
@@ -247,7 +247,7 @@ sed -i '/^SELINUX=/c SELINUX=disabled' /etc/selinux/config
 
 #安装umeet
 ln -s /opt/systec/umeet /usr/bin/umeet
-umeet create
+bash umeet create
 
 #设置防火墙
 #systemctl stop firewalld.service
