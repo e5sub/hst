@@ -30,6 +30,7 @@ sys_install(){
     fi
 }
 sys_install
+mkdir /etc/docker/
 cat >/etc/docker/daemon.json<<EOF
 {
 "log-driver": "json-file",

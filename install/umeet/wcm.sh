@@ -212,6 +212,7 @@ EOL
 sed -i "s|ExecStart=/usr/bin/dockerd.*|ExecStart=/usr/bin/dockerd --selinux-enabled=false --insecure-registry=$IP|" /etc/systemd/system/docker.service
 
 # 限制docker日志大小
+mkdir /etc/docker/
 cat >/etc/docker/daemon.json<<EOF
 {
 "log-driver": "json-file",

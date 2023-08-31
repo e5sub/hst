@@ -40,6 +40,7 @@ sys_install
 # 获取网卡IP
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 
+mkdir /etc/docker/
 cat >/etc/docker/daemon.json<<EOF
 {
 "log-driver": "json-file",

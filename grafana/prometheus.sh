@@ -108,6 +108,7 @@ acl = {
   }
 }
 EOF
+mkdir /etc/docker/
 cat >/etc/docker/daemon.json<<EOF
 {
 "log-driver": "json-file",
