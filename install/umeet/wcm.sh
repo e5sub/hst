@@ -211,6 +211,14 @@ EOL
 # 修改docker.service文件中的ExecStart行
 sed -i "s|ExecStart=/usr/bin/dockerd.*|ExecStart=/usr/bin/dockerd --selinux-enabled=false --insecure-registry=$IP|" /etc/systemd/system/docker.service
 
+# 限制docker日志大小
+cat >/etc/docker/daemon.json<<EOF
+{
+"log-driver": "json-file",
+"log-opts": {"max-size":"20m", "max-file":"2"}
+}
+EOF
+
 # 重新加载systemd并启用新的Docker服务
 systemctl daemon-reload
 systemctl enable docker.service

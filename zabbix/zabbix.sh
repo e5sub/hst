@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年8月18日                         "*
+echo -e "# *脚本更新时间：2023年8月31日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -39,6 +39,13 @@ sys_install(){
 sys_install
 # 获取网卡IP
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+
+cat >/etc/docker/daemon.json<<EOF
+{
+"log-driver": "json-file",
+"log-opts": {"max-size":"20m", "max-file":"2"}
+}
+EOF
 
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then

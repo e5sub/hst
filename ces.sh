@@ -30,6 +30,12 @@ sys_install(){
     fi
 }
 sys_install
+cat >/etc/docker/daemon.json<<EOF
+{
+"log-driver": "json-file",
+"log-opts": {"max-size":"20m", "max-file":"2"}
+}
+EOF
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 sh_ver="2.0"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"

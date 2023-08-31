@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年8月30日                         "*
+echo -e "# *脚本更新时间：2023年8月31日                         "*
 echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
@@ -202,6 +202,14 @@ EOL
 
 # 修改docker.service文件中的ExecStart行
 sed -i "s|ExecStart=/usr/bin/dockerd.*|ExecStart=/usr/bin/dockerd --selinux-enabled=false --insecure-registry=$IP|" /etc/systemd/system/docker.service
+
+# 限制docker日志大小
+cat >/etc/docker/daemon.json<<EOF
+{
+"log-driver": "json-file",
+"log-opts": {"max-size":"20m", "max-file":"2"}
+}
+EOF
 
 # 重新加载systemd并启用新的Docker服务
 systemctl daemon-reload

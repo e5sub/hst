@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年8月14日                         "*
+echo -e "# *脚本更新时间：2023年8月31日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -106,6 +106,12 @@ acl = {
     initial_management = "$uuid"
     agent = "$uuid"
   }
+}
+EOF
+cat >/etc/docker/daemon.json<<EOF
+{
+"log-driver": "json-file",
+"log-opts": {"max-size":"20m", "max-file":"2"}
 }
 EOF
 chmod 777 -R $tsspath/consul/config
