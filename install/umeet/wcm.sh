@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年8月30日                         "*
+echo -e "# *脚本更新时间：2023年9月14日                         "*
 echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
@@ -257,7 +257,7 @@ mysql -uroot --password="${temp_password}" --connect-expired-password -e "set gl
 echo "Mysql密码已修改为${new_password}"
 
 # 导入init.sql文件到MySQL
-#mysql -uroot --password="${new_password}"< init.sql 待测试
+mysql -uroot --password="${new_password}"<"init.sql"
 
 # 备份并更新my.cnf配置文件
 cp /etc/my.cnf /etc/my_bak.cnf
