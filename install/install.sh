@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年6月17日                         "*
+echo -e "# *脚本更新时间：2023年9月14日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -62,16 +62,16 @@ pre_install_config(){
 pre_install_config	
 if [ $1 = '-438' ]
 then
-	echo -e "\033[33m 【你选择的是安装CES v4.38.0.15服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装CES v4.38.0.17服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/fsp-base-1.0.2.19.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/fsp-live-1.0.0.18.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/fsp-record-4.38.0.9.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/fsp-store-1.2.16.3.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/hstdeploy-5.1.52.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/meeting-4.38.0.15.tar.gz
-    tar -zxvf hstdeploy-5.1.52.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/fsp-base-1.0.2.25.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/fsp-live-1.0.0.19.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/fsp-record-4.38.0.16.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/fsp-store-1.2.16.12.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/hstdeploy-5.1.56.6.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/meeting-4.38.0.17.tar.gz
+    tar -zxvf hstdeploy-5.1.56.6.tar.gz
 	cd ./hstdeploy
 	bash install.sh
 fi
@@ -185,16 +185,16 @@ fi
 
 if [ $1 = '-zx438' ]
 then
-	echo -e "\033[33m 【你选择的是安装CES v4.38.0.15服务器】 \033[0m"
+	echo -e "\033[33m 【你选择的是安装CES v4.38.0.17服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/fsp-base-1.0.2.19.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/fsp-live-1.0.0.18.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/fsp-record-4.38.0.9.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/fsp-store-1.2.16.3.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/hstdeploy-5.1.52.tar.gz
-    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/meeting-4.38.0.15.tar.gz
-    tar -zxvf hstdeploy-5.1.52.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/fsp-base-1.0.2.25.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/fsp-live-1.0.0.19.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/fsp-record-4.38.0.16.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/fsp-store-1.2.16.12.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/hstdeploy-5.1.56.6.tar.gz
+    wget -N --no-check-certificate https://fs1.hst.com/ces4.38.0.7/zx/meeting-4.38.0.17.tar.gz
+    tar -zxvf hstdeploy-5.1.56.6.tar.gz
 	cd ./hstdeploy
 	bash install.sh
 fi
