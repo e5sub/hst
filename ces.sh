@@ -203,7 +203,7 @@ case $N in
   8) bash install.sh -h323pri ;;
   9) bash install.sh -h323pub ;;
   10) bash install.sh -record ;;
-  11) docker run -dit -p 2022:2022 -p 2443:2443 -p 1935:1935 -p 8080:8080 -p 8000:8000/udp -p 10080:10080/udp --name srs-stack -v /home/srs:/data ossrs/srs-stack:5 ;;
+  11) docker run -dit --restart=always -p 2022:2022 -p 2443:2443 -p 1935:1935 -p 8080:8080 -p 8000:8000/udp -p 10080:10080/udp --name srs-stack -v /home/srs:/data ossrs/srs-stack:5 ;;
   12) docker run -dit --restart=always -p 5201:5201 -p 5201:5201/udp --name iperf3 ccr.ccs.tencentyun.com/1040155/iperf3 -s ;;  
   13) docker run -dit --restart=always -p 6688:80 --name hst-speedtest 1040155/hst-speedtest ;; 
   14) docker run -dit --name ddns-go --restart=always --net=host -v /home/ddns-go:/root jeessy/ddns-go ;;
