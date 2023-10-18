@@ -50,9 +50,9 @@ pre_install_config(){
     # Set version
     echo ""
     echo "请输入版本号:"
-    echo "1. single (单机版)"
-    echo "2. main (集群版 - 主节点)"
-    echo "3. cluster node (集群版 - 节点服务器)"
+    echo "1. 单机版"
+    echo "2. 集群版 - 主节点"
+    echo "3. 集群版 - 节点"
     echo ""
     read -p "(请输入要安装的版本，留空则安装单机版，默认为1):" choice
     case "$choice" in
