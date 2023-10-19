@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年10月18日                         "*
+echo -e "# *脚本更新时间：2023年10月19日                         "*
 echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
@@ -114,8 +114,8 @@ sys_install
 
 # 下载所需的安装包
 wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
-wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.0.12.rpm
-wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/wcm_install_saas_2.6.zip
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.2.2-1.el7.remi.x86_64.rpm
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/wcm_install.run
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/init.sql
 else
 echo "未检测到外网环境,本次将使用离线安装方式"
@@ -347,16 +347,16 @@ case $answer in
         echo "你选择了安装会话存档应用"; 
         # 检测会话存档安装包
         while true; do
-            if [ ! -f wcm_install*.zip ]; then
-                echo "需要的wcm_install.zip文件不存在，无法进行离线安装"
-                read -p "请将wcm_install.zip文件放置到当前目录下，然后按回车键继续..."
+            if [ ! -f wcm*.zip ]; then
+                echo "需要的wcm*.zip文件不存在，无法进行离线安装"
+                read -p "请将wcm*.zip文件放置到当前目录下，然后按回车键继续..."
             else
                 break
             fi
         done
         # 解压并安装wcm
         unzip wcm*.zip
-        cat install.sh wcm_install.tar.gz > wcm_install.run
+        chmod +x wcm_install.run        
         bash wcm_install.run
         ;;
     [Nn]* | "" ) 
@@ -398,7 +398,7 @@ systemctl disable firewalld.service
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"*
 echo -e "#                                                                               "
-echo -e "# *恭喜！Umeet Pro服务器安装完成！                                              "
+echo -e "# *恭喜！安装完成！                                              "
 echo -e "#                                                                               "
 echo -e "# *后台初始用户名密码均为admin                                                  "
 echo -e "#                                                                               "
