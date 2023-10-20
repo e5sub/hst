@@ -39,7 +39,7 @@ while true; do
         echo "需要的 redis.rpm文 文件不存在，是否通过网络下载？(Y/N)"
         read -r download_redis
         if [ "$download_redis" = "Y" ] || [ "$download_redis" = "y" ]; then
-            yum install -y wget && wget -c -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.2.2-1.el7.remi.x86_64.rpm
+            yum install -y wget && wget -c -N --no-check-certificate https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.2-1.el7.remi.x86_64.rpm
             break  # 如果下载完成，退出循环
         else
             echo "请将 redis.rpm文 文件放置到当前目录下，然后按回车键继续..."
