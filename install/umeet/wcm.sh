@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年10月19日                         "*
+echo -e "# *脚本更新时间：2023年10月20日                         "*
 echo -e "#                                                      "*
 echo -e "# *建议使用CentOS7,其他版本暂未测试                    "* 
 echo -e "#                                                      "*
@@ -115,7 +115,7 @@ sys_install
 # 下载所需的安装包
 wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.2.2-1.el7.remi.x86_64.rpm
-wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/wcm_install.run
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/wcm.zip
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/init.sql
 else
 echo "未检测到外网环境,本次将使用离线安装方式"
@@ -226,7 +226,7 @@ systemctl enable docker.service
 
 # 使用新的服务启动Docker
 systemctl start docker.service
-fi
+
 
 # 移除任何已经安装的 MySQL 或者 MariaDB
 rpm -e `rpm -qa | grep -i mysql`
