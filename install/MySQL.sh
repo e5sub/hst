@@ -14,31 +14,31 @@ echo -e "                                                       "
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
 # CentOS
+echo -e "# *检测到系统为CentOS"*
 # 关闭并禁用防火墙
 systemctl stop firewalld
 systemctl disable firewalld
-# 下载MySQL和Redis安装包
-wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
-wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.2.2-1.el7.remi.x86_64.rpm
 # 检测MySQL和Redis安装包
-while true; do
-    if [ ! -f mysql-5.7*.tar ]; then
-        echo "需要的mysql-5.7.tar文件不存在，无法进行离线安装"
-        read -p "请将mysql-5.7.tar文件放置到当前目录下，然后按回车键继续..."
+if [ ! -f mysql-5.7*.tar ]; then
+    echo "需要的mysql-5.7.tar文件不存在，是否通过wget下载？(Y/N)"
+    read -r download_mysql
+    if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
+        wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
     else
+        echo "请将mysql-5.7.tar文件放置到当前目录下，然后按回车键继续..."
         break
     fi
-done
-
-while true; do
-    if [ ! -f redis*.rpm ]; then
-        echo "需要的redis.rpm文件不存在，无法进行离线安装"
-        read -p "请将redis.rpm文件放置到当前目录下，然后按回车键继续..."
+fi
+if [ ! -f redis*.rpm ]; then
+    echo "需要的redis.rpm文件不存在，是否通过wget下载？(Y/N)"
+    read -r download_redis
+    if [ "$download_redis" = "Y" ] || [ "$download_redis" = "y" ]; then
+        wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.2.2-1.el7.remi.x86_64.rpm
     else
+        echo "请将redis.rpm文件放置到当前目录下，然后按回车键继续..."
         break
     fi
-done
-
+fi
 # 移除任何已经安装的 MySQL 或者 MariaDB
 rpm -e `rpm -qa | grep -i mysql`
 rpm -e --nodeps `rpm -qa | grep -i mariadb`
@@ -151,19 +151,20 @@ else
 fi
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian
-# 下载MySQL安装包
-wget -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
+echo -e "# *检测到系统为Ubuntu"*
 # 关闭防火墙
 sudo ufw disable
 # 检测MySQL安装包
-while true; do
-    if [ ! -f mysql*.tar ]; then
-        echo "需要的mysql.tar文件不存在，无法进行离线安装"
-        read -p "请将mysql.tar文件放置到当前目录下，然后按回车键继续..."
+if [ ! -f mysql*.tar ]; then
+    echo "需要的mysql.tar文件不存在，是否通过wget下载？(Y/N)"
+    read -r download_mysql
+    if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
+        wget -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
     else
+        echo "请将mysql.tar文件放置到当前目录下，然后按回车键继续..."
         break
     fi
-done
+fi
 # 解压MySQL安装包
 tar -xvf mysql*.tar
 # 安装MySQL
