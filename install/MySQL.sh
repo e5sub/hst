@@ -17,7 +17,9 @@ if [[ -f /etc/redhat-release ]]; then
 # 关闭并禁用防火墙
 systemctl stop firewalld
 systemctl disable firewalld
-
+# 下载MySQL和Redis安装包
+wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
+wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.2.2-1.el7.remi.x86_64.rpm
 # 检测MySQL和Redis安装包
 while true; do
     if [ ! -f mysql-5.7*.tar ]; then
@@ -149,6 +151,8 @@ else
 fi
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian
+# 下载MySQL安装包
+wget -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
 # 关闭防火墙
 sudo ufw disable
 # 检测MySQL安装包
