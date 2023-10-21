@@ -269,7 +269,7 @@ while true; do
                 # 解压MySQL安装包
                 tar -xvf mysql*.tar
                 # 安装MySQL
-                apt install -y libaio1 libtinfo5 libmecab2 redis
+                apt install -y libaio1 libtinfo5 libmecab2
                 dpkg -i mysql-common*.deb
                 dpkg-preconfigure mysql-community-server*.deb 
                 dpkg -i libmysqlclient20*.deb
@@ -386,7 +386,7 @@ while true; do
                 # 解压MySQL安装包
                 tar -xvf mysql*.tar
                 # 安装MySQL
-                apt install -y psmisc libaio1 libnuma1 libatomic1 libmecab2 redis
+                apt install -y psmisc libaio1 libnuma1 libatomic1 libmecab2
                 dpkg -i mysql-common*.deb
                 dpkg -i mysql-community-client-plugins*.deb
                 dpkg -i mysql-community-client-core*.deb
