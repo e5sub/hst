@@ -25,8 +25,21 @@ while true; do
         echo "未检测到MySQL环境，是否通过网络下载并安装？(Y/N)"
         read -r download_mysql
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
-            echo "正在下载 MySQL 安装包..."
-            yum install -y wget && wget -c -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
+                echo "正在下载 MySQL 安装包..."
+                yum install -y wget && wget -c -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
+                # 移除任何已经安装的 MySQL 或者 MariaDB
+                rpm -e `rpm -qa | grep -i mysql`
+                rpm -e --nodeps `rpm -qa | grep -i mariadb`
+                # 解压Mysql5.7安装包
+                tar -xvf mysql-5.7*.tar 
+                # 安装Mysql5.7
+                rpm -ivh mysql-community-common-5.7*.rpm
+                rpm -ivh mysql-community-libs-5.7*.rpm
+                rpm -ivh mysql-community-client-5.7*.rpm
+                rpm -ivh --nodeps mysql-community-server-5.7*.rpm
+                # 启动Mysql5.7
+                systemctl start mysqld     
+                break  
         else
             echo "请将 mysql.tar 文件放置到当前目录下，然后按回车键继续..."
             read  # 这里等待用户按回车键
@@ -44,12 +57,12 @@ while true; do
                 rpm -ivh --nodeps mysql-community-server-5.7*.rpm
                 # 启动Mysql5.7
                 systemctl start mysqld
-                break  # 如果下载完成，退出循环
+                break
             fi
         fi
     else
         echo "检测到已有MySQL环境，跳过安装"
-        break  # 如果MySQL已安装，退出循环
+        break
     fi
 done
 while true; do
@@ -59,7 +72,8 @@ while true; do
         if [ "$download_redis" = "Y" ] || [ "$download_redis" = "y" ]; then
             echo "正在下载 Redis 安装包..."
             yum install -y wget && wget -c -N --no-check-certificate https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.2-1.el7.remi.x86_64.rpm
-            break  # 如果下载完成，退出循环
+            rpm -ivh redis*.rpm
+            break
         else
             echo "请将 redis.rpm 文件放置到当前目录下，然后按回车键继续..."
             read  # 这里等待用户按回车键
@@ -67,12 +81,12 @@ while true; do
                 echo "检测到Redis安装包已存在。"
                 # 安装Redis
                 rpm -ivh redis*.rpm
-                break  # 如果下载完成，退出循环
+                break
             fi
         fi       
     else
         echo "检测到已有Redis环境，跳过安装"
-        break  # 如果Redis已安装，退出循环
+        break
     fi
 done
 while true; do
@@ -82,7 +96,7 @@ while true; do
          if [ "$download_docker" = "Y" ] || [ "$download_docker" = "y" ]; then
             curl -sSL https://get.docker.com/ | sh 
             systemctl enable docker && systemctl start docker            
-            break  # 如果下载完成，退出循环
+            break
         else
             echo "请将 docker.tgz 文件放置到当前目录下，然后按回车键继续..."
             read  # 这里等待用户按回车键
@@ -148,12 +162,12 @@ systemctl enable docker.service
 
 # 使用新的服务启动Docker
 systemctl start docker.service
-                break  # 如果检测存在，退出循环
+                break
             fi
         fi
     else
         echo "检测到已有Docker环境，跳过安装"
-        break  # 如果Docker已安装，退出循环
+        break
     fi
 done
 
@@ -211,30 +225,25 @@ if [ -f "$my_cnf" ]; then
     if [ -n "$server_id" ]; then
         if [ "$server_id" -eq 1 ]; then
             # 主服务器
-            echo "这是主服务器，执行主服务器脚本"
-            
+            echo "这是主服务器，执行主服务器脚本"            
             # 执行主服务器脚本
             mysql -uroot -p"$new_password" -e "set global validate_password_policy=0; set global validate_password_mixed_case_count=0; CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;"
         else
             # 从服务器
-            echo "这是从服务器，执行从服务器脚本"
-            
+            echo "这是从服务器，执行从服务器脚本"            
             # 获取主服务器的二进制日志文件名和位置
             read -ep "请输入主MySQL的root密码: " root_password
             result=$(mysql -h "$master_host" -uroot -p"$root_password" -e "SHOW MASTER STATUS\G")
             master_log_file=$(echo "$result" | awk '/File:/ {print $2}')
             master_log_pos=$(echo "$result" | awk '/Position:/ {print $2}')            
             echo "主服务器的二进制日志文件名为: $master_log_file"
-            echo "主服务器的日志大小为: $master_log_pos"
-            
+            echo "主服务器的日志大小为: $master_log_pos"            
             # 在从服务器上执行初始化
             mysql -uroot -p"$new_password" -e "STOP SLAVE;"
             mysql -uroot -p"$new_password" -e "CHANGE MASTER TO MASTER_HOST='$master_host', MASTER_USER='$master_user', MASTER_PASSWORD='$master_password', MASTER_LOG_FILE='$master_log_file', MASTER_LOG_POS=$master_log_pos;"
-            mysql -uroot -p"$new_password" -e "START SLAVE;"
-            
+            mysql -uroot -p"$new_password" -e "START SLAVE;"            
             # 检查从服务器的复制状态
-            status=$(mysql uroot -p"$new_password" "SHOW SLAVE STATUS\G")
-            
+            status=$(mysql uroot -p"$new_password" "SHOW SLAVE STATUS\G")            
             # 检查复制状态是否正常
             if [[ $status == *"Slave_IO_Running: Yes"* && $status == *"Slave_SQL_Running: Yes"* ]]; then
                 echo "MySQL主从复制已成功配置。"
@@ -259,8 +268,22 @@ while true; do
         echo "未检测到MySQL环境，是否通过网络下载并安装？(Y/N)"
         read -r download_mysql
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
-            echo "正在下载 MySQL 安装包..."
-            yum install -y wget && wget -c -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
+                echo "正在下载 MySQL 安装包..."
+                yum install -y wget && wget -c -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
+                # 解压MySQL安装包
+                tar -xvf mysql*.tar
+                # 安装MySQL
+                apt install -y libaio1 libtinfo5 libmecab2
+                dpkg -i mysql-common*.deb
+                dpkg-preconfigure mysql-community-server*.deb 
+                dpkg -i libmysqlclient20*.deb
+                dpkg -i libmysqlclient-dev*.deb
+                dpkg -i libmysqld-dev*.deb
+                dpkg -i mysql-community-client*.deb
+                dpkg -i mysql-client*.deb
+                dpkg -i mysql-community-server*.deb
+                dpkg -i mysql-server*.deb
+                break
         else
             echo "请将 mysql.tar 文件放置到当前目录下，然后按回车键继续..."
             read  # 这里等待用户按回车键
@@ -279,12 +302,12 @@ while true; do
                 dpkg -i mysql-client*.deb
                 dpkg -i mysql-community-server*.deb
                 dpkg -i mysql-server*.deb
-                break  # 如果下载完成，退出循环
+                break
             fi
         fi
     else
         echo "检测到已有MySQL环境，跳过安装"
-        break  # 如果MySQL已安装，退出循环
+        break
     fi
 done
 # 安装Redis
@@ -328,29 +351,24 @@ if [ -f "$my_cnf" ]; then
     if [ -n "$server_id" ]; then
         if [ "$server_id" -eq 1 ]; then
             # 主服务器
-            echo "这是主服务器，执行主服务器脚本"
-            
+            echo "这是主服务器，执行主服务器脚本"            
             # 执行主服务器脚本
             mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;"
         else
             # 从服务器
-            echo "这是从服务器，执行从服务器脚本"
-            
+            echo "这是从服务器，执行从服务器脚本"            
             # 获取主服务器的二进制日志文件名和位置
             result=$(mysql -h "$master_host" -uroot -p"$root_password" -e "SHOW MASTER STATUS\G")
             master_log_file=$(echo "$result" | awk '/File:/ {print $2}')
             master_log_pos=$(echo "$result" | awk '/Position:/ {print $2}')            
             echo "主服务器的二进制日志文件名为: $master_log_file"
-            echo "主服务器的日志大小为: $master_log_pos"
-            
+            echo "主服务器的日志大小为: $master_log_pos"            
             # 在从服务器上执行初始化
             mysql -uroot -p"$root_password" -e "STOP SLAVE;"
             mysql -uroot -p"$root_password" -e "CHANGE MASTER TO MASTER_HOST='$master_host', MASTER_USER='$master_user', MASTER_PASSWORD='$master_password', MASTER_LOG_FILE='$master_log_file', MASTER_LOG_POS=$master_log_pos;"
-            mysql -uroot -p"$root_password" -e "START SLAVE;"
-            
+            mysql -uroot -p"$root_password" -e "START SLAVE;"            
             # 检查从服务器的复制状态
-            status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")
-            
+            status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")            
             # 检查复制状态是否正常
             if [[ $status == *"Slave_IO_Running: Yes"* && $status == *"Slave_SQL_Running: Yes"* ]]; then
                 echo "MySQL主从复制已成功配置。"
@@ -373,8 +391,24 @@ while true; do
         echo "未检测到MySQL环境，是否通过网络下载并安装？(Y/N)"
         read -r download_mysql
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
-            echo "正在下载 MySQL 安装包..."
-            yum install -y wget && wget -c -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_8.0.33-1debian11_amd64.deb-bundle.tar
+                echo "正在下载 MySQL 安装包..."
+                yum install -y wget && wget -c -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_8.0.33-1debian11_amd64.deb-bundle.tar
+                # 安装MySQL8.0依赖
+                wget -c -N --no-check-certificate https://mirrors.tuna.tsinghua.edu.cn/debian/pool/main/o/openssl/libssl1.1_1.1.1w-0%2Bdeb11u1_amd64.deb 
+                dpkg -i libssl1.1_1.1.1w-0+deb11u1_amd64.deb
+                # 解压MySQL安装包
+                tar -xvf mysql*.tar
+                # 安装MySQL
+                apt install -y psmisc libaio1 libnuma1 libatomic1 libmecab2
+                dpkg -i mysql-common*.deb
+                dpkg -i mysql-community-client-plugins*.deb
+                dpkg -i mysql-community-client-core*.deb
+                dpkg -i mysql-community-client*.deb
+                dpkg -i mysql-client*.deb
+                dpkg -i mysql-community-server-core*.deb
+                dpkg -i mysql-community-server*.deb 
+                dpkg -i mysql-server*.deb
+                break
         else
             echo "请将 mysql.tar 文件放置到当前目录下，然后按回车键继续..."
             read  # 这里等待用户按回车键
@@ -395,12 +429,12 @@ while true; do
                 dpkg -i mysql-community-server-core*.deb
                 dpkg -i mysql-community-server*.deb 
                 dpkg -i mysql-server*.deb
-                break  # 如果下载完成，退出循环
+                break
             fi
         fi
     else
         echo "检测到已有MySQL环境，跳过安装"
-        break  # 如果MySQL已安装，退出循环
+        break
     fi
 done
 # 安装Redis
@@ -455,16 +489,13 @@ if [ -f "$my_cnf" ]; then
             master_log_file=$(echo "$result" | awk '/File:/ {print $2}')
             master_log_pos=$(echo "$result" | awk '/Position:/ {print $2}')            
             echo "主服务器的二进制日志文件名为: $master_log_file"
-            echo "主服务器的日志大小为: $master_log_pos"
-            
+            echo "主服务器的日志大小为: $master_log_pos"            
             # 在从服务器上执行初始化
             mysql -uroot -p"$root_password" -e "STOP SLAVE;"
             mysql -uroot -p"$root_password" -e "CHANGE MASTER TO MASTER_HOST='$master_host', MASTER_USER='$master_user', MASTER_PASSWORD='$master_password', MASTER_LOG_FILE='$master_log_file', MASTER_LOG_POS=$master_log_pos;"
-            mysql -uroot -p"$root_password" -e "START SLAVE;"
-            
+            mysql -uroot -p"$root_password" -e "START SLAVE;"            
             # 检查从服务器的复制状态
-            status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")
-            
+            status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")            
             # 检查复制状态是否正常
             if [[ $status == *"Slave_IO_Running: Yes"* && $status == *"Slave_SQL_Running: Yes"* ]]; then
                 echo "MySQL主从复制已成功配置。"
