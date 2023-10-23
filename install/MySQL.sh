@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年10月21日                         "*
+echo -e "# *脚本更新时间：2023年10月23日                         "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -233,7 +233,7 @@ if [ -f "$my_cnf" ]; then
             mysql -uroot -p"$new_password" -e "START SLAVE;"
             
             # 检查从服务器的复制状态
-            status=$(mysql -e "SHOW SLAVE STATUS\G")
+            status=$(mysql uroot -p"$new_password" "SHOW SLAVE STATUS\G")
             
             # 检查复制状态是否正常
             if [[ $status == *"Slave_IO_Running: Yes"* && $status == *"Slave_SQL_Running: Yes"* ]]; then
