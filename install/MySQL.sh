@@ -178,7 +178,7 @@ done
 temp_password=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}')
 
 # 设置mysql和redis新密码
-new_password="wecom,123!"
+new_password=wecom,123!
 read -p "请输入mysql和redis的新密码（默认为：$new_password）：" input
 new_password=${input:-$new_password}
 
@@ -243,7 +243,7 @@ if [ -f "$my_cnf" ]; then
             # 添加密码选项
             echo "sentinel auth-pass mymaster ${new_password}" >> $sentinel_config
             # 设置超时时间
-            echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
+            echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
             systemctl restart redis-sentinel
         else
@@ -268,11 +268,11 @@ if [ -f "$my_cnf" ]; then
             # 添加密码选项
             echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
-            echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
+            echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
             systemctl restart redis-sentinel
             # 检查从服务器的复制状态
-            status=$(mysql uroot -p"$new_password" "SHOW SLAVE STATUS\G")            
+            status=$(mysql uroot -p"$new_password" -e "SHOW SLAVE STATUS\G")             
             # 检查复制状态是否正常
             if [[ $status == *"Slave_IO_Running: Yes"* && $status == *"Slave_SQL_Running: Yes"* ]]; then
                 echo "MySQL主从复制已成功配置。"
@@ -398,7 +398,7 @@ if [ -f "$my_cnf" ]; then
             # 添加密码选项
             echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
-            echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
+            echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
             systemctl restart redis-sentinel
         else
@@ -422,11 +422,11 @@ if [ -f "$my_cnf" ]; then
             # 添加密码选项
             echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
-            echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
+            echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
             systemctl restart redis-sentinel
             # 检查从服务器的复制状态
-            status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")  
+            status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")            
             # 检查复制状态是否正常
             if [[ $status == *"Slave_IO_Running: Yes"* && $status == *"Slave_SQL_Running: Yes"* ]]; then
                 echo "MySQL主从复制已成功配置。"
@@ -554,7 +554,7 @@ if [ -f "$my_cnf" ]; then
             # 添加密码选项
             echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
-            echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
+            echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
             systemctl restart redis-sentinel
         else
@@ -578,11 +578,11 @@ if [ -f "$my_cnf" ]; then
             # 添加密码选项
             echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
-            echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
+            echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
             systemctl restart redis-sentinel    
             # 检查从服务器的复制状态
-            status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")            
+            status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")                  
             # 检查复制状态是否正常
             if [[ $status == *"Slave_IO_Running: Yes"* && $status == *"Slave_SQL_Running: Yes"* ]]; then
                 echo "MySQL主从复制已成功配置。"
