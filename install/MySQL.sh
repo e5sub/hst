@@ -266,7 +266,7 @@ if [ -f "$my_cnf" ]; then
             # 添加主节点监控选项
             echo "sentinel monitor mymaster ${master_host} 6379 1" >> $sentinel_config
             # 添加密码选项
-            echo "sentinel auth-pass mymaster ${new_password}" >> $sentinel_config
+            echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
             echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
@@ -390,13 +390,13 @@ if [ -f "$my_cnf" ]; then
             echo "这是主服务器，执行主服务器脚本"            
             # 执行主服务器脚本
             mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;"
-            redis-cli -h 127.0.0.1 -p 6379 -a ${new_password} SLAVEOF NO ONE
+            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF NO ONE
             # 清除哨兵配置文件
             > $sentinel_config
             # 添加主节点监控选项
             echo "sentinel monitor mymaster ${master_host} 6379 1" >> $sentinel_config
             # 添加密码选项
-            echo "sentinel auth-pass mymaster ${new_password}" >> $sentinel_config
+            echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
             echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
@@ -420,7 +420,7 @@ if [ -f "$my_cnf" ]; then
             # 添加主节点监控选项
             echo "sentinel monitor mymaster ${master_host} 6379 1" >> $sentinel_config
             # 添加密码选项
-            echo "sentinel auth-pass mymaster ${new_password}" >> $sentinel_config
+            echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
             echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
@@ -546,13 +546,13 @@ if [ -f "$my_cnf" ]; then
             echo "这是主服务器，执行主服务器脚本"            
             # 执行主服务器脚本
             mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;"
-            redis-cli -h 127.0.0.1 -p 6379 -a ${new_password} SLAVEOF NO ONE
+            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF NO ONE
             # 清除哨兵配置文件
             > $sentinel_config
             # 添加主节点监控选项
             echo "sentinel monitor mymaster ${master_host} 6379 1" >> $sentinel_config
             # 添加密码选项
-            echo "sentinel auth-pass mymaster ${new_password}" >> $sentinel_config
+            echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
             echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
@@ -576,7 +576,7 @@ if [ -f "$my_cnf" ]; then
             # 添加主节点监控选项
             echo "sentinel monitor mymaster ${master_host} 6379 1" >> $sentinel_config
             # 添加密码选项
-            echo "sentinel auth-pass mymaster ${new_password}" >> $sentinel_config
+            echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
             echo "ssentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
