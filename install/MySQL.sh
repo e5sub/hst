@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年10月24日                         "*
+echo -e "# *脚本更新时间：2023年10月31日                         "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -16,9 +16,10 @@ IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | gre
 if [[ -f /etc/redhat-release ]]; then
 # CentOS
 echo -e "# 检测到系统为CentOS，仅支持MySQL5.7"
-# 关闭并禁用防火墙
-systemctl stop firewalld
-systemctl disable firewalld
+# 开放防火墙端口
+firewall-cmd --zone=public --add-port=3306/tcp --permanent
+firewall-cmd --zone=public --add-port=6379/tcp --permanent
+firewall-cmd --zone=public --add-port=26379/tcp --permanent
 # 禁用SELinux
 setenforce 0
 sed -i s#SELINUX=enforcing#SELINUX=disabled# /etc/selinux/config
@@ -289,8 +290,10 @@ fi
 elif [[ -f /etc/lsb-release ]]; then
 # Ubuntu
 echo -e "# 检测到系统为Ubuntu，仅支持MySQL5.7"
-# 关闭防火墙
-sudo ufw disable
+# 开放防火墙端口
+sudo ufw allow 3306/tcp
+sudo ufw allow 6379/tcp
+sudo ufw allow 26379/tcp
 # 检测MySQL安装包
 while true; do
     if ! command -v mysql &> /dev/null; then
