@@ -22,7 +22,7 @@ firewall-cmd --zone=public --add-port=6379/tcp --permanent
 firewall-cmd --zone=public --add-port=26379/tcp --permanent
 # 禁用SELinux
 setenforce 0
-sed -i s#SELINUX=enforcing#SELINUX=disabled# /etc/selinux/config
+sed -i '/^SELINUX=/c SELINUX=disabled' /etc/selinux/config
 # 检测MySQL、Redis、Docker安装包
 while true; do
     if ! command -v mysql &> /dev/null; then
