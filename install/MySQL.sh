@@ -30,7 +30,7 @@ while true; do
         read -r download_mysql
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
                 echo "正在下载 MySQL 安装包..."
-                yum install -y wget && wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.43-1.el7.x86_64.rpm-bundle.tar
+                yum install -y wget && wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.44-1.el7.x86_64.rpm-bundle.tar
                 # 移除任何已经安装的 MySQL 或者 MariaDB
                 rpm -e `rpm -qa | grep -i mysql`
                 rpm -e --nodeps `rpm -qa | grep -i mariadb`
@@ -197,11 +197,11 @@ chown -R redis /etc/redis
 echo "Redis密码已修改为${new_password}"
 
 # 设置开机自启
-systemctl restart redis
 systemctl enable redis
+systemctl restart redis
 
 # 使用临时密码登录并修改MYSQL密码
-mysql -uroot --password="${temp_password}" --connect-expired-password -e "set global validate_password_policy=0; set global validate_password_mixed_case_count=0; ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_password}';GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${new_password}'; FLUSH PRIVILEGES;"
+mysql -uroot --password="${temp_password}" --connect-expired-password -e "set global validate_password_policy=0; set global validate_password_mixed_case_count=0; ALTER USER 'root'@'localhost' IDENTIFIED BY '${new_password}';GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${new_password}'; FLUSH PRIVILEGES;" 2>/dev/null
 echo "Mysql密码已修改为${new_password}"
 
 # 创建同步所需的MYSQL用户
@@ -235,8 +235,8 @@ if [ -f "$my_cnf" ]; then
             # 主服务器
             echo "这是主服务器，执行主服务器脚本"            
             # 执行主服务器脚本
-            mysql -uroot -p"$new_password" -e "set global validate_password_policy=0; set global validate_password_mixed_case_count=0; CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;"
-            redis-cli -h 127.0.0.1 -p 6379 -a ${new_password} SLAVEOF NO ONE
+            mysql -uroot -p"$new_password" -e "set global validate_password_policy=0; set global validate_password_mixed_case_count=0; CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;" 2>/dev/null
+            redis-cli -h 127.0.0.1 -p 6379 -a ${new_password} SLAVEOF NO ONE 2>/dev/null
             # 清除哨兵配置文件
             > $sentinel_config
             # 添加主节点监控选项
@@ -259,9 +259,9 @@ if [ -f "$my_cnf" ]; then
             echo "主服务器的日志大小为: $master_log_pos"            
             # 在从服务器上执行初始化
             mysql -uroot -p"$new_password" -e "STOP SLAVE;"
-            mysql -uroot -p"$new_password" -e "CHANGE MASTER TO MASTER_HOST='$master_host', MASTER_USER='$master_user', MASTER_PASSWORD='$master_password', MASTER_LOG_FILE='$master_log_file', MASTER_LOG_POS=$master_log_pos;"
+            mysql -uroot -p"$new_password" -e "CHANGE MASTER TO MASTER_HOST='$master_host', MASTER_USER='$master_user', MASTER_PASSWORD='$master_password', MASTER_LOG_FILE='$master_log_file', MASTER_LOG_POS=$master_log_pos;" 2>/dev/null
             mysql -uroot -p"$new_password" -e "START SLAVE;"
-            redis-cli -h 127.0.0.1 -p 6379 -a ${new_password} SLAVEOF "${master_host}" 6379
+            redis-cli -h 127.0.0.1 -p 6379 -a ${new_password} SLAVEOF "${master_host}" 6379 2>/dev/null
             # 清除哨兵配置文件
             > $sentinel_config
             # 添加主节点监控选项
@@ -301,7 +301,7 @@ while true; do
         read -r download_mysql
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
                 echo "正在下载 MySQL 安装包..."
-                yum install -y wget && wget -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
+                wget -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
                 # 解压MySQL安装包
                 tar -xvf mysql*.tar
                 # 安装MySQL
@@ -343,7 +343,7 @@ while true; do
     fi
 done
 # 安装Redis
-apt install -y redis
+apt install -y redis redis-sentinel
 # 获取MySQL密码
 read -ep "请输入主MySQL的root密码: " root_password
 # 备份Redis配置文件
@@ -360,14 +360,13 @@ chown -R redis /etc/redis
 echo "Redis密码已修改为${root_password}"
 # 设置开机自启
 systemctl restart redis
-systemctl enable redis
-# 设置MySQL访问权限
-mysql -uroot -p"$root_password" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${root_password}'; FLUSH PRIVILEGES;"
 # 创建同步所需的MYSQL用户
 read -ep "请输入MySQL主服务器的地址: " master_host
 read -ep "请输入同步用的MySQL用户名（主从保持一致）: " master_user
 read -ep "请输入同步用的MySQL密码（主从保持一致）: " master_password
 read -ep "请输入MySQL服务器的ID（输入数字，注意不能重复，默认1为主服务器）: " mysql_id
+# 设置MySQL访问权限
+mysql -uroot -p"$root_password" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${root_password}'; FLUSH PRIVILEGES;" 2>/dev/null
 cat  >> /etc/mysql/mysql.conf.d/mysqld.cnf <<EOF 
 server-id = $mysql_id 
 log-bin = mysql-bin 
@@ -392,8 +391,8 @@ if [ -f "$my_cnf" ]; then
             # 主服务器
             echo "这是主服务器，执行主服务器脚本"            
             # 执行主服务器脚本
-            mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;"
-            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF NO ONE
+            mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;" 2>/dev/null
+            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF NO ONE 2>/dev/null
             # 清除哨兵配置文件
             > $sentinel_config
             # 添加主节点监控选项
@@ -417,7 +416,7 @@ if [ -f "$my_cnf" ]; then
             mysql -uroot -p"$root_password" -e "STOP SLAVE;"
             mysql -uroot -p"$root_password" -e "CHANGE MASTER TO MASTER_HOST='$master_host', MASTER_USER='$master_user', MASTER_PASSWORD='$master_password', MASTER_LOG_FILE='$master_log_file', MASTER_LOG_POS=$master_log_pos;"
             mysql -uroot -p"$root_password" -e "START SLAVE;" 
-            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF "${master_host}" 6379
+            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF "${master_host}" 6379 2>/dev/null
             # 清除哨兵配置文件
             > $sentinel_config
             # 添加主节点监控选项
@@ -445,7 +444,7 @@ else
 fi
 elif [[ -f /etc/debian_version ]]; then
 # Debian
-echo -e "# 检测到系统为Debian，仅支持MySQL8.0"
+echo -e "# 检测到系统为Debian，仅支持MySQL8.2"
 # 检测MySQL安装包
 while true; do
     if ! command -v mysql &> /dev/null; then
@@ -453,8 +452,8 @@ while true; do
         read -r download_mysql
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
                 echo "正在下载 MySQL 安装包..."
-                yum install -y wget && wget -N --no-check-certificate https://downloads.mysql.com/archives/get/p/23/file/mysql-server_8.0.33-1debian11_amd64.deb-bundle.tar
-                # 安装MySQL8.0依赖
+                wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-8.2/mysql-server_8.2.0-1debian12_amd64.deb-bundle.tar
+                # 安装MySQL8.2依赖
                 wget -N --no-check-certificate https://mirrors.tuna.tsinghua.edu.cn/debian/pool/main/o/openssl/libssl1.1_1.1.1w-0%2Bdeb11u1_amd64.deb 
                 dpkg -i libssl1.1_1.1.1w-0+deb11u1_amd64.deb
                 # 解压MySQL安装包
@@ -475,7 +474,7 @@ while true; do
             read  # 这里等待用户按回车键
             if ls mysql*.tar 1> /dev/null 2>&1; then
                 echo "检测到MySQL安装包已存在。"
-                # 安装MySQL8.0依赖
+                # 安装MySQL8.2依赖
                 wget -N --no-check-certificate https://mirrors.tuna.tsinghua.edu.cn/debian/pool/main/o/openssl/libssl1.1_1.1.1w-0%2Bdeb11u1_amd64.deb 
                 dpkg -i libssl1.1_1.1.1w-0+deb11u1_amd64.deb
                 # 解压MySQL安装包
@@ -499,7 +498,7 @@ while true; do
     fi
 done
 # 安装Redis
-apt install -y redis
+apt install -y redis redis-sentinel
 # 获取MySQL密码
 read -ep "请输入主MySQL的root密码: " root_password
 # 备份Redis配置文件
@@ -516,14 +515,13 @@ chown -R redis /etc/redis
 echo "Redis密码已修改为${root_password}"
 # 设置开机自启
 systemctl restart redis
-systemctl enable redis
-# 设置MySQL访问权限
-mysql -uroot -p"$root_password" -e "USE mysql; UPDATE user SET host='%' WHERE user='root'; FLUSH PRIVILEGES;"
 # 创建同步所需的MYSQL用户
 read -ep "请输入MySQL主服务器的地址: " master_host
 read -ep "请输入同步用的MySQL用户名（主从保持一致）: " master_user
 read -ep "请输入同步用的MySQL密码（主从保持一致）: " master_password
 read -ep "请输入MySQL服务器的ID（输入数字，注意不能重复，默认1为主服务器）: " mysql_id
+# 设置MySQL访问权限
+mysql -uroot -p"$root_password" -e "USE mysql; UPDATE user SET host='%' WHERE user='root'; FLUSH PRIVILEGES;"
 cat  >> /etc/mysql/mysql.conf.d/mysqld.cnf <<EOF 
 server-id = $mysql_id 
 log-bin = mysql-bin 
@@ -548,8 +546,8 @@ if [ -f "$my_cnf" ]; then
             # 主服务器
             echo "这是主服务器，执行主服务器脚本"            
             # 执行主服务器脚本
-            mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;"
-            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF NO ONE
+            mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;" 2>/dev/null
+            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF NO ONE 2>/dev/null
             # 清除哨兵配置文件
             > $sentinel_config
             # 添加主节点监控选项
@@ -571,9 +569,9 @@ if [ -f "$my_cnf" ]; then
             echo "主服务器的日志大小为: $master_log_pos"            
             # 在从服务器上执行初始化
             mysql -uroot -p"$root_password" -e "STOP SLAVE;"
-            mysql -uroot -p"$root_password" -e "CHANGE MASTER TO MASTER_HOST='$master_host', MASTER_USER='$master_user', MASTER_PASSWORD='$master_password', MASTER_LOG_FILE='$master_log_file', MASTER_LOG_POS=$master_log_pos;"
+            mysql -uroot -p"$root_password" -e "CHANGE MASTER TO MASTER_HOST='$master_host', MASTER_USER='$master_user', MASTER_PASSWORD='$master_password', MASTER_LOG_FILE='$master_log_file', MASTER_LOG_POS=$master_log_pos;" 2>/dev/null
             mysql -uroot -p"$root_password" -e "START SLAVE;" 
-            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF "${master_host}" 6379
+            redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF "${master_host}" 6379 2>/dev/null
             # 清除哨兵配置文件
             > $sentinel_config
             # 添加主节点监控选项
@@ -583,7 +581,7 @@ if [ -f "$my_cnf" ]; then
             # 设置超时时间
             echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 重启Redis Sentinel服务
-            systemctl restart redis-sentinel    
+            systemctl restart redis-sentinel
             # 检查从服务器的复制状态
             status=$(mysql -uroot -p"$root_password" -e "SHOW SLAVE STATUS\G")                  
             # 检查复制状态是否正常
