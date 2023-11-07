@@ -44,7 +44,8 @@ while true; do
                 rpm -ivh mysql-community-client-5.7*.rpm
                 rpm -ivh --nodeps mysql-community-server-5.7*.rpm
                 # 启动Mysql5.7
-                systemctl start mysqld     
+                systemctl start mysqld   
+                break  
         else
             echo "请将 mysql.tar 文件放置到当前目录下，然后按回车键继续..."
             read  # 这里等待用户按回车键
@@ -62,6 +63,7 @@ while true; do
                 rpm -ivh --nodeps mysql-community-server-5.7*.rpm
                 # 启动Mysql5.7
                 systemctl start mysqld
+                break
             fi
         fi
     else
