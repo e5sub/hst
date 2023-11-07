@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年10月31日                         "*
+echo -e "# *脚本更新时间：2023年11月7日                           "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -17,9 +17,11 @@ if [[ -f /etc/redhat-release ]]; then
 # CentOS
 echo -e "# 检测到系统为CentOS，仅支持MySQL5.7"
 # 开放防火墙端口
+firewall-cmd --add-masquerade --permanent
 firewall-cmd --zone=public --add-port=3306/tcp --permanent
 firewall-cmd --zone=public --add-port=6379/tcp --permanent
 firewall-cmd --zone=public --add-port=26379/tcp --permanent
+ firewall-cmd --reload
 # 禁用SELinux
 setenforce 0
 sed -i '/^SELINUX=/c SELINUX=disabled' /etc/selinux/config
@@ -30,7 +32,7 @@ while true; do
         read -r download_mysql
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
                 echo "正在下载 MySQL 安装包..."
-                yum install -y wget && wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.44-1.el7.x86_64.rpm-bundle.tar
+                yum install -y wget libaio && wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.44-1.el7.x86_64.rpm-bundle.tar
                 # 移除任何已经安装的 MySQL 或者 MariaDB
                 rpm -e `rpm -qa | grep -i mysql`
                 rpm -e --nodeps `rpm -qa | grep -i mariadb`
@@ -43,7 +45,6 @@ while true; do
                 rpm -ivh --nodeps mysql-community-server-5.7*.rpm
                 # 启动Mysql5.7
                 systemctl start mysqld     
-                break  
         else
             echo "请将 mysql.tar 文件放置到当前目录下，然后按回车键继续..."
             read  # 这里等待用户按回车键
@@ -61,7 +62,6 @@ while true; do
                 rpm -ivh --nodeps mysql-community-server-5.7*.rpm
                 # 启动Mysql5.7
                 systemctl start mysqld
-                break
             fi
         fi
     else
@@ -75,7 +75,7 @@ while true; do
         read -r download_redis
         if [ "$download_redis" = "Y" ] || [ "$download_redis" = "y" ]; then
             echo "正在下载 Redis 安装包..."
-            yum install -y wget && wget -N --no-check-certificate https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.2-1.el7.remi.x86_64.rpm
+            yum install -y wget && wget -N --no-check-certificate https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.3-1.el7.remi.x86_64.rpm
             rpm -ivh redis*.rpm
             break
         else
