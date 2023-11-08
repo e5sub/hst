@@ -34,7 +34,7 @@ firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --zone=public --add-port=3306/tcp --permanent
 firewall-cmd --zone=public --add-port=6379/tcp --permanent
 firewall-cmd --zone=public --add-port=26379/tcp --permanent
- firewall-cmd --reload
+firewall-cmd --reload
 # 禁用SELinux
 setenforce 0
 sed -i '/^SELINUX=/c SELINUX=disabled' /etc/selinux/config
