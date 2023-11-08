@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月7日                           "*
+echo -e "# *脚本更新时间：2023年11月8日                           "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -12,12 +12,25 @@ echo -e "# ******************************************************"
 echo -e "                                                       "
 # 获取内网IP地址
 IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
+# 美化Bash
+if ! grep -q "getmyip" /etc/profile; then
+    echo "# 获取IP函数" >> /etc/profile
+    echo "function getmyip {" >> /etc/profile
+    echo "    ip addr | grep -E -o '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -vE '^127\.|^255\.|^0\.' | head -n 1" >> /etc/profile
+    echo "}" >> /etc/profile
+fi
+if ! grep -q "export PS1" /etc/profile; then
+    echo "# 输出美化" >> /etc/profile
+    echo "export PS1='\[\e[31m\][$?]\[\e[m\]:\[\e[32m\][\u@\H]\[\e[m\]:\[\e[34m\][\t]\[\e[m\]:\[\e[31m\][\$(getmyip)]\[\e[m\]:\[\e[33m\][\w]\[\e[m\]\$> '" >> /etc/profile
+fi
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
 # CentOS
 echo -e "# 检测到系统为CentOS，仅支持MySQL5.7"
 # 开放防火墙端口
 firewall-cmd --add-masquerade --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
 firewall-cmd --zone=public --add-port=3306/tcp --permanent
 firewall-cmd --zone=public --add-port=6379/tcp --permanent
 firewall-cmd --zone=public --add-port=26379/tcp --permanent
@@ -290,6 +303,17 @@ else
     echo "my.cnf文件不存在或路径不正确。"
 fi
 elif [[ -f /etc/lsb-release ]]; then
+# 美化Bash
+if ! grep -q "getmyip" /root/.bashrc; then
+    echo "# 获取IP函数" >> /root/.bashrc
+    echo "function getmyip {" >> /root/.bashrc
+    echo "    ip addr | grep -E -o '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -vE '^127\.|^255\.|^0\.' | head -n 1" >> /root/.bashrc
+    echo "}" >> /root/.bashrc
+fi
+if ! grep -q "export PS1" /root/.bashrc; then
+    echo "# 输出美化" >> /root/.bashrc
+    echo "export PS1='\[\e[31m\][$?]\[\e[m\]:\[\e[32m\][\u@\H]\[\e[m\]:\[\e[34m\][\t]\[\e[m\]:\[\e[31m\][\$(getmyip)]\[\e[m\]:\[\e[33m\][\w]\[\e[m\]\$> '" >> /root/.bashrc
+fi
 # Ubuntu
 echo -e "# 检测到系统为Ubuntu，仅支持MySQL5.7"
 # 开放防火墙端口

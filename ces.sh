@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+# 美化Bash
+if ! grep -q "getmyip" /etc/profile; then
+    echo "# 获取IP函数" >> /etc/profile
+    echo "function getmyip {" >> /etc/profile
+    echo "    ip addr | grep -E -o '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -vE '^127\.|^255\.|^0\.' | head -n 1" >> /etc/profile
+    echo "}" >> /etc/profile
+fi
+if ! grep -q "export PS1" /etc/profile; then
+    echo "# 输出美化" >> /etc/profile
+    echo "export PS1='\[\e[31m\][$?]\[\e[m\]:\[\e[32m\][\u@\H]\[\e[m\]:\[\e[34m\][\t]\[\e[m\]:\[\e[31m\][\$(getmyip)]\[\e[m\]:\[\e[33m\][\w]\[\e[m\]\$> '" >> /etc/profile
+fi
 #检测依赖
 sys_install(){
     if ! type wget >/dev/null 2>&1; then
