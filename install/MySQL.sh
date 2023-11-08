@@ -317,6 +317,8 @@ fi
 # Ubuntu
 echo -e "# 检测到系统为Ubuntu，仅支持MySQL5.7"
 # 开放防火墙端口
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
 sudo ufw allow 3306/tcp
 sudo ufw allow 6379/tcp
 sudo ufw allow 26379/tcp
