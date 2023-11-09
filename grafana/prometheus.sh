@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月8日                          "*
+echo -e "# *脚本更新时间：2023年11月9日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -126,7 +126,7 @@ cat >/etc/docker/daemon.json<<EOF
 }
 EOF
 chmod 777 -R $tsspath/consul/config
-wget -N --no-check-certificate -P /home/grafana/consul https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
+wget -N --no-check-certificate -P /home/grafana https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
 
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml
@@ -137,7 +137,7 @@ sed -i "s/admin_passwd: xxx/admin_passwd: $adminpwd/" /home/grafana/consul/docke
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 
 # 启动服务
-cd /home/grafana/consul
+cd /home/grafana
 docker-compose pull && docker-compose up -d 
 
 # 显示脚本安装次数

@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月8日                         "*
+echo -e "# *脚本更新时间：2023年11月9日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -63,7 +63,7 @@ echo "ZBX_HOSTNAME: $ZBX_HOSTNAME"
 echo "ZBX_SERVER_HOST: $ZBX_SERVER_HOST"
 echo "ZBX_SERVER_PORT: $ZBX_SERVER_PORT"
 # 启动agent容器
-docker run -dit --name zabbix-agent -e ZBX_HOSTNAME="$ZBX_HOSTNAME" -e ZBX_SERVER_HOST="$ZBX_SERVER_HOST" -e ZBX_SERVER_PORT="$ZBX_SERVER_PORT" -v /etc/localtime:/etc/localtime -p 10050:10050 zabbix/zabbix-agent:latest
+docker run -dit --name zabbix-agent -e ZBX_HOSTNAME="$ZBX_HOSTNAME" -e ZBX_SERVER_HOST="$ZBX_SERVER_HOST" -e ZBX_SERVER_PORT="$ZBX_SERVER_PORT" -v /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro -p 10050:10050 zabbix/zabbix-agent:latest
 
 # 显示脚本安装次数
 counter=$(curl -s https://www.yaohst.com/counter.php)

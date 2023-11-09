@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月8日                          "*
+echo -e "# *脚本更新时间：2023年11月9日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -41,7 +41,7 @@ cat >/etc/docker/daemon.json<<EOF
 }
 EOF
 # 使用docker部署node-exporter
-docker run -d -p 9100:9100 -v /home/grafana/node-exporter/proc:/host/proc:ro -v /home/grafana/node-exporter/sys:/host/sys:ro -v /home/grafana/node-exporter/:/homefs:ro --name node-exporter --restart=always prom/node-exporter
+docker run -d -p 9100:9100 -v /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro -v /home/grafana/node-exporter/proc:/host/proc:ro -v /home/grafana/node-exporter/sys:/host/sys:ro -v /home/grafana/node-exporter/:/homefs:ro --name node-exporter --restart=always prom/node-exporter
 echo -e "                                                                                "
 echo -e "#*******************************************************************************"
 echo -e "#                                                                               "

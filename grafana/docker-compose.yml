@@ -9,6 +9,7 @@ services:
     volumes:
       - /home/grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /home/grafana/prometheus/rules.yml:/etc/prometheus/rules.yml
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       
   alertmanager:
     image: prom/alertmanager
@@ -18,6 +19,7 @@ services:
       - "9093:9093"
     volumes:
       - /home/grafana/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       
@@ -43,6 +45,7 @@ services:
       - /home/grafana/node-exporter/proc:/host/proc:ro
       - /home/grafana/node-exporter/sys:/host/sys:ro
       - /home/grafana/node-exporter/:/homefs:ro
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       
   grafana:
     image: grafana/grafana
@@ -52,6 +55,7 @@ services:
       - "3000:3000"
     volumes:
       - /home/grafana/grafana:/var/lib/grafana
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       
   consul:
     image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/consul:latest

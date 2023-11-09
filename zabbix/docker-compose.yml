@@ -14,7 +14,7 @@ services:
       - MYSQL_PASSWORD=zabbix
       - MYSQL_ROOT_PASSWORD=zabbix
     volumes:
-      - /etc/localtime:/etc/localtime 
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       - /home/zabbix/mysql:/var/lib/mysql
       
   zabbix-java-gateway:
@@ -37,7 +37,7 @@ services:
       MYSQL_ROOT_PASSWORD: zabbix
     restart: always
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       - /home/zabbix/zabbix_server.conf:/etc/zabbix/zabbix_server.conf
     depends_on:
       - mysql-server
@@ -66,7 +66,7 @@ services:
       - mysql-server
       - zabbix-server
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
       
 #  zabbix-agent:
 #    image: zabbix/zabbix-agent:latest
@@ -79,4 +79,4 @@ services:
 #    ports:
 #      - "10050:10050"
 #    volumes:
-#      - /etc/localtime:/etc/localtime
+#      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
