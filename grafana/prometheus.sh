@@ -52,16 +52,16 @@ local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 
 # 下载alertmanager配置文件
 mkdir -p /home/grafana/alertmanager
-wget -N --no-check-certificate -P /home/grafana/alertmanager https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/alertmanager.yml
+wget -N --no-check-certificate -P /home/grafana/alertmanager https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/alertmanager.yml
 
 # 下载blackbox_exporter配置文件
 mkdir -p /home/grafana/blackbox_exporter
-wget -N --no-check-certificate -P /home/grafana/blackbox_exporter https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/blackbox.yml
+wget -N --no-check-certificate -P /home/grafana/blackbox_exporter https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/blackbox.yml
 
 # 下载prometheus配置文件
 mkdir -p /home/grafana/prometheus
-wget -N --no-check-certificate -P /home/grafana/prometheus https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.yml
-wget -N --no-check-certificate -P /home/grafana/prometheus https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/rules.yml
+wget -N --no-check-certificate -P /home/grafana/prometheus https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.yml
+wget -N --no-check-certificate -P /home/grafana/prometheus https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/rules.yml
 
 # 设置grafana文件夹权限
 mkdir -p /home/grafana/grafana
@@ -71,8 +71,8 @@ chmod 777 /home/grafana/grafana
 if [[ -f /etc/redhat-release ]]; then
 # CentOS
     yum -y install python3-pip
-    pip3 install --upgrade pip
-	  pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
+    pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     pip3 install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian
@@ -126,7 +126,7 @@ cat >/etc/docker/daemon.json<<EOF
 }
 EOF
 chmod 777 -R $tsspath/consul/config
-wget -N --no-check-certificate -P /home/grafana https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
+wget -N --no-check-certificate -P /home/grafana https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
 
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml

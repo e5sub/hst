@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2022年8月17日                         "*
+echo -e "# *脚本更新时间：2023年11月10日                         "*
 echo -e "#                                                      "*
 echo -e "# *作者：Sugar                                         "*
 echo -e "#                                                      "*
@@ -21,7 +21,7 @@ docker_id=`docker ps|grep fsp_pri|awk '{print $1}'`
 IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 getIpAddress=$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)
 #解决CES查询后台录制文件大小为0的问题
-wget -N --no-check-certificate https://ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/record.sql
+wget -N --no-check-certificate https://mirror.ghproxy.com/https://github.com/e5sub/hst/blob/master/install/4.36/record.sql
 docker cp record.sql $docker_id:/
 echo -e "当前服务器的内网IP：\033[44;37m ${IP} \033[0m"
 echo -e " "

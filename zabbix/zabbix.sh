@@ -62,7 +62,7 @@ EOF
 if [[ -f /etc/redhat-release ]]; then
 # CentOS
     yum -y install python3-pip
-    pip3 install --upgrade pip
+    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
     pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     pip3 install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
@@ -72,8 +72,8 @@ else
     echo "不支持的操作系统"
     exit 1
 fi
-wget -N --no-check-certificate -P /home/zabbix https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/docker-compose.yml
-wget -N --no-check-certificate -P /home/zabbix https://ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/zabbix_server.conf
+wget -N --no-check-certificate -P /home/zabbix https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/docker-compose.yml
+wget -N --no-check-certificate -P /home/zabbix https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/zabbix_server.conf
 sed -i "s/#\s*NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /home/zabbix/zabbix_server.conf
 #sed -i "s/ZBX_SERVER_HOST:.*/ZBX_SERVER_HOST: $local_ip/"  /home/zabbix/docker-compose.yml
 
