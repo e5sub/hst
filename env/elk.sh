@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月13日                         "*
+echo -e "# *脚本更新时间：2023年11月14日                         "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -13,7 +13,19 @@ echo -e "                                                       "
 # 获取内网IP地址
 IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 # 系统设置
-sysctl -w vm.max_map_count=262144
+if grep -q "vm.max_map_count=262144" /etc/sys.conf; then
+    echo "vm.max_map_count=262144已存在于sysctl.conf中"
+else
+    echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+    echo "vm.max_map_count=262144已添加到sysctl.conf中"
+fi
+if grep -q "net.ipv4.ip_forward=1" /etc/sys.conf; then
+    echo "net.ipv4.ip_forward=1已存在于sysctl.conf中"
+else
+    echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+    echo "net.ipv4.ip_forward=1已添加到sysctl.conf中"
+fi
+sysctl -p
 # 美化Bash
 if ! grep -q "getmyip" /etc/profile; then
     echo "# 获取IP函数" >> /etc/profile
@@ -94,10 +106,10 @@ echo 所有密码已保存到 /home/elk/password.txt 请妥善保管密码文件
 # 保存密码
 echo "$password" > /home/elk/password.txt
 # 提取密码
-elastic_password=$(grep "PASSWORD elastic" /home/elk/password.txt | awk '{print $4}' | sed 's/ *$//')
-logstash_internal_password=$(grep "PASSWORD logstash_system" /home/elk/password.txt | awk '{print $4}' | sed 's/ *$//')
-kibana_system_password=$(grep "PASSWORD kibana_system" /home/elk/password.txt | awk '{print $4}' | sed 's/ *$//')
-beats_system_password=$(grep "PASSWORD beats_system" /home/elk/password.txt | awk '{print $4}' | sed 's/ *$//')
+elastic_password=$(grep "PASSWORD elastic" /home/elk/password.txt | awk '{print $4}' | sed 's/[[:space:]]*$')
+logstash_internal_password=$(grep "PASSWORD logstash_system" /home/elk/password.txt | awk '{print $4}' | sed 's/[[:space:]]*$')
+kibana_system_password=$(grep "PASSWORD kibana_system" /home/elk/password.txt | awk '{print $4}' | sed 's/[[:space:]]*$')
+beats_system_password=$(grep "PASSWORD beats_system" /home/elk/password.txt | awk '{print $4}' | sed 's/[[:space:]]*$')
 # 修改配置文件
 sed -i 's/xpack.license.self_generated.type: trial/xpack.license.self_generated.type: basic/g'  /home/elk/elasticsearch/config/elasticsearch.yml
 sed -i "s/ELASTIC_PASSWORD.*/ELASTIC_PASSWORD='$elastic_password'/" /home/elk/.env
