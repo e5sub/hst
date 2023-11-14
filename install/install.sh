@@ -618,7 +618,7 @@ then
     sleep 5s
     docker rm $(docker ps -qf status=exited)
     sleep 5s
-    docker run -dit --name nginx_proxy -v /usr/local/nginx/html:/usr/share/nginx/html -v /usr/local/nginx:/etc/nginx -v /usr/local/nginx/logs:/var/log/nginx -v /usr/local/nginx/ssl:/etc/nginx/ssl -e TZ=Asia/Shanghai --net=host --hostname nginx_proxy --restart=always nginx
+    docker run -dit --name nginx -v /usr/local/nginx/html:/usr/share/nginx/html -v /usr/local/nginx:/etc/nginx -v /usr/local/nginx/logs:/var/log/nginx -v /usr/local/nginx/ssl:/etc/nginx/ssl -e TZ=Asia/Shanghai --net=host --hostname nginx_proxy --restart=always nginx
 fi
 if [ $1 = '-resetadmin' ]
 then
