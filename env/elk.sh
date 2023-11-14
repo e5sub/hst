@@ -16,7 +16,7 @@ IP=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | gre
 if grep -q "vm.max_map_count=262144" /etc/sys.conf; then
     echo "vm.max_map_count=262144已存在于sysctl.conf中"
 else
-    echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+    echo "vm.max_map_count=262144" >> /etc/sysctl.conf
     echo "vm.max_map_count=262144已添加到sysctl.conf中"
 fi
 if grep -q "net.ipv4.ip_forward=1" /etc/sys.conf; then
