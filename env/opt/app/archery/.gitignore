@@ -1,0 +1,16 @@
+*.pyc
+*.swp
+*.lock
+*.log
+.idea/
+.DS_Store
+archery/settings.py.github
+archery/settings.py.dev
+archery/settings_dev.py
+sql/migrations/
+venv
+env
+sonar-project.properties
+.scannerwork
+.env
+local_settings.py

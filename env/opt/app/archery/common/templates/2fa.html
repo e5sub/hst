@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Archery - 两步验证</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-select/css/bootstrap-select.min.css' %}" rel="stylesheet">
+    <link href="{% static 'dist/css/login.css' %}" rel="stylesheet">
+    <!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+    <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+    <!--[if lt IE 9]>
+         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+</head>
+<body onload="document.getElementById('otpCode').focus()" style="background-color:#edeff1;">
+<div class="row lsb-login">
+    <div class="col-sm-3 mypanalbox">
+        <form class="login-form fade-in-effect" id="auth" method="post" role="form">
+            {% csrf_token %}
+            {% if verify_mode == 'verify_config' %}
+                <div class="form-group">
+                    <h4 style="font-weight: bold">启用两步验证</h4>
+                </div>
+                <div class="form-group">
+                    <label for="auth_type">验证方式:</label>
+                    <select id="auth_type" class="form-control show-tick selectpicker" name="auth_type"
+                            title="选择额外验证方式:"
+                            data-live-search="true">
+                        <option value="totp" selected="selected">Google身份验证器</option>
+                        <option value="sms">短信验证码</option>
+                    </select>
+                </div>
+
+                <div id="totp-form" class="form-group" style="display: grid">
+                    <label class="control-label" for="qrcode-img">1. 使用Google身份验证器扫码：</label>
+                    <img id="qrcode-img" key="" src="" style="width: 100%;height: auto;">
+                </div>
+                <div id="sms-form" class="form-group" style="display:none;">
+                    <label class="control-label" for="phone">1. 输入要绑定的手机号码：</label>
+                    <input class="form-control ng-valid ng-dirty ng-touched" id="phone" name="phone" type="text"
+                           oninput="value=value.replace(/[^\d]/g,'')" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="otpCode">2. 输入6位验证码完成验证：</label>
+                    <input class="form-control ng-valid ng-dirty ng-touched" id="otpCode" name="otpCode" type="text"
+                           oninput="value=value.replace(/[^\d]/g,'')" autocomplete="off" required>
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <button id="btnCaptcha" type="button" class="btn btn-primary btn-block" style="display: none">获取验证码</button>
+                    <button id="btnAuth" type="button" class="btn btn-success btn-block"><i class="fa-lock"></i>验证</button>
+                </div>
+            {% else %}
+                <div class="form-group">
+                    <label for="auth_type">选择验证方式:</label>
+                    <select id="auth_type" class="form-control show-tick selectpicker" name="auth_type"
+                            title="选择额外验证方式:"
+                            data-live-search="true">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label id="totp-form" class="control-label" for="otpCode">OTP验证码</label>
+                    <label id="sms-form" class="control-label" for="otpCode">短信验证码</label>
+                    <input class="form-control ng-valid ng-dirty ng-touched" id="otpCode" name="otpCode" type="text"
+                           oninput="value=value.replace(/[^\d]/g,'')" autocomplete="off" required>
+                </div>
+                <input id="phone" value="{{ phone }}" style="display: none">
+                <div class="form-group">
+                    <button id="btnCaptcha" type="button" class="btn btn-primary btn-block" >获取验证码</button>
+                    <button id="btnAuth" type="button" class="btn btn-success btn-block"><i class="fa-lock"></i>验证</button>
+                </div>
+            {% endif %}
+            <input type="text" style="display:none">
+        </form>
+    </div>
+</div>
+
+<!--底部部分 -->
+<div class="user-bottom-div">
+    <p><strong>&copy; Archery</strong>&nbsp;(v{{ archery_version }})</p>
+</div>
+<script src="{% static 'jquery/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'bootstrap-select/js/i18n/defaults-zh_CN.min.js' %}"></script>
+<script src="{% static 'dist/js/utils.js' %}"></script>
+</body>
+<!-- 解决CSRF-->
+<script>
+    $(function () {
+        $.ajaxSetup({
+            headers: {"X-CSRFToken": getCookie("csrftoken")}
+        });
+    });
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+<script>
+
+    //回车键提交验证
+    $(document).ready(function () {
+        $(document).keydown(function (event) {
+            //keycode==13为回车键
+            if (event.keyCode === 13) {
+                let otp = $('#otpCode').val();
+                if (!otp) {
+                    alert('请输入验证码！')
+                    return
+                }
+                authOTP(otp);
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        if ('{{ verify_mode }}' === 'verify_config') {
+            let data = config_2fa();
+            $("#qrcode-img").attr("key", data.data.key)
+            $("#qrcode-img").attr("src", "/user/qrcode/" + data.data.key)
+        } else if ('{{ verify_mode }}' === 'verify_only') {
+            let auth_types = {{ auth_types|safe }};
+            for (i=0;i < auth_types.length;i++) {
+                let auth_type;
+                if (i === 0) {
+                    auth_type = '<option value="' + auth_types[i].code + '" selected="selected">' + auth_types[i].display + '</option>'
+                } else {
+                    auth_type = '<option value="' + auth_types[i].code + '">' + auth_types[i].display + '</option>'
+                }
+                $("#auth_type").append(auth_type)
+                $("#auth_type").trigger('change')
+            }
+        }
+    })
+
+    $('#btnAuth').click(function () {
+        let otp = $('#otpCode').val();
+        if (!otp) {
+            alert('请输入验证码！')
+            return
+        }
+        authOTP(otp);
+    });
+
+    $("#btnCaptcha").click(function () {
+        if ('{{ verify_mode }}' === 'verify_config') {
+            let phone = $("#phone").val();
+            if (!phone) {
+                alert('请输入手机号！')
+                return
+            }
+        }
+        let data = config_2fa();
+        if (data.status === 0) {
+            init_countdown(this);
+            alert('验证码已发送，5分钟内有效')
+        }
+    })
+
+    $("#auth_type").change(function () {
+        $("#otpCode").val('');
+        let auth_type = $("#auth_type").val();
+        if (auth_type === 'totp') {
+            $("#totp-form").show();
+            $("#sms-form").hide();
+            $("#btnCaptcha").hide()
+        } else if (auth_type === 'sms') {
+            $("#totp-form").hide();
+            $("#sms-form").show();
+            $("#btnCaptcha").show()
+        }
+    })
+
+    function config_2fa() {
+        // 配置2fa
+        let result;
+        $.ajax({
+            type: "post",
+            url: "/api/v1/user/2fa/",
+            dataType: "json",
+            data: {
+                engineer: '{{ username }}',
+                enable: 'true',
+                auth_type: $("#auth_type").val(),
+                phone: $("#phone").val()
+            },
+            async: false,
+            complete: function () {
+            },
+            success: function (data) {
+                result = data
+                if (data.status !== 0) {
+                    alert(data.msg);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown + ' : ' + XMLHttpRequest.responseText);
+            }
+        })
+        return result
+    }
+
+    function save() {
+        $.ajax({
+            type: "post",
+            url: "/api/v1/user/2fa/save/",
+            dataType: "json",
+            headers: {"X-CSRFToken": getCookie("csrftoken")},
+            data: {
+                engineer: '{{ username }}',
+                auth_type: $("#auth_type").val(),
+                key: $("#qrcode-img").attr('key'),
+                phone: $("#phone").val()
+            },
+            async: false,
+            complete: function () {
+            },
+            success: function (data) {
+                if (data.status === 0) {
+                    alert("已开启两步验证！");
+                } else {
+                    alert(data.msg)
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown + ' : ' + XMLHttpRequest.responseText)
+            }
+        });
+    }
+
+    function authOTP(otp) {
+        $.ajax({
+            type: "post",
+            url: "/api/v1/user/2fa/verify/",
+            dataType: "json",
+            data: {
+                engineer: '{{ username }}',
+                auth_type: $("#auth_type").val(),
+                otp: otp,
+                key: $("#qrcode-img").attr('key'),
+                phone: $("#phone").val()
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                if (data.status === 0) {
+                    if ('{{ verify_mode }}' === 'verify_config') {
+                        save();
+                    }
+                    $(location).attr('href', '/index/');
+                } else {
+                    alert(data.msg)
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown + ' : ' + XMLHttpRequest.responseText)
+            }
+        });
+    }
+</script>
+</html>

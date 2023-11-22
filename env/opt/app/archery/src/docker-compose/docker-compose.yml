@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  goinception:
+    image: hanchuanchuan/goinception
+    container_name: goinception
+    restart: always
+    ports:
+      - "4000:4000"
+    volumes:
+      - "./inception/config.toml:/etc/config.toml"
+
+  archery:
+    image: hhyo/archery:v1.9.1
+    container_name: archery
+    restart: always
+    ports:
+      - "9123:9123"
+    volumes:
+      - "./archery/settings.py:/opt/archery/local_settings.py"
+      - "./archery/soar.yaml:/etc/soar.yaml"
+      - "./archery/docs.md:/opt/archery/docs/docs.md"
+      - "./archery/downloads:/opt/archery/downloads"
+      - "./archery/sql/migrations:/opt/archery/sql/migrations"
+      - "./archery/logs:/opt/archery/logs"
+      - "./archery/keys:/opt/archery/keys"
+    entrypoint: "dockerize -wait tcp://10.0.3.229:3306 -wait tcp://10.0.3.229:6379 -timeout 60s /opt/archery/src/docker/startup.sh"
+    env_file:
+      - .env

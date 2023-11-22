@@ -1,0 +1,9 @@
+[run]
+include =
+    common*
+    sql*
+    sql_api*
+omit =
+    src*
+    downloads*
+    sql/migrations/*

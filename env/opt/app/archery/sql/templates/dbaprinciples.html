@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row clearfix">
+        <div id="principles" class="col-md-12">
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    {% load static %}
+    <script src="{% static 'dist/js/marked.min.js' %}"></script>
+    <script>
+        let rendererMD = new marked.Renderer();
+        marked.setOptions({
+            renderer: rendererMD,
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: false,
+            sanitize: false,
+            smartLists: false,
+            smartypants: false
+        });
+        //增加的代码，用于个性化输出table
+        rendererMD.table = function (header, body) {
+            return '<div class="table-responsive"><table class="table table-condensed">' + header + body + '</table></div>'
+        };
+        document.getElementById('principles').innerHTML = marked("{{ md|safe }}");
+    </script>
+{% endblock %}
