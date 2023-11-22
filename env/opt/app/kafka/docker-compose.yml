@@ -3,6 +3,8 @@ services:
   zookeeper:
     image: bitnami/zookeeper
     container_name: zookeeper
+    environment:
+    - ALLOW_ANONYMOUS_LOGIN=yes
     volumes:
       - /opt/app/kafka/zookeeper:/bitnami/zookeeper
     ports:
@@ -13,6 +15,7 @@ services:
     container_name: kafka
     ports:
       - "9092:9092"
+      - "9093:9093"
     volumes:
       - "/opt/app/kafka/kafka-data:/bitnami"
     environment:

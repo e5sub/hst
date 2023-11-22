@@ -10,6 +10,6 @@ services:
         --spring.datasource.username=root |
         --spring.datasource.password=root
     volumes:
-      - /opt/app/xxl-job/admin/logs:/data/applogs
+      - /opt/app/xxl-job:/data/applogs
     privileged: true
     restart: always

@@ -13,5 +13,8 @@ services:
       RABBITMQ_DEFAULT_USER: rabbit
       RABBITMQ_DEFAULT_PASS: 123456
     volumes:
+      - /opt/app/rabbitmq/backup:/backup
+      - /opt/app/rabbitmq/logs:/var/log/rabbitmq
       - /opt/app/rabbitmq/data:/var/lib/rabbitmq
-      - /opt/app/rabbitmq/conf:/etc/rabbitmq
+      - /opt/app/rabbitmq/config:/etc/rabbitmq
+      - /etc/localtime:/etc/localtime:ro 

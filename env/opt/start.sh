@@ -1,6 +1,7 @@
 #!/bin/bash
 # 安装ELK
-bash /opt/app/elk/elk.sh
+bash /opt/elk.sh
+chmod -R 777 /opt/app
 COMPOSE_PATHS=(
     "/opt/app/archery/src/docker-compose/docker-compose.yml"
     "/opt/app/elk/docker-compose.yml"

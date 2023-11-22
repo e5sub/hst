@@ -7,4 +7,7 @@ services:
     ports: 
       - "8858:8858"
     volumes:
-      - /opt/app/sentinel/logs:/root/logs
+      - /opt/app/sentinel/config:/root/etc
+      - /opt/app/sentinel/data:/root/sentinel
+      - /opt/app/sentinel/logs:/root/logs/csp
+      - /opt/app/sentinel/backup:/backup
