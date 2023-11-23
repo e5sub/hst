@@ -5,7 +5,7 @@ services:
     container_name: nacos
     hostname: nacos
     ports:
-      - 8080:8848
+      - 8848:8848
       - 9848:9848
     environment:
       - MODE=standalone
