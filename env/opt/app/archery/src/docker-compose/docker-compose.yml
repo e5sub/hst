@@ -1,6 +1,28 @@
 version: '3'
 
 services:
+  redis:
+    image: redis:5
+    container_name: redis
+    restart: always
+    command: redis-server --requirepass 123456
+    expose:
+      - "6379"
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysql/my.cnf:/etc/mysql/my.cnf"
+      - "./mysql/datadir:/var/lib/mysql"
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      MYSQL_DATABASE: archery
+      MYSQL_ROOT_PASSWORD: 123456
+
   goinception:
     image: hanchuanchuan/goinception
     container_name: goinception
@@ -9,6 +31,7 @@ services:
       - "4000:4000"
     volumes:
       - "./inception/config.toml:/etc/config.toml"
+      - /etc/localtime:/etc/localtime:ro
 
   archery:
     image: hhyo/archery:v1.9.1
@@ -24,6 +47,7 @@ services:
       - "./archery/sql/migrations:/opt/archery/sql/migrations"
       - "./archery/logs:/opt/archery/logs"
       - "./archery/keys:/opt/archery/keys"
-    entrypoint: "dockerize -wait tcp://10.0.3.229:3306 -wait tcp://10.0.3.229:6379 -timeout 60s /opt/archery/src/docker/startup.sh"
+      - /etc/localtime:/etc/localtime:ro
+    entrypoint: "dockerize -wait tcp://mysql:3306 -wait tcp://redis:6379 -timeout 60s /opt/archery/src/docker/startup.sh"
     env_file:
       - .env

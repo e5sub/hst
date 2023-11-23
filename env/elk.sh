@@ -49,12 +49,19 @@ sys_install(){
         echo 'docker 未安装 正在安装中';
         curl -sSL https://get.docker.com/ | sh 
         systemctl enable docker 
-        systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi 
 }
 sys_install
+cat >/etc/docker/daemon.json<<EOF
+{
+"log-driver": "json-file",
+"log-opts": {"max-size":"20m", "max-file":"2"}
+}
+EOF
+systemctl daemon-reload
+systemctl restart docker
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
 # CentOS

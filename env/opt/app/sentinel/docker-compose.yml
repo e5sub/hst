@@ -11,3 +11,4 @@ services:
       - /opt/app/sentinel/data:/root/sentinel
       - /opt/app/sentinel/logs:/root/logs/csp
       - /opt/app/sentinel/backup:/backup
+      - /etc/localtime:/etc/localtime:ro

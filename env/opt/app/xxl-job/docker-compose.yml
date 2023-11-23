@@ -11,5 +11,6 @@ services:
         --spring.datasource.password=root
     volumes:
       - /opt/app/xxl-job:/data/applogs
+      - /etc/localtime:/etc/localtime:ro
     privileged: true
     restart: always

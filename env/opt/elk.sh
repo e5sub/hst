@@ -37,6 +37,8 @@ if ! grep -q "export PS1" /etc/profile; then
     echo "# 输出美化" >> /etc/profile
     echo "export PS1='\[\e[31m\][$?]\[\e[m\]:\[\e[32m\][\u@\H]\[\e[m\]:\[\e[34m\][\t]\[\e[m\]:\[\e[31m\][\$(getmyip)]\[\e[m\]:\[\e[33m\][\w]\[\e[m\]\$> '" >> /etc/profile
 fi
+mkdir -p /opt/docker
+ln -s /opt/docker /var/lib
 # 系统环境检测
 sys_install(){
     if ! type curl >/dev/null 2>&1; then
@@ -49,12 +51,19 @@ sys_install(){
         echo 'docker 未安装 正在安装中';
         curl -sSL https://get.docker.com/ | sh 
         systemctl enable docker 
-        systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi 
 }
 sys_install
+cat >/etc/docker/daemon.json<<EOF
+{
+"log-driver": "json-file",
+"log-opts": {"max-size":"20m", "max-file":"2"}
+}
+EOF
+sed -i "s|ExecStart.*|ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --data-root=/opt/docker|" /usr/lib/systemd/system/docker.service
+systemctl daemon-reload && systemctl start docker
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
 # CentOS

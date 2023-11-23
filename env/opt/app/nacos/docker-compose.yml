@@ -16,7 +16,7 @@ services:
     privileged: true    
     volumes:
       - /opt/app/nacos/logs:/home/nacos/logs
-      - /opt/app/nacos/conf/application.properties:/home/nacos/conf/application.properties
+      - /opt/app/nacos/config/application.properties:/home/nacos/conf/application.properties
       - /opt/app/nacos/data:/home/nacos/data
       - /opt/app/nacos/backup:/backup
       - /opt/app/nacos/config:/home/nacos/init.d
