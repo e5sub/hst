@@ -136,6 +136,7 @@ if [ -f "$ip_file" ]; then
           echo "Sect_Begin=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           echo "Sect_End=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           echo "Scale=1000" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          done
           # 修改wwlsocks5proxy.conf中的IP地址
           sed -i "s/IP=.*/IP=$local_ip/" /home/wwlocal/wwlsocks5proxy/conf/wwlsocks5proxy.conf
           # 保存后重启wwlsocks5proxy
