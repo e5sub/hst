@@ -72,11 +72,11 @@ done
 unzip -P 5np?M#b% wwlocal-*.zip
 tar -zxf wwlocal-*.tar.gz -C /home/
 
-# 复制wwlsocks5proxy_cli.conf.template模板并改名wwlsocks5proxy_cli.conf
-cp /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf.template /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-
 # 复制localglobal.conf配置文件
 cp localglobal.conf /home/wwlocal/conf/global/localglobal.conf
+
+# 复制wwlsocks5proxy_cli.conf.template模板并改名wwlsocks5proxy_cli.conf
+cp /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf.template /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
 
 # 复制ip.lst配置文件
 cp ip.lst /home/wwlocal/conf/global/ip.lst
@@ -101,6 +101,7 @@ if [ -f "$ip_file" ]; then
           # 提取ip.lst信息并自动修改配置文件
           ips=($(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | cut -d'=' -f2))
           count=$(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | wc -l)
+          sed -i "s/UseProxy=1/UseProxy=0/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           sed -i "s/ServerCount=[0-9]*/ServerCount=$count/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           # 删除现有的 [Server0] 部分
           sed -i '/\[Server0\]/,/^\[/d' /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
@@ -112,7 +113,6 @@ if [ -f "$ip_file" ]; then
           echo "Sect_Begin=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           echo "Sect_End=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           echo "Scale=1000" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-          echo >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           done
           # 执行安装脚本
           bash /home/wwlocal/wwlops/SETUP.sh
@@ -121,19 +121,10 @@ if [ -f "$ip_file" ]; then
           ;;
         PIP*)
           echo "根据ip.lst信息识别到这台是接入服务器，开始安装接入服务器"
-          # 修改wwlsocks5proxy.conf中的IP地址
-          sed -i "s/IP=.*/IP=$local_ip/" /home/wwlocal/wwlsocks5proxy/conf/wwlsocks5proxy.conf
-          # 保存后重启wwlsocks5proxy
-          /home/wwlocal/wwlsocks5proxy/bin/wwlsocks5proxyTool restart
-          echo "内网IP地址已更新为: $local_ip"
-          # 执行安装脚本
-          bash /home/wwlocal/wwlops/SETUP.sh
-          ;;
-        SIP*)
-          echo "根据ip.lst信息识别到这台是存储服务器，开始安装存储服务器"
           # 提取ip.lst信息并自动修改配置文件
           ips=($(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | cut -d'=' -f2))
           count=$(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | wc -l)
+          sed -i "s/UseProxy=1/UseProxy=0/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           sed -i "s/ServerCount=[0-9]*/ServerCount=$count/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           # 删除现有的 [Server0] 部分
           sed -i '/\[Server0\]/,/^\[/d' /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
@@ -145,13 +136,38 @@ if [ -f "$ip_file" ]; then
           echo "Sect_Begin=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           echo "Sect_End=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           echo "Scale=1000" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-          echo >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-          done
+          # 修改wwlsocks5proxy.conf中的IP地址
+          sed -i "s/IP=.*/IP=$local_ip/" /home/wwlocal/wwlsocks5proxy/conf/wwlsocks5proxy.conf
+          # 保存后重启wwlsocks5proxy
+          /home/wwlocal/wwlsocks5proxy/bin/wwlsocks5proxyTool restart
+          echo "内网IP地址已更新为: $local_ip"
           # 执行安装脚本
           bash /home/wwlocal/wwlops/SETUP.sh
-          # 初始化企业数据
-          bash /home/wwlocal/wwlops/INIT.sh
           ;;
+# 以下#号部分暂时没用，后续根据有需要在修改
+#        SIP*)
+#          echo "根据ip.lst信息识别到这台是存储服务器，开始安装存储服务器"
+#          # 提取ip.lst信息并自动修改配置文件
+#          ips=($(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | cut -d'=' -f2))
+#          count=$(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | wc -l)
+#          sed -i "s/ServerCount=[0-9]*/ServerCount=$count/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          # 删除现有的 [Server0] 部分
+#          sed -i '/\[Server0\]/,/^\[/d' /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          # 循环生成配置文件，从 [Server0] 开始递增
+#          for ((i=0; i<${#ips[@]}; i++)); do
+#          echo "[Server$i]" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          echo "SVR_IP=${ips[i]}" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          echo "SVR_Port=8081" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          echo "Sect_Begin=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          echo "Sect_End=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          echo "Scale=1000" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          echo >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+#          done
+#          # 执行安装脚本
+#          bash /home/wwlocal/wwlops/SETUP.sh
+#          # 初始化企业数据
+#          bash /home/wwlocal/wwlops/INIT.sh
+#          ;;
         *)
           echo "根据ip.lst信息识未能识别出服务器，不执行安装"
           ;;
