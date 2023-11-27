@@ -101,7 +101,7 @@ if [ -f "$ip_file" ]; then
           # 提取ip.lst信息并自动修改配置文件
           ips=($(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | cut -d'=' -f2))
           count=$(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | wc -l)
-          sed -i "s/UseProxy=1/UseProxy=0/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          sed -i "s/UseProxy=0/UseProxy=1/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           sed -i "s/ServerCount=[0-9]*/ServerCount=$count/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           # 删除现有的 [Server0] 部分
           sed -i '/\[Server0\]/,/^\[/d' /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
@@ -124,7 +124,7 @@ if [ -f "$ip_file" ]; then
           # 提取ip.lst信息并自动修改配置文件
           ips=($(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | cut -d'=' -f2))
           count=$(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | wc -l)
-          sed -i "s/UseProxy=1/UseProxy=0/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          sed -i "s/UseProxy=0/UseProxy=1/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           sed -i "s/ServerCount=[0-9]*/ServerCount=$count/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
           # 删除现有的 [Server0] 部分
           sed -i '/\[Server0\]/,/^\[/d' /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
@@ -150,6 +150,7 @@ if [ -f "$ip_file" ]; then
 #          # 提取ip.lst信息并自动修改配置文件
 #          ips=($(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | cut -d'=' -f2))
 #          count=$(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | wc -l)
+#          sed -i "s/UseProxy=0/UseProxy=1/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
 #          sed -i "s/ServerCount=[0-9]*/ServerCount=$count/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
 #          # 删除现有的 [Server0] 部分
 #          sed -i '/\[Server0\]/,/^\[/d' /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
