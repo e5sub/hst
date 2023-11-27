@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年9月28日                         "*
+echo -e "# *脚本更新时间：2023年11月27日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -15,7 +15,7 @@ echo -e "                                                       "
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 
 # 安装centos依赖
-yum -y install rsync ntpdate curl net-tools psmisc sysstat unzip wget ntp
+yum -y install rsync ntpdate curl net-tools psmisc sysstat unzip wget ntp libaio*
 
 # 移除任何已经安装的 MySQL 或者 MariaDB
 rpm -e `rpm -qa | grep -i mysql`
