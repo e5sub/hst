@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月29日                         "*
+echo -e "# *脚本更新时间：2023年11月30日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -15,7 +15,7 @@ echo -e "                                                       "
 local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -E -v "^127\.|^255\.|^0\." | head -n 1)
 
 # 安装centos依赖
-yum -y install rsync ntpdate curl net-tools psmisc sysstat unzip wget ntp libaio*
+yum -y install rsync ntpdate curl net-tools psmisc sysstat unzip wget ntp screen bind-utils libaio* 
 
 # 移除任何已经安装的 MySQL 或者 MariaDB
 rpm -e `rpm -qa | grep -i mysql`
@@ -144,31 +144,30 @@ if [ -f "$ip_file" ]; then
           # 保存后重启wwlsocks5proxy
           /home/wwlocal/wwlsocks5proxy/bin/wwlsocks5proxyTool restart
           ;;
-# 以下#号部分暂时没用，后续根据有需要在修改
-#        SIP*)
-#          echo "根据ip.lst信息识别到这台是存储服务器，开始安装存储服务器"
-#          # 提取ip.lst信息并自动修改配置文件
-#          ips=($(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | cut -d'=' -f2))
-#          count=$(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | wc -l)
-#          sed -i "s/UseProxy=0/UseProxy=1/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          sed -i "s/ServerCount=[0-9]*/ServerCount=$count/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          # 删除现有的 [Server0] 部分
-#          sed -i '/\[Server0\]/,/^\[/d' /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          # 循环生成配置文件，从 [Server0] 开始递增
-#          for ((i=0; i<${#ips[@]}; i++)); do
-#          echo "[Server$i]" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          echo "SVR_IP=${ips[i]}" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          echo "SVR_Port=8081" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          echo "Sect_Begin=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          echo "Sect_End=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          echo "Scale=1000" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          echo >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
-#          done
-#          # 执行安装脚本
-#          bash /home/wwlocal/wwlops/SETUP.sh
-#          # 初始化企业数据
-#          bash /home/wwlocal/wwlops/INIT.sh
-#          ;;
+        SIP*)
+          echo "根据ip.lst信息识别到这台是存储服务器，开始安装存储服务器"
+          # 提取ip.lst信息并自动修改配置文件
+          ips=($(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | cut -d'=' -f2))
+          count=$(grep -E 'PIP[0-9]*' /home/wwlocal/conf/global/ip.lst | wc -l)
+          sed -i "s/UseProxy=0/UseProxy=1/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          sed -i "s/ServerCount=[0-9]*/ServerCount=$count/" /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          # 删除现有的 [Server0] 部分
+          sed -i '/\[Server0\]/,/^\[/d' /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          # 循环生成配置文件，从 [Server0] 开始递增
+          for ((i=0; i<${#ips[@]}; i++)); do
+          echo "[Server$i]" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          echo "SVR_IP=${ips[i]}" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          echo "SVR_Port=8081" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          echo "Sect_Begin=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          echo "Sect_End=-1" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          echo "Scale=1000" >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          echo >> /home/wwlocal/conf/global/wwlsocks5proxy_cli.conf
+          done
+          # 执行安装脚本
+          bash /home/wwlocal/wwlops/SETUP.sh
+          # 初始化企业数据
+          bash /home/wwlocal/wwlops/INIT.sh
+          ;;
         *)
           echo "根据ip.lst信息识未能识别出服务器，不执行安装"
           ;;
