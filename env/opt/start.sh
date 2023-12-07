@@ -1,4 +1,5 @@
 #!/bin/bash
+git clone https://gitee.com/kesion/archery.git /opt/app/archery
 # 安装ELK
 bash /opt/elk.sh
 chmod -R 777 /opt/app

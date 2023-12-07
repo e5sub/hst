@@ -124,7 +124,7 @@ sys_install
 
 # 下载所需的安装包
 wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.44-1.el7.x86_64.rpm-bundle.tar
-wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/redis-7.2.2-1.el7.remi.x86_64.rpm
+wget -N --no-check-certificate https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.3-1.el7.remi.x86_64.rpm
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/wcm.zip
 wget -N --no-check-certificate https://pan.yaohst.com/d/OS/umeet/init.sql
 else
