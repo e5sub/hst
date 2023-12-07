@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月9日                          "*
+echo -e "# *脚本更新时间：2023年12月7日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -52,16 +52,16 @@ local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 
 # 下载alertmanager配置文件
 mkdir -p /home/grafana/alertmanager
-wget -N --no-check-certificate -P /home/grafana/alertmanager https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/alertmanager.yml
+wget -N --no-check-certificate -P /home/grafana/alertmanager https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/alertmanager.yml
 
 # 下载blackbox_exporter配置文件
 mkdir -p /home/grafana/blackbox_exporter
-wget -N --no-check-certificate -P /home/grafana/blackbox_exporter https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/blackbox.yml
+wget -N --no-check-certificate -P /home/grafana/blackbox_exporter https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/blackbox.yml
 
 # 下载prometheus配置文件
 mkdir -p /home/grafana/prometheus
-wget -N --no-check-certificate -P /home/grafana/prometheus https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.yml
-wget -N --no-check-certificate -P /home/grafana/prometheus https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/rules.yml
+wget -N --no-check-certificate -P /home/grafana/prometheus https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/prometheus.yml
+wget -N --no-check-certificate -P /home/grafana/prometheus https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/rules.yml
 
 # 设置grafana文件夹权限
 mkdir -p /home/grafana/grafana
@@ -126,7 +126,7 @@ cat >/etc/docker/daemon.json<<EOF
 }
 EOF
 chmod 777 -R $tsspath/consul/config
-wget -N --no-check-certificate -P /home/grafana https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/docker-compose.yml
+wget -N --no-check-certificate -P /home/grafana https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/docker-compose.yml
 
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml

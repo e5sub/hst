@@ -51,7 +51,6 @@ EOF
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 sh_ver="2.0"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
-github="ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master"
 #更新脚本
 Update_Shell(){
 	echo -e "当前版本为 [ ${sh_ver} ]，开始检测最新版本..."
@@ -62,7 +61,7 @@ Update_Shell(){
 		read -p "(默认: y):" yn
 		[[ -z "${yn}" ]] && yn="y"
 		if [[ ${yn} == [Yy] ]]; then
-			wget -N --no-check-certificate http://${github}/ces.sh && chmod +x ces.sh
+			wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/ces.sh && chmod +x ces.sh
 			echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !"
 			bash ces.sh
 		else
@@ -71,11 +70,11 @@ Update_Shell(){
 	else
 		echo -e "当前已是最新版本[ ${sh_new_ver} ] !"
 		sleep 5s
-		bash <(curl -Ls https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/ces.sh) 
+		bash <(curl -Ls https://cdn.jsdelivr.net/gh/e5sub/hst@master/ces.sh) 
 	fi
 }
-wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/install.sh
-wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/cesinstall.sh
+wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/install.sh
+wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/cesinstall.sh
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
@@ -223,26 +222,26 @@ case $N in
       docker run --name hbbr -p 21117:21117 -p 21119:21119 -v /home/rustdesk:/root -dit --restart=always rustdesk/rustdesk-server hbbr  ;;
   17) bash install.sh -frps ;;
   18) bash install.sh -frpc ;;
-  19) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/prometheus.sh && bash prometheus.sh ;;
-  20) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/grafana/node.sh && bash node.sh ;;
-  21) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/zabbix.sh && bash zabbix.sh ;;
-  22) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/agent.sh && bash agent.sh ;;
+  19) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/prometheus.sh && bash prometheus.sh ;;
+  20) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/node.sh && bash node.sh ;;
+  21) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/zabbix/zabbix.sh && bash zabbix.sh ;;
+  22) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/zabbix/agent.sh && bash agent.sh ;;
   23) docker run -dit -e PUID=0 -e PGID=0 -v /home/emby/movies:/data/movies -v /home/emby/config:/config -p 8096:8096 -p 8920:8920 --name=emby --restart=always xinjiawei1/emby_unlockd:latest ;;
   24) docker run -dit --restart=always -v /home/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest ;;
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
-  90) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323pri.sh && bash h323pri.sh ;;
-  91) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/h323pub.sh && bash h323pub.sh ;;
-  92) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/4.36/config.sh && bash config.sh ;;
-  93) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/node.sh && bash node.sh ;;
+  90) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/h323pri.sh && bash h323pri.sh ;;
+  91) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/h323pub.sh && bash h323pub.sh ;;
+  92) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/4.36/config.sh && bash config.sh ;;
+  93) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/node.sh && bash node.sh ;;
   94) bash install.sh -nginx ;;
   95) bash install.sh -proxy ;;
   96) systemctl stop firewalld.service
       systemctl disable firewalld.service ;;
 
   97) bash install.sh -resetadmin ;;
-  98) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/old.sh && bash old.sh ;;
-  00) wget -N --no-check-certificate https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/install/zxces.sh && bash zxces.sh ;;
+  98) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/old.sh && bash old.sh ;;
+  00) wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/zxces.sh && bash zxces.sh ;;
   *)
       clear
       echo -e "${Error}:请输入正确的数字"

@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月8日                         "*
+echo -e "# *脚本更新时间：2023年12月7日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -72,8 +72,8 @@ else
     echo "不支持的操作系统"
     exit 1
 fi
-wget -N --no-check-certificate -P /home/zabbix https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/docker-compose.yml
-wget -N --no-check-certificate -P /home/zabbix https://mirror.ghproxy.com/https://raw.githubusercontent.com/e5sub/hst/master/zabbix/zabbix_server.conf
+wget -N --no-check-certificate -P /home/zabbix https://cdn.jsdelivr.net/gh/e5sub/hst@master/zabbix/docker-compose.yml
+wget -N --no-check-certificate -P /home/zabbix https://cdn.jsdelivr.net/gh/e5sub/hst@master/zabbix/zabbix_server.conf
 sed -i "s/#\s*NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /home/zabbix/zabbix_server.conf
 #sed -i "s/ZBX_SERVER_HOST:.*/ZBX_SERVER_HOST: $local_ip/"  /home/zabbix/docker-compose.yml
 
