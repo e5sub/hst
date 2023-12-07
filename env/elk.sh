@@ -83,7 +83,7 @@ if [[ -f /etc/redhat-release ]]; then
        ln -s /usr/local/python3/bin/python3 /usr/bin/python3
     if ! command -v docker-compose &> /dev/null; then
        echo "docker-compose not found, installing docker-compose"
-       curl -SL https://mirror.ghproxy.com/https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-linux-x86_64 -o /usr/bin/docker-compose
+       curl -SL https://gitee.com/kesion/compose/releases/download/v2.23.3/docker-compose-linux-x86_64 -o /usr/bin/docker-compose
        chmod +x /usr/bin/docker-compose
     else
        echo "docker-compose already installed"
