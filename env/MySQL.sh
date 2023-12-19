@@ -289,7 +289,7 @@ if [ -f "$my_cnf" ]; then
             # 重启Redis Sentinel服务
             systemctl restart redis-sentinel
             # 检查从服务器的复制状态
-            status=$(mysql uroot -p"$new_password" -e "SHOW SLAVE STATUS\G")             
+            status=$(mysql -uroot -p"$new_password" -e "SHOW SLAVE STATUS\G")             
             # 检查复制状态是否正常
             if [[ $status == *"Slave_IO_Running: Yes"* && $status == *"Slave_SQL_Running: Yes"* ]]; then
                 echo "MySQL主从复制已成功配置。"
