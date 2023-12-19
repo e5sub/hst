@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年11月8日                           "*
+echo -e "# *脚本更新时间：2023年12月19日                           "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -45,7 +45,8 @@ while true; do
         read -r download_mysql
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
                 echo "正在下载 MySQL 安装包..."
-                yum install -y wget libaio && wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.44-1.el7.x86_64.rpm-bundle.tar
+                yum -y install wget libaio* 
+                yum install -y  && wget -N --no-check-certificate https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-5.7.44-1.el7.x86_64.rpm-bundle.tar
                 # 移除任何已经安装的 MySQL 或者 MariaDB
                 rpm -e `rpm -qa | grep -i mysql`
                 rpm -e --nodeps `rpm -qa | grep -i mariadb`
