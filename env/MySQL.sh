@@ -262,8 +262,15 @@ if [ -f "$my_cnf" ]; then
             echo "sentinel auth-pass mymaster ${new_password}" >> $sentinel_config
             # 设置超时时间
             echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
-            # 重启Redis Sentinel服务
-            systemctl restart redis-sentinel
+            # 检查是否已经存在哨兵自启命令
+            if grep -q "redis-sentinel /etc/redis/sentinel.conf" /etc/rc.local; then
+               echo "redis-sentinel /etc/redis/sentinel.conf already exists in /etc/rc.local"
+            else
+            # 添加redis-sentinel命令到rc.local
+               echo "redis-sentinel /etc/redis/sentinel.conf" | sudo tee -a /etc/rc.local > /dev/null
+               echo "redis-sentinel /etc/redis/sentinel.conf added to /etc/rc.local"
+               chmod +x /etc/rc.local
+            fi
         else
             # 从服务器
             echo "这是从服务器，执行从服务器脚本"            
@@ -287,8 +294,15 @@ if [ -f "$my_cnf" ]; then
             echo "sentinel auth-pass mymaster ${root_password}" >> $sentinel_config
             # 设置超时时间
             echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
-            # 重启Redis Sentinel服务
-            systemctl restart redis-sentinel
+            # 检查是否已经存在哨兵自启命令
+            if grep -q "redis-sentinel /etc/redis/sentinel.conf" /etc/rc.local; then
+               echo "redis-sentinel /etc/redis/sentinel.conf already exists in /etc/rc.local"
+            else
+            # 添加redis-sentinel命令到rc.local
+               echo "redis-sentinel /etc/redis/sentinel.conf" | sudo tee -a /etc/rc.local > /dev/null
+               echo "redis-sentinel /etc/redis/sentinel.conf added to /etc/rc.local"
+               chmod +x /etc/rc.local
+            fi
             # 检查从服务器的复制状态
             status=$(mysql -uroot -p"$new_password" -e "SHOW SLAVE STATUS\G")             
             # 检查复制状态是否正常
