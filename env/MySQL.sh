@@ -230,12 +230,13 @@ read -ep "请输入MySQL服务器的ID（输入数字，注意不能重复，默
 cat  >> /etc/my.cnf <<EOF 
 server-id = $mysql_id 
 log-bin = mysql-bin 
-# 用于排除自带的数据库。  
-binlog-ignore-db = mysql 
-binlog-ignore-db = information_schema
-binlog-ignore-db = performance_schema
-#二进制日志格式，建议使用ROW格式以获得更好的兼容性和可靠性。
-binlog-format = ROW 
+expire_logs_days=7
+max_binlog_size=512M
+slave_skip_errors=1032,1146,1007,1008,1050,1051
+slow_query_log = ON
+slow_query_log_file=/var/lib/mysql/instance-slow.log
+long_query_time = 10
+max_connections=3000
 EOF
 
 # 重启MySQL
@@ -414,12 +415,13 @@ mysql -uroot -p"$root_password" -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' ID
 cat  >> /etc/mysql/mysql.conf.d/mysqld.cnf <<EOF 
 server-id = $mysql_id 
 log-bin = mysql-bin 
-# 用于排除自带的数据库。  
-binlog-ignore-db = mysql 
-binlog-ignore-db = information_schema
-binlog-ignore-db = performance_schema
-#二进制日志格式，建议使用ROW格式以获得更好的兼容性和可靠性。
-binlog-format = ROW 
+expire_logs_days=7
+max_binlog_size=512M
+slave_skip_errors=1032,1146,1007,1008,1050,1051
+slow_query_log = ON
+slow_query_log_file=/var/lib/mysql/instance-slow.log
+long_query_time = 10
+max_connections=3000
 EOF
 sed -i 's/^bind-address/# bind-address/' /etc/mysql/mysql.conf.d/mysqld.cnf
 # 重启MySQL
@@ -569,12 +571,13 @@ mysql -uroot -p"$root_password" -e "USE mysql; UPDATE user SET host='%' WHERE us
 cat  >> /etc/mysql/mysql.conf.d/mysqld.cnf <<EOF 
 server-id = $mysql_id 
 log-bin = mysql-bin 
-# 用于排除自带的数据库。  
-binlog-ignore-db = mysql 
-binlog-ignore-db = information_schema
-binlog-ignore-db = performance_schema
-#二进制日志格式，建议使用ROW格式以获得更好的兼容性和可靠性。
-binlog-format = ROW 
+expire_logs_days=7
+max_binlog_size=512M
+slave_skip_errors=1032,1146,1007,1008,1050,1051
+slow_query_log = ON
+slow_query_log_file=/var/lib/mysql/instance-slow.log
+long_query_time = 10
+max_connections=3000
 EOF
 sed -i 's/^bind-address/# bind-address/' /etc/mysql/mysql.conf.d/mysqld.cnf
 # 重启MySQL
