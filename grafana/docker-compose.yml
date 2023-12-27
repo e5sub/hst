@@ -69,8 +69,6 @@ services:
      - /home/grafana/consul/config:/consul/config
      - /usr/share/zoneinfo/PRC:/etc/localtime
     command: "agent"
-    networks:
-      - TenSunS
 
   flask-consul:
     image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/flask-consul:latest
@@ -86,8 +84,6 @@ services:
       log_level: INFO
     depends_on:
       - consul
-    networks:
-      - TenSunS
 
   nginx-consul:
     image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/nginx-consul:latest
@@ -100,12 +96,3 @@ services:
       - /usr/share/zoneinfo/PRC:/etc/localtime
     depends_on:
       - flask-consul
-    networks:
-      - TenSunS
-
-networks:
-  TenSunS:
-    name: TenSunS
-    driver: bridge
-    ipam:
-      driver: default
