@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年12月7日                          "*
+echo -e "# *脚本更新时间：2023年12月27日                          "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -132,8 +132,8 @@ wget -N --no-check-certificate -P /home/grafana https://cdn.jsdelivr.net/gh/e5su
 sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml
 sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
-sed -i "s/consul_token: xxx/consul_token: $uuid/" /home/grafana/consul/docker-compose.yml
-sed -i "s/admin_passwd: xxx/admin_passwd: $adminpwd/" /home/grafana/consul/docker-compose.yml
+sed -i "s/consul_token: xxx/consul_token: $uuid/" /home/grafana/docker-compose.yml
+sed -i "s/admin_passwd: xxx/admin_passwd: $adminpwd/" /home/grafana/docker-compose.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 
 # 启动服务
