@@ -131,7 +131,6 @@ wget -N --no-check-certificate -P /home/grafana https://cdn.jsdelivr.net/gh/e5su
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml
 sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
-sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/consul_token: xxx/consul_token: $uuid/" /home/grafana/docker-compose.yml
 sed -i "s/admin_passwd: xxx/admin_passwd: $adminpwd/" /home/grafana/docker-compose.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
