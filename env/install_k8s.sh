@@ -27,9 +27,9 @@ echo "请修改/home/kubeadm/example文件夹里的配置文件"
 echo ""
 echo "配置文件说明，请根据实际情况修改"
 echo "---------------------------------"
-echo "|       节点类型       |       样式一       |       样式二       |"
+echo "|       节点类型      |       样式一       |       样式二       |"
 echo "---------------------------------"
-echo "|       单节点         |  hosts.allinone.ip  | hosts.allinone.hostname |"
+echo "|       单节点        |  hosts.allinone.ip  | hosts.allinone.hostname |"
 echo "---------------------------------"
 echo "|     单主多节点      |  hosts.s-master.ip  | hosts.s-master.hostname |"
 echo "---------------------------------"
@@ -38,7 +38,7 @@ echo "---------------------------------"
 read -p "修改完成之后按下回车键继续..."
 echo ""
 read -ep "请输入修改完成之后的配置文件名称: " config_name
-# 一键部署k8s
+# 一键部署k8s，带高级配置的命令 ansible-playbook -i /home/kubeadm/example/$config_name -e @example/variables.yaml 90-init-cluster.yml
 ansible-playbook -i /home/kubeadm/example/$config_name 90-init-cluster.yml
 # 安装rancher
 echo "ranche对k8s版本有要求，如果报错不影响k8s安装"
