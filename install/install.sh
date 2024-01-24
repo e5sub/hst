@@ -536,20 +536,20 @@ then
 	echo -e "\033[33m 【你选择的是安装Frp内网穿透服务器】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	mkdir -p /home/frp
-	cd /home/frp
-	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/frp/frps.ini
-	docker run --restart=always --net=host -dit -v /home/frp:/etc/frp --name frps snowdreamtech/frps
+	mkdir -p /home/frps
+	cd /home/frps
+	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/frp/frps.toml
+	docker run --restart=always --net=host -dit -v /home/frps:/etc/frp --name frps snowdreamtech/frps
 fi
 if [ $1 = '-frpc' ]
 then
 	echo -e "\033[33m 【你选择的是安装Frp内网穿透客户端】 \033[0m"
 	echo -e "\n"
 	sleep 5s
-	mkdir -p /home/frp
-	cd /home/frp
-	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/frp/frpc.ini
-	docker run --restart=always --net=host -dit -v /home/frp:/etc/frp --name frpc snowdreamtech/frpc
+	mkdir -p /home/frpc
+	cd /home/frpc
+	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/frp/frpc.toml
+	docker run --restart=always --net=host -dit -v /home/frpc:/etc/frp --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-time' ]
 then
