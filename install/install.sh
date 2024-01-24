@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年12月7日                         "*
+echo -e "# *脚本更新时间：2024年1月24日                         "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -539,7 +539,7 @@ then
 	mkdir -p /home/frp
 	cd /home/frp
 	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/frp/frps.ini
-	docker run --restart=always --network host -dit -v /home/frp:/etc/frp --name frps snowdreamtech/frps
+	docker run --restart=always --net=host -dit -v /home/frp:/etc/frp --name frps snowdreamtech/frps
 fi
 if [ $1 = '-frpc' ]
 then
@@ -549,7 +549,7 @@ then
 	mkdir -p /home/frp
 	cd /home/frp
 	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/frp/frpc.ini
-	docker run --restart=always --network host -dit -v /home/frp:/etc/frp --name frpc snowdreamtech/frpc
+	docker run --restart=always --net=host -dit -v /home/frp:/etc/frp --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-time' ]
 then
