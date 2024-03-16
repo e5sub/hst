@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年12月19日                           "*
+echo -e "# *脚本更新时间：2024年3月16日                           "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -92,7 +92,7 @@ while true; do
         read -r download_redis
         if [ "$download_redis" = "Y" ] || [ "$download_redis" = "y" ]; then
             echo "正在下载 Redis 安装包..."
-            yum install -y wget && wget -N --no-check-certificate https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.3-1.el7.remi.x86_64.rpm
+            yum install -y wget && wget -N --no-check-certificate https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.4-1.el7.remi.x86_64.rpm
             rpm -ivh redis*.rpm
             break
         else
