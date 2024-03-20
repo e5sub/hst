@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2024年3月16日                           "*
+echo -e "# *脚本更新时间：2024年3月19日                           "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -197,7 +197,7 @@ temp_password=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}
 
 # 设置mysql和redis新密码
 new_password=wecom,123!
-read -p "请输入mysql和redis的新密码（默认为：$new_password）：" input
+read -ep "请输入mysql和redis的新密码（默认为：$new_password）：" input
 new_password=${input:-$new_password}
 
 # 备份Redis配置文件
