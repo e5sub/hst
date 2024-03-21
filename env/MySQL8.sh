@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2024年3月16日                           "*
+echo -e "# *脚本更新时间：2024年3月20日                           "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "* 
 echo -e "#                                                      "*
@@ -46,22 +46,37 @@ while true; do
         if [ "$download_mysql" = "Y" ] || [ "$download_mysql" = "y" ]; then
                 echo "正在下载 MySQL 安装包..."
                 yum -y install wget perl net-tools libaio*
-                yum install -y  && wget -N --no-check-certificate https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.36-1.el7.x86_64.rpm-bundle.tar
+                wget -N --no-check-certificate https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.36-1.el7.x86_64.rpm-bundle.tar
                 # 移除任何已经安装的 MySQL 或者 MariaDB
                 rpm -e `rpm -qa | grep -i mysql`
                 rpm -e --nodeps `rpm -qa | grep -i mariadb`
                 # 解压Mysql8.0装包
                 tar -xvf mysql-8*.tar 
                 # 安装Mysql8.0
-                rpm -ivh mysql-community-libs-compat-8*.rpm
                 rpm -ivh mysql-community-common-8*.rpm
                 rpm -ivh mysql-community-client-plugins-8*.rpm
                 rpm -ivh mysql-community-icu-data-files-8*.rpm
                 rpm -ivh mysql-community-libs-8*.rpm
                 rpm -ivh mysql-community-common-8*.rpm
-                rpm -ivh mysql-community-libs-8*.rpm
+                rpm -ivh mysql-community-libs-compat-8*.rpm
                 rpm -ivh mysql-community-client-8*.rpm
                 rpm -ivh mysql-community-server-8*.rpm
+cat  >> /etc/my.cnf <<EOF 
+server-id = $mysql_id 
+log-bin = mysql-bin 
+expire_logs_days=7
+max_binlog_size=512M
+slave_skip_errors=1032,1146,1007,1008,1050,1051
+slow_query_log = ON
+slow_query_log_file=/var/lib/mysql/instance-slow.log
+long_query_time = 10
+max_connections=3000
+lower_case_table_names=1
+character_set_server=utf8mb4
+symbolic-links=0
+max_connections=800
+explicit_defaults_for_timestamp=true
+EOF
                 # 启动Mysql8.0
                 systemctl start mysqld   
                 break  
@@ -77,15 +92,30 @@ while true; do
                 # 解压Mysql8.0安装包
                 tar -xvf mysql-8*.tar 
                 # 安装Mysql8.0
-                rpm -ivh mysql-community-libs-compat-8*.rpm
                 rpm -ivh mysql-community-common-8*.rpm
                 rpm -ivh mysql-community-client-plugins-8*.rpm
                 rpm -ivh mysql-community-icu-data-files-8*.rpm
                 rpm -ivh mysql-community-libs-8*.rpm
                 rpm -ivh mysql-community-common-8*.rpm
-                rpm -ivh mysql-community-libs-8*.rpm
+                rpm -ivh mysql-community-libs-compat-8*.rpm
                 rpm -ivh mysql-community-client-8*.rpm
                 rpm -ivh mysql-community-server-8*.rpm
+cat  >> /etc/my.cnf <<EOF 
+server-id = $mysql_id 
+log-bin = mysql-bin 
+expire_logs_days=7
+max_binlog_size=512M
+slave_skip_errors=1032,1146,1007,1008,1050,1051
+slow_query_log = ON
+slow_query_log_file=/var/lib/mysql/instance-slow.log
+long_query_time = 10
+max_connections=3000
+lower_case_table_names=1
+character_set_server=utf8mb4
+symbolic-links=0
+max_connections=800
+explicit_defaults_for_timestamp=true
+EOF
                 # 启动Mysql8.0
                 systemctl start mysqld
                 break
@@ -225,6 +255,7 @@ echo "Redis密码已修改为${new_password}"
 
 # 设置开机自启
 systemctl enable redis
+systemctl enable redis-sentinel
 systemctl restart redis
 
 # 使用临时密码登录并修改MYSQL密码
@@ -237,18 +268,6 @@ read -ep "请输入MySQL主服务器的地址: " master_host
 read -ep "请输入同步用的MySQL用户名（主从保持一致）: " master_user
 read -ep "请输入同步用的MySQL密码（主从保持一致）: " master_password
 read -ep "请输入MySQL服务器的ID（输入数字，注意不能重复，默认1为主服务器）: " mysql_id
-
-cat  >> /etc/my.cnf <<EOF 
-server-id = $mysql_id 
-log-bin = mysql-bin 
-expire_logs_days=7
-max_binlog_size=512M
-slave_skip_errors=1032,1146,1007,1008,1050,1051
-slow_query_log = ON
-slow_query_log_file=/var/lib/mysql/instance-slow.log
-long_query_time = 10
-max_connections=3000
-EOF
 
 # 重启MySQL
 systemctl restart mysqld
@@ -275,14 +294,15 @@ if [ -f "$my_cnf" ]; then
             # 设置超时时间
             echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 检查是否已经存在哨兵自启命令
-            if grep -q "redis-sentinel /etc/redis/sentinel.conf" /etc/rc.local; then
-               echo "redis-sentinel /etc/redis/sentinel.conf already exists in /etc/rc.local"
-            else
+            #if grep -q "redis-sentinel /etc/redis/sentinel.conf" /etc/rc.local; then
+            #   echo "redis-sentinel /etc/redis/sentinel.conf already exists in /etc/rc.local"
+            #else
             # 添加redis-sentinel命令到rc.local
-               echo "redis-sentinel /etc/redis/sentinel.conf" | sudo tee -a /etc/rc.local > /dev/null
-               echo "redis-sentinel /etc/redis/sentinel.conf added to /etc/rc.local"
-               chmod +x /etc/rc.local
-            fi
+            #   echo "redis-sentinel /etc/redis/sentinel.conf" | sudo tee -a /etc/rc.local > /dev/null
+            #   echo "redis-sentinel /etc/redis/sentinel.conf added to /etc/rc.local"
+            #   chmod +x /etc/rc.local
+            #fi
+            systemctl restart redis-sentinel
         else
             # 从服务器
             echo "这是从服务器，执行从服务器脚本"            
@@ -307,14 +327,15 @@ if [ -f "$my_cnf" ]; then
             # 设置超时时间
             echo "sentinel down-after-milliseconds mymaster 5000" >> $sentinel_config
             # 检查是否已经存在哨兵自启命令
-            if grep -q "redis-sentinel /etc/redis/sentinel.conf" /etc/rc.local; then
-               echo "redis-sentinel /etc/redis/sentinel.conf already exists in /etc/rc.local"
-            else
+            #if grep -q "redis-sentinel /etc/redis/sentinel.conf" /etc/rc.local; then
+            #   echo "redis-sentinel /etc/redis/sentinel.conf already exists in /etc/rc.local"
+            #else
             # 添加redis-sentinel命令到rc.local
-               echo "redis-sentinel /etc/redis/sentinel.conf" | sudo tee -a /etc/rc.local > /dev/null
-               echo "redis-sentinel /etc/redis/sentinel.conf added to /etc/rc.local"
-               chmod +x /etc/rc.local
-            fi
+            #   echo "redis-sentinel /etc/redis/sentinel.conf" | sudo tee -a /etc/rc.local > /dev/null
+            #   echo "redis-sentinel /etc/redis/sentinel.conf added to /etc/rc.local"
+            #   chmod +x /etc/rc.local
+            #fi
+            systemctl restart redis-sentinel
             # 检查从服务器的复制状态
             status=$(mysql -uroot -p"$new_password" -e "SHOW SLAVE STATUS\G")             
             # 检查复制状态是否正常
@@ -433,6 +454,11 @@ slow_query_log = ON
 slow_query_log_file=/var/lib/mysql/instance-slow.log
 long_query_time = 10
 max_connections=3000
+lower_case_table_names=1
+character_set_server=utf8mb4
+symbolic-links=0
+max_connections=800
+explicit_defaults_for_timestamp=true
 EOF
 sed -i 's/^bind-address/# bind-address/' /etc/mysql/mysql.conf.d/mysqld.cnf
 # 重启MySQL
@@ -589,6 +615,11 @@ slow_query_log = ON
 slow_query_log_file=/var/lib/mysql/instance-slow.log
 long_query_time = 10
 max_connections=3000
+lower_case_table_names=1
+character_set_server=utf8mb4
+symbolic-links=0
+max_connections=800
+explicit_defaults_for_timestamp=true
 EOF
 sed -i 's/^bind-address/# bind-address/' /etc/mysql/mysql.conf.d/mysqld.cnf
 # 重启MySQL
