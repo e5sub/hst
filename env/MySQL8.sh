@@ -61,6 +61,7 @@ while true; do
                 rpm -ivh mysql-community-libs-compat-8*.rpm
                 rpm -ivh mysql-community-client-8*.rpm
                 rpm -ivh mysql-community-server-8*.rpm
+read -ep "请输入MySQL服务器的ID（输入数字，注意不能重复，默认1为主服务器）: " mysql_id  
 cat  >> /etc/my.cnf <<EOF 
 server-id = $mysql_id 
 log-bin = mysql-bin 
@@ -100,6 +101,7 @@ EOF
                 rpm -ivh mysql-community-libs-compat-8*.rpm
                 rpm -ivh mysql-community-client-8*.rpm
                 rpm -ivh mysql-community-server-8*.rpm
+read -ep "请输入MySQL服务器的ID（输入数字，注意不能重复，默认1为主服务器）: " mysql_id                
 cat  >> /etc/my.cnf <<EOF 
 server-id = $mysql_id 
 log-bin = mysql-bin 
@@ -267,7 +269,6 @@ echo "Mysql密码已修改为${new_password}"
 read -ep "请输入MySQL主服务器的地址: " master_host
 read -ep "请输入同步用的MySQL用户名（主从保持一致）: " master_user
 read -ep "请输入同步用的MySQL密码（主从保持一致）: " master_password
-read -ep "请输入MySQL服务器的ID（输入数字，注意不能重复，默认1为主服务器）: " mysql_id
 
 # 重启MySQL
 systemctl restart mysqld
@@ -281,7 +282,8 @@ if [ -f "$my_cnf" ]; then
     if [ -n "$server_id" ]; then
         if [ "$server_id" -eq 1 ]; then
             # 主服务器
-            echo "这是主服务器，执行主服务器脚本"            
+            echo "这是主服务器，执行主服务器脚本"  
+            hostnamectl set-hostname master$mysql_id         
             # 执行主服务器脚本
             mysql -uroot -p"$new_password" -e "SET GLOBAL validate_password.policy = 0; SET GLOBAL validate_password.length = 6; SET GLOBAL validate_password.policy = LOW; CREATE USER '${master_user}'@'%' IDENTIFIED BY '${master_password}'; GRANT ALL PRIVILEGES ON *.* TO '${master_user}'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" 2>/dev/null
             redis-cli -h 127.0.0.1 -p 6379 -a ${new_password} SLAVEOF NO ONE 2>/dev/null
@@ -305,7 +307,8 @@ if [ -f "$my_cnf" ]; then
             systemctl restart redis-sentinel
         else
             # 从服务器
-            echo "这是从服务器，执行从服务器脚本"            
+            echo "这是从服务器，执行从服务器脚本"    
+            hostnamectl set-hostname slave$mysql_id         
             # 获取主服务器的二进制日志文件名和位置
             read -ep "请输入主MySQL的root密码: " root_password
             result=$(mysql -h "$master_host" -uroot -p"$root_password" -e "SHOW MASTER STATUS\G")
@@ -472,7 +475,8 @@ if [ -f "$my_cnf" ]; then
     if [ -n "$server_id" ]; then
         if [ "$server_id" -eq 1 ]; then
             # 主服务器
-            echo "这是主服务器，执行主服务器脚本"            
+            echo "这是主服务器，执行主服务器脚本"    
+            hostnamectl set-hostname master$mysql_id         
             # 执行主服务器脚本
             mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;" 2>/dev/null
             redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF NO ONE 2>/dev/null
@@ -488,7 +492,8 @@ if [ -f "$my_cnf" ]; then
             systemctl restart redis-sentinel
         else
             # 从服务器
-            echo "这是从服务器，执行从服务器脚本"            
+            echo "这是从服务器，执行从服务器脚本"  
+            hostnamectl set-hostname slave$mysql_id           
             # 获取主服务器的二进制日志文件名和位置
             result=$(mysql -h "$master_host" -uroot -p"$root_password" -e "SHOW MASTER STATUS\G")
             master_log_file=$(echo "$result" | awk '/File:/ {print $2}')
@@ -633,7 +638,8 @@ if [ -f "$my_cnf" ]; then
     if [ -n "$server_id" ]; then
         if [ "$server_id" -eq 1 ]; then
             # 主服务器
-            echo "这是主服务器，执行主服务器脚本"            
+            echo "这是主服务器，执行主服务器脚本"  
+            hostnamectl set-hostname master$mysql_id           
             # 执行主服务器脚本
             mysql -uroot -p"$root_password" -e "CREATE USER '$master_user'@'%' IDENTIFIED BY '$master_password'; GRANT REPLICATION SLAVE ON *.* TO '$master_user'@'%'; FLUSH PRIVILEGES;" 2>/dev/null
             redis-cli -h 127.0.0.1 -p 6379 -a ${root_password} SLAVEOF NO ONE 2>/dev/null
@@ -649,7 +655,8 @@ if [ -f "$my_cnf" ]; then
             systemctl restart redis-sentinel
         else
             # 从服务器
-            echo "这是从服务器，执行从服务器脚本"            
+            echo "这是从服务器，执行从服务器脚本"    
+            hostnamectl set-hostname slave$mysql_id         
             # 获取主服务器的二进制日志文件名和位置
             result=$(mysql -h "$master_host" -uroot -p"$root_password" -e "SHOW MASTER STATUS\G")
             master_log_file=$(echo "$result" | awk '/File:/ {print $2}')
