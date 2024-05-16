@@ -1,0 +1,189 @@
+global:
+  scrape_interval:     60s
+  evaluation_interval: 60s
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+       - ip:9093 
+rule_files:
+  - "/etc/prometheus/rules.yml"     #报警规则
+scrape_configs:
+  - job_name: node_exporter
+    scrape_interval: 15s
+    scrape_timeout: 5s
+    consul_sd_configs:
+      - server: 'xxx:8500'
+        token: 'xxx'
+        refresh_interval: 30s
+        services: ['selfnode_exporter']
+        tags: ['linux']
+    relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        regex: .*OFF.*
+        action: drop
+      - source_labels: ['__meta_consul_service']
+        target_label: cservice
+      - source_labels: ['__meta_consul_service_metadata_vendor']
+        target_label: vendor
+      - source_labels: ['__meta_consul_service_metadata_region']
+        target_label: region
+      - source_labels: ['__meta_consul_service_metadata_group']
+        target_label: group
+      - source_labels: ['__meta_consul_service_metadata_account']
+        target_label: account
+      - source_labels: ['__meta_consul_service_metadata_name']
+        target_label: name
+      - source_labels: ['__meta_consul_service_metadata_iid']
+        target_label: iid
+      - source_labels: ['__meta_consul_service_metadata_exp']
+        target_label: exp
+      - source_labels: ['__meta_consul_service_metadata_instance']
+        target_label: instance
+      - source_labels: [instance]
+        target_label: __address__
+  - job_name: windows_exporter
+    scrape_interval: 15s
+    scrape_timeout: 5s
+    consul_sd_configs:
+      - server: 'xxx:8500'
+        token: 'xxx'
+        refresh_interval: 30s
+        services: ['selfnode_exporter']
+        tags: ['windows']
+    relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        regex: .*OFF.*
+        action: drop
+      - source_labels: ['__meta_consul_service']
+        target_label: cservice
+      - source_labels: ['__meta_consul_service_metadata_vendor']
+        target_label: vendor
+      - source_labels: ['__meta_consul_service_metadata_region']
+        target_label: region
+      - source_labels: ['__meta_consul_service_metadata_group']
+        target_label: group
+      - source_labels: ['__meta_consul_service_metadata_account']
+        target_label: account
+      - source_labels: ['__meta_consul_service_metadata_name']
+        target_label: name
+      - source_labels: ['__meta_consul_service_metadata_iid']
+        target_label: iid
+      - source_labels: ['__meta_consul_service_metadata_exp']
+        target_label: exp
+      - source_labels: ['__meta_consul_service_metadata_instance']
+        target_label: instance
+      - source_labels: [instance]
+        target_label: __address__
+  - job_name: 'blackbox_exporter'
+    scrape_interval: 15s
+    scrape_timeout: 5s
+    metrics_path: /probe
+    consul_sd_configs:
+      - server: 'xxx:8500'
+        token: 'xxx'
+        services: ['blackbox_exporter']
+    relabel_configs:
+      - source_labels: ["__meta_consul_service_metadata_instance"]
+        target_label: __param_target
+      - source_labels: [__meta_consul_service_metadata_module]
+        target_label: __param_module
+      - source_labels: [__meta_consul_service_metadata_module]
+        target_label: module
+      - source_labels: ["__meta_consul_service_metadata_company"]
+        target_label: company
+      - source_labels: ["__meta_consul_service_metadata_env"]
+        target_label: env
+      - source_labels: ["__meta_consul_service_metadata_name"]
+        target_label: name
+      - source_labels: ["__meta_consul_service_metadata_project"]
+        target_label: project
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 127.0.0.1:9115
+  - job_name: multi_mysqld_exporter
+    scrape_interval: 15s
+    scrape_timeout: 5s
+    metrics_path: /probe
+    consul_sd_configs:
+      - server: 'xxx:8500'
+        token: 'xxx'
+        refresh_interval: 30s
+        services: ['selfrds_exporter']
+    relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        regex: .*OFF.*
+        action: drop
+      - source_labels: [__meta_consul_service_address,__meta_consul_service_port]
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        target_label: __param_target
+        replacement: $1:$2
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 3306
+      - source_labels: ['__meta_consul_service_metadata_vendor']
+        target_label: vendor
+      - source_labels: ['__meta_consul_service_metadata_region']
+        target_label: region
+      - source_labels: ['__meta_consul_service_metadata_group']
+        target_label: group
+      - source_labels: ['__meta_consul_service_metadata_account']
+        target_label: account
+      - source_labels: ['__meta_consul_service_metadata_name']
+        target_label: name
+      - source_labels: ['__meta_consul_service_metadata_iid']
+        target_label: iid
+      - source_labels: ['__meta_consul_service_metadata_exp']
+        target_label: exp
+      - source_labels: ['__meta_consul_service_metadata_cpu']
+        target_label: cpu
+      - source_labels: ['__meta_consul_service_metadata_mem']
+        target_label: mem
+      - source_labels: ['__meta_consul_service_metadata_disk']
+        target_label: disk
+      - source_labels: ['__meta_consul_service_metadata_itype']
+        target_label: itype
+  - job_name: redis_exporter
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /scrape
+    consul_sd_configs:
+      - server: 'xxx:8500'
+        token: 'xxx'
+        refresh_interval: 30s
+        services: ['selfredis_exporter']
+    relabel_configs:
+      - source_labels: [__meta_consul_tags]
+        regex: .*OFF.*
+        action: drop
+      - source_labels: [__meta_consul_service_address,__meta_consul_service_port]
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        target_label: __param_target
+        replacement: $1:$2
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 6379
+      - source_labels: ['__meta_consul_service_metadata_vendor']
+        target_label: vendor
+      - source_labels: ['__meta_consul_service_metadata_region']
+        target_label: region
+      - source_labels: ['__meta_consul_service_metadata_group']
+        target_label: group
+      - source_labels: ['__meta_consul_service_metadata_account']
+        target_label: account
+      - source_labels: ['__meta_consul_service_metadata_name']
+        target_label: name
+      - source_labels: ['__meta_consul_service_metadata_iid']
+        target_label: iid
+      - source_labels: ['__meta_consul_service_metadata_mem']
+        target_label: mem
+      - source_labels: ['__meta_consul_service_metadata_itype']
+        target_label: itype
+      - source_labels: ['__meta_consul_service_metadata_ver']
+        target_label: ver
+      - source_labels: ['__meta_consul_service_metadata_exp']
+        target_label: exp
+

@@ -1,0 +1,41 @@
+serverAddr = "1.1.1.1" 
+serverPort = 7000 
+auth.method = "token" 
+auth.token = "test123" 
+transport.tls.enable = false 
+transport.tls.disableCustomTLSFirstByte = false 
+transport.protocol = "quic"
+ 
+[[proxies]]
+name = "rdp"   
+type = "tcp"   
+localIP = "127.0.0.1"  
+localPort = 3389   
+remotePort = 23389    
+transport.useEncryption = true  
+transport.useCompression = true 
+
+[[proxies]]
+name = "dsm_http" 
+type = "http" 
+localIP = "127.0.0.1" 
+localPort = 5000 
+customDomains = ["test.yaohst.com"] 
+transport.useEncryption = true  
+transport.useCompression = true  
+
+[[proxies]]
+name = "dsm_https"   
+type = "https" 
+localIP = "xxx.xxx.xxx.xxx" 
+localPort = 5001  
+customDomains = ["test.yaohst.com"]  
+transport.useEncryption = true  
+transport.useCompression = true  
+
+[[proxies]]
+name = "web"
+type = "http"
+localIP = "xxx.xxx.xxx.xxx" 
+localPort = 80
+subdomain = "test"

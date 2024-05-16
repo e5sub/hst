@@ -1,0 +1,14 @@
+bindPort = 7000   
+quicBindPort = 7000
+kcpBindPort = 7100
+webServer.addr = "0.0.0.0" 
+webServer.port = 7500
+webServer.user = "admin"   
+webServer.password = "admin" 
+auth.method = "token"  
+auth.token = "mint"  
+vhostHTTPPort = 80    
+vhostHTTPSPort = 443  
+tcpmuxHTTPConnectPort = 1337  
+transport.tls.force = false   
+subdomainHost = "frps.com"  

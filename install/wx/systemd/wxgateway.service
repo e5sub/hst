@@ -1,0 +1,10 @@
+[Unit]
+Description=wxgateway
+After=network.target
+ 
+[Service]
+Type=forking
+ExecStart=/etc/init.d/gateway.sh
+ 
+[Install]
+WantedBy=multi-user.target

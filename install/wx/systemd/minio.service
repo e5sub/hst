@@ -1,0 +1,10 @@
+[Unit]
+Description=minio
+After=network.target
+ 
+[Service]
+Type=simple
+ExecStart=/etc/init.d/minio_server start
+ 
+[Install]
+WantedBy=multi-user.target

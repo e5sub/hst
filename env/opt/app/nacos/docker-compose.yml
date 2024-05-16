@@ -1,0 +1,23 @@
+version: '3'
+services:
+  nacos:
+    image: nacos/nacos-server
+    container_name: nacos
+    hostname: nacos
+    ports:
+      - 8848:8848
+      - 9848:9848
+    environment:
+      - MODE=standalone
+      - JVM_XMS=2048m
+      - JVM_XMX=2048m
+      - JVM_XMN=1024m 
+    restart: always
+    privileged: true    
+    volumes:
+      - /opt/app/nacos/logs:/home/nacos/logs
+      - /opt/app/nacos/config/application.properties:/home/nacos/conf/application.properties
+      - /opt/app/nacos/data:/home/nacos/data
+      - /opt/app/nacos/backup:/backup
+      - /opt/app/nacos/config:/home/nacos/init.d
+      - /etc/localtime:/etc/localtime:ro

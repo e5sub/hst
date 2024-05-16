@@ -1,0 +1,48 @@
+version: '3'
+services:
+  zookeeper:
+    image: bitnami/zookeeper
+    container_name: zookeeper
+    environment:
+    - ALLOW_ANONYMOUS_LOGIN=yes
+    volumes:
+      - /opt/app/kafka/zookeeper:/bitnami/zookeeper
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 2181:2181
+    restart: always
+  kafka:
+    image: bitnami/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    volumes:
+      - "/opt/app/kafka/kafka-data:/bitnami"
+    environment:
+      # KRaft settings
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      # Listeners
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+    restart: always
+  kafka-map:
+    image: dushixiang/kafka-map:latest
+    container_name: kafka-map
+    ports:
+      - 8081:8080
+    volumes:
+      - /opt/app/kafka/kafka-map:/usr/local/kafka-map/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - DEFAULT_USERNAME=admin
+      - DEFAULT_PASSWORD=admin
+    restart: always
+volumes:
+  kafka_data:
+    driver: local

@@ -1,0 +1,10 @@
+[Unit]
+Description=wxprovider
+After=network.target
+ 
+[Service]
+Type=forking
+ExecStart=/etc/init.d/provider.sh
+ 
+[Install]
+WantedBy=multi-user.target

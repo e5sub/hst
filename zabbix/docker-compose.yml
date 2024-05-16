@@ -1,0 +1,82 @@
+version: "3"
+services:
+  mysql-server:
+    image: mysql:8.0
+    hostname: mysql-server
+    container_name: mysql-server
+    command: 
+    - --character-set-server=utf8mb4
+    - --collation-server=utf8mb4_bin
+    restart: always
+    environment:
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=zabbix
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /home/zabbix/mysql:/var/lib/mysql
+      
+  zabbix-java-gateway:
+    image: zabbix/zabbix-java-gateway:latest
+    container_name: zabbix-java-gateway
+    restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime
+
+  zabbix-server:
+    image: zabbix/zabbix-server-mysql:latest
+    container_name: zabbix-server
+    ports:
+      - "10051:10051"
+    environment:
+      DB_SERVER_HOST: mysql-server
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+      MYSQL_ROOT_PASSWORD: zabbix
+    restart: always
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /home/zabbix/zabbix_server.conf:/etc/zabbix/zabbix_server.conf
+    depends_on:
+      - mysql-server
+      - zabbix-java-gateway
+    links:
+      - mysql-server
+      - zabbix-java-gateway
+
+  zabbix-web-nginx-mysql:
+    image: zabbix/zabbix-web-nginx-mysql:latest
+    container_name: zabbix-web-nginx-mysql
+    ports:
+      - "8080:8080"
+    environment:
+      DB_SERVER_HOST: mysql-server
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+      MYSQL_ROOT_PASSWORD: zabbix
+      ZBX_JAVAGATEWAY: zabbix-java-gateway
+    restart: always
+    depends_on:
+      - mysql-server
+      - zabbix-server
+    links:
+      - mysql-server
+      - zabbix-server
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      
+#  zabbix-agent:
+#    image: zabbix/zabbix-agent:latest
+#    container_name: zabbix-agent
+#    environment:
+#      ZBX_HOSTNAME: Zabbix server
+#      ZBX_SERVER_HOST: xxx
+#      ZBX_SERVER_PORT: 10051
+#    restart: always
+#    ports:
+#      - "10050:10050"
+#    volumes:
+#      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro

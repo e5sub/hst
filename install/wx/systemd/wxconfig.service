@@ -1,0 +1,10 @@
+[Unit]
+Description=wxconfig
+After=network.target
+ 
+[Service]
+Type=forking
+ExecStart=/etc/init.d/config.sh
+ 
+[Install]
+WantedBy=multi-user.target

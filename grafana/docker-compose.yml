@@ -1,0 +1,98 @@
+version: "3.2"
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - /home/grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /home/grafana/prometheus/rules.yml:/etc/prometheus/rules.yml
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    restart: always
+    ports:
+      - "9093:9093"
+    volumes:
+      - /home/grafana/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      
+  blackbox_exporter:
+    image: prom/blackbox-exporter
+    container_name: blackbox_exporter
+    restart: always
+    ports:
+      - "9115:9115"
+    volumes:
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      - /home/grafana/blackbox_exporter/blackbox.yml:/etc/blackbox_exporter/blackbox.yml
+    command:
+      - '--config.file=/etc/blackbox_exporter/blackbox.yml'
+
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    restart: always
+    ports:
+      - "9100:9100"
+    volumes:
+      - /home/grafana/node-exporter/proc:/host/proc:ro
+      - /home/grafana/node-exporter/sys:/host/sys:ro
+      - /home/grafana/node-exporter/:/homefs:ro
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - /home/grafana/grafana:/var/lib/grafana
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+      
+  consul:
+    image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/consul:latest
+    container_name: consul
+    hostname: consul
+    restart: always
+    ports:
+      - "8500:8500"
+    volumes:
+     - /home/grafana/consul/data:/consul/data
+     - /home/grafana/consul/config:/consul/config
+     - /usr/share/zoneinfo/PRC:/etc/localtime
+    command: "agent"
+
+  flask-consul:
+    image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/flask-consul:latest
+    container_name: flask-consul
+    hostname: flask-consul
+    restart: always
+    volumes:
+      - /usr/share/zoneinfo/PRC:/etc/localtime
+    environment:
+      consul_token: xxx
+      consul_url: http://consul:8500/v1
+      admin_passwd: xxx
+      log_level: INFO
+    depends_on:
+      - consul
+
+  nginx-consul:
+    image: swr.cn-south-1.myhuaweicloud.com/starsl.cn/nginx-consul:latest
+    container_name: nginx-consul
+    hostname: nginx-consul
+    restart: always
+    ports:
+      - "1026:1026"
+    volumes:
+      - /usr/share/zoneinfo/PRC:/etc/localtime
+    depends_on:
+      - flask-consul

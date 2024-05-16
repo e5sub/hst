@@ -1,0 +1,10 @@
+[Unit]
+Description=wxjob
+After=network.target
+ 
+[Service]
+Type=forking
+ExecStart=/etc/init.d/job.sh
+ 
+[Install]
+WantedBy=multi-user.target

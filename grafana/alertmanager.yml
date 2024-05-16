@@ -1,0 +1,42 @@
+global:
+  resolve_timeout: 5m
+  http_config:
+    follow_redirects: true
+    enable_http2: true
+  smtp_from: xxx@xxx.xxx
+  smtp_hello: qq.com
+  smtp_smarthost: smtp.163.com:25
+  smtp_auth_username: xxx@xxx.xxx
+  smtp_auth_password: <secret>
+  smtp_require_tls: false
+  pagerduty_url: https://events.pagerduty.com/v2/enqueue
+  opsgenie_api_url: https://api.opsgenie.com/
+  wechat_api_url: https://qyapi.weixin.qq.com/cgi-bin/
+  victorops_api_url: https://alert.victorops.com/integrations/generic/20131114/alert/
+  telegram_api_url: https://api.telegram.org
+  webex_api_url: https://webexapis.com/v1/messages
+route:
+  receiver: email
+  group_by:
+  - alertname
+  continue: false
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 1m
+receivers:
+- name: email
+  email_configs:
+  - send_resolved: false
+    to: xxx@xxx.xxx
+    from: xxx@xxx.xxx
+    hello: 163.com
+    smarthost: smtp.163.com:25
+    auth_username: xxx@xxx.xxx
+    auth_password: <secret>
+    headers:
+      From: xxx@xxx.xxx
+      Subject: '{{ template "email.default.subject" . }}'
+      To: xxx@xxx.xxx
+    html: '{{ template "email.default.html" . }}'
+    require_tls: false
+templates: []

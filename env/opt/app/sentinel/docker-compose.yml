@@ -1,0 +1,14 @@
+version: '3'
+services:
+  sentinel:
+    image: bladex/sentinel-dashboard
+    container_name: sentinel
+    restart: always
+    ports: 
+      - "8858:8858"
+    volumes:
+      - /opt/app/sentinel/config:/root/etc
+      - /opt/app/sentinel/data:/root/sentinel
+      - /opt/app/sentinel/logs:/root/logs/csp
+      - /opt/app/sentinel/backup:/backup
+      - /etc/localtime:/etc/localtime:ro
