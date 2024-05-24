@@ -49,9 +49,9 @@ read -ep "请输入要设置的 keepalived 虚拟IP地址（默认为：$virtual
 virtual_ip=${input:-$virtual_ip}
 #--------------------------------------------------------------------------------------
 # MySQL/Redis下载地址
-CentOS_MySQL=https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.37-1.el7.x86_64.rpm-bundle.tar
-Ubuntu_MySQL=https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-server_8.0.37-1ubuntu24.04_amd64.deb-bundle.tar
-Debian_MySQL=https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-server_8.0.37-1debian12_amd64.deb-bundle.tar
+CentOS_MySQL=https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-8.4.0-1.el7.aarch64.rpm-bundle.tar
+Ubuntu_MySQL=https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-server_8.4.0-1ubuntu24.04_amd64.deb-bundle.tar
+Debian_MySQL=https://dev.mysql.com/get/Downloads/MySQL-8.4/mysql-server_8.4.0-1debian12_amd64.deb-bundle.tar
 CentOS_Redis=https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.4-1.el7.remi.x86_64.rpm
 if grep -q "net.ipv4.ip_forward = 1" /etc/sysctl.conf; then
     :
@@ -96,7 +96,7 @@ systemctl start docker
 # 检测系统类型
 if [[ -f /etc/redhat-release ]]; then
     # CentOS
-    echo -e "# 检测到系统为CentOS，仅支持MySQL8.0"
+    echo -e "# 检测到系统为CentOS，仅支持MySQL8.x"
     # 开放防火墙端口
     firewall-cmd --add-masquerade --permanent
     firewall-cmd --zone=public --add-port=80/tcp --permanent
@@ -114,7 +114,7 @@ while true; do
         # 移除任何已经安装的 MySQL 或者 MariaDB
         rpm -e `rpm -qa | grep -i mysql`
         rpm -e --nodeps `rpm -qa | grep -i mariadb`
-        curl -LO -k https://dev.mysql.com/get/mysql80-community-release-el7-11.noarch.rpm && rpm -ivh mysql80-community-release-el7-11.noarch.rpm 
+        curl -LO -k https://dev.mysql.com/get/mysql84-community-release-el7-1.noarch.rpm && rpm -ivh mysql84-community-release-el7-1.noarch.rpm
         yum -y install mysql-community-server wget unzip libappindicator-gtk3 libXScrnSaver-devel perl net-tools libaio* keepalived    
         break
     else
@@ -142,9 +142,8 @@ cat  >> /etc/my.cnf <<EOF
 port = $mysql_port
 server-id = $mysql_id
 log-bin = mysql-bin
-expire_logs_days=7
 max_binlog_size=512M
-slave_skip_errors=1032,1146,1007,1008,1050,1051
+replica_skip_errors=1032,1146,1007,1008,1050,1051
 binlog-ignore-db=mysql
 binlog-ignore-db=information_schema
 binlog-ignore-db=performance_schema
@@ -160,6 +159,7 @@ max_connections=800
 explicit_defaults_for_timestamp=true
 #auto_increment_increment = 2
 #auto_increment_offset = 1
+#expire_logs_days=7
 EOF
     echo "请稍候，正在初始化数据库。。。"
     # 初始化数据库
@@ -192,7 +192,7 @@ EOF
     systemctl restart mysqld
 elif [[ -f /etc/lsb-release ]]; then
     # Ubuntu
-    echo -e "# 检测到系统为Ubuntu，仅支持MySQL8.0"
+    echo -e "# 检测到系统为Ubuntu，仅支持MySQL8.x"
     # 开放防火墙端口
     sudo ufw allow 80/tcp
     sudo ufw allow 443/tcp
@@ -230,9 +230,8 @@ cat  >> /etc/mysql/mysql.conf.d/mysqld.cnf <<EOF
 port = $mysql_port
 server-id = $mysql_id
 log-bin = mysql-bin
-expire_logs_days=7
 max_binlog_size=512M
-slave_skip_errors=1032,1146,1007,1008,1050,1051
+replica_skip_errors=1032,1146,1007,1008,1050,1051
 binlog-ignore-db=mysql
 binlog-ignore-db=information_schema
 binlog-ignore-db=performance_schema
@@ -248,6 +247,7 @@ max_connections=800
 explicit_defaults_for_timestamp=true
 #auto_increment_increment = 2
 #auto_increment_offset = 1
+#expire_logs_days=7
 EOF
 sed -i 's/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 sed -i 's/^mysqlx-bind-address\s*=\s*127.0.0.1/mysqlx-bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -262,12 +262,12 @@ temp_password=$(grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}
 mysql -uroot --password="${temp_password}" --connect-expired-password -P $mysql_port -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${root_password}'; CREATE USER 'root'@'%' IDENTIFIED BY '${root_password}'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" 2>/dev/null
 elif [[ -f /etc/debian_version ]]; then
     # Debian
-    echo -e "# 检测到系统为Debian，仅支持MySQL8.0"
+    echo -e "# 检测到系统为Debian，仅支持MySQL8.x"
     # 检测 MySQL 安装包
 while true; do
     if ! command -v mysql &> /dev/null; then
         # 安装 MySQL
-        curl -LO -k https://dev.mysql.com/get/mysql-apt-config_0.8.29-1_all.deb && dpkg -i ./mysql-apt-config_0.8.29-1_all.deb
+        curl -LO -k https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb && dpkg -i ./mysql-apt-config_0.8.30-1_all.deb
         apt update && apt install -y libaio1 libtinfo5 libmecab2 curl gnupg2 ca-certificates net-tools lsb-release debian-archive-keyring psmisc libnuma1 mecab-ipadic-utf8 keepalived mysql-server
         break
     else
@@ -295,9 +295,8 @@ cat  >> /etc/mysql/mysql.conf.d/mysqld.cnf <<EOF
 port = $mysql_port
 server-id = $mysql_id
 log-bin = mysql-bin
-expire_logs_days=7
 max_binlog_size=512M
-slave_skip_errors=1032,1146,1007,1008,1050,1051
+replica_skip_errors=1032,1146,1007,1008,1050,1051
 binlog-ignore-db=mysql
 binlog-ignore-db=information_schema
 binlog-ignore-db=performance_schema
@@ -312,7 +311,8 @@ symbolic-links=0
 max_connections=800
 explicit_defaults_for_timestamp=true
 #auto_increment_increment = 2  
-#auto_increment_offset = 1    
+#auto_increment_offset = 1   
+#expire_logs_days=7 
 EOF
 sed -i 's/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 sed -i 's/^mysqlx-bind-address\s*=\s*127.0.0.1/mysqlx-bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -346,7 +346,7 @@ if [ "$mysql_id" -eq 1 ]; then
     # 主服务器
     echo "这是主服务器，执行主服务器脚本"  
     hostnamectl set-hostname master0$mysql_id  
-    echo "master_info_repository=TABLE" | tee -a $my_cnf
+    #echo "master_info_repository=TABLE" | tee -a $my_cnf
     # 重启 MySQL 数据库
     if systemctl status mysqld.service >/dev/null 2>&1; then
     systemctl restart mysqld.service
