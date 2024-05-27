@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2024年5月7日                          "*
+echo -e "# *脚本更新时间：2024年5月27日                          "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "*
 echo -e "#                                                      "*
@@ -148,6 +148,7 @@ binlog-ignore-db=mysql
 binlog-ignore-db=information_schema
 binlog-ignore-db=performance_schema
 binlog-ignore-db=sys
+innodb_log_file_size=1G
 slow_query_log = ON
 slow_query_log_file=/var/lib/mysql/instance-slow.log
 long_query_time = 10
@@ -155,11 +156,8 @@ max_connections=3000
 lower_case_table_names=1
 character_set_server=utf8mb4
 symbolic-links=0
-max_connections=800
+max_connect_errors=100
 explicit_defaults_for_timestamp=true
-#auto_increment_increment = 2
-#auto_increment_offset = 1
-#expire_logs_days=7
 EOF
     echo "请稍候，正在初始化数据库。。。"
     # 初始化数据库
@@ -236,6 +234,7 @@ binlog-ignore-db=mysql
 binlog-ignore-db=information_schema
 binlog-ignore-db=performance_schema
 binlog-ignore-db=sys
+innodb_log_file_size=1G
 slow_query_log = ON
 slow_query_log_file=/var/lib/mysql/instance-slow.log
 long_query_time = 10
@@ -243,11 +242,8 @@ max_connections=3000
 lower_case_table_names=1
 character_set_server=utf8mb4
 symbolic-links=0
-max_connections=800
+max_connect_errors=100
 explicit_defaults_for_timestamp=true
-#auto_increment_increment = 2
-#auto_increment_offset = 1
-#expire_logs_days=7
 EOF
 sed -i 's/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 sed -i 's/^mysqlx-bind-address\s*=\s*127.0.0.1/mysqlx-bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -301,6 +297,7 @@ binlog-ignore-db=mysql
 binlog-ignore-db=information_schema
 binlog-ignore-db=performance_schema
 binlog-ignore-db=sys
+innodb_log_file_size=1G
 slow_query_log = ON
 slow_query_log_file=/var/lib/mysql/instance-slow.log
 long_query_time = 10
@@ -308,11 +305,8 @@ max_connections=3000
 lower_case_table_names=1
 character_set_server=utf8mb4
 symbolic-links=0
-max_connections=800
+max_connect_errors=100
 explicit_defaults_for_timestamp=true
-#auto_increment_increment = 2  
-#auto_increment_offset = 1   
-#expire_logs_days=7 
 EOF
 sed -i 's/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 sed -i 's/^mysqlx-bind-address\s*=\s*127.0.0.1/mysqlx-bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
