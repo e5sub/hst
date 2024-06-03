@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2023年12月27日                          "*
+echo -e "# *脚本更新时间：2024年6月3日                            "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -76,7 +76,7 @@ if [[ -f /etc/redhat-release ]]; then
     pip3 install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian
-    apt install -y uuid-runtime docker-compose
+    apt install -y python3-pip uuid-runtime docker-compose
 else
     echo "不支持的操作系统"
     exit 1
