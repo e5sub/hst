@@ -2,7 +2,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2024年5月27日                          "*
+echo -e "# *脚本更新时间：2024年6月8日                          "*
 echo -e "#                                                      "*
 echo -e "# *脚本支持CentOS/Ubuntu/Debian                        "*
 echo -e "#                                                      "*
@@ -89,6 +89,7 @@ cat >/etc/docker/daemon.json<<EOF
 {
 "log-driver": "json-file",
 "log-opts": {"max-size":"20m", "max-file":"2"}
+"registry-mirrors": ["https://hlx1vn88.mirror.aliyuncs.com"]
 }
 EOF
 systemctl daemon-reload
