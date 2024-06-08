@@ -53,11 +53,14 @@ local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 mkdir /etc/docker
 cat >/etc/docker/daemon.json<<EOF
 {
-"log-driver": "json-file",
-"log-opts": {"max-size":"20m", "max-file":"2"}
-}
-{
-"registry-mirrors": ["https://hlx1vn88.mirror.aliyuncs.com"]
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "20m",
+    "max-file": "2"
+  },
+  "registry-mirrors": [
+    "https://hlx1vn88.mirror.aliyuncs.com"
+  ]
 }
 EOF
 

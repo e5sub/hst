@@ -87,11 +87,14 @@ fi
 # 限制docker日志大小
 cat >/etc/docker/daemon.json<<EOF
 {
-"log-driver": "json-file",
-"log-opts": {"max-size":"20m", "max-file":"2"}
-}
-{
-"registry-mirrors": ["https://hlx1vn88.mirror.aliyuncs.com"]
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "20m",
+    "max-file": "2"
+  },
+  "registry-mirrors": [
+    "https://hlx1vn88.mirror.aliyuncs.com"
+  ]
 }
 EOF
 systemctl daemon-reload
