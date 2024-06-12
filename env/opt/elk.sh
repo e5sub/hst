@@ -49,7 +49,7 @@ sys_install(){
     fi   
     if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
-        curl -sSL https://get.docker.com/ | sh 
+        curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
         systemctl enable docker 
     else 
         echo 'docker 已安装，继续操作'
