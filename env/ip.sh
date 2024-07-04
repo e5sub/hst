@@ -1,7 +1,7 @@
 #!/bin/bash
 echo -e "# ******************************************************"
 echo -e "#                                                      "
-echo -e "# *脚本更新时间：2024年4月16日       脚本作者：萌萌哒菜芽  "
+echo -e "# *脚本更新时间：2024年7月4日       脚本作者：萌萌哒菜芽  "
 echo -e "#                                                      "
 echo -e "# *脚本支持CentOS/Ubuntu/Debian系统"
 echo -e "#                                                      "
@@ -156,7 +156,7 @@ if command -v nmcli &> /dev/null; then
     nmcli connection modify "$connection_name" ipv4.dns "$dns1 $dns2"
     nmcli connection modify "$connection_name" ipv4.method manual
     # 重新加载网络连接
-    nmcli con down "$connection_name" && nmcli con up "$connection_name" && systemctl restart NetworkManager
+    #nmcli con down "$connection_name" && nmcli con up "$connection_name" && systemctl restart NetworkManager
     echo "固定IP地址设置完成"
 else
     # 备份原始网络配置文件
@@ -165,7 +165,7 @@ else
     fi
     sed -i "s/dhcp4: true/dhcp4: false\n      addresses:\n        - $ip_address\/$netmask\n      nameservers:\n        addresses:  \[$dns1, $dns2\]\n      routes:\n        - to: default\n          via: $gateway/g" /etc/netplan/00-installer-config.yaml
     chmod 600 /etc/netplan/00-installer-config.yaml
-    netplan apply
+    #netplan apply
     echo "固定IP地址设置完成"
 fi
 
@@ -184,7 +184,7 @@ if command -v nmcli &> /dev/null; then
     nmcli connection modify "$connection_name" ipv4.dns "$dns1 $dns2"
     nmcli connection modify "$connection_name" ipv4.method manual
     # 重新加载网络连接
-    nmcli con down "$connection_name" && nmcli con up "$connection_name" && systemctl restart NetworkManager
+    #nmcli con down "$connection_name" && nmcli con up "$connection_name" && systemctl restart NetworkManager
     echo "固定IP地址设置完成"
 else
     # 备份原始网络配置文件
@@ -199,7 +199,7 @@ else
            -e "/^iface $interface inet static/{n;s/netmask .*/netmask $netmask/}" \
            -e "/^iface $interface inet static/{n;s/gateway .*/gateway $gateway/}" /etc/network/interfaces
     fi
-    systemctl restart networking
+    #systemctl restart networking
     echo "固定IP地址设置完成"
 fi
 
