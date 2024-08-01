@@ -27,7 +27,6 @@ sys_install(){
         echo 'docker 未安装 正在安装中';
         sudo curl -sSL https://get.docker.com/ | sh
         systemctl enable docker
-        systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi	
@@ -46,6 +45,8 @@ cat >/etc/docker/daemon.json<<EOF
   ]
 }
 EOF
+systemctl daemon-reload
+systemctl start docker
 # 使用docker部署node-exporter
 docker run -d -p 9100:9100 -v /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro -v /home/grafana/node-exporter/proc:/host/proc:ro -v /home/grafana/node-exporter/sys:/host/sys:ro -v /home/grafana/node-exporter/:/homefs:ro --name node-exporter --restart=always prom/node-exporter
 echo -e "                                                                                "

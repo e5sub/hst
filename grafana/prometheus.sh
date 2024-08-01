@@ -41,7 +41,6 @@ sys_install(){
         echo 'docker 未安装 正在安装中';
         curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
         systemctl enable docker 
-        systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi
@@ -135,6 +134,8 @@ cat >/etc/docker/daemon.json<<EOF
   ]
 }
 EOF
+systemctl daemon-reload
+systemctl start docker
 chmod 777 -R $tsspath/consul/config
 wget -N --no-check-certificate -P /home/grafana https://fastly.jsdelivr.net/gh/e5sub/hst@master/grafana/docker-compose.yml
 

@@ -35,7 +35,6 @@ sys_install(){
         echo 'docker 未安装 正在安装中';
         curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
         systemctl enable docker 
-        systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi
@@ -57,7 +56,8 @@ cat >/etc/docker/daemon.json<<EOF
   ]
 }
 EOF
-
+systemctl daemon-reload
+systemctl start docker
 # 提示用户输入环境变量
 read -ep "请输入ZBX_HOSTNAME: " ZBX_HOSTNAME
 read -ep "请输入ZBX_SERVER_HOST: " ZBX_SERVER_HOST

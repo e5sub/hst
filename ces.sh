@@ -35,7 +35,6 @@ sys_install(){
         echo 'docker 未安装 正在安装中';
         curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
 		systemctl enable docker
-		systemctl start docker
     else 
         echo 'docker 已安装，继续操作'
     fi
@@ -54,6 +53,8 @@ cat >/etc/docker/daemon.json<<EOF
   ]
 }
 EOF
+systemctl daemon-reload
+systemctl start docker
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 sh_ver="2.0"
 Error="${Red_font_prefix}[错误]${Font_color_suffix}"
