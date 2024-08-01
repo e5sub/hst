@@ -1,16 +1,5 @@
 version: "3.2"
 services:
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheus
-    restart: always
-    ports:
-      - "9090:9090"
-    volumes:
-      - /home/grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - /home/grafana/prometheus/rules.yml:/etc/prometheus/rules.yml
-      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
-      
   alertmanager:
     image: prom/alertmanager
     container_name: alertmanager
@@ -102,6 +91,18 @@ services:
       - flask-consul
     networks:
       - TenSunS
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - /home/grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /home/grafana/prometheus/rules.yml:/etc/prometheus/rules.yml
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
+
 networks:
   TenSunS:
     name: TenSunS

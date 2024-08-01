@@ -145,12 +145,6 @@ sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus
 cd /home/grafana
 docker-compose pull && docker-compose up -d 
 
-# 等待10s
-sleep 10s
-
-#重启prometheus
-docker restart prometheus
-
 # 显示脚本安装次数
 counter=$(curl -s https://www.yaohst.com/counter.php)
 
