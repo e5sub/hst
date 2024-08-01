@@ -2,7 +2,7 @@
 echo -e "                                                       "
 echo -e "# ******************************************************"
 echo -e "#                                                      "*
-echo -e "# *脚本更新时间：2024年6月8日                            "*
+echo -e "# *脚本更新时间：2024年8月1日                            "*
 echo -e "#                                                      "*
 echo -e "# *抖音、微信视频号：萌萌哒菜芽，欢迎关注！            "*
 echo -e "#                                                      "*
@@ -144,6 +144,12 @@ sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus
 # 启动服务
 cd /home/grafana
 docker-compose pull && docker-compose up -d 
+
+# 等待10s
+sleep 10s
+
+#重启prometheus
+docker restart prometheus
 
 # 显示脚本安装次数
 counter=$(curl -s https://www.yaohst.com/counter.php)
