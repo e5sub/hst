@@ -19,7 +19,7 @@ git clone https://gitee.com/kesion/kubeadm.git /home/kubeadm
 # 安装ansible
 cd /home/kubeadm/ansible && bash install.sh
 # 安装helm
-curl https://cdn.jsdelivr.net/gh/helm/helm@main/scripts/get-helm-3 | bash
+curl https://fastly.jsdelivr.net/gh/helm/helm@main/scripts/get-helm-3 | bash
 # 添加rancher chart仓库
 helm repo add rancher-stable http://rancher-mirror.oss-cn-beijing.aliyuncs.com/server-charts/stable && helm repo update
 # 等待修改配置文件

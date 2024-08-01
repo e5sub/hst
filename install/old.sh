@@ -27,6 +27,6 @@ case $N in
   41) bash cesinstall.sh -gc434;;
   42) bash cesinstall.sh -gc431;;
   50) bash cesinstall.sh -m435;;
-  00) wget --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/ces.sh -O ces.sh && chmod +x ces.sh && bash ces.sh;;
+  00) wget --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/ces.sh -O ces.sh && chmod +x ces.sh && bash ces.sh;;
    *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac

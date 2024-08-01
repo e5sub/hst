@@ -115,7 +115,7 @@ while true; do
         echo "未检测到Docker环境，是否通过网络下载并安装？(Y/N)"
         read -r download_docker
          if [ "$download_docker" = "Y" ] || [ "$download_docker" = "y" ]; then
-            curl -fsSL https://cdn.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
+            curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
             systemctl enable docker && systemctl start docker            
             break
         else

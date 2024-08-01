@@ -39,6 +39,6 @@ case $N in
   10) bash install.sh -gczx435 ;;
   11) bash install.sh -gczx434 ;;
   20) bash install.sh -mzx435 ;;
-  00) wget --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/ces.sh -O ces.sh && chmod +x ces.sh && bash ces.sh;;
+  00) wget --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/ces.sh -O ces.sh && chmod +x ces.sh && bash ces.sh;;
   *) echo -e "输入的编号有误，请重新运行安装脚本!" ;;
 esac

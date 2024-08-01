@@ -39,7 +39,7 @@ sys_install(){
     fi
     if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
-        curl -fsSL https://cdn.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
+        curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
         systemctl enable docker 
         systemctl start docker
     else 
@@ -78,8 +78,8 @@ else
     echo "不支持的操作系统"
     exit 1
 fi
-wget -N --no-check-certificate -P /home/zabbix https://cdn.jsdelivr.net/gh/e5sub/hst@master/zabbix/docker-compose.yml
-wget -N --no-check-certificate -P /home/zabbix https://cdn.jsdelivr.net/gh/e5sub/hst@master/zabbix/zabbix_server.conf
+wget -N --no-check-certificate -P /home/zabbix https://fastly.jsdelivr.net/gh/e5sub/hst@master/zabbix/docker-compose.yml
+wget -N --no-check-certificate -P /home/zabbix https://fastly.jsdelivr.net/gh/e5sub/hst@master/zabbix/zabbix_server.conf
 sed -i "s/#\s*NodeAddress=localhost:10051/NodeAddress=$local_ip:10051/g" /home/zabbix/zabbix_server.conf
 #sed -i "s/ZBX_SERVER_HOST:.*/ZBX_SERVER_HOST: $local_ip/"  /home/zabbix/docker-compose.yml
 

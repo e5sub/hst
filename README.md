@@ -27,7 +27,7 @@
 
 一键安装脚本：     
 
-bash <(curl -Ls https://cdn.jsdelivr.net/gh/e5sub/hst@master/ces.sh)         
+bash <(curl -Ls https://fastly.jsdelivr.net/gh/e5sub/hst@master/ces.sh)         
 
 做脚本不易，希望能关注下抖音、微信视频号。谢谢大家
 

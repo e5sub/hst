@@ -337,12 +337,12 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.7.5.1服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/set_extra_ip.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/set_protocol_addr.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/set_store_proxy.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/set_wb_app_id.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/add_protocol_addr.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/fsmeeting.conf
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/set_extra_ip.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/set_protocol_addr.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/set_store_proxy.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/set_wb_app_id.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/add_protocol_addr.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.7.5.1/fsmeeting.conf
 docker run -dit --name=fsp_pri ${FSP175}
 echo -e "请稍等，正在映射FSP至本地目录/hst/fsp"
 mkdir -p /hst/fsp
@@ -417,12 +417,12 @@ then
 echo -e "\033[33m 【你选择的是安装FSP v1.8.3.5服务器】 \033[0m"
 echo -e "\n"
 sleep 5s
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/set_extra_ip.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/set_protocol_addr.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/set_store_proxy.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/set_wb_app_id.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/add_protocol_addr.sh
-wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/fsmeeting.conf
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/set_extra_ip.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/set_protocol_addr.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/set_store_proxy.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/set_wb_app_id.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/add_protocol_addr.sh
+wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/1.8.3.5/fsmeeting.conf
 docker run -dit --name=fsp_pri ${FSP183}
 echo -e "请稍等，正在映射FSP至本地目录/hst/fsp"
 #mkdir -p /hst/fsp
@@ -538,7 +538,7 @@ then
 	sleep 5s
 	mkdir -p /home/frps
 	cd /home/frps
-	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/frp/frps.toml
+	wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/frp/frps.toml
 	docker run --restart=always --net=host -dit -v /home/frps:/etc/frp -e TZ=Asia/Shanghai --name frps snowdreamtech/frps
 fi
 if [ $1 = '-frpc' ]
@@ -548,7 +548,7 @@ then
 	sleep 5s
 	mkdir -p /home/frpc
 	cd /home/frpc
-	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/frp/frpc.toml
+	wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/frp/frpc.toml
 	docker run --restart=always --net=host -dit -v /home/frpc:/etc/frp -e TZ=Asia/Shanghai --name frpc snowdreamtech/frpc
 fi
 if [ $1 = '-time' ]
@@ -596,7 +596,7 @@ then
 	echo -e "\n"
 	sleep 5s	
 	cd /usr/local/hst
-    wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/4.36/nginx.tar.gz
+    wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/4.36/nginx.tar.gz
 	tar zxvf nginx.tar.gz
 	service fmservice restart
 fi
@@ -609,9 +609,9 @@ then
     docker run -d --name nginx_proxy --net=host --hostname nginx_proxy --restart=always nginx
     docker cp $(docker ps|grep nginx_proxy|awk '{print $1}'):/etc/nginx /usr/local/nginx
     mkdir -p /usr/local/nginx/ssl
-    wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/4.36/proxy.tar.gz
+    wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/4.36/proxy.tar.gz
     tar -zxvf proxy.tar.gz -C /usr/local/nginx
-    wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/4.36/ssl.tar.gz
+    wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/4.36/ssl.tar.gz
     tar -zxvf ssl.tar.gz -C /usr/local/nginx/ssl
 	sleep 5s
     docker stop $(docker ps|grep nginx_proxy|awk '{print $1}')
@@ -625,7 +625,7 @@ then
 	echo -e "\033[33m 【你选择的是重置后台admin密码】 \033[0m"
 	echo -e "\n"
 	sleep 5s	
-	wget -N --no-check-certificate https://cdn.jsdelivr.net/gh/e5sub/hst@master/install/resetadmin.sql
+	wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/resetadmin.sql
 	mysql -u admin -pFsEntMeeting.com -P3308<"resetadmin.sql"
 fi
 ## 是否关闭系统防火墙

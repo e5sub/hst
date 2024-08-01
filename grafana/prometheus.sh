@@ -39,7 +39,7 @@ sys_install(){
     fi
     if ! type docker >/dev/null 2>&1; then
         echo 'docker 未安装 正在安装中';
-        curl -fsSL https://cdn.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
+        curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
         systemctl enable docker 
         systemctl start docker
     else 
@@ -52,16 +52,16 @@ local_ip=$(ip addr | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 
 # 下载alertmanager配置文件
 mkdir -p /home/grafana/alertmanager
-wget -N --no-check-certificate -P /home/grafana/alertmanager https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/alertmanager.yml
+wget -N --no-check-certificate -P /home/grafana/alertmanager https://fastly.jsdelivr.net/gh/e5sub/hst@master/grafana/alertmanager.yml
 
 # 下载blackbox_exporter配置文件
 mkdir -p /home/grafana/blackbox_exporter
-wget -N --no-check-certificate -P /home/grafana/blackbox_exporter https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/blackbox.yml
+wget -N --no-check-certificate -P /home/grafana/blackbox_exporter https://fastly.jsdelivr.net/gh/e5sub/hst@master/grafana/blackbox.yml
 
 # 下载prometheus配置文件
 mkdir -p /home/grafana/prometheus
-wget -N --no-check-certificate -P /home/grafana/prometheus https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/prometheus.yml
-wget -N --no-check-certificate -P /home/grafana/prometheus https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/rules.yml
+wget -N --no-check-certificate -P /home/grafana/prometheus https://fastly.jsdelivr.net/gh/e5sub/hst@master/grafana/prometheus.yml
+wget -N --no-check-certificate -P /home/grafana/prometheus https://fastly.jsdelivr.net/gh/e5sub/hst@master/grafana/rules.yml
 
 # 设置grafana文件夹权限
 mkdir -p /home/grafana/grafana
@@ -132,7 +132,7 @@ cat >/etc/docker/daemon.json<<EOF
 }
 EOF
 chmod 777 -R $tsspath/consul/config
-wget -N --no-check-certificate -P /home/grafana https://cdn.jsdelivr.net/gh/e5sub/hst@master/grafana/docker-compose.yml
+wget -N --no-check-certificate -P /home/grafana https://fastly.jsdelivr.net/gh/e5sub/hst@master/grafana/docker-compose.yml
 
 # 更新 docker-compose.yml 和 prometheus.yml 配置文件
 sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml
