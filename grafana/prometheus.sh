@@ -84,7 +84,11 @@ fi
 mkdir -p /home/grafana/consul
 tsspath="/home/grafana"
 uuid=`uuidgen`
-adminpwd=`uuidgen|awk -F- '{print $1}'`
+read -ep "请设置登录后羿运维平台的admin密码：" passwd
+if [ -z $passwd ]; then
+  passwd="yaohst"
+  echo -e "\n未输入，使用默认密码：\033[31;1myaohst\033[0m\n"
+fi
 mkdir -p $tsspath/consul/config
 cat <<EOF > $tsspath/consul/config/consul.hcl
 log_level = "error"
@@ -138,7 +142,7 @@ wget -N --no-check-certificate -P /home/grafana https://fastly.jsdelivr.net/gh/e
 sed -i "s/- ip:9093/- $local_ip:9093/g" /home/grafana/prometheus/prometheus.yml
 sed -i "s/token:.*/token: '$uuid'/" /home/grafana/prometheus/prometheus.yml
 sed -i "s/consul_token: xxx/consul_token: $uuid/" /home/grafana/docker-compose.yml
-sed -i "s/admin_passwd: xxx/admin_passwd: $adminpwd/" /home/grafana/docker-compose.yml
+sed -i "s/admin_passwd: xxx/admin_passwd: $passwd/" /home/grafana/docker-compose.yml
 sed -i "s/server: 'xxx:8500'/server: '$local_ip:8500'/" /home/grafana/prometheus/prometheus.yml
 
 # 启动服务
@@ -163,7 +167,7 @@ echo -e "# *Prometheus：http://$local_ip:9090/targets                          
 echo -e "#                                                                               "
 echo -e "# *Grafana: http://$local_ip:3000/   登录帐号密码:admin                         "
 echo -e "#                                                                               "
-echo -e "# *后羿运维平台默认的admin密码是：\033[31;1m$adminpwd\033[0m                    "
+echo -e "# *后羿运维平台默认的admin密码是：\033[31;1m$passwd\033[0m                    "
 echo -e "#                                                                               "
 echo -e "# *修改密码请编辑 /home/grafana/docker-compose.yaml 查找并修改变量 admin_passwd 的值"
 echo -e "#                                                                               "
