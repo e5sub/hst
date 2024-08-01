@@ -101,6 +101,7 @@ services:
     volumes:
       - /home/grafana/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /home/grafana/prometheus/rules.yml:/etc/prometheus/rules.yml
+      - /home/grafana/prometheus/data:/prometheus
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime:ro
 
 networks:
