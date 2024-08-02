@@ -168,7 +168,7 @@ echo -e "# *Prometheus：http://$local_ip:9090/targets                          
 echo -e "#                                                                               "
 echo -e "# *Grafana: http://$local_ip:3000/   登录帐号密码:admin                         "
 echo -e "#                                                                               "
-echo -e "# *后羿运维平台默认的admin密码是：\033[31;1m$passwd\033[0m                    "
+echo -e "# *后羿运维平台的admin密码是：\033[31;1m$passwd\033[0m                    "
 echo -e "#                                                                               "
 echo -e "# *修改密码请编辑 /home/grafana/docker-compose.yaml 查找并修改变量 admin_passwd 的值"
 echo -e "#                                                                               "
