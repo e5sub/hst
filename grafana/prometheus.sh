@@ -75,7 +75,7 @@ if [[ -f /etc/redhat-release ]]; then
     pip3 install docker-compose
 elif [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
 # Ubuntu/Debian
-    apt install -y python3-pip uuid-runtime docker-compose
+    apt install -y uuid-runtime docker-compose-plugin
 else
     echo "不支持的操作系统"
     exit 1
