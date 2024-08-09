@@ -226,8 +226,8 @@ case $N in
   13) docker run -dit --restart=always -p 6688:80 --name hst-speedtest 1040155/hst-speedtest ;; 
   14) docker run -dit --name ddns-go --restart=always --net=host -v /home/ddns-go:/root jeessy/ddns-go ;;
   15) bash install.sh -time ;;
-  16) docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v /home/rustdesk:/root -dit --restart=always rustdesk/rustdesk-server hbbs -r ${LOCAL_IP} -k "" 
-      docker run --name hbbr -p 21117:21117 -p 21119:21119 -v /home/rustdesk:/root -dit --restart=always rustdesk/rustdesk-server hbbr -k "" ;;
+  16) docker run --name hbbs -p 21115:21115 -p 21116:21116 -p 21116:21116/udp -p 21118:21118 -v /home/rustdesk:/root -dit --restart=always rustdesk/rustdesk-server hbbs -r ${LOCAL_IP} -k 123456
+      docker run --name hbbr -p 21117:21117 -p 21119:21119 -v /home/rustdesk:/root -dit --restart=always rustdesk/rustdesk-server hbbr -k 123456 ;;
   17) bash install.sh -frps ;;
   18) bash install.sh -frpc ;;
   19) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/grafana/prometheus.sh && bash prometheus.sh ;;
