@@ -189,8 +189,9 @@ echo -e " \033[32m 20. \033[0m 安装Prometheus-Node-Exporter"
 echo -e " \033[32m 21. \033[0m 安装zabbix-server"
 echo -e " \033[32m 22. \033[0m 安装zabbix-agent"
 echo -e " \033[32m 23. \033[0m 安装Emby流媒体服务器（8096/8920端口）"
-echo -e " \033[32m 24. \033[0m 安装Alist文件列表程序（5244端口）"
-echo -e " \033[32m 25. \033[0m 设置每周一自动更新容器镜像"
+echo -e " \033[32m 24. \033[0m 安装jellyfin流媒体服务器（8096/8920/7359/1900端口）"
+echo -e " \033[32m 25. \033[0m 安装Alist文件列表程序（5244端口）"
+echo -e " \033[32m 26. \033[0m 设置每周一自动更新容器镜像"
 echo -e ""
 echo -e " \033[32m 88. \033[0m 卸载CES服务器"
 echo -e " \033[32m 89. \033[0m 卸载FSP服务器"
@@ -235,8 +236,9 @@ case $N in
   21) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/zabbix/zabbix.sh && bash zabbix.sh ;;
   22) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/zabbix/agent.sh && bash agent.sh ;;
   23) docker run -dit -e PUID=0 -e PGID=0 -v /home/emby/movies:/data/movies -v /home/emby/config:/config -p 8096:8096 -p 8920:8920 --name=emby --restart=always xinjiawei1/emby_unlockd:latest ;;
-  24) docker run -dit --restart=always -v /home/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest ;;
-  25) (crontab -l ; echo "0 3 * * 1 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -cR" ) | crontab - ;;
+  24) docker run -dit --name jellyfin -e PUID=0 -e PGID=0 -e TZ=Asia/Shanghai -e JELLYFIN_PublishedServerUrl=${LOCAL_IP} -p 8096:8096 -p 8920:8920  -p 7359:7359/udp  -p 1900:1900/udp -v /home/jellyfin/library:/config -v /home/jellyfin/tvseries:/data/tvshows -v /home/jellyfin/movies:/data/movies --restart=always lscr.io/linuxserver/jellyfin:latest ;;
+  25) docker run -dit --restart=always -v /home/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest ;;
+  26) (crontab -l ; echo "0 3 * * 1 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -cR" ) | crontab - ;;
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
   90) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/h323pri.sh && bash h323pri.sh ;;
