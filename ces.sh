@@ -239,7 +239,7 @@ case $N in
   23) docker run -dit -e PUID=0 -e PGID=0 -v /home/emby/movies:/data/movies -v /home/emby/config:/config -p 8096:8096 -p 8920:8920 --name=emby --restart=always xinjiawei1/emby_unlockd:latest ;;
   24) docker run -dit --name jellyfin -e PUID=0 -e PGID=0 -e TZ=Asia/Shanghai -e JELLYFIN_PublishedServerUrl=${LOCAL_IP} -p 8096:8096 -p 8920:8920  -p 7359:7359/udp  -p 1900:1900/udp -v /home/jellyfin/library:/config -v /home/jellyfin/tvseries:/data/tvshows -v /home/jellyfin/movies:/data/movies --restart=always lscr.io/linuxserver/jellyfin:latest ;;
   25) docker run -dit --restart=always -v /home/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest ;;
-  26) docker run -dit --name homeassistant --privileged --restart=always -e TZ=Asia/Shanghai -v /home/homeassistant:/config -v /run/dbus:/run/dbus:ro --network=host   ghcr.io/home-assistant/home-assistant:stable ;;
+  26) docker run -dit --name homeassistant --privileged --restart=always -e TZ=Asia/Shanghai -v /home/homeassistant:/config -v /run/dbus:/run/dbus:ro --network=host ghcr.io/home-assistant/home-assistant:stable ;;
   27) (crontab -l ; echo "0 3 * * 1 docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower -cR" ) | crontab - ;;
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
