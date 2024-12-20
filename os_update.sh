@@ -1,6 +1,6 @@
 #!/bin/bash
 # 检测操作系统类型
-if [ -f /etc/redhat-release ]; then
+if [ -f /etc/redhat-release -o -f /etc/oracle-release ]; then
     # CentOS 或其他基于Red Hat的系统
     echo "检测到系统为类Red Hat系统"
     echo "执行 yum 更新..."
