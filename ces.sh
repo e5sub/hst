@@ -203,10 +203,9 @@ echo -e " \033[32m 92. \033[0m 修改CES V4.36 配置信息（需先安装FSP服
 echo -e " \033[32m 93. \033[0m 修改节点服务器配置信息（主服务器勿用）"
 echo -e " \033[32m 94. \033[0m Nginx转发8443端口，隐藏公网8443后台页面（转发端口号18443）"
 echo -e " \033[32m 95. \033[0m Nginx反代1089/8443/20020端口（需手动修改/usr/local/nginx/nginx.conf里的地址）"
-echo -e " \033[32m 96. \033[0m 放行服务器所有端口"
 echo -e ""
-echo -e " \033[32m 97. \033[0m 重置后台admin密码"
-echo -e " \033[32m 98. \033[0m 安装CES历史版本以及国产化版本"
+echo -e " \033[32m 96. \033[0m 重置后台admin密码"
+echo -e " \033[32m 97. \033[0m 安装CES历史版本以及国产化版本"
 echo -e " \033[32m 00. \033[0m 安装中性版服务器"
 echo -e ""
 echo && read -ep "请输入数字选择: " N
@@ -249,11 +248,8 @@ case $N in
   93) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/node.sh && bash node.sh ;;
   94) bash install.sh -nginx ;;
   95) bash install.sh -proxy ;;
-  96) systemctl stop firewalld.service
-      systemctl disable firewalld.service ;;
-
-  97) bash install.sh -resetadmin ;;
-  98) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/old.sh && bash old.sh ;;
+  96) bash install.sh -resetadmin ;;
+  97) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/old.sh && bash old.sh ;;
   00) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/zxces.sh && bash zxces.sh ;;
   *)
       clear

@@ -49,10 +49,10 @@ read -ep "请输入要设置的 keepalived 虚拟IP地址（默认为：$virtual
 virtual_ip=${input:-$virtual_ip}
 #--------------------------------------------------------------------------------------
 # MySQL/Redis下载地址
-CentOS_MySQL=https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-8.0.39-1.el7.x86_64.rpm-bundle.tar
-Ubuntu_MySQL=https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-server_8.0.39-1ubuntu24.04_amd64.deb-bundle.tar
-Debian_MySQL=https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-server_8.0.39-1debian12_amd64.deb-bundle.tar
-CentOS_Redis=https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.4-1.el7.remi.x86_64.rpm
+CentOS_MySQL=https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-8.0.42-1.el7.x86_64.rpm-bundle.tar
+Ubuntu_MySQL=https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-server_8.0.42-1ubuntu24.04_amd64.deb-bundle.tar
+Debian_MySQL=https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-server_8.0.42-1debian12_amd64.deb-bundle.tar
+CentOS_Redis=https://rpms.remirepo.net/enterprise/7/remi/x86_64/redis-7.2.5-1.el7.remi.x86_64.rpm
 if grep -q "net.ipv4.ip_forward = 1" /etc/sysctl.conf; then
     :
 else
