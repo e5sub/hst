@@ -1,0 +1,255 @@
+services:
+  # Watchtower 自动更新容器
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_REMOVE_VOLUMES=true
+      - WATCHTOWER_SCHEDULE=0 0 2 * * *
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    mem_limit: 128m
+    cpus: 0.25
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: 3
+
+  # Home Assistant 家庭自动化平台
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    privileged: true
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/homeassistant:/config
+      - /run/dbus:/run/dbus:ro
+    network_mode: host
+
+  # Emby 媒体服务器
+  emby:
+    image: xinjiawei1/emby_unlockd:latest
+    container_name: emby
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/emby/config:/config
+      - /opt/emby/movies:/data/movies
+    ports:
+      - 8096:8096
+      - 8920:8920
+    restart: always
+
+  # DDNS-Go 动态 DNS 服务        
+  ddns-go:
+    image: jeessy/ddns-go
+    container_name: ddns-go
+    restart: always
+    network_mode: host
+    volumes:
+      - /opt/ddns-go:/root
+
+  # FileCodeBox 文件代码分享平台
+  filecodebox:
+    image: lanol/filecodebox:latest
+    container_name: filecodebox
+    restart: always
+    ports:
+      - 12345:12345
+    volumes:
+      - /opt/FileCodeBox:/app/data
+    environment:
+      - TZ=Asia/Shanghai
+
+  # FRPC 内网穿透服务（客户端）
+  frpc:
+    image: snowdreamtech/frpc
+    container_name: frpc
+    restart: always
+    network_mode: host
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/frpc:/etc/frp
+  
+  # FRPS 内网穿透服务（服务端）
+  frps:
+    image: snowdreamtech/frps
+    container_name: frps
+    restart: always
+    network_mode: host
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/frps:/etc/frp
+
+  # PDF 转换服务
+  stirling-pdf:
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    container_name: stirling-pdf
+    ports:
+      - "8081:8080"
+    volumes:
+      - /opt/StirlingPDF/trainingData:/usr/share/tessdata
+      - /opt/StirlingPDF/extraConfigs:/configs
+      - /opt/StirlingPDF/customFiles:/customFiles/
+      - /opt/StirlingPDF/logs:/logs/
+      - /opt/StirlingPDF/pipeline:/pipeline/
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - LANGS=zh_CN
+      - TZ=Asia/Shanghai
+    restart: always
+
+  # LibreTV 免费电影电视
+  libretv:
+    image: bestzwei/libretv:latest
+    container_name: libretv
+    ports:
+      - "8899:8080"
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+
+  # Sun-Panel 导航页
+  sun-panel:
+    image: hslr/sun-panel:latest
+    container_name: sun-panel
+    ports:
+      - "3002:3002"
+    volumes:
+      - /opt/sun-panel/conf:/app/conf
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+
+  # Tailscale 内网穿透服务
+  tailscaled:
+    image: tailscale/tailscale
+    container_name: tailscaled
+    restart: always
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - /var/lib:/var/lib
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_AUTHKEY=tskey-auth-k68eNkeSyz11CNTRL-LcAE9LYDCP # 替换为你的 Tailscale Auth Key
+      - TZ=Asia/Shanghai
+
+  # SGCC 电力数据应用
+  sgcc_electricity_app:
+    env_file:
+      - sgcc_electricity_new/.env
+    image: registry.cn-hangzhou.aliyuncs.com/arcw/sgcc_electricity:latest
+    container_name: sgcc_electricity
+    network_mode: "host"
+    environment:
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+    restart: always
+    volumes:
+      - ./:/data
+    command: python3 main.py
+    init: true
+
+  # All-in-One 肥羊IPTV
+  allinone:
+    image: youshandefeiyang/allinone
+    container_name: allinone
+    restart: always
+    privileged: true
+    ports:
+      - "35455:35455"
+    command: -tv=true -aesKey=h28xum0q20d5qa39ir5u3glz3xdadlhn -userid=464569852 -token=a57e4b742d040e3a41f993c9dc22c5ceafdad5f1daeff6e771deaf24ec490a331aafdf2476dcfb587dd19d3dd9f859d4b3f91d599fb1b54b530d50c27629f4fb1f84f6d8a26b
+ 
+  # Alist 文件管理系统
+  alist:
+    image: xhofe/alist:latest
+    container_name: alist
+    restart: always
+    ports:
+      - "5244:5244"
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=022
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/alist:/opt/alist/data
+
+  # JD-Sign 京东签到脚本
+  jd_sign:
+    image: yanyu.icu/yanyuwangluo/jd-sign:latest
+    container_name: jd_sign
+    restart: always
+    ports:
+      - "17840:17840"
+
+  # JD-H5ST 京东 H5 签名服务
+  jd_server:
+    image: docker.kfcvme50.tech/zhx47/jd_h5st_server:latest
+    container_name: jd_server
+    restart: always
+    ports:
+      - "3001:3001"
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: "50m"
+
+  # Qinglong 青龙面板
+  qinglong:
+    image: whyour/qinglong:latest
+    container_name: qinglong
+    hostname: qinglong
+    restart: always
+    ports:
+      - "5700:5700"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/ql/data:/ql/data
+
+  # RustDesk 远程桌面服务API
+  rustdesk:
+    image: lejianwen/rustdesk-server-s6:latest
+    environment:
+      - RELAY=xxx.com:21117 # 替换为你的中继服务器地址
+      - ENCRYPTED_ONLY=1
+      - MUST_LOGIN=N
+      - TZ=Asia/Shanghai
+      - ALWAYS_USE_RELAY=N
+      - RUSTDESK_API_RUSTDESK_ID_SERVER=xxx.com:21116 # 替换为你的ID服务器地址
+      - RUSTDESK_API_RUSTDESK_RELAY_SERVER=xxx:21117 # 替换为你的中继服务器地址
+      - RUSTDESK_API_RUSTDESK_API_SERVER=http://xxx.com # 替换为你的API服务器地址
+      - RUSTDESK_API_KEY_FILE=/data/id_ed25519.pub
+      - RUSTDESK_API_JWT_KEY=/data/id_ed25519
+    volumes:
+      - /opt/rustdesk/server:/data
+      - /opt/rustdesk/api:/app/data
+    network_mode: "host"
+    restart: always 
+
+  # MS365 E5 Renew X 微软365 E5续订脚本
+  ms365:
+    image: hanhongyong/ms365-e5-renew-x:general
+    container_name: ms365
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "1066:1066"
+    restart: always    
