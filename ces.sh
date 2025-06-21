@@ -239,7 +239,7 @@ case $N in
   24) docker run -dit --name jellyfin -e PUID=0 -e PGID=0 -e TZ=Asia/Shanghai -e JELLYFIN_PublishedServerUrl=${LOCAL_IP} -p 8096:8096 -p 8920:8920  -p 7359:7359/udp  -p 1900:1900/udp -v /home/jellyfin/library:/config -v /home/jellyfin/tvseries:/data/tvshows -v /home/jellyfin/movies:/data/movies --restart=always lscr.io/linuxserver/jellyfin:latest ;;
   25) docker run -dit --restart=always -v /home/alist:/opt/alist/data -p 5244:5244 -e PUID=0 -e PGID=0 -e UMASK=022 --name="alist" xhofe/alist:latest ;;
   26) docker run -dit --name homeassistant --privileged --restart=always -e TZ=Asia/Shanghai -v /home/homeassistant:/config -v /run/dbus:/run/dbus:ro --network=host ghcr.io/home-assistant/home-assistant:stable ;;
-  27) docker run -d --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock  containrrr/watchtower -cR  --schedule "0 0 2 * * *" ;;
+  27) docker run -d --name watchtower -e TZ=Asia/Shanghai --restart=always -v /var/run/docker.sock:/var/run/docker.sock  containrrr/watchtower -cR  --schedule "0 0 2 * * *" ;;
   88) bash install.sh -xiezai ;;
   89) bash install.sh -unfsp ;;
   90) wget -N --no-check-certificate https://fastly.jsdelivr.net/gh/e5sub/hst@master/install/h323pri.sh && bash h323pri.sh ;;

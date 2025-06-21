@@ -1,41 +1,118 @@
-serverAddr = "1.1.1.1" 
-serverPort = 7000 
+serverAddr = "xxx"
+serverPort = 7000
 auth.method = "token" 
-auth.token = "test123" 
-transport.tls.enable = false 
-transport.tls.disableCustomTLSFirstByte = false 
-transport.protocol = "quic"
- 
-[[proxies]]
-name = "rdp"   
-type = "tcp"   
-localIP = "127.0.0.1"  
-localPort = 3389   
-remotePort = 23389    
-transport.useEncryption = true  
-transport.useCompression = true 
+auth.token = "xxxx" 
+#不能删除, 否则连接不上会闪退
+loginFailExit=false
 
 [[proxies]]
-name = "dsm_http" 
-type = "http" 
-localIP = "127.0.0.1" 
-localPort = 5000 
-customDomains = ["test.yaohst.com"] 
-transport.useEncryption = true  
-transport.useCompression = true  
+name = "fn-ssh"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 6000
 
 [[proxies]]
-name = "dsm_https"   
-type = "https" 
-localIP = "xxx.xxx.xxx.xxx" 
-localPort = 5001  
-customDomains = ["test.yaohst.com"]  
-transport.useEncryption = true  
-transport.useCompression = true  
-
-[[proxies]]
-name = "web"
+name = "fn-qinglong"
 type = "http"
-localIP = "xxx.xxx.xxx.xxx" 
+localIP = "127.0.0.1"
+localPort = 15700
+subdomain = "ql"
+
+[[proxies]]
+name = "fn-home-assistant"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 8123
+subdomain = "ha"   
+  
+[[proxies]]
+name = "fn-admin"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 5666
+subdomain = "fn"        
+        
+[[proxies]]
+name = "fn-alist"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 5244
+subdomain = "pan"            
+        
+[[proxies]]
+name = "fn-ddns"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 9876
+subdomain = "ddns" 
+        
+[[proxies]]
+name = "fn-emby"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 8096
+subdomain = "emby"          
+       
+[[proxies]]
+name = "fn-filecodebox"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 12345
+subdomain = "file"          
+
+[[proxies]]
+name = "fn-jumpserver"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 81
+subdomain = "jump" 
+        
+[[proxies]]
+name = "fn-openwrt"
+type = "http"
+localIP = "192.168.0.250"
 localPort = 80
-subdomain = "test"
+subdomain = "openwrt" 
+
+[[proxies]]
+name = "fn-prowlarr"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 9696
+subdomain = "prowlarr" 
+        
+[[proxies]]
+name = "fn-radarr"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 7878
+subdomain = "radarr" 
+
+[[proxies]]
+name = "fn-qbittorrent"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 8085
+subdomain = "bt" 
+
+[[proxies]]
+name = "fn-pdf"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 8081
+subdomain = "pdf" 
+        
+[[proxies]]
+name = "fn-lot"
+type = "http"
+localIP = "192.168.0.1"
+localPort = 8086
+subdomain = "lot"   
+        
+[[proxies]]
+name = "fn-nav"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 3002
+subdomain = "nav"
