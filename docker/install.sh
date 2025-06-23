@@ -19,7 +19,14 @@ docker_install(){
     else
         echo -e "\033[1;32mcurl 已安装，继续操作\033[0m"
     fi
-    
+
+    if ! type git >/dev/null 2>&1; then
+        echo -e "\033[1;33mgit 未安装，正在安装中...\033[0m"
+        apt install git -y || yum install git -y
+    else
+        echo -e "\033[1;32mgit 已安装，继续操作\033[0m"
+    fi   
+     
     if ! type docker >/dev/null 2>&1; then
         echo -e "\033[1;33mdocker 未安装，正在安装中...\033[0m"
         curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
@@ -175,7 +182,115 @@ if [[ " ${selected_services[@]} " =~ " rustdesk " ]]; then
     echo -e "${GREEN}RustDesk 服务器地址已配置${NC}"
 fi
 
-# 其他参数注入...
+# 处理nginx映射问题
+if [[ " ${selected_services[@]} " =~ " nginx " ]]; then
+    echo -e "${CYAN}配置 Nginx 服务...${NC}"
+
+    # 拉取最新 nginx 镜像
+    echo -e "${CYAN}拉取 nginx:latest 镜像...${NC}"
+    docker pull nginx:latest
+
+    # 创建临时容器提取配置
+    container_id=$(docker create nginx:latest)
+    echo -e "${CYAN}创建临时容器: $container_id${NC}"
+
+    temp_dir=$(mktemp -d)
+    echo -e "${CYAN}使用临时目录: $temp_dir${NC}"
+
+    # 提取配置文件
+    docker cp "$container_id:/etc/nginx" "$temp_dir/"
+    docker cp "$container_id:/usr/share/nginx/html" "$temp_dir/"
+    docker rm "$container_id" >/dev/null
+
+    # 定义挂载映射
+    declare -A mount_map=(
+        ["/usr/share/nginx/html"]="/opt/nginx/html"
+        ["/etc/nginx"]="/opt/nginx/conf"
+        ["/var/log/nginx"]="/opt/nginx/log"
+    )
+
+    for container_path in "${!mount_map[@]}"; do
+        host_path="${mount_map[$container_path]}"
+        echo -e "${CYAN}处理挂载: ${host_path} -> ${container_path}${NC}"
+
+        mkdir -p "$host_path"
+
+        case "$container_path" in
+            "/usr/share/nginx/html")
+                if [ -z "$(ls -A "$host_path")" ]; then
+                    echo -e "${CYAN}复制默认网页内容...${NC}"
+                    cp -r "$temp_dir/html/." "$host_path/"
+                    echo -e "${GREEN}网页内容复制完成${NC}"
+                else
+                    echo -e "${GREEN}网页目录非空，跳过复制${NC}"
+                fi
+                ;;
+
+            "/etc/nginx")
+                missing_main_conf=0
+                [ ! -f "$host_path/nginx.conf" ] && missing_main_conf=1
+                [ ! -d "$host_path/conf.d" ] && missing_main_conf=1
+
+                if [ -z "$(ls -A "$host_path")" ] || [ "$missing_main_conf" -eq 1 ]; then
+                    echo -e "${YELLOW}配置目录为空或缺失关键文件，初始化默认配置...${NC}"
+                    cp -r "$temp_dir/nginx/." "$host_path/"
+
+                    # 检查并生成 default.conf
+                    if [ ! -f "$host_path/conf.d/default.conf" ]; then
+                        echo -e "${YELLOW}default.conf 不存在，生成默认虚拟主机配置...${NC}"
+                        mkdir -p "$host_path/conf.d"
+                        cat > "$host_path/conf.d/default.conf" <<EOF
+server {
+    listen       80;
+    server_name  localhost;
+    return       301 https://\$host\$request_uri;
+}
+
+server {
+    listen       443 ssl;
+    server_name  localhost;
+
+    ssl_certificate      /etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key  /etc/nginx/ssl/nginx.key;
+
+    ssl_protocols        TLSv1.2 TLSv1.3;
+    ssl_ciphers          HIGH:!aNULL:!MD5;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+EOF
+                    echo -e "${GREEN}default.conf 已生成${NC}"
+                fi
+                    echo -e "${GREEN}Nginx 配置初始化完成${NC}"
+                else
+                    echo -e "${GREEN}配置目录存在且完整，跳过复制${NC}"
+                fi
+                ;;
+
+            "/var/log/nginx")
+                echo -e "${GREEN}日志目录已准备好${NC}"
+                ;;
+
+            *)
+                echo -e "${YELLOW}未知路径 $container_path，跳过${NC}"
+                ;;
+        esac
+    done
+
+    # 清理临时目录
+    echo -e "${CYAN}清理临时目录...${NC}"
+    rm -rf "$temp_dir"
+
+    echo -e "${GREEN}Nginx 配置完成${NC}"
+fi
 
 # 启动所选服务
 echo -e "\n${CYAN}正在启动所选服务...${NC}"

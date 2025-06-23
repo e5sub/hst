@@ -273,18 +273,34 @@ services:
     restart: always 
     environment:   
       - TZ=Asia/Shanghai
-      - ND_DEFAULTLANGUAGE: "zh"
-      - ND_LOGLEVEL: "info"
-      - ND_ENABLESHARING: "true"
-      - ND_SCANSCHEDULE: 0
-      - ND_BASEURL: ""
-      - ND_PLAYLISTSPATH: "."
-      - ND_LASTFM_LANGUAGE: "zh"
-      - ND_LASTFM_APIKEY: "d3f69254a30d704fb37d5e5c9a39c409"
-      - ND_LASTFM_SECRET: "027ae630f90ce5c06d1d6ce8d8e4d74f"
-      - ND_SPOTIFY_ID: "b4db885f5ce7452ea3d66df3a1ba1158"
-      - ND_SPOTIFY_SECRET: "0b931c3f86c54342a9e878ad8b5d0ca0"
-      - ND_ENABLEARTWORKPRECACHE: "true"
+      - ND_DEFAULTLANGUAGE=zh
+      - ND_LOGLEVEL=info
+      - ND_ENABLESHARING=true
+      - ND_SCANSCHEDULE=0
+      - ND_BASEURL=
+      - ND_PLAYLISTSPATH=.
+      - ND_LASTFM_LANGUAGE=zh
+      - ND_LASTFM_APIKEY=d3f69254a30d704fb37d5e5c9a39c409
+      - ND_LASTFM_SECRET=027ae630f90ce5c06d1d6ce8d8e4d74f
+      - ND_SPOTIFY_ID=b4db885f5ce7452ea3d66df3a1ba1158
+      - ND_SPOTIFY_SECRET=0b931c3f86c54342a9e878ad8b5d0ca0
+      - ND_ENABLEARTWORKPRECACHE=true
     volumes:
       - "/opt/navidrom/data:/data"
       - "/opt/navidrom/music:/music:ro"
+
+  # Nginx 代理服务器
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/nginx/html:/usr/share/nginx/html
+      - /opt/nginx/conf.d:/etc/nginx/conf.d 
+      - /opt/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /opt/nginx/log:/var/log/nginx
