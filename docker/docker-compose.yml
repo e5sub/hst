@@ -32,7 +32,7 @@ services:
       - /run/dbus:/run/dbus:ro
     network_mode: host
 
-  # 媒体服务器
+  # 媒体服务器（开心版）
   emby:
     image: xinjiawei1/emby_unlockd:latest
     container_name: emby
@@ -273,7 +273,7 @@ services:
     restart: always 
     environment:   
       - TZ=Asia/Shanghai
-      - ND_DEFAULTLANGUAGE=zh
+      - ND_DEFAULTLANGUAGE=zh-Hans
       - ND_LOGLEVEL=info
       - ND_ENABLESHARING=true
       - ND_SCANSCHEDULE=0
