@@ -109,7 +109,7 @@ services:
       - TZ=Asia/Shanghai
     restart: always
 
-  # LibreTV 免费电影电视
+  # LibreTV 免费电影
   libretv:
     image: bestzwei/libretv:latest
     container_name: libretv
@@ -149,7 +149,7 @@ services:
       - TS_AUTHKEY=tskey-auth-k68eNkeSyz11CNTRL-LcAE9LYDCP # 替换为你的 Tailscale Auth Key
       - TZ=Asia/Shanghai
 
-  # SGCC 电力数据应用
+  # SGCC 电力数据应用（对接Home Assistant）
   sgcc_electricity_app:
     env_file:
       - sgcc_electricity_new/.env
@@ -175,10 +175,10 @@ services:
       - "35455:35455"
     command: -tv=true -aesKey=h28xum0q20d5qa39ir5u3glz3xdadlhn -userid=464569852 -token=a57e4b742d040e3a41f993c9dc22c5ceafdad5f1daeff6e771deaf24ec490a331aafdf2476dcfb587dd19d3dd9f859d4b3f91d599fb1b54b530d50c27629f4fb1f84f6d8a26b
  
-  # Alist 文件管理系统
-  alist:
-    image: xhofe/alist:latest
-    container_name: alist
+  # Openlist 文件管理系统
+  openlist:
+    image: openlistteam/openlist:latest-aio
+    container_name: openlist
     restart: always
     ports:
       - "5244:5244"
@@ -188,9 +188,9 @@ services:
       - UMASK=022
       - TZ=Asia/Shanghai
     volumes:
-      - /opt/alist:/opt/alist/data
+      - /opt/openlist:/opt/openlist/data
 
-  # JD-Sign 京东签到脚本
+  # JD-Sign 京东签到服务
   jd_sign:
     image: yanyu.icu/yanyuwangluo/jd-sign:latest
     container_name: jd_sign
@@ -253,3 +253,13 @@ services:
     ports:
       - "1066:1066"
     restart: always    
+
+  # IT-Tools IT工具箱
+  it-tools:
+    image: corentinth/it-tools:latest
+    container_name: it-tools
+    environment:
+      - TZ=Asia/Shanghai
+    restart: always
+    ports:
+      - "8082:80"
