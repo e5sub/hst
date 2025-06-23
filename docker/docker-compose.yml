@@ -268,6 +268,7 @@ services:
   navidrome:
     image: deluan/navidrome:latest    
     container_name: navidrome
+    user: "1000:1000"
     ports:
       - "4533:4533"
     restart: always 
@@ -285,6 +286,9 @@ services:
       - ND_SPOTIFY_ID=b4db885f5ce7452ea3d66df3a1ba1158
       - ND_SPOTIFY_SECRET=0b931c3f86c54342a9e878ad8b5d0ca0
       - ND_ENABLEARTWORKPRECACHE=true
+      - ND_ENABLETRANSCODINGCONFIG=true 
+      - ND_SUBSONICARTISTPARTICIPATIONS=true
+      - ND_DEFAULTTHEME=Nord
     volumes:
       - "/opt/navidrom/data:/data"
       - "/opt/navidrom/music:/music:ro"
@@ -301,6 +305,5 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - /opt/nginx/html:/usr/share/nginx/html
-      - /opt/nginx/conf.d:/etc/nginx/conf.d 
-      - /opt/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /opt/nginx/conf:/etc/nginx
       - /opt/nginx/log:/var/log/nginx
