@@ -182,39 +182,31 @@ if [[ " ${selected_services[@]} " =~ " rustdesk " ]]; then
     echo -e "${GREEN}RustDesk 服务器地址已配置${NC}"
 fi
 
-# 处理nginx映射问题
+    # 处理nginx目录映射问题
 if [[ " ${selected_services[@]} " =~ " nginx " ]]; then
     echo -e "${CYAN}配置 Nginx 服务...${NC}"
-
     # 拉取最新 nginx 镜像
     echo -e "${CYAN}拉取 nginx:latest 镜像...${NC}"
     docker pull nginx:latest
-
     # 创建临时容器提取配置
     container_id=$(docker create nginx:latest)
     echo -e "${CYAN}创建临时容器: $container_id${NC}"
-
     temp_dir=$(mktemp -d)
     echo -e "${CYAN}使用临时目录: $temp_dir${NC}"
-
     # 提取配置文件
     docker cp "$container_id:/etc/nginx" "$temp_dir/"
     docker cp "$container_id:/usr/share/nginx/html" "$temp_dir/"
     docker rm "$container_id" >/dev/null
-
     # 定义挂载映射
     declare -A mount_map=(
         ["/usr/share/nginx/html"]="/opt/nginx/html"
         ["/etc/nginx"]="/opt/nginx/conf"
         ["/var/log/nginx"]="/opt/nginx/log"
     )
-
     for container_path in "${!mount_map[@]}"; do
         host_path="${mount_map[$container_path]}"
         echo -e "${CYAN}处理挂载: ${host_path} -> ${container_path}${NC}"
-
         mkdir -p "$host_path"
-
         case "$container_path" in
             "/usr/share/nginx/html")
                 if [ -z "$(ls -A "$host_path")" ]; then
@@ -225,7 +217,6 @@ if [[ " ${selected_services[@]} " =~ " nginx " ]]; then
                     echo -e "${GREEN}网页目录非空，跳过复制${NC}"
                 fi
                 ;;
-
             "/etc/nginx")
                 missing_main_conf=0
                 [ ! -f "$host_path/nginx.conf" ] && missing_main_conf=1
@@ -234,7 +225,6 @@ if [[ " ${selected_services[@]} " =~ " nginx " ]]; then
                 if [ -z "$(ls -A "$host_path")" ] || [ "$missing_main_conf" -eq 1 ]; then
                     echo -e "${YELLOW}配置目录为空或缺失关键文件，初始化默认配置...${NC}"
                     cp -r "$temp_dir/nginx/." "$host_path/"
-
                     # 检查并生成 default.conf
                     if [ ! -f "$host_path/conf.d/default.conf" ]; then
                         echo -e "${YELLOW}default.conf 不存在，生成默认虚拟主机配置...${NC}"
@@ -274,11 +264,9 @@ EOF
                     echo -e "${GREEN}配置目录存在且完整，跳过复制${NC}"
                 fi
                 ;;
-
             "/var/log/nginx")
                 echo -e "${GREEN}日志目录已准备好${NC}"
                 ;;
-
             *)
                 echo -e "${YELLOW}未知路径 $container_path，跳过${NC}"
                 ;;
@@ -288,7 +276,6 @@ EOF
     # 清理临时目录
     echo -e "${CYAN}清理临时目录...${NC}"
     rm -rf "$temp_dir"
-
     echo -e "${GREEN}Nginx 配置完成${NC}"
 fi
 
@@ -304,6 +291,19 @@ if [[ " ${selected_services[@]} " =~ " redis " ]]; then
     else
         echo -e "${GREEN}Redis 配置文件下载成功${NC}"
     fi
+fi
+
+# 处理 MinIO 配置文件
+if [[ " ${selected_services[@]} " =~ " minio " ]]; then
+    minio_conf_file="/opt/minio/minio"
+    mkdir -p "$(dirname "$minio_conf_file")"
+    cat > "$minio_conf_file" <<EOF
+MINIO_ROOT_USER=admin
+MINIO_ROOT_PASSWORD=minioadmin
+MINIO_VOLUMES="/mnt/data"
+MINIO_OPTS="--console-address :9001"
+EOF
+    echo -e "${GREEN}MinIO 配置文件已生成${NC}"
 fi
 
 # 启动所选服务

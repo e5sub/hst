@@ -175,7 +175,7 @@ services:
       - "35455:35455"
     command: -tv=true -aesKey=h28xum0q20d5qa39ir5u3glz3xdadlhn -userid=464569852 -token=a57e4b742d040e3a41f993c9dc22c5ceafdad5f1daeff6e771deaf24ec490a331aafdf2476dcfb587dd19d3dd9f859d4b3f91d599fb1b54b530d50c27629f4fb1f84f6d8a26b
  
-  # 多种网盘挂载系统
+  # 支持多存储的文件列表程序
   openlist:
     image: openlistteam/openlist:latest-aio
     container_name: openlist
@@ -293,6 +293,62 @@ services:
       - /opt/navidrom/data:/data
       - /opt/navidrom/music:/music:ro
 
+  # 在线笔记工具
+  memos:
+    image: neosmemo/memos:stable
+    container_name: memos
+    restart: always
+    ports:
+      - "5230:5230"
+    volumes:
+      - /opt/memos/data:/var/opt/memos
+    environment:
+      - MEMOS_MODE=prod
+      - MEMOS_PORT=5230
+      - TZ=Asia/Shanghai
+
+  # 远程下载工具
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - /opt/qbittorrent/appdata:/config
+      - /opt/qbittorrent/downloads:/downloads 
+    ports:
+      - 8083:8080
+      - 6881:6881
+      - 6881:6881/udp
+    restart: always
+
+  # 软硬路由公网神器
+  lucky:
+    image: gdy666/lucky
+    container_name: lucky
+    restart: always
+    network_mode: host
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/lucky:/goodluck 
+
+  # 服务器监控工具
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    container_name: uptime-kuma
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "3003:3001"
+    volumes:
+      - /opt/uptime-kuma:/app/data 
+
   # Nginx 代理服务器
   nginx:
     image: nginx
@@ -322,3 +378,19 @@ services:
       - /opt/redis/conf/redis.conf:/etc/redis/redis.conf
       - /opt/redis/data:/data
     command: redis-server /etc/redis/redis.conf
+
+  # 对象存储服务
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - /opt/minio/data:/mnt/data
+      - /opt/minio/minio:/etc/config.env
+    environment:
+      - MINIO_CONFIG_ENV_FILE=/etc/config.env
+      - TZ=Asia/Shanghai
+    command: server --console-address ":9001"
