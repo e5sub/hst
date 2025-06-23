@@ -46,20 +46,31 @@ EOF
 systemctl daemon-reload
 systemctl start docker
 
-# 下载 docker-compose.yml 文件
-compose_url="https://fastly.jsdelivr.net/gh/e5sub/hst@master/docker/docker-compose.yml"
-compose_file="docker-compose.yml"
-echo -e "\033[1;34m正在下载 docker-compose.yml 文件...\033[0m"
-wget -q -N --no-cache $compose_url -O $compose_file
-if [ $? -ne 0 ]; then
-    echo -e "\033[1;31m下载 docker-compose.yml 文件失败，请检查网络或 URL 地址\033[0m"
-    exit 1
-else
-    echo -e "\033[1;32m下载 docker-compose.yml 文件成功\033[0m"
-fi
+# 定义配置文件路径和下载地址
 compose_file="./docker-compose.yml"
+compose_url="https://fastly.jsdelivr.net/gh/e5sub/hst@master/docker/docker-compose.yml"
+
+# 检查文件是否存在
+if [ -f "$compose_file" ]; then
+    echo -e "\033[1;33m检测到已有 docker-compose.yml 文件，跳过下载\033[0m"
+else
+    # 下载文件
+    echo -e "\033[1;34m正在下载 docker-compose.yml 文件...\033[0m"
+    wget -q -N --no-cache "$compose_url" -O "$compose_file"
+    
+    # 检查下载结果
+    if [ $? -ne 0 ]; then
+        echo -e "\033[1;31m下载失败，请检查网络或 URL 地址\033[0m"
+        exit 1
+    else
+        echo -e "\033[1;32m下载成功\033[0m"
+    fi
+fi
+
+# 创建临时文件用于后续处理
 temp_compose_file="./docker-compose.temp.yml"
 cp "$compose_file" "$temp_compose_file"
+echo -e "\033[1;34m已创建临时配置文件\033[0m"
 
 # 提取服务描述
 service_descriptions=()

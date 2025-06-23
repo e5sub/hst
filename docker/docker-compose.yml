@@ -1,5 +1,5 @@
 services:
-  # Watchtower 自动更新容器
+  # 自动更新容器
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
@@ -19,7 +19,7 @@ services:
         max-size: 10m
         max-file: 3
 
-  # Home Assistant 家庭自动化平台
+  # 家庭自动化平台
   homeassistant:
     image: ghcr.io/home-assistant/home-assistant:stable
     container_name: homeassistant
@@ -32,7 +32,7 @@ services:
       - /run/dbus:/run/dbus:ro
     network_mode: host
 
-  # Emby 媒体服务器
+  # 媒体服务器
   emby:
     image: xinjiawei1/emby_unlockd:latest
     container_name: emby
@@ -48,7 +48,7 @@ services:
       - 8920:8920
     restart: always
 
-  # DDNS-Go 动态 DNS 服务        
+  # 动态 DNS 服务        
   ddns-go:
     image: jeessy/ddns-go
     container_name: ddns-go
@@ -57,7 +57,7 @@ services:
     volumes:
       - /opt/ddns-go:/root
 
-  # FileCodeBox 文件代码分享平台
+  # 文件快递柜
   filecodebox:
     image: lanol/filecodebox:latest
     container_name: filecodebox
@@ -69,7 +69,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
 
-  # FRPC 内网穿透服务（客户端）
+  # 内网穿透服务（客户端）
   frpc:
     image: snowdreamtech/frpc
     container_name: frpc
@@ -80,7 +80,7 @@ services:
     volumes:
       - /opt/frpc:/etc/frp
   
-  # FRPS 内网穿透服务（服务端）
+  # 内网穿透服务（服务端）
   frps:
     image: snowdreamtech/frps
     container_name: frps
@@ -109,7 +109,7 @@ services:
       - TZ=Asia/Shanghai
     restart: always
 
-  # LibreTV 免费电影
+  # 免费电影
   libretv:
     image: bestzwei/libretv:latest
     container_name: libretv
@@ -119,7 +119,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
 
-  # Sun-Panel 导航页
+  # 导航页
   sun-panel:
     image: hslr/sun-panel:latest
     container_name: sun-panel
@@ -132,7 +132,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
 
-  # Tailscale 内网穿透服务
+  # 异地组网服务
   tailscaled:
     image: tailscale/tailscale
     container_name: tailscaled
@@ -149,7 +149,7 @@ services:
       - TS_AUTHKEY=tskey-auth-k68eNkeSyz11CNTRL-LcAE9LYDCP # 替换为你的 Tailscale Auth Key
       - TZ=Asia/Shanghai
 
-  # SGCC 电力数据应用（对接Home Assistant）
+  # 国家电网数据应用（对接Home Assistant）
   sgcc_electricity_app:
     env_file:
       - sgcc_electricity_new/.env
@@ -165,7 +165,7 @@ services:
     command: python3 main.py
     init: true
 
-  # All-in-One 肥羊IPTV
+  # 肥羊IPTV
   allinone:
     image: youshandefeiyang/allinone
     container_name: allinone
@@ -175,7 +175,7 @@ services:
       - "35455:35455"
     command: -tv=true -aesKey=h28xum0q20d5qa39ir5u3glz3xdadlhn -userid=464569852 -token=a57e4b742d040e3a41f993c9dc22c5ceafdad5f1daeff6e771deaf24ec490a331aafdf2476dcfb587dd19d3dd9f859d4b3f91d599fb1b54b530d50c27629f4fb1f84f6d8a26b
  
-  # Openlist 文件管理系统
+  # 多种网盘挂载系统
   openlist:
     image: openlistteam/openlist:latest-aio
     container_name: openlist
@@ -190,7 +190,7 @@ services:
     volumes:
       - /opt/openlist:/opt/openlist/data
 
-  # JD-Sign 京东签到服务
+  # 京东签到服务
   jd_sign:
     image: yanyu.icu/yanyuwangluo/jd-sign:latest
     container_name: jd_sign
@@ -198,7 +198,7 @@ services:
     ports:
       - "17840:17840"
 
-  # JD-H5ST 京东 H5 签名服务
+  # 京东 H5 签名服务
   jd_server:
     image: docker.kfcvme50.tech/zhx47/jd_h5st_server:latest
     container_name: jd_server
@@ -211,7 +211,7 @@ services:
         max-file: "2"
         max-size: "50m"
 
-  # Qinglong 青龙面板
+  # 青龙面板
   qinglong:
     image: whyour/qinglong:latest
     container_name: qinglong
@@ -224,7 +224,7 @@ services:
     volumes:
       - /opt/ql/data:/ql/data
 
-  # RustDesk 远程桌面服务API
+  # 远程桌面服务API
   rustdesk:
     image: lejianwen/rustdesk-server-s6:latest
     environment:
@@ -244,7 +244,7 @@ services:
     network_mode: "host"
     restart: always 
 
-  # MS365 E5 Renew X 微软365 E5续订脚本
+  # 微软365 E5续订脚本
   ms365:
     image: hanhongyong/ms365-e5-renew-x:general
     container_name: ms365
@@ -254,7 +254,7 @@ services:
       - "1066:1066"
     restart: always    
 
-  # IT-Tools IT工具箱
+  # IT工具箱
   it-tools:
     image: corentinth/it-tools:latest
     container_name: it-tools
@@ -263,3 +263,28 @@ services:
     restart: always
     ports:
       - "8082:80"
+
+  # 音乐服务器
+  navidrome:
+    image: deluan/navidrome:latest    
+    container_name: navidrome
+    ports:
+      - "4533:4533"
+    restart: always 
+    environment:   
+      - TZ=Asia/Shanghai
+      - ND_DEFAULTLANGUAGE: "zh"
+      - ND_LOGLEVEL: "info"
+      - ND_ENABLESHARING: "true"
+      - ND_SCANSCHEDULE: 0
+      - ND_BASEURL: ""
+      - ND_PLAYLISTSPATH: "."
+      - ND_LASTFM_LANGUAGE: "zh"
+      - ND_LASTFM_APIKEY: "d3f69254a30d704fb37d5e5c9a39c409"
+      - ND_LASTFM_SECRET: "027ae630f90ce5c06d1d6ce8d8e4d74f"
+      - ND_SPOTIFY_ID: "b4db885f5ce7452ea3d66df3a1ba1158"
+      - ND_SPOTIFY_SECRET: "0b931c3f86c54342a9e878ad8b5d0ca0"
+      - ND_ENABLEARTWORKPRECACHE: "true"
+    volumes:
+      - "/opt/navidrom/data:/data"
+      - "/opt/navidrom/music:/music:ro"
