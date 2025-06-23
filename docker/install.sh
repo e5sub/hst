@@ -292,6 +292,20 @@ EOF
     echo -e "${GREEN}Nginx 配置完成${NC}"
 fi
 
+# 处理 Redis 配置文件
+if [[ " ${selected_services[@]} " =~ " redis " ]]; then
+    redis_conf_url="https://gh-proxy.com/https://raw.githubusercontent.com/redis/redis/8.0/redis.conf"
+    redis_conf_dir="/opt/redis/conf"
+    mkdir -p "$redis_conf_dir"
+    echo -e "${CYAN}正在下载 Redis 配置文件...${NC}"
+    wget -q -N --no-cache "$redis_conf_url" -O "$redis_conf_dir/redis.conf"
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}Redis 配置文件下载失败，请检查网络或 URL 地址${NC}"
+    else
+        echo -e "${GREEN}Redis 配置文件下载成功${NC}"
+    fi
+fi
+
 # 启动所选服务
 echo -e "\n${CYAN}正在启动所选服务...${NC}"
 if ! [[ " ${selected_services[*]} " == "sgcc_electricity_app" ]]; then

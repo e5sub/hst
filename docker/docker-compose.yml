@@ -290,8 +290,8 @@ services:
       - ND_SUBSONICARTISTPARTICIPATIONS=true
       - ND_DEFAULTTHEME=Nord
     volumes:
-      - "/opt/navidrom/data:/data"
-      - "/opt/navidrom/music:/music:ro"
+      - /opt/navidrom/data:/data
+      - /opt/navidrom/music:/music:ro
 
   # Nginx 代理服务器
   nginx:
@@ -307,3 +307,18 @@ services:
       - /opt/nginx/html:/usr/share/nginx/html
       - /opt/nginx/conf:/etc/nginx
       - /opt/nginx/log:/var/log/nginx
+  
+  # Redis 数据库
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "6379:6379"
+    volumes:
+      - /opt/redis/conf/redis.conf:/etc/redis/redis.conf
+      - /opt/redis/data:/data
+    command: redis-server /etc/redis/redis.conf
