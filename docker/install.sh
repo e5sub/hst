@@ -1,5 +1,9 @@
 #!/bin/bash
-# 安装 Docker 和 Docker Compose
+# 作者: [菜芽]
+# 更新日期: [2025-06-23]
+# 描述: 该脚本用于安装 Docker 环境、下载 docker-compose.yml 文件，并根据用户选择安装和配置服务。
+
+# 安装 Docker 环境
 docker_install(){
     echo -e "\033[1;34m正在检查依赖工具...\033[0m"
     if ! type wget >/dev/null 2>&1; then
@@ -42,8 +46,19 @@ EOF
 systemctl daemon-reload
 systemctl start docker
 
-compose_file="/root/docker-compose.yml"
-temp_compose_file="/root/docker-compose.temp.yml"
+# 下载 docker-compose.yml 文件
+compose_url="https://fastly.jsdelivr.net/gh/e5sub/hst@master/docker/docker-compose.yml"
+compose_file="docker-compose.yml"
+echo -e "\033[1;34m正在下载 docker-compose.yml 文件...\033[0m"
+wget -q -N --no-cache $compose_url -O $compose_file
+if [ $? -ne 0 ]; then
+    echo -e "\033[1;31m下载 docker-compose.yml 文件失败，请检查网络或 URL 地址\033[0m"
+    exit 1
+else
+    echo -e "\033[1;32m下载 docker-compose.yml 文件成功\033[0m"
+fi
+compose_file="./docker-compose.yml"
+temp_compose_file="./docker-compose.temp.yml"
 cp "$compose_file" "$temp_compose_file"
 
 # 提取服务描述
