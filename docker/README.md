@@ -1,4 +1,4 @@
-# Docker 服务安装脚本 README
+# Docker 服务安装脚本
 
 ## 概述
 本脚本 `install.sh` 用于自动化安装 Docker 环境、下载 `docker-compose.yml` 文件，并根据用户的选择安装和配置相应的服务。脚本支持多服务选择，可单独选择或一次性选择所有服务进行安装，同时会根据所选服务进行必要的参数注入。
@@ -14,7 +14,7 @@
 ## 使用方法
 
 ### 1. 一键运行脚本
-bash <(curl -Ls https://fastly.jsdelivr.net/gh/e5sub/hst@master/docker/install.sh) 
+bash <(curl -Ls https://fastly.jsdelivr.net/gh/e5sub/docker-images@master/install.sh) 
 ### 2. 选择服务
 脚本会显示一个服务列表，你可以输入服务的序号（用空格分隔多个选项）或输入 `all` 选择所有服务。例如：请选择要安装的服务（用空格分隔多个选项，输入 all 选择所有服务）：
 --------------------------------------------------------------------------------
