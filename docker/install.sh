@@ -279,6 +279,15 @@ EOF
     echo -e "${GREEN}Nginx 配置完成${NC}"
 fi
 
+# 处理 n8n 文件夹权限设置
+if [[ " ${selected_services[@]} " =~ " n8n " ]]; then
+    n8n_dir="/opt/n8n"
+    mkdir -p "$n8n_dir"
+    chown -R 1000:1000 "$n8n_dir"
+    chmod -R 777 "$n8n_dir"
+    echo -e "${GREEN}已创建并设置 $n8n_dir 文件夹权限${NC}"
+fi
+
 # 处理 Redis 配置文件
 if [[ " ${selected_services[@]} " =~ " redis " ]]; then
     redis_conf_url="https://gh-proxy.com/https://raw.githubusercontent.com/redis/redis/8.0/redis.conf"

@@ -288,9 +288,10 @@ services:
   # n8n 工作流自动化工具
   n8n:
     container_name: n8n
-    image: docker.n8n.io/n8nio/n8n
+    image: n8nio/n8n
     environment:      
       - TZ=Asia/Shanghai
+      - N8N_SECURE_COOKIE=false
     volumes:
       - /opt/n8n:/home/node/.n8n
     ports:
