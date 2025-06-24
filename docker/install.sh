@@ -1,6 +1,5 @@
 #!/bin/bash
 # 作者: [菜芽]
-# 更新日期: [2025-06-23]
 # 描述: 该脚本用于安装 Docker 环境、下载 docker-compose.yml 文件，并根据用户选择安装和配置服务。
 # 项目地址：https://github.com/e5sub/docker-images
 

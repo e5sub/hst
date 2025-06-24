@@ -53,7 +53,10 @@ services:
     image: jeessy/ddns-go
     container_name: ddns-go
     restart: unless-stopped
-    network_mode: host
+    ports:
+      - 9876:9876
+    environment:
+      - TZ=Asia/Shanghai    
     volumes:
       - /opt/ddns-go:/root
 
@@ -208,7 +211,7 @@ services:
     volumes:
       - /opt/openlist:/opt/openlist/data
 
-  # 京东签到服务
+  # 自建京东本地签名服务
   jd_sign:
     image: yanyu.icu/yanyuwangluo/jd-sign:latest
     container_name: jd_sign
@@ -216,7 +219,7 @@ services:
     ports:
       - "17840:17840"
 
-  # 京东 H5 签名服务
+  # 自建京东H5算法服务
   jd_server:
     image: docker.kfcvme50.tech/zhx47/jd_h5st_server:latest
     container_name: jd_server
