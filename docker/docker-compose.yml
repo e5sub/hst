@@ -3,7 +3,7 @@ services:
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=Asia/Shanghai
       - WATCHTOWER_CLEANUP=true
@@ -24,7 +24,7 @@ services:
     image: ghcr.io/home-assistant/home-assistant:stable
     container_name: homeassistant
     privileged: true
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=Asia/Shanghai
     volumes:
@@ -46,13 +46,13 @@ services:
     ports:
       - 8096:8096
       - 8920:8920
-    restart: always
+    restart: unless-stopped
 
   # 动态 DNS 服务        
   ddns-go:
     image: jeessy/ddns-go
     container_name: ddns-go
-    restart: always
+    restart: unless-stopped
     network_mode: host
     volumes:
       - /opt/ddns-go:/root
@@ -61,7 +61,7 @@ services:
   filecodebox:
     image: lanol/filecodebox:latest
     container_name: filecodebox
-    restart: always
+    restart: unless-stopped
     ports:
       - 12345:12345
     volumes:
@@ -73,7 +73,7 @@ services:
   frpc:
     image: snowdreamtech/frpc
     container_name: frpc
-    restart: always
+    restart: unless-stopped
     network_mode: host
     environment:
       - TZ=Asia/Shanghai
@@ -84,7 +84,7 @@ services:
   frps:
     image: snowdreamtech/frps
     container_name: frps
-    restart: always
+    restart: unless-stopped
     network_mode: host
     environment:
       - TZ=Asia/Shanghai
@@ -107,7 +107,7 @@ services:
       - DOCKER_ENABLE_SECURITY=false
       - LANGS=zh_CN
       - TZ=Asia/Shanghai
-    restart: always
+    restart: unless-stopped
 
   # 免费电影
   libretv:
@@ -115,9 +115,27 @@ services:
     container_name: libretv
     ports:
       - "8899:8080"
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=Asia/Shanghai
+
+  # Stremio 媒体播放器
+  stremio:
+    container_name: stremio-docker
+    image: tsaridas/stremio-docker:latest
+    environment:
+      - NO_CORS=1
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/stremio-server:/root/.stremio-server
+    # devices:
+    #  - "/dev/dri/card0:/dev/dri/card0"       # 如果需要硬件加速，可以取消注释
+    #  - "/dev/dri/renderD128:/dev/dri/renderD128" # 如果需要硬件加速，可以取消注释
+    ports:
+      - "8084:8080"
+      - "11470:11470"
+      - "12470:12470"
+    restart: unless-stopped
 
   # 导航页
   sun-panel:
@@ -128,7 +146,7 @@ services:
     volumes:
       - /opt/sun-panel/conf:/app/conf
       - /var/run/docker.sock:/var/run/docker.sock
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=Asia/Shanghai
 
@@ -136,7 +154,7 @@ services:
   tailscaled:
     image: tailscale/tailscale
     container_name: tailscaled
-    restart: always
+    restart: unless-stopped
     network_mode: host
     cap_add:
       - NET_ADMIN
@@ -159,7 +177,7 @@ services:
     environment:
       - SET_CONTAINER_TIMEZONE=true
       - CONTAINER_TIMEZONE=Asia/Shanghai
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./:/data
     command: python3 main.py
@@ -169,7 +187,7 @@ services:
   allinone:
     image: youshandefeiyang/allinone
     container_name: allinone
-    restart: always
+    restart: unless-stopped
     privileged: true
     ports:
       - "35455:35455"
@@ -179,7 +197,7 @@ services:
   openlist:
     image: openlistteam/openlist:latest-aio
     container_name: openlist
-    restart: always
+    restart: unless-stopped
     ports:
       - "5244:5244"
     environment:
@@ -194,7 +212,7 @@ services:
   jd_sign:
     image: yanyu.icu/yanyuwangluo/jd-sign:latest
     container_name: jd_sign
-    restart: always
+    restart: unless-stopped
     ports:
       - "17840:17840"
 
@@ -202,7 +220,7 @@ services:
   jd_server:
     image: docker.kfcvme50.tech/zhx47/jd_h5st_server:latest
     container_name: jd_server
-    restart: always
+    restart: unless-stopped
     ports:
       - "3001:3001"
     logging:
@@ -216,7 +234,7 @@ services:
     image: whyour/qinglong:latest
     container_name: qinglong
     hostname: qinglong
-    restart: always
+    restart: unless-stopped
     ports:
       - "5700:5700"
     environment:
@@ -232,7 +250,7 @@ services:
       - ENCRYPTED_ONLY=1
       - MUST_LOGIN=N
       - TZ=Asia/Shanghai
-      - ALWAYS_USE_RELAY=N
+      - unless-stopped_USE_RELAY=N
       - RUSTDESK_API_RUSTDESK_ID_SERVER=xxx.com:21116 # 替换为你的ID服务器地址
       - RUSTDESK_API_RUSTDESK_RELAY_SERVER=xxx:21117 # 替换为你的中继服务器地址
       - RUSTDESK_API_RUSTDESK_API_SERVER=http://xxx.com # 替换为你的API服务器地址
@@ -242,7 +260,7 @@ services:
       - /opt/rustdesk/server:/data
       - /opt/rustdesk/api:/app/data
     network_mode: "host"
-    restart: always 
+    restart: unless-stopped 
 
   # 微软365 E5续订脚本
   ms365:
@@ -252,7 +270,7 @@ services:
       - TZ=Asia/Shanghai
     ports:
       - "1066:1066"
-    restart: always    
+    restart: unless-stopped    
 
   # IT工具箱
   it-tools:
@@ -260,9 +278,21 @@ services:
     container_name: it-tools
     environment:
       - TZ=Asia/Shanghai
-    restart: always
+    restart: unless-stopped
     ports:
       - "8082:80"
+
+  # n8n 工作流自动化工具
+  n8n:
+    container_name: n8n
+    image: docker.n8n.io/n8nio/n8n
+    environment:      
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/n8n:/home/node/.n8n
+    ports:
+      - "5678:5678"
+    restart: unless-stopped
 
   # 音乐服务器
   navidrome:
@@ -271,7 +301,7 @@ services:
     user: "1000:1000"
     ports:
       - "4533:4533"
-    restart: always 
+    restart: unless-stopped 
     environment:   
       - TZ=Asia/Shanghai
       - ND_DEFAULTLANGUAGE=zh-Hans
@@ -297,7 +327,7 @@ services:
   memos:
     image: neosmemo/memos:stable
     container_name: memos
-    restart: always
+    restart: unless-stopped
     ports:
       - "5230:5230"
     volumes:
@@ -324,13 +354,13 @@ services:
       - 8083:8080
       - 6881:6881
       - 6881:6881/udp
-    restart: always
+    restart: unless-stopped
 
   # 软硬路由公网神器
   lucky:
     image: gdy666/lucky
     container_name: lucky
-    restart: always
+    restart: unless-stopped
     network_mode: host
     environment:
       - TZ=Asia/Shanghai
@@ -341,7 +371,7 @@ services:
   uptime-kuma:
     image: louislam/uptime-kuma
     container_name: uptime-kuma
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=Asia/Shanghai
     ports:
@@ -353,7 +383,7 @@ services:
   nginx:
     image: nginx
     container_name: nginx
-    restart: always
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -368,7 +398,7 @@ services:
   redis:
     image: redis:latest
     container_name: redis
-    restart: always
+    restart: unless-stopped
     privileged: true
     environment:
       - TZ=Asia/Shanghai
@@ -383,7 +413,7 @@ services:
   minio:
     image: minio/minio:latest
     container_name: minio
-    restart: always
+    restart: unless-stopped
     ports:
       - "9000:9000"
       - "9001:9001"
