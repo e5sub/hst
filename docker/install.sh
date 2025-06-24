@@ -315,6 +315,21 @@ EOF
     echo -e "${GREEN}MinIO 配置文件已生成${NC}"
 fi
 
+# 处理 MoneyPrinterTurbo 配置文件
+if [[ " ${selected_services[@]} " =~ " moneyprinterturbo " ]]; then
+    moneyprinterturbo_dir="/opt/MoneyPrinterTurbo"
+    mkdir -p "$moneyprinterturbo_dir"
+    git_repo="https://gh-proxy.com/https://github.com/harry0703/MoneyPrinterTurbo.git"
+    echo -e "${CYAN}正在下载 MoneyPrinterTurbo 代码...${NC}"
+    git clone "$git_repo" "$moneyprinterturbo_dir"
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}代码下载失败，请检查网络或 URL 地址${NC}"
+        exit 1
+    else
+        echo -e "${GREEN}代码下载成功${NC}"
+    fi
+fi
+
 # 启动所选服务
 echo -e "\n${CYAN}正在启动所选服务...${NC}"
 if ! [[ " ${selected_services[*]} " == "sgcc_electricity_app" ]]; then

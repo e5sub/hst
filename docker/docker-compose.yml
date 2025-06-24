@@ -298,6 +298,24 @@ services:
       - "5678:5678"
     restart: unless-stopped
 
+  # AI视频生成工具
+  moneyprinterturbo:
+    image: ghcr.io/e5sub/moneyprinterturbo:latest
+    container_name: "moneyprinterturbo"
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "8501:8501" 
+      - "8080:8080"
+    volumes:
+      - /opt/MoneyPrinterTurbo:/MoneyPrinterTurbo
+    restart: unless-stopped
+    command: >
+      sh -c "
+      python3 main.py &
+      streamlit run ./webui/Main.py --browser.serverAddress=127.0.0.1 --server.enableCORS=True --browser.gatherUsageStats=False
+      "
+
   # 音乐服务器
   navidrome:
     image: deluan/navidrome:latest    
