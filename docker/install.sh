@@ -31,13 +31,7 @@ docker_install(){
         echo -e "\033[1;33mdocker 未安装，正在安装中...\033[0m"
         curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
         systemctl enable docker
-    else 
-        echo -e "\033[1;32mdocker 已安装，继续操作\033[0m"
-    fi
-}
-docker_install
-
-echo -e "\033[1;34m正在配置 Docker...\033[0m"
+        echo -e "\033[1;34m正在配置 Docker...\033[0m"
 cat >/etc/docker/daemon.json<<EOF
 {
   "log-driver": "json-file",
@@ -50,8 +44,13 @@ cat >/etc/docker/daemon.json<<EOF
   ]
 }
 EOF
-systemctl daemon-reload
-systemctl start docker
+        systemctl daemon-reload
+        systemctl start docker
+    else 
+        echo -e "\033[1;32mdocker 已安装，继续操作\033[0m"
+    fi
+}
+docker_install
 
 # 定义配置文件路径和下载地址
 compose_file="./docker-compose.yml"
