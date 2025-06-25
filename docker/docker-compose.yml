@@ -19,7 +19,7 @@ services:
         max-size: 10m
         max-file: 3
 
-  # 家庭自动化平台
+  # 家庭自动化平台（8123端口）
   homeassistant:
     image: ghcr.io/home-assistant/home-assistant:stable
     container_name: homeassistant
@@ -32,7 +32,7 @@ services:
       - /run/dbus:/run/dbus:ro
     network_mode: host
 
-  # 媒体服务器（开心版）
+  # 媒体服务器（8096、8920端口）
   emby:
     image: xinjiawei1/emby_unlockd:latest
     container_name: emby
@@ -48,7 +48,7 @@ services:
       - 8920:8920
     restart: unless-stopped
 
-  # 动态 DNS 服务        
+  # 动态 DNS 服务（9876端口） 
   ddns-go:
     image: jeessy/ddns-go
     container_name: ddns-go
@@ -60,7 +60,7 @@ services:
     volumes:
       - /opt/ddns-go:/root
 
-  # 文件快递柜
+  # 文件快递柜（12345端口）
   filecodebox:
     image: lanol/filecodebox:latest
     container_name: filecodebox
@@ -94,7 +94,7 @@ services:
     volumes:
       - /opt/frps:/etc/frp
 
-  # PDF 转换服务
+  # PDF 转换服务（8081端口）
   stirling-pdf:
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
     container_name: stirling-pdf
@@ -112,7 +112,7 @@ services:
       - TZ=Asia/Shanghai
     restart: unless-stopped
 
-  # 免费电影
+  # 免费电影（8899端口）
   libretv:
     image: bestzwei/libretv:latest
     container_name: libretv
@@ -122,7 +122,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
 
-  # Stremio 媒体播放器
+  # Stremio 媒体播放器（8084、11470、12470端口）
   stremio:
     container_name: stremio-docker
     image: tsaridas/stremio-docker:latest
@@ -140,7 +140,7 @@ services:
       - "12470:12470"
     restart: unless-stopped
 
-  # 导航页
+  # 导航页（3002端口）
   sun-panel:
     image: hslr/sun-panel:latest
     container_name: sun-panel
@@ -186,7 +186,7 @@ services:
     command: python3 main.py
     init: true
 
-  # 肥羊IPTV
+  # 肥羊IPTV（35455端口）
   allinone:
     image: youshandefeiyang/allinone
     container_name: allinone
@@ -196,7 +196,7 @@ services:
       - "35455:35455"
     command: -tv=true -aesKey=h28xum0q20d5qa39ir5u3glz3xdadlhn -userid=464569852 -token=a57e4b742d040e3a41f993c9dc22c5ceafdad5f1daeff6e771deaf24ec490a331aafdf2476dcfb587dd19d3dd9f859d4b3f91d599fb1b54b530d50c27629f4fb1f84f6d8a26b
  
-  # 支持多存储的文件列表程序
+  # 支持多存储的文件列表程序（5244端口）
   openlist:
     image: openlistteam/openlist:latest-aio
     container_name: openlist
@@ -211,7 +211,7 @@ services:
     volumes:
       - /opt/openlist:/opt/openlist/data
 
-  # 自建京东本地签名服务
+  # 自建京东本地签名服务（17840端口）
   jd_sign:
     image: yanyu.icu/yanyuwangluo/jd-sign:latest
     container_name: jd_sign
@@ -219,7 +219,7 @@ services:
     ports:
       - "17840:17840"
 
-  # 自建京东H5算法服务
+  # 自建京东H5算法服务（3001端口）
   jd_server:
     image: docker.kfcvme50.tech/zhx47/jd_h5st_server:latest
     container_name: jd_server
@@ -232,7 +232,7 @@ services:
         max-file: "2"
         max-size: "50m"
 
-  # 青龙面板
+  # 青龙面板（5700端口）
   qinglong:
     image: whyour/qinglong:latest
     container_name: qinglong
@@ -265,7 +265,7 @@ services:
     network_mode: "host"
     restart: unless-stopped 
 
-  # 微软365 E5续订脚本
+  # 微软365 E5续订脚本（1066端口）
   ms365:
     image: hanhongyong/ms365-e5-renew-x:general
     container_name: ms365
@@ -275,7 +275,7 @@ services:
       - "1066:1066"
     restart: unless-stopped    
 
-  # IT工具箱
+  # IT工具箱（8082端口）
   it-tools:
     image: corentinth/it-tools:latest
     container_name: it-tools
@@ -285,7 +285,7 @@ services:
     ports:
       - "8082:80"
 
-  # n8n 工作流自动化工具
+  # n8n 工作流自动化工具（5678端口）
   n8n:
     container_name: n8n
     image: n8nio/n8n
@@ -298,7 +298,7 @@ services:
       - "5678:5678"
     restart: unless-stopped
 
-  # AI视频生成工具
+  # AI视频生成工具（8501、8080端口）
   moneyprinterturbo:
     image: ghcr.io/e5sub/moneyprinterturbo:latest
     container_name: "moneyprinterturbo"
@@ -316,7 +316,7 @@ services:
       streamlit run ./webui/Main.py --browser.serverAddress=127.0.0.1 --server.enableCORS=True --browser.gatherUsageStats=False
       "
 
-  # 音乐服务器
+  # 音乐服务器（4533端口）
   navidrome:
     image: deluan/navidrome:latest    
     container_name: navidrome
@@ -345,7 +345,7 @@ services:
       - /opt/navidrom/data:/data
       - /opt/navidrom/music:/music:ro
 
-  # 在线笔记工具
+  # 在线笔记工具（5230端口）
   memos:
     image: neosmemo/memos:stable
     container_name: memos
@@ -359,7 +359,7 @@ services:
       - MEMOS_PORT=5230
       - TZ=Asia/Shanghai
 
-  # 远程下载工具
+  # 远程下载工具（8083、6881端口）
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -389,7 +389,7 @@ services:
     volumes:
       - /opt/lucky:/goodluck 
 
-  # 服务器监控工具
+  # 服务器监控工具（3003端口）
   uptime-kuma:
     image: louislam/uptime-kuma
     container_name: uptime-kuma
@@ -401,7 +401,7 @@ services:
     volumes:
       - /opt/uptime-kuma:/app/data 
 
-  # Nginx 代理服务器
+  # Nginx 代理服务器（80、443端口）
   nginx:
     image: nginx
     container_name: nginx
@@ -415,8 +415,23 @@ services:
       - /opt/nginx/html:/usr/share/nginx/html
       - /opt/nginx/conf:/etc/nginx
       - /opt/nginx/log:/var/log/nginx
-  
-  # Redis 数据库
+      
+  # jenkins 持续集成工具（8085、50000端口） 
+  jenkins:
+    image: jenkins/jenkins:latest
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "8085:8080"
+      - "50000:50000"
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins
+      - TZ=Asia/Shanghai
+    volumes:
+      - /opt/jenkins:/var/jenkins_home
+   
+
+  # Redis 缓存服务（6379端口）
   redis:
     image: redis:latest
     container_name: redis
@@ -431,7 +446,7 @@ services:
       - /opt/redis/data:/data
     command: redis-server /etc/redis/redis.conf
 
-  # MySQL 数据库
+  # MySQL 数据库（3308端口）
   mysql:
     image: mysql:5.7    # 使用 MySQL 5.7 版本
     container_name: mysql
@@ -441,11 +456,11 @@ services:
       - MYSQL_DATABASE=my_database # 替换为你的数据库名称
       - TZ=Asia/Shanghai
     ports:
-      - "3306:3306"
+      - "3308:3306"
     volumes:
       - /opt/mysql/data:/var/lib/mysql
 
-  # MongoDB 数据库
+  # MongoDB 数据库（27017端口）
   mongodb:
     image: mongo:8.0.10  # 使用 MongoDB 8.0.10 版本
     container_name: mongodb
@@ -459,7 +474,7 @@ services:
     volumes:  
       - /opt/mongodb/data:/data/db
 
-  # PostgreSQL 数据库
+  # PostgreSQL 数据库（5432端口）
   postgresql:
     image: postgres:17.5     # 使用 PostgreSQL 17.5 版本
     container_name: postgresql
@@ -474,7 +489,7 @@ services:
     volumes:
       - /opt/postgresql/data:/var/lib/postgresql/data   
 
-  # 对象存储服务
+  # 对象存储服务（9000、9001端口）
   minio:
     image: minio/minio:latest
     container_name: minio
