@@ -330,6 +330,35 @@ if [[ " ${selected_services[@]} " =~ " moneyprinterturbo " ]]; then
     fi
 fi
 
+# 处理 mysql 配置
+if [[ " ${selected_services[@]} " =~ " mysql " ]]; then
+    read -p "请输入 MySQL root 密码: " mysql_root_password
+    read -p "请输入 MySQL 数据库名称: " mysql_database
+    sed -i "s/MYSQL_ROOT_PASSWORD=.*# 替换为你的 MySQL root 密码/MYSQL_ROOT_PASSWORD=$mysql_root_password/" "$temp_compose_file"
+    sed -i "s/MYSQL_DATABASE=.*# 替换为你的数据库名称/MYSQL_DATABASE=$mysql_database/" "$temp_compose_file"
+    echo -e "${GREEN}MySQL 配置已完成${NC}"
+fi
+
+# 处理 MongoDB 配置
+if [[ " ${selected_services[@]} " =~ " mongodb " ]]; then
+    read -p "请输入 MongoDB root 用户名: " mongo_root_username
+    read -p "请输入 MongoDB root 密码: " mongo_root_password
+    sed -i "s/MONGO_INITDB_ROOT_USERNAME=.*# 替换为你的 MongoDB root 用户名/MONGO_INITDB_ROOT_USERNAME=$mongo_root_username/" "$temp_compose_file"
+    sed -i "s/MONGO_INITDB_ROOT_PASSWORD=.*# 替换为你的 MongoDB root 密码/MONGO_INITDB_ROOT_PASSWORD=$mongo_root_password/" "$temp_compose_file"
+    echo -e "${GREEN}MongoDB 配置已完成${NC}"
+fi
+
+# 处理 PostgreSQL 配置
+if [[ " ${selected_services[@]} " =~ " postgresql " ]]; then
+    read -p "请输入 PostgreSQL 用户名: " postgres_user
+    read -p "请输入 PostgreSQL 密码: " postgres_password
+    read -p "请输入 PostgreSQL 数据库名称: " postgres_database
+    sed -i "s/POSTGRES_USER=.*# 替换为你的 PostgreSQL 用户名/POSTGRES_USER=$postgres_user/" "$temp_compose_file"
+    sed -i "s/POSTGRES_PASSWORD=.*# 替换为你的 PostgreSQL 密码/POSTGRES_PASSWORD=$postgres_password/" "$temp_compose_file"
+    sed -i "s/POSTGRES_DB=.*# 替换为你的数据库名称/POSTGRES_DB=$postgres_database/" "$temp_compose_file"
+    echo -e "${GREEN}PostgreSQL 配置已完成${NC}"
+fi
+
 # 启动所选服务
 echo -e "\n${CYAN}正在启动所选服务...${NC}"
 if ! [[ " ${selected_services[*]} " == "sgcc_electricity_app" ]]; then

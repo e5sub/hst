@@ -431,6 +431,49 @@ services:
       - /opt/redis/data:/data
     command: redis-server /etc/redis/redis.conf
 
+  # MySQL 数据库
+  mysql:
+    image: mysql:5.7    # 使用 MySQL 5.7 版本
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password # 替换为你的 MySQL root 密码
+      - MYSQL_DATABASE=my_database # 替换为你的数据库名称
+      - TZ=Asia/Shanghai
+    ports:
+      - "3306:3306"
+    volumes:
+      - /opt/mysql/data:/var/lib/mysql
+
+  # MongoDB 数据库
+  mongodb:
+    image: mongo:8.0.10  # 使用 MongoDB 8.0.10 版本
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root # 替换为你的 MongoDB root 用户名
+      - MONGO_INITDB_ROOT_PASSWORD=root_password # 替换为你的 MongoDB root 密码
+      - TZ=Asia/Shanghai
+    ports:
+      - "27017:27017"
+    volumes:  
+      - /opt/mongodb/data:/data/db
+
+  # PostgreSQL 数据库
+  postgresql:
+    image: postgres:17.5     # 使用 PostgreSQL 17.5 版本
+    container_name: postgresql
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres # 替换为你的 PostgreSQL 用户名
+      - POSTGRES_PASSWORD=postgres_password # 替换为你的 PostgreSQL 密码
+      - POSTGRES_DB=my_database # 替换为你的数据库名称
+      - TZ=Asia/Shanghai
+    ports:
+      - "5432:5432"
+    volumes:
+      - /opt/postgresql/data:/var/lib/postgresql/data   
+
   # 对象存储服务
   minio:
     image: minio/minio:latest
