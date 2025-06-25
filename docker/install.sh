@@ -32,7 +32,7 @@ docker_install(){
         curl -fsSL https://fastly.jsdelivr.net/gh/e5sub/docker-install@master/install.sh | bash -s docker --mirror Aliyun
         systemctl enable docker
         echo -e "\033[1;34m正在配置 Docker...\033[0m"
-cat >/etc/docker/daemon.json<<EOF
+        cat >/etc/docker/daemon.json<<EOF
 {
   "log-driver": "json-file",
   "log-opts": {
