@@ -361,18 +361,7 @@ fi
 
 # 启动所选服务
 echo -e "\n${CYAN}正在启动所选服务...${NC}"
-if ! [[ " ${selected_services[*]} " == "sgcc_electricity_app" ]]; then
-    docker compose -f "$temp_compose_file" up -d ${selected_services[@]}
-else
-    # 特殊处理 sgcc_electricity_app
-    git_repo="https://github.com/ARC-MX/sgcc_electricity_new.git"
-    git_dir="sgcc_electricity_new"
-    [ ! -d "$git_dir" ] && git clone "$git_repo" "$git_dir" || (cd "$git_dir" && git pull && cd ..)
-    cd "$git_dir"
-    cp example.env .env
-    docker compose -f "$temp_compose_file" up -d sgcc_electricity_app
-    cd ..
-fi
+docker compose -f "$temp_compose_file" up -d ${selected_services[@]}
 
 rm "$temp_compose_file"
 

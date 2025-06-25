@@ -170,22 +170,6 @@ services:
       - TS_AUTHKEY=tskey-auth-k68eNkeSyz11CNTRL-LcAE9LYDCP # 替换为你的 Tailscale Auth Key
       - TZ=Asia/Shanghai
 
-  # 国家电网数据应用（对接Home Assistant）
-  sgcc_electricity_app:
-    env_file:
-      - sgcc_electricity_new/.env
-    image: registry.cn-hangzhou.aliyuncs.com/arcw/sgcc_electricity:latest
-    container_name: sgcc_electricity
-    network_mode: "host"
-    environment:
-      - SET_CONTAINER_TIMEZONE=true
-      - CONTAINER_TIMEZONE=Asia/Shanghai
-    restart: unless-stopped
-    volumes:
-      - ./:/data
-    command: python3 main.py
-    init: true
-
   # 肥羊IPTV（35455）
   allinone:
     image: youshandefeiyang/allinone
@@ -464,17 +448,20 @@ services:
 
   # MySQL 数据库（3308）
   mysql:
-    image: mysql:5.7    # 使用 MySQL 5.7 版本
+    image: mysql:8.4   # 使用 MySQL 8.4 版本
     container_name: mysql
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=root_password # 替换为你的 MySQL root 密码
       - MYSQL_DATABASE=my_database # 替换为你的数据库名称
+      - MYSQL_ROOT_HOST=% # 允许从任何主机连接 
       - TZ=Asia/Shanghai
     ports:
       - "3308:3306"
     volumes:
       - /opt/mysql/data:/var/lib/mysql
+      - /opt/mysql/conf:/etc/mysql/conf.d
+      - /opt/mysql/log:/var/log/mysql
 
   # MongoDB 数据库（27017）
   mongodb:
@@ -489,6 +476,8 @@ services:
       - "27017:27017"
     volumes:  
       - /opt/mongodb/data:/data/db
+      - /opt/mongodb/conf:/data/configdb
+      - /opt/mongodb/log:/var/log/mongodb
 
   # PostgreSQL 数据库（5432）
   postgresql:
@@ -504,6 +493,8 @@ services:
       - "5432:5432"
     volumes:
       - /opt/postgresql/data:/var/lib/postgresql/data   
+      - /opt/postgresql/conf:/etc/postgresql
+      - /opt/postgresql/log:/var/log/postgresql
 
   # minio对象存储服务（9000、9001）
   minio:
