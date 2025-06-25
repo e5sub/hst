@@ -54,7 +54,7 @@ docker_install
 
 # 定义配置文件路径和下载地址
 compose_file="./docker-compose.yml"
-compose_url="https://fastly.jsdelivr.net/gh/e5sub/hst@master/docker/docker-compose.yml"
+compose_url="https://fastly.jsdelivr.net/gh/e5sub/docker-images@master/docker-compose.yml"
 
 # 检查文件是否存在
 if [ -f "$compose_file" ]; then
@@ -160,28 +160,27 @@ for ((i = 0; i < ${#selected_services[@]}; i++)); do
     done
 done
 
-# 参数注入
+# 处理 tailscaled 配置文件
 echo -e "\n${CYAN}正在配置所选服务...${NC}"
-if [[ " ${selected_services[@]} " =~ " tailscaled " ]]; then
+if [[ " ${selected_services[@]} " =~ " tailscale " ]]; then
     read -p "请输入你的 Tailscale Auth Key: " ts_authkey
     sed -i "s/TS_AUTHKEY=.*# 替换为你的 Tailscale Auth Key/TS_AUTHKEY=$ts_authkey/" "$temp_compose_file"
     echo -e "${GREEN}Tailscale Auth Key 已配置${NC}"
 fi
 
-if [[ " ${selected_services[@]} " =~ " rustdesk " ]]; then
+# 处理 rustdesk-server 配置文件
+if [[ " ${selected_services[@]} " =~ " rustdesk-server " ]]; then
     read -p "请输入你的中继服务器地址: " relay_server
     read -p "请输入你的 ID 服务器地址: " id_server
-    read -p "请输入你的 API 服务器地址: " api_server
-    
+    read -p "请输入你的 API 服务器地址: " api_server    
     sed -i "s/RELAY=.*# 替换为你的中继服务器地址（21117端口）/RELAY=$relay_server/" "$temp_compose_file"
     sed -i "s/RUSTDESK_API_RUSTDESK_ID_SERVER=.*# 替换为你的ID服务器地址（21116端口）/RUSTDESK_API_RUSTDESK_ID_SERVER=$id_server/" "$temp_compose_file"
     sed -i "s/RUSTDESK_API_RUSTDESK_RELAY_SERVER=.*# 替换为你的中继服务器地址（21117端口）/RUSTDESK_API_RUSTDESK_RELAY_SERVER=$relay_server/" "$temp_compose_file"
-    sed -i "s/RUSTDESK_API_RUSTDESK_API_SERVER=.*# 替换为你的API服务器地址/RUSTDESK_API_RUSTDESK_API_SERVER=$api_server/" "$temp_compose_file"
-    
+    sed -i "s/RUSTDESK_API_RUSTDESK_API_SERVER=.*# 替换为你的API服务器地址/RUSTDESK_API_RUSTDESK_API_SERVER=$api_server/" "$temp_compose_file"    
     echo -e "${GREEN}RustDesk 服务器地址已配置${NC}"
 fi
 
-    # 处理nginx目录映射问题
+# 处理nginx目录映射问题
 if [[ " ${selected_services[@]} " =~ " nginx " ]]; then
     echo -e "${CYAN}配置 Nginx 服务...${NC}"
     # 拉取最新 nginx 镜像

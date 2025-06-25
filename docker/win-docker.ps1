@@ -1,6 +1,6 @@
 # 定义配置文件路径和下载地址
 $composeFile = ".\docker-compose.yml"
-$composeUrl = "https://fastly.jsdelivr.net/gh/e5sub/hst@master/docker/docker-compose.yml"
+$composeUrl = "https://fastly.jsdelivr.net/gh/e5sub/docker-images@master/docker-compose.yml"
 
 # 检查文件是否存在
 if (Test-Path $composeFile) {
