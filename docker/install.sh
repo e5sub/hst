@@ -357,6 +357,18 @@ if [[ " ${selected_services[@]} " =~ " postgresql " ]]; then
     echo -e "${GREEN}PostgreSQL 配置已完成${NC}"
 fi
 
+# 处理 dockerhub配置
+if [[ " ${selected_services[@]} " =~ " dockerhub " ]]; then
+    echo -e "${CYAN}正在下载 Docker-Proxy 代码...${NC}"
+    git clone https://gh-proxy.com/https://github.com/dqzboy/Docker-Proxy.git /opt/Docker-Proxy
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}代码下载失败，请检查网络或 URL 地址${NC}"
+        exit 1
+    else
+        echo -e "${GREEN}代码下载成功${NC}"
+    fi
+fi
+
 # 启动所选服务
 echo -e "\n${CYAN}正在启动所选服务...${NC}"
 docker compose -f "$temp_compose_file" up -d ${selected_services[@]}
