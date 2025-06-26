@@ -260,7 +260,19 @@ services:
       - TZ=Asia/Shanghai
     ports:
       - "1066:1066"
-    restart: unless-stopped    
+    restart: unless-stopped
+
+  # Docker镜像加速服务（6443）
+  crproxy:
+    image: cleverest/crproxy:latest
+    container_name: crproxy
+    environment:
+    # - http_proxy=http://proxy.com:7890   #如果是国内机器，请设置代理
+    # - https_proxy=http://proxy.com:7890  #如果是国内机器，请设置代理
+      - TZ=Asia/Shanghai      
+    restart: unless-stopped
+    ports:
+      - "6443:443"
 
   # Dockerhub 镜像仓库代理（51000）
   dockerhub:
@@ -276,7 +288,7 @@ services:
     ports:
       - "51000:5000"
 
-  # Docker容器代理管理面板 默认登入账号密码: root / admin@123 （30080）   
+  # Docker容器管理面板 默认登入账号密码: root / admin@123 （30080）   
   hubcmdui-server:
     image: dqzboy/hubcmd-ui
     container_name: hubcmdui-server
@@ -297,6 +309,16 @@ services:
     restart: unless-stopped
     ports:
       - "8082:80"      
+
+  # 在线生成Docker-Compose 配置文件（7576）
+  dcm:
+    image: ghcr.io/ajnart/dcm
+    container_name: dcm
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "7576:7576"
+    restart: unless-stopped
 
   # n8n 工作流自动化工具（5678）
   n8n:

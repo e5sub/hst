@@ -357,7 +357,7 @@ if [[ " ${selected_services[@]} " =~ " postgresql " ]]; then
     echo -e "${GREEN}PostgreSQL 配置已完成${NC}"
 fi
 
-# 处理 dockerhub配置
+# 处理 Dockerhub 配置
 if [[ " ${selected_services[@]} " =~ " dockerhub " ]]; then
     echo -e "${CYAN}正在下载 Docker-Proxy 代码...${NC}"
     git clone https://gh-proxy.com/https://github.com/dqzboy/Docker-Proxy.git /opt/Docker-Proxy
