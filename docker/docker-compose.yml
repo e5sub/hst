@@ -97,9 +97,10 @@ services:
  # frp-panel 内网穿透面板（9000、9001）
   frpp-master:
     image: vaalacat/frp-panel:latest
+    container_name: frpp-master
     network_mode: host
     environment:
-      - APP_GLOBAL_SECRET=your_secret # APP_GLOBAL_SECRET注意不要泄漏，客户端和服务端的是通过Master生成的
+      - APP_GLOBAL_SECRET=de2791899f24d6ac3d035729b87c5292 # APP_GLOBAL_SECRET注意不要泄漏，客户端和服务端的是通过Master生成的
       - MASTER_RPC_HOST=1.2.3.4 #服务器的外部IP或域名
       - MASTER_RPC_PORT=9001
       - MASTER_API_HOST=1.2.3.4 #服务器的外部IP或域名
