@@ -422,7 +422,7 @@ done
 done
     sed -i "s/frpp.example.com/$host/g" "$temp_compose_file"
     sed -i "s/frpp-rpc.example.com/$host/g" "$temp_compose_file"
-    sed -i "s/abcde/$secret/g" "$temp_compose_file"
+    sed -i "s/abcdef/$secret/g" "$temp_compose_file"
     sed -i "s/default/$id/g" "$temp_compose_file"
     echo -e "${GREEN}frp-panel-server 配置已完成${NC}"
 fi
