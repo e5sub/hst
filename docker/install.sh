@@ -45,7 +45,7 @@ docker_install(){
 }
 EOF
         systemctl daemon-reload
-        systemctl start docker
+        systemctl restart docker
     else 
         echo -e "\033[1;32mdocker 已安装，继续操作\033[0m"
     fi
@@ -162,17 +162,17 @@ done
 
 # 处理 tailscaled 配置文件
 echo -e "\n${CYAN}正在配置所选服务...${NC}"
-if [[ " ${selected_services[@]} " =~ " tailscale " ]]; then
-    read -p "请输入你的 Tailscale Auth Key: " ts_authkey
+if [[ " ${selected_services[@]} " =~ " tailscaled " ]]; then
+    read -e -p "请输入你的 Tailscale Auth Key: " ts_authkey
     sed -i "s/TS_AUTHKEY=.*# 替换为你的 Tailscale Auth Key/TS_AUTHKEY=$ts_authkey/" "$temp_compose_file"
     echo -e "${GREEN}Tailscale Auth Key 已配置${NC}"
 fi
 
 # 处理 rustdesk-server 配置文件
 if [[ " ${selected_services[@]} " =~ " rustdesk-server " ]]; then
-    read -p "请输入你的中继服务器地址: " relay_server
-    read -p "请输入你的 ID 服务器地址: " id_server
-    read -p "请输入你的 API 服务器地址: " api_server    
+    read -e -p "请输入你的中继服务器地址: " relay_server
+    read -e -p "请输入你的 ID 服务器地址: " id_server
+    read -e -p "请输入你的 API 服务器地址: " api_server    
     sed -i "s/RELAY=.*# 替换为你的中继服务器地址（21117端口）/RELAY=$relay_server/" "$temp_compose_file"
     sed -i "s/RUSTDESK_API_RUSTDESK_ID_SERVER=.*# 替换为你的ID服务器地址（21116端口）/RUSTDESK_API_RUSTDESK_ID_SERVER=$id_server/" "$temp_compose_file"
     sed -i "s/RUSTDESK_API_RUSTDESK_RELAY_SERVER=.*# 替换为你的中继服务器地址（21117端口）/RUSTDESK_API_RUSTDESK_RELAY_SERVER=$relay_server/" "$temp_compose_file"
@@ -330,8 +330,8 @@ fi
 
 # 处理 mysql 配置
 if [[ " ${selected_services[@]} " =~ " mysql " ]]; then
-    read -p "请输入 MySQL root 密码: " mysql_root_password
-    read -p "请输入 MySQL 数据库名称: " mysql_database
+    read -e -p "请输入 MySQL root 密码: " mysql_root_password
+    read -e -p "请输入 MySQL 数据库名称: " mysql_database
     sed -i "s/MYSQL_ROOT_PASSWORD=.*# 替换为你的 MySQL root 密码/MYSQL_ROOT_PASSWORD=$mysql_root_password/" "$temp_compose_file"
     sed -i "s/MYSQL_DATABASE=.*# 替换为你的数据库名称/MYSQL_DATABASE=$mysql_database/" "$temp_compose_file"
     echo -e "${GREEN}MySQL 配置已完成${NC}"
@@ -339,8 +339,8 @@ fi
 
 # 处理 MongoDB 配置
 if [[ " ${selected_services[@]} " =~ " mongodb " ]]; then
-    read -p "请输入 MongoDB root 用户名: " mongo_root_username
-    read -p "请输入 MongoDB root 密码: " mongo_root_password
+    read -e -p "请输入 MongoDB root 用户名: " mongo_root_username
+    read -e -p "请输入 MongoDB root 密码: " mongo_root_password
     sed -i "s/MONGO_INITDB_ROOT_USERNAME=.*# 替换为你的 MongoDB root 用户名/MONGO_INITDB_ROOT_USERNAME=$mongo_root_username/" "$temp_compose_file"
     sed -i "s/MONGO_INITDB_ROOT_PASSWORD=.*# 替换为你的 MongoDB root 密码/MONGO_INITDB_ROOT_PASSWORD=$mongo_root_password/" "$temp_compose_file"
     echo -e "${GREEN}MongoDB 配置已完成${NC}"
@@ -348,9 +348,9 @@ fi
 
 # 处理 PostgreSQL 配置
 if [[ " ${selected_services[@]} " =~ " postgresql " ]]; then
-    read -p "请输入 PostgreSQL 用户名: " postgres_user
-    read -p "请输入 PostgreSQL 密码: " postgres_password
-    read -p "请输入 PostgreSQL 数据库名称: " postgres_database
+    read -e -p "请输入 PostgreSQL 用户名: " postgres_user
+    read -e -p "请输入 PostgreSQL 密码: " postgres_password
+    read -e -p "请输入 PostgreSQL 数据库名称: " postgres_database
     sed -i "s/POSTGRES_USER=.*# 替换为你的 PostgreSQL 用户名/POSTGRES_USER=$postgres_user/" "$temp_compose_file"
     sed -i "s/POSTGRES_PASSWORD=.*# 替换为你的 PostgreSQL 密码/POSTGRES_PASSWORD=$postgres_password/" "$temp_compose_file"
     sed -i "s/POSTGRES_DB=.*# 替换为你的数据库名称/POSTGRES_DB=$postgres_database/" "$temp_compose_file"
@@ -367,6 +367,64 @@ if [[ " ${selected_services[@]} " =~ " dockerhub " ]]; then
     else
         echo -e "${GREEN}代码下载成功${NC}"
     fi
+fi
+
+# 处理 frpp-master 配置文件
+if [[ " ${selected_services[@]} " =~ " frpp-master " ]]; then
+    # 随机生成 APP_GLOBAL_SECRET
+    app_global_secret=$(openssl rand -hex 16)
+    echo -e "${CYAN}生成的 APP_GLOBAL_SECRET: $app_global_secret${NC}"
+    # 保存 APP_GLOBAL_SECRET 到 /opt/frpp
+    mkdir -p /opt/frpp
+    echo "$app_global_secret" > /opt/frpp/app_global_secret.txt
+    echo -e "${GREEN}APP_GLOBAL_SECRET 已保存到 /opt/frpp/app_global_secret.txt${NC}"
+    # 替换 docker-compose.yml 中的 APP_GLOBAL_SECRET
+    sed -i "s/APP_GLOBAL_SECRET=.*# APP_GLOBAL_SECRET注意不要泄漏，客户端和服务端的是通过Master生成的/APP_GLOBAL_SECRET=$app_global_secret/" "$temp_compose_file"
+    # 提示用户输入 MASTER_RPC_HOST 和 MASTER_API_HOST
+    while true; do
+    read -e -p "请输入服务器的外部 IP 或 域名: " host
+    if [ -n "$host" ]; then
+        break
+    else
+        echo -e "${RED}输入不能为空，请重新输入。${NC}"
+    fi
+done
+    sed -i "s/MASTER_RPC_HOST=.*#服务器的外部IP或域名/MASTER_RPC_HOST=$host/" "$temp_compose_file"
+    sed -i "s/MASTER_API_HOST=.*#服务器的外部IP或域名/MASTER_API_HOST=$host/" "$temp_compose_file"
+    echo -e "${GREEN}frpp-master 配置已完成${NC}"
+fi
+
+# 处理 frp-panel-server 配置文件
+if [[ " ${selected_services[@]} " =~ " frp-panel-server " ]]; then
+    while true; do
+    read -e -p "请输入frp-panel面板服务器的外部 IP 或 域名: " host
+    if [ -n "$host" ]; then
+        break
+    else
+        echo -e "${RED}输入不能为空，请重新输入。${NC}"
+    fi
+done
+    while true; do
+    read -e -p "请输入frp-panel服务端面板生成的密钥: " secret
+    if [ -n "$secret" ]; then
+        break
+    else
+        echo -e "${RED}输入不能为空，请重新输入。${NC}"
+    fi
+done
+    while true; do
+    read -e -p "请输入frp-panel服务端面板的ID: " id
+    if [ -n "$id" ]; then
+        break
+    else
+        echo -e "${RED}输入不能为空，请重新输入。${NC}"
+    fi
+done
+    sed -i "s/frpp.example.com/$host/g" "$temp_compose_file"
+    sed -i "s/frpp-rpc.example.com/$host/g" "$temp_compose_file"
+    sed -i "s/abcde/$secret/g" "$temp_compose_file"
+    sed -i "s/default/$id/g" "$temp_compose_file"
+    echo -e "${GREEN}frp-panel-server 配置已完成${NC}"
 fi
 
 # 启动所选服务

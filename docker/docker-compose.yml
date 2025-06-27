@@ -94,6 +94,32 @@ services:
     volumes:
       - /opt/frps:/etc/frp
 
+ # frp-panel 内网穿透面板（9000、9001）
+  frpp-master:
+    image: vaalacat/frp-panel:latest
+    network_mode: host
+    environment:
+      - APP_GLOBAL_SECRET=your_secret # APP_GLOBAL_SECRET注意不要泄漏，客户端和服务端的是通过Master生成的
+      - MASTER_RPC_HOST=1.2.3.4 #服务器的外部IP或域名
+      - MASTER_RPC_PORT=9001
+      - MASTER_API_HOST=1.2.3.4 #服务器的外部IP或域名
+      - MASTER_API_PORT=9000
+      - MASTER_API_SCHEME=http
+      - TZ=Asia/Shanghai
+      - APP_ENABLE_REGISTER=true
+    volumes:
+      - /opt/frpp/data:/data 
+    restart: unless-stopped
+    command: master
+
+  # frp-panel 内网穿透服务端
+  frp-panel-server:
+    image: vaalacat/frp-panel
+    container_name: frp-panel-server
+    network_mode: host
+    restart: unless-stopped
+    command: server -s abcdef -i default --api-url http://frpp.example.com:9000 --rpc-url grpc://frpp-rpc.example.com:9001
+
   # PDF 转换服务（8081）
   stirling-pdf:
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
@@ -154,21 +180,21 @@ services:
       - TZ=Asia/Shanghai
 
   # 异地组网服务
-  tailscale:
+  tailscaled:
     image: tailscale/tailscale
-    container_name: tailscale
+    container_name: tailscaled
     restart: unless-stopped
     network_mode: host
     cap_add:
       - NET_ADMIN
       - NET_RAW
-    volumes:
-      - /var/lib:/var/lib
-      - /dev/net/tun:/dev/net/tun
     environment:
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_AUTHKEY=tskey-auth-k68eNkeSyz11CNTRL-LcAE9LYDCP # 替换为你的 Tailscale Auth Key
       - TZ=Asia/Shanghai
+    volumes:
+      - /opt/tailscale:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
 
   # 肥羊IPTV（35455）
   allinone:
