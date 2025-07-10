@@ -315,8 +315,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/portainer:/data
-    restart: always
-    privileged: unless-stopped
+    restart: unless-stopped
+    privileged: true
 
   # Docker镜像加速服务（6443）
   crproxy:
