@@ -304,6 +304,20 @@ services:
       - "1066:1066"
     restart: unless-stopped
 
+  # Portainer 容器管理平台（9000）
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/portainer:/data
+    restart: always
+    privileged: unless-stopped
+
   # Docker镜像加速服务（6443）
   crproxy:
     image: cleverest/crproxy:latest
