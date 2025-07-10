@@ -166,6 +166,24 @@ if [[ " ${selected_services[@]} " =~ " tailscaled " ]]; then
     read -e -p "请输入你的 Tailscale Auth Key: " ts_authkey
     sed -i "s/TS_AUTHKEY=.*# 替换为你的 Tailscale Auth Key/TS_AUTHKEY=$ts_authkey/" "$temp_compose_file"
     echo -e "${GREEN}Tailscale Auth Key 已配置${NC}"
+    # 获取网卡 IP 段
+    ip_segment=$(ip -o -f inet addr show | awk '/scope global/ {split($4, a, "/"); print a[1]"/"a[2]}' | head -n 1)
+    if [ -n "$ip_segment" ]; then
+        # 安装 ipcalc 工具（如果未安装）
+        if ! type ipcalc >/dev/null 2>&1; then
+            apt install ipcalc -y || yum install ipcalc -y
+        fi
+        # 使用 ipcalc 计算网络地址
+        network_address=$(ipcalc $ip_segment | grep 'Network' | awk '{print $2}')
+        if [ -n "$network_address" ]; then
+            sed -i "s|--advertise-routes=192.168.0.0/24|--advertise-routes=$network_address|" "$temp_compose_file"
+            echo -e "${GREEN}Tailscale 广告路由已更新为 $network_address${NC}"
+        else
+            echo -e "${RED}无法计算网络地址，使用默认配置${NC}"
+        fi
+    else
+        echo -e "${RED}无法获取网卡 IP 段，使用默认配置${NC}"
+    fi
 fi
 
 # 处理 rustdesk-server 配置文件
