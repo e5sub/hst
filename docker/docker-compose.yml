@@ -284,9 +284,10 @@ services:
       - unless-stopped_USE_RELAY=N
       - RUSTDESK_API_RUSTDESK_ID_SERVER=xxx.com:21116 # 替换为你的ID服务器地址
       - RUSTDESK_API_RUSTDESK_RELAY_SERVER=xxx:21117 # 替换为你的中继服务器地址
-      - RUSTDESK_API_RUSTDESK_API_SERVER=http://xxx.com # 替换为你的API服务器地址
+      - RUSTDESK_API_RUSTDESK_API_SERVER=http://xxx.com:21114 # 替换为你的API服务器地址
       - RUSTDESK_API_KEY_FILE=/data/id_ed25519.pub
       - RUSTDESK_API_JWT_KEY=/data/id_ed25519
+      - RUSTDESK_API_APP_REGISTER=true
     volumes:
       - /opt/rustdesk/server:/data
       - /opt/rustdesk/api:/app/data
