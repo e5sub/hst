@@ -198,6 +198,13 @@ if [[ " ${selected_services[@]} " =~ " rustdesk-server " ]]; then
     echo -e "${GREEN}RustDesk 服务器地址已配置${NC}"
 fi
 
+# 处理 portainer 或者 portainer_agent 的 AGENT_SECRET 配置
+if [[ " ${selected_services[@]} " =~ " portainer " ]] && [[ " ${selected_services[@]} " =~ " portainer_agent " ]]; then
+    read -e -p "请输入 Portainer 或者 Portainer Agent 的 AGENT_SECRET 密码: " agent_secret
+    sed -i "s/AGENT_SECRET=.*$/AGENT_SECRET=$agent_secret/" "$temp_compose_file"
+    echo -e "${GREEN}Portainer 或者 Portainer Agent 的 AGENT_SECRET 已配置${NC}"
+fi
+
 # 处理nginx目录映射问题
 if [[ " ${selected_services[@]} " =~ " nginx " ]]; then
     echo -e "${CYAN}配置 Nginx 服务...${NC}"

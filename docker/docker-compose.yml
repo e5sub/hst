@@ -310,6 +310,7 @@ services:
     container_name: portainer
     environment:
       - TZ=Asia/Shanghai
+      - AGENT_SECRET=123456
     ports:
       - "9000:9000"
     volumes:
@@ -317,6 +318,21 @@ services:
       - /opt/portainer:/data
     restart: unless-stopped
     privileged: true
+
+  # Portainer Agent（9001）
+  portainer_agent:
+    image: portainer/agent
+    container_name: portainer_agent
+    ports:
+      - "9001:9001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+      - /:/host 
+    environment:
+      - AGENT_SECRET=123456
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
 
   # Docker镜像加速服务（6443）
   crproxy:
