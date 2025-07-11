@@ -210,6 +210,23 @@ services:
       - "35455:35455"
     command: -tv=true -aesKey=h28xum0q20d5qa39ir5u3glz3xdadlhn -userid=464569852 -token=a57e4b742d040e3a41f993c9dc22c5ceafdad5f1daeff6e771deaf24ec490a331aafdf2476dcfb587dd19d3dd9f859d4b3f91d599fb1b54b530d50c27629f4fb1f84f6d8a26b 
 
+  # EMQX MQTT消息服务器（1883、8083、8084、8883、18083）
+  emqx-enterprise:
+    image: emqx/emqx-enterprise:latest
+    container_name: emqx-enterprise
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - "1883:1883"
+      - "8083:8083"
+      - "8084:8084"
+      - "8883:8883"
+      - "18083:18083"
+    volumes:
+      - /opt/emqx/data:/opt/emqx/data
+      - /opt/emqx/log:/opt/emqx/log
+    restart: unless-stopped
+
   # Owncast 自建直播平台（8080、1935） 
   owncast:
     image: owncast/owncast:latest
