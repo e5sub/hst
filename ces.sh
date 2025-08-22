@@ -49,7 +49,7 @@ cat >/etc/docker/daemon.json<<EOF
     "max-file": "2"
   },
   "registry-mirrors": [
-    "https://docker.071717.xyz"
+    "https://docker.1ms.run"
   ]
 }
 EOF
