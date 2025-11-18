@@ -139,16 +139,6 @@ services:
       - TZ=Asia/Shanghai
     restart: unless-stopped
 
-  # 免费电影（8899）
-  libretv:
-    image: bestzwei/libretv:latest
-    container_name: libretv
-    ports:
-      - "8899:8080"
-    restart: unless-stopped
-    environment:
-      - TZ=Asia/Shanghai
-
   # Stremio 媒体播放器（8084、11470、12470）
   stremio:
     container_name: stremio-docker
